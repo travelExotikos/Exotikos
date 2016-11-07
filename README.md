@@ -13,37 +13,55 @@ The following **required** functionality is completed:
   * [ ] Bar code scanner [Owner: Ada]
     * [ ] APIs to use the bar code scanner - library https://pdf417.mobi/ [Owner: Ada]
     * [ ] What information is obtained from the QR code  [Owner: Ada]
+    * [ ] Use https://shaun.net/whats-contained-in-a-boarding-pass-barcode/ to obtain QR code scanning
+       * [ ] Name
+       * [ ] booking  reference???,
+       * [ ] from-to-airline need dictionary/service to read this. ATLMEMDL=from Atlanta to Memphis, Delta
+       * [ ] Flight #
+       * [ ] Departure day 006 = 06JAN Julian format
+       * [ ] Cabin Y-economy, F-first, J-business
+       * [ ] Seat # 
   * [ ] Manually provide the information [Owner: Lakshmy] **Optional**
 * [ ] Get the native clock and provide push notification for when the travel is imminent and in progress
   * [ ] Travel start [Owner: Jesus]
     * [ ] Upcoming flights list view [Owner: Jesus]
+    * [ ] Flight detail activity
+       * [ ] Fragment - You will flight in X days
+       * [ ] Fragment - Your flight will depart in XX hours, head to {AirportName}
+       * [ ] [Actions] Give me directions
+       * [ ] [Checks section] Before you leave
+       * [ ] Luggage
+       * [ ] Visas
+       * [ ] Medication
   * [ ] In Progress [Owner: Lakshmy]
     * [ ] In flight [Owner: Lakshmy]
-    * [ ] In airport [Owner: Lakshmy]
+      * [ ] Fragment - details on the next leg of the journey
+       * [ ] In flightCountry
+       * [ ] Time zone
+       * [ ] Language
+       * [ ] Details of the next airport (shops, etc) [Stretch]
+     * [ ] Fragment - inflight exercises
+       * [ ] Leg exercises
+       * [ ] Back exercises
+       * [ ] In airport [Owner: Lakshmy]
   * [ ] Destination [Owner: Lakshmy]
-* [ ] Provide users will additional help needed along the way
-  * [ ] Include translation as needed [Owner: Ada]
- * [ ] 
+    * [ ] In airport
+       * [ ] Provide weather information 
+       * [ ] Provide next gate information
+       * [ ] Time gap between landing to next gate
+       * [ ] provide weather information, 
+       * [ ] provide baggage information
+  * [ ] Provide users will additional help needed along the way[Owner: Ada]
+    * [ ] Include translation as needed [Owner: Ada]
+   
 
 The following **optional** features are implemented:
-
-* [ ] Yelp with top restaurants in the airport 
-* [ ] Manually allow users to input travel information [Owner: Lakshmy] 
-* [ ] When a network request is sent, user sees an [indeterminate progress indicator](http://guides.codepath.com/android/Handling-ProgressBars#progress-within-actionbar)
-* [ ] User can **"reply" to any tweet on their home timeline**
-  * [ ] The user that wrote the original tweet is automatically "@" replied in compose
-* [ ] User can click on a tweet to be **taken to a "detail view"** of that tweet
- * [ ] User can take favorite (and unfavorite) or retweet actions on a tweet
-* [ ] Improve the user interface and theme the app to feel twitter branded
-* [ ] User can **search for tweets matching a particular query** and see results
-* [ ] Usernames and hashtags are styled and clickable within tweets [using clickable spans](http://guides.codepath.com/android/Working-with-the-TextView#creating-clickable-styled-spans)
+  * [ ] Barometric pressure changes - provide exercises to pop ears [stretch]
+  * [ ] Manually allow users to input travel information [Owner: Lakshmy] 
 
 The following **bonus** features are implemented:
 
-* [ ] Use Parcelable instead of Serializable using the popular [Parceler library](http://guides.codepath.com/android/Using-Parceler).
-* [ ] Leverages the [data binding support module](http://guides.codepath.com/android/Applying-Data-Binding-for-Views) to bind data into layout templates.
-* [ ] On the profile screen, leverage the [CoordinatorLayout](http://guides.codepath.com/android/Handling-Scrolls-with-CoordinatorLayout#responding-to-scroll-events) to [apply scrolling behavior](https://hackmd.io/s/SJyDOCgU) as the user scrolls through the profile timeline.
-* [ ] User can view their direct messages (or send new ones)
+* [ ] Yelp with top restaurants in the airport 
 
 The following **additional** features are implemented:
 
