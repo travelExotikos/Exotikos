@@ -7,8 +7,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        android:name=".ExotikosApplication">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,6 +20,12 @@
             android:name="io.fabric.ApiKey"
             android:value="9d93aab23a0020bed8d4bf32f4c5fd184e3a8733"
             />
+        <meta-data
+            android:name="FLIGHTSTATS_APP_ID"
+            android:value="446d495f" />
+        <meta-data
+            android:name="FLIGHTSTATS_APP_KEY"
+            android:value="cc4a60543606224b369ed138786562f3" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
