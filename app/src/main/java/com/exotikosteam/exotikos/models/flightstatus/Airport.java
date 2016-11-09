@@ -1,9 +1,10 @@
 
-package com.exotikosteam.exotikos.models;
+package com.exotikosteam.exotikos.models.flightstatus;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class Airport {
@@ -17,18 +18,9 @@ public class Airport {
     @SerializedName("icao")
     @Expose
     private String icao;
-    @SerializedName("faa")
-    @Expose
-    private String faa;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("street1")
-    @Expose
-    private String street1;
-    @SerializedName("street2")
-    @Expose
-    private String street2;
     @SerializedName("city")
     @Expose
     private String city;
@@ -38,15 +30,9 @@ public class Airport {
     @SerializedName("stateCode")
     @Expose
     private String stateCode;
-    @SerializedName("postalCode")
-    @Expose
-    private String postalCode;
     @SerializedName("countryCode")
     @Expose
     private String countryCode;
-    @SerializedName("district")
-    @Expose
-    private String district;
     @SerializedName("countryName")
     @Expose
     private String countryName;
@@ -56,15 +42,12 @@ public class Airport {
     @SerializedName("timeZoneRegionName")
     @Expose
     private String timeZoneRegionName;
-    @SerializedName("weatherZone")
-    @Expose
-    private String weatherZone;
     @SerializedName("localTime")
     @Expose
     private String localTime;
     @SerializedName("utcOffsetHours")
     @Expose
-    private Double utcOffsetHours;
+    private Integer utcOffsetHours;
     @SerializedName("latitude")
     @Expose
     private Double latitude;
@@ -80,18 +63,21 @@ public class Airport {
     @SerializedName("active")
     @Expose
     private Boolean active;
-    @SerializedName("dateFrom")
-    @Expose
-    private String dateFrom;
-    @SerializedName("dateTo")
-    @Expose
-    private String dateTo;
-    @SerializedName("weatherUrl")
-    @Expose
-    private String weatherUrl;
     @SerializedName("delayIndexUrl")
     @Expose
     private String delayIndexUrl;
+    @SerializedName("weatherUrl")
+    @Expose
+    private String weatherUrl;
+    @SerializedName("faa")
+    @Expose
+    private String faa;
+    @SerializedName("postalCode")
+    @Expose
+    private String postalCode;
+    @SerializedName("weatherZone")
+    @Expose
+    private String weatherZone;
 
     /**
      * 
@@ -150,24 +136,6 @@ public class Airport {
     /**
      * 
      * @return
-     *     The faa
-     */
-    public String getFaa() {
-        return faa;
-    }
-
-    /**
-     * 
-     * @param faa
-     *     The faa
-     */
-    public void setFaa(String faa) {
-        this.faa = faa;
-    }
-
-    /**
-     * 
-     * @return
      *     The name
      */
     public String getName() {
@@ -181,42 +149,6 @@ public class Airport {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * 
-     * @return
-     *     The street1
-     */
-    public String getStreet1() {
-        return street1;
-    }
-
-    /**
-     * 
-     * @param street1
-     *     The street1
-     */
-    public void setStreet1(String street1) {
-        this.street1 = street1;
-    }
-
-    /**
-     * 
-     * @return
-     *     The street2
-     */
-    public String getStreet2() {
-        return street2;
-    }
-
-    /**
-     * 
-     * @param street2
-     *     The street2
-     */
-    public void setStreet2(String street2) {
-        this.street2 = street2;
     }
 
     /**
@@ -276,24 +208,6 @@ public class Airport {
     /**
      * 
      * @return
-     *     The postalCode
-     */
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    /**
-     * 
-     * @param postalCode
-     *     The postalCode
-     */
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    /**
-     * 
-     * @return
      *     The countryCode
      */
     public String getCountryCode() {
@@ -307,24 +221,6 @@ public class Airport {
      */
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
-    }
-
-    /**
-     * 
-     * @return
-     *     The district
-     */
-    public String getDistrict() {
-        return district;
-    }
-
-    /**
-     * 
-     * @param district
-     *     The district
-     */
-    public void setDistrict(String district) {
-        this.district = district;
     }
 
     /**
@@ -384,24 +280,6 @@ public class Airport {
     /**
      * 
      * @return
-     *     The weatherZone
-     */
-    public String getWeatherZone() {
-        return weatherZone;
-    }
-
-    /**
-     * 
-     * @param weatherZone
-     *     The weatherZone
-     */
-    public void setWeatherZone(String weatherZone) {
-        this.weatherZone = weatherZone;
-    }
-
-    /**
-     * 
-     * @return
      *     The localTime
      */
     public String getLocalTime() {
@@ -422,7 +300,7 @@ public class Airport {
      * @return
      *     The utcOffsetHours
      */
-    public Double getUtcOffsetHours() {
+    public Integer getUtcOffsetHours() {
         return utcOffsetHours;
     }
 
@@ -431,7 +309,7 @@ public class Airport {
      * @param utcOffsetHours
      *     The utcOffsetHours
      */
-    public void setUtcOffsetHours(Double utcOffsetHours) {
+    public void setUtcOffsetHours(Integer utcOffsetHours) {
         this.utcOffsetHours = utcOffsetHours;
     }
 
@@ -528,37 +406,19 @@ public class Airport {
     /**
      * 
      * @return
-     *     The dateFrom
+     *     The delayIndexUrl
      */
-    public String getDateFrom() {
-        return dateFrom;
+    public String getDelayIndexUrl() {
+        return delayIndexUrl;
     }
 
     /**
      * 
-     * @param dateFrom
-     *     The dateFrom
+     * @param delayIndexUrl
+     *     The delayIndexUrl
      */
-    public void setDateFrom(String dateFrom) {
-        this.dateFrom = dateFrom;
-    }
-
-    /**
-     * 
-     * @return
-     *     The dateTo
-     */
-    public String getDateTo() {
-        return dateTo;
-    }
-
-    /**
-     * 
-     * @param dateTo
-     *     The dateTo
-     */
-    public void setDateTo(String dateTo) {
-        this.dateTo = dateTo;
+    public void setDelayIndexUrl(String delayIndexUrl) {
+        this.delayIndexUrl = delayIndexUrl;
     }
 
     /**
@@ -582,19 +442,55 @@ public class Airport {
     /**
      * 
      * @return
-     *     The delayIndexUrl
+     *     The faa
      */
-    public String getDelayIndexUrl() {
-        return delayIndexUrl;
+    public String getFaa() {
+        return faa;
     }
 
     /**
      * 
-     * @param delayIndexUrl
-     *     The delayIndexUrl
+     * @param faa
+     *     The faa
      */
-    public void setDelayIndexUrl(String delayIndexUrl) {
-        this.delayIndexUrl = delayIndexUrl;
+    public void setFaa(String faa) {
+        this.faa = faa;
+    }
+
+    /**
+     * 
+     * @return
+     *     The postalCode
+     */
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    /**
+     * 
+     * @param postalCode
+     *     The postalCode
+     */
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    /**
+     * 
+     * @return
+     *     The weatherZone
+     */
+    public String getWeatherZone() {
+        return weatherZone;
+    }
+
+    /**
+     * 
+     * @param weatherZone
+     *     The weatherZone
+     */
+    public void setWeatherZone(String weatherZone) {
+        this.weatherZone = weatherZone;
     }
 
 }

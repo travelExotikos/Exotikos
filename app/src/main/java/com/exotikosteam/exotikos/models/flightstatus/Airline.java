@@ -1,5 +1,5 @@
 
-package com.exotikosteam.exotikos.models;
+package com.exotikosteam.exotikos.models.flightstatus;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -27,15 +27,6 @@ public class Airline {
     @SerializedName("active")
     @Expose
     private Boolean active;
-    @SerializedName("dateFrom")
-    @Expose
-    private String dateFrom;
-    @SerializedName("dateTo")
-    @Expose
-    private String dateTo;
-    @SerializedName("category")
-    @Expose
-    private String category;
 
     /**
      * 
@@ -143,60 +134,6 @@ public class Airline {
      */
     public void setActive(Boolean active) {
         this.active = active;
-    }
-
-    /**
-     * 
-     * @return
-     *     The dateFrom
-     */
-    public String getDateFrom() {
-        return dateFrom;
-    }
-
-    /**
-     * 
-     * @param dateFrom
-     *     The dateFrom
-     */
-    public void setDateFrom(String dateFrom) {
-        this.dateFrom = dateFrom;
-    }
-
-    /**
-     * 
-     * @return
-     *     The dateTo
-     */
-    public String getDateTo() {
-        return dateTo;
-    }
-
-    /**
-     * 
-     * @param dateTo
-     *     The dateTo
-     */
-    public void setDateTo(String dateTo) {
-        this.dateTo = dateTo;
-    }
-
-    /**
-     * 
-     * @return
-     *     The category
-     */
-    public String getCategory() {
-        return category;
-    }
-
-    /**
-     * 
-     * @param category
-     *     The category
-     */
-    public void setCategory(String category) {
-        this.category = category;
     }
 
 }

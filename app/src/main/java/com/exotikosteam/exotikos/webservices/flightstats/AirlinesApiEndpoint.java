@@ -1,6 +1,6 @@
 package com.exotikosteam.exotikos.webservices.flightstats;
 
-import com.exotikosteam.exotikos.models.AirlinesResponse;
+import com.exotikosteam.exotikos.models.airline.AirlinesResponse;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;

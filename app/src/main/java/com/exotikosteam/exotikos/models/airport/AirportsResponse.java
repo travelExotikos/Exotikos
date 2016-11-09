@@ -1,6 +1,7 @@
 
-package com.exotikosteam.exotikos.models;
+package com.exotikosteam.exotikos.models.airport;
 
+import com.exotikosteam.exotikos.models.Error;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,17 +11,17 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class AirlinesResponse {
+public class AirportsResponse {
 
     @SerializedName("error")
     @Expose
     private Error error;
-    @SerializedName("airlines")
+    @SerializedName("airports")
     @Expose
-    private List<Airline> airlines = new ArrayList<Airline>();
-    @SerializedName("airline")
+    private List<Airport> airports = new ArrayList<Airport>();
+    @SerializedName("airport")
     @Expose
-    private Airline airline;
+    private Airport airport;
 
     /**
      * 
@@ -43,37 +44,37 @@ public class AirlinesResponse {
     /**
      * 
      * @return
-     *     The airlines
+     *     The airports
      */
-    public List<Airline> getAirlines() {
-        return airlines;
+    public List<Airport> getAirports() {
+        return airports;
     }
 
     /**
      * 
-     * @param airlines
-     *     The airlines
+     * @param airports
+     *     The airports
      */
-    public void setAirlines(List<Airline> airlines) {
-        this.airlines = airlines;
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports;
     }
 
     /**
      * 
      * @return
-     *     The airline
+     *     The airport
      */
-    public Airline getAirline() {
-        return airline;
+    public Airport getAirport() {
+        return airport;
     }
 
     /**
      * 
-     * @param airline
-     *     The airline
+     * @param airport
+     *     The airport
      */
-    public void setAirline(Airline airline) {
-        this.airline = airline;
+    public void setAirport(Airport airport) {
+        this.airport = airport;
     }
 
 }
