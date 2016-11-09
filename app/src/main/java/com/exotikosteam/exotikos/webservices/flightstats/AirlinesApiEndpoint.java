@@ -35,5 +35,5 @@ public interface AirlinesApiEndpoint {
             @Query("appId") String appId,
             @Query("appKey") String appKey,
             @Path("iata") String iata);
-    
+
 }
