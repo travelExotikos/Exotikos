@@ -8,44 +8,44 @@ import retrofit2.http.Query;
 
 public interface AirportsApiEndpoint {
 
-    @GET("/airports/rest/v1/json/all")
+    @GET("/flex/airports/rest/v1/json/all")
     rx.Observable<AirportsResponse> getAll(
             @Query("appId") String appId,
             @Query("appKey") String appKey);
 
-    @GET("/airports/rest/v1/json/active")
+    @GET("/flex/airports/rest/v1/json/active")
     rx.Observable<AirportsResponse> getActive(
             @Query("appId") String appId,
             @Query("appKey") String appKey);
 
-    @GET("/airports/rest/v1/json/fs/{code}")
+    @GET("/flex/airports/rest/v1/json/fs/{code}")
     rx.Observable<AirportsResponse> getByFlightStatsCode(
             @Query("appId") String appId,
             @Query("appKey") String appKey,
             @Path("code") String code);
 
-    @GET("/airports/rest/v1/json/icao/{icao}")
+    @GET("/flex/airports/rest/v1/json/icao/{icao}")
     rx.Observable<AirportsResponse> getByICAOCode(
+            @Path("icao") String icao,
             @Query("appId") String appId,
-            @Query("appKey") String appKey,
-            @Path("icao") String icao);
+            @Query("appKey") String appKey);
 
-    @GET("/airports/rest/v1/json/iata/{iata}")
+    @GET("/flex/airports/rest/v1/json/iata/{iata}")
     rx.Observable<AirportsResponse> getByIATACode(
+            @Path("iata") String iata,
             @Query("appId") String appId,
-            @Query("appKey") String appKey,
-            @Path("iata") String iata);
+            @Query("appKey") String appKey);
 
-    @GET("/airports/rest/v1/json/countryCode/{countryCode}")
+    @GET("/flex/airports/rest/v1/json/countryCode/{countryCode}")
     rx.Observable<AirportsResponse> getByCountryCode(
+            @Path("countryCode") String countryCode,
             @Query("appId") String appId,
-            @Query("appKey") String appKey,
-            @Path("countryCode") String countryCode);
+            @Query("appKey") String appKey);
 
-    @GET("/airports/rest/v1/json/cityCode/{cityCode}")
+    @GET("/flex/airports/rest/v1/json/cityCode/{cityCode}")
     rx.Observable<AirportsResponse> getByCityCode(
+            @Path("cityCode") String cityCode,
             @Query("appId") String appId,
-            @Query("appKey") String appKey,
-            @Path("countryCode") String cityCode);
+            @Query("appKey") String appKey);
 
 }

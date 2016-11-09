@@ -8,31 +8,31 @@ import retrofit2.http.Query;
 
 public interface FlightStatusApiEndpoint {
 
-    @GET("/flightstatus/rest/v2/json/flight/status/{flightId}")
+    @GET("/flex/flightstatus/rest/v2/json/flight/status/{flightId}")
     rx.Observable<FlightStatusResponse> getByFlightID(
+            @Path("flightId") String flightId,
             @Query("appId") String appId,
-            @Query("appKey") String appKey,
-            @Path("flightId") String flightId);
+            @Query("appKey") String appKey);
 
 
-    @GET("/flightstatus/rest/v2/json/flight/status/{carrier}/{flightNumber}/arr/{year}/{month}/{day}")
+    @GET("/flex/flightstatus/rest/v2/json/flight/status/{carrier}/{flightNumber}/arr/{year}/{month}/{day}")
     rx.Observable<FlightStatusResponse> getByArrivingDate(
-            @Query("appId") String appId,
-            @Query("appKey") String appKey,
             @Path("carrier") String carrier,
             @Path("flightNumber") String flightNumber,
             @Path("year") int year,
             @Path("month") int month,
-            @Path("day") int day);
+            @Path("day") int day,
+            @Query("appId") String appId,
+            @Query("appKey") String appKey);
 
-    @GET("/flightstatus/rest/v2/json/flight/status/{carrier}/{flightNumber}/dep/{year}/{month}/{day}")
+    @GET("/flex/flightstatus/rest/v2/json/flight/status/{carrier}/{flightNumber}/dep/{year}/{month}/{day}")
     rx.Observable<FlightStatusResponse> getByDepartingDate(
-            @Query("appId") String appId,
-            @Query("appKey") String appKey,
             @Path("carrier") String carrier,
             @Path("flightNumber") String flightNumber,
             @Path("year") int year,
             @Path("month") int month,
-            @Path("day") int day);
+            @Path("day") int day,
+            @Query("appId") String appId,
+            @Query("appKey") String appKey);
 
 }

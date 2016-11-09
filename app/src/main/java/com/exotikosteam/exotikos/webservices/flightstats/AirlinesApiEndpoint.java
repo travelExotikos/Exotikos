@@ -8,32 +8,32 @@ import retrofit2.http.Query;
 
 public interface AirlinesApiEndpoint {
 
-    @GET("/airlines/rest/v1/json/all")
+    @GET("/flex/airlines/rest/v1/json/all")
     rx.Observable<AirlinesResponse> getAll(
             @Query("appId") String appId,
             @Query("appKey") String appKey);
 
-    @GET("/airlines/rest/v1/json/active")
+    @GET("/flex/airlines/rest/v1/json/active")
     rx.Observable<AirlinesResponse> getActive(
             @Query("appId") String appId,
             @Query("appKey") String appKey);
 
-    @GET("/airlines/rest/v1/json/fs/{code}")
+    @GET("/flex/airlines/rest/v1/json/fs/{code}")
     rx.Observable<AirlinesResponse> getByFlightStatsCode(
+            @Path("code") String code,
             @Query("appId") String appId,
-            @Query("appKey") String appKey,
-            @Path("code") String code);
+            @Query("appKey") String appKey);
 
-    @GET("/airlines/rest/v1/json/icao/{icao}")
+    @GET("/flex/airlines/rest/v1/json/icao/{icao}")
     rx.Observable<AirlinesResponse> getByICAOCode(
+            @Path("icao") String icao,
             @Query("appId") String appId,
-            @Query("appKey") String appKey,
-            @Path("icao") String icao);
+            @Query("appKey") String appKey);
 
-    @GET("/airlines/rest/v1/json/iata/{iata}")
+    @GET("/flex/airlines/rest/v1/json/iata/{iata}")
     rx.Observable<AirlinesResponse> getByIATACode(
+            @Path("iata") String iata,
             @Query("appId") String appId,
-            @Query("appKey") String appKey,
-            @Path("iata") String iata);
+            @Query("appKey") String appKey);
 
 }

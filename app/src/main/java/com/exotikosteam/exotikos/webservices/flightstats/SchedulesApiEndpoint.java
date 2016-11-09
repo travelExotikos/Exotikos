@@ -8,23 +8,23 @@ import retrofit2.http.Query;
 
 public interface SchedulesApiEndpoint {
 
-    @GET("/schedules/rest/v1/json/flight/{carrier}/{flightNumber}/departing/{year}/{month}/{day}")
+    @GET("/flex/schedules/rest/v1/json/flight/{carrier}/{flightNumber}/departing/{year}/{month}/{day}")
     rx.Observable<FlightScheduleResponse> getByDepartingDate(
-            @Query("appId") String appId,
-            @Query("appKey") String appKey,
             @Path("carrier") String carrier,
             @Path("flightNumber") String flightNumber,
             @Path("year") int year,
             @Path("month") int month,
-            @Path("day") int day);
+            @Path("day") int day,
+            @Query("appId") String appId,
+            @Query("appKey") String appKey);
 
-    @GET("/schedules/rest/v1/json/flight/{carrier}/{flightNumber}/arriving/{year}/{month}/{day}")
+    @GET("/flex/schedules/rest/v1/json/flight/{carrier}/{flightNumber}/arriving/{year}/{month}/{day}")
     rx.Observable<FlightScheduleResponse> getByArrivingDate(
-            @Query("appId") String appId,
-            @Query("appKey") String appKey,
             @Path("carrier") String carrier,
             @Path("flightNumber") String flightNumber,
             @Path("year") int year,
             @Path("month") int month,
-            @Path("day") int day);
+            @Path("day") int day,
+            @Query("appId") String appId,
+            @Query("appKey") String appKey);
 }

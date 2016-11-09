@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
+import com.exotikosteam.exotikos.thirdparty.LenientGsonConverterFactory;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
@@ -16,14 +17,13 @@ import io.fabric.sdk.android.Fabric;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 import rx.schedulers.Schedulers;
 
 public class ExotikosApplication extends Application {
 
     public static final String TAG = ExotikosApplication.class.getSimpleName();
 
-    public static final String FLIGHTSTATS_API_BASE = "https://api.flightstats.com/flex";
+    public static final String FLIGHTSTATS_API_BASE = "https://api.flightstats.com/";
 
     private String fligthStatsAppID;
     private String fligthStatsAppKey;
@@ -60,7 +60,7 @@ public class ExotikosApplication extends Application {
         flightstatsRetrofit = new Retrofit.Builder()
                 .baseUrl(FLIGHTSTATS_API_BASE)
                 .client(client)
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(LenientGsonConverterFactory.create(gson))
                 .addCallAdapterFactory(rxAdapter)
                 .build();
     }
