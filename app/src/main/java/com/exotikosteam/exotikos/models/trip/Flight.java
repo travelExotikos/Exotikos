@@ -18,13 +18,13 @@ public class Flight {
     //private Integer stops; Not sure if this is needed...I think this will be handled through Trips
 
     //Departure Time of the flight
-    private String departureTime;
+    String departureTime;
 
     //Arrival time for the flight
     private String arrivalTime;
 
     //Terminal for the flight departure
-    private String departureTerminal;
+    String departureTerminal;
 
     //Terminal for the flight arrival
     private String arrivalTerminal;
