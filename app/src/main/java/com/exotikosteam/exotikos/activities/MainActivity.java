@@ -1,8 +1,10 @@
 package com.exotikosteam.exotikos.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
@@ -11,14 +13,20 @@ import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+
+    @BindView(R.id.btnTravelStatus) Button btnTravelStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         String appId = ((ExotikosApplication)getApplication()).getFligthStatsAppID();
         String appKey = ((ExotikosApplication)getApplication()).getFligthStatsAppKey();
@@ -106,5 +114,14 @@ public class MainActivity extends AppCompatActivity {
                         () -> Log.i(TAG, "Done with schedule")
                 );
 
+        setupListeners();
+
+    }
+
+    private void setupListeners() {
+        btnTravelStatus.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, TravelStatusActivity.class);
+            startActivity(i);
+        });
     }
 }
