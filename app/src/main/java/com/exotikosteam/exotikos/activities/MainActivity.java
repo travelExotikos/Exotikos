@@ -2,12 +2,16 @@ package com.exotikosteam.exotikos.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
+import com.exotikosteam.exotikos.fragments.TravelScanFragment;
+import com.exotikosteam.exotikos.fragments.TravelStatusFragment;
+import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
@@ -19,12 +23,16 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
+    private TripStatus trip;
+    private boolean tripExists;
 
     @BindView(R.id.btnTravelStatus) Button btnTravelStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        tripExists = false;
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -115,7 +123,20 @@ public class MainActivity extends AppCompatActivity {
                 );
 
         setupListeners();
+        setupStarterFragment();
 
+    }
+
+    private void setupStarterFragment() {
+        //Depending on whether the user has scanned the boarding pass or not,
+        // we show the travel summary or the scanner fragment here
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if(tripExists != false) //replace with some logic to see if the use has created a trip before
+            ft.replace(R.id.frgPlaceholder, TravelStatusFragment.newInstance("Travel Status"));
+        else
+            ft.replace(R.id.frgPlaceholder, TravelScanFragment.newInstance("Travel Status"));
+
+        ft.commit();
     }
 
     private void setupListeners() {
@@ -123,5 +144,7 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(MainActivity.this, TravelStatusActivity.class);
             startActivity(i);
         });
+
+
     }
 }

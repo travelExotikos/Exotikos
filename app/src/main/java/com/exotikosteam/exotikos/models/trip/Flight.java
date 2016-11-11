@@ -42,6 +42,7 @@ public class Flight extends BaseModel {
     @Column(name = "arrival_time")
     String arrivalTime;
 
+    //Terminal for the flight departure
     @Column(name = "departure_terminal")
     String departureTerminal;
 

@@ -4,17 +4,19 @@ package com.exotikosteam.exotikos.models.flightstatus;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import javax.annotation.Generated;
+import org.parceler.Parcel;
 
+import javax.annotation.Generated;
+@Parcel
 @Generated("org.jsonschema2pojo")
 public class DateLocalAndUTC {
 
     @SerializedName("dateLocal")
     @Expose
-    private String dateLocal;
+    String dateLocal;
     @SerializedName("dateUtc")
     @Expose
-    private String dateUtc;
+    String dateUtc;
 
     /**
      * 
