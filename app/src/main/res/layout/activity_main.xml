@@ -10,18 +10,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.exotikosteam.exotikos.activities.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView" />
 
     <Button
-        android:text="Open Travel Status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/btnTravelStatus" />
+    android:text="Open Travel Status"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:id="@+id/btnTravelStatus" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/frgPlaceholder"
+        android:layout_below="@id/btnTravelStatus"
+        >
+
+    </FrameLayout>
+
 </RelativeLayout>

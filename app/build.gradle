@@ -32,6 +32,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -43,6 +44,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+android {
+    compileSdkVersion 24  // needs to be consistent with major support libs used
+}
+ext {
+    supportLibVersion = '24.2.1'  // variable that can be referenced to keep support libs consistent
 }
 
 dependencies {
@@ -70,6 +78,9 @@ dependencies {
     }
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
-
+    compile 'org.parceler:parceler-api:1.1.1'
+    compile "com.android.support:support-vector-drawable:${supportLibVersion}" // VectorDrawableCompat
+    compile "com.android.support:animated-vector-drawable:${supportLibVersion}" // AnimatedVectorDrawableCompat
+    apt 'org.parceler:parceler:1.1.1'
     testCompile 'junit:junit:4.12'
 }
