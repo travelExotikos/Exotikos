@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true">
+
+    <TextView
+        android:id="@+id/tvCardName"
+        tools:text="Card Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/card_header_padding"
+        android:layout_marginStart="@dimen/card_header_padding"
+        android:layout_marginLeft="@dimen/card_header_padding"
+        android:layout_marginBottom="@dimen/card_header_padding"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        tools:text="in XXh XXm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginEnd="@dimen/card_header_padding"
+        android:layout_marginRight="@dimen/card_header_padding"
+        android:layout_alignBottom="@+id/tvCardName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+        android:id="@+id/rlCardContents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCardName"
+        android:padding="@dimen/card_header_padding"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        app:ael_expanded="false"
+        app:ael_duration="500"
+        app:ael_interpolator="bounce"
+        app:ael_orientation="vertical">
+
+        <!-- The content of the expanded card should be here -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_ipsum_long"/>
+
+    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+</RelativeLayout>
