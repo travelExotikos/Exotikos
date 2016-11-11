@@ -6,10 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.exotikosteam.exotikos.R;
+import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +25,8 @@ public class SampleCardFragment extends Fragment implements ExpandableCard {
     // Bindings
     @BindView(R.id.tvCardName) TextView tvCardName;
     @BindView(R.id.tvTime) TextView tvTime;
-    @BindView(R.id.rlCardContents) RelativeLayout rlCardContents;
+    @BindView(R.id.rlCardContents)
+    ExpandableRelativeLayout rlCardContents;
 
     // Event topics
     private final PublishSubject<SampleCardFragment> titleClickSubject = PublishSubject.create();
@@ -59,7 +60,7 @@ public class SampleCardFragment extends Fragment implements ExpandableCard {
 
         tvCardName.setText(cardName);
         tvTime.setText(relativeTime);
-        rlCardContents.setVisibility(getArguments().getBoolean("collapsed") ? View.GONE : View.VISIBLE);
+//        rlCardContents.setVisibility(getArguments().getBoolean("collapsed") ? View.GONE : View.VISIBLE);
 
         setupListeners();
     }
@@ -75,29 +76,21 @@ public class SampleCardFragment extends Fragment implements ExpandableCard {
     @Override
     public void expand() {
         if (!isDetached()) {
-            rlCardContents.setVisibility(View.VISIBLE);
+            rlCardContents.expand();
         }
     }
 
     @Override
     public void collapse() {
         if (!isDetached()) {
-            rlCardContents.setVisibility(View.GONE);
+            rlCardContents.collapse();
         }
     }
 
     @Override
     public void toggle() {
         if (!isDetached()) {
-            if (isExpanded()) {
-                collapse();
-            } else {
-                expand();
-            }
+            rlCardContents.toggle();
         }
-    }
-
-    private boolean isExpanded() {
-        return rlCardContents.getVisibility() == View.VISIBLE;
     }
 }
