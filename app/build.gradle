@@ -20,6 +20,7 @@ repositories {
     jcenter()
     maven { url 'https://maven.fabric.io/public' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url 'http://maven.microblink.com' }
 }
 
 android {
@@ -89,4 +90,7 @@ dependencies {
     compile "com.android.support:animated-vector-drawable:${supportLibVersion}" // AnimatedVectorDrawableCompat
     apt 'org.parceler:parceler:1.1.1'
     testCompile 'junit:junit:4.12'
+    compile('com.microblink:pdf417.mobi:6.0.0@aar') {
+        transitive = true
+    }
 }
