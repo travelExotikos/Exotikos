@@ -1,6 +1,7 @@
 package com.exotikosteam.exotikos.fragments;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,9 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.exotikosteam.exotikos.R;
+import com.exotikosteam.exotikos.databinding.TravelPrepFragmentBinding;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -23,19 +23,26 @@ public class TravelPrepFragment extends Fragment {
 
     Unbinder unbinder;
     OnButtonsClicks listener;
+    TravelPrepFragmentBinding prepFragmentBinding;
 
     public interface OnButtonsClicks {
         void handleButtonsClicks(String buttonName);
     }
 
-    @BindView(R.id.btnLaunchScanPage) Button launchScan;
+    Button launchScan;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.preflight_fragment, container, false);
-        unbinder = ButterKnife.bind(this, v);
-        return v;
+        prepFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.travel_prep_fragment, container, false);
+        setupBindings();
+        setOnClickListener();
+
+        return prepFragmentBinding.getRoot();
+    }
+
+    private void setupBindings() {
+        //bind any view elements here to PrepFragmentBinding
     }
 
     @Override
@@ -49,10 +56,9 @@ public class TravelPrepFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setOnClickListener(view);
     }
 
-    private void setOnClickListener(View V) {
+    private void setOnClickListener() {
         launchScan.setOnClickListener(v -> {
             handleLaunchScanPage();
         });
