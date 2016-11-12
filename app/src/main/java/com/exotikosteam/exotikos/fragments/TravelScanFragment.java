@@ -1,6 +1,7 @@
 package com.exotikosteam.exotikos.fragments;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,11 +12,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.exotikosteam.exotikos.R;
+import com.exotikosteam.exotikos.databinding.TravelScanFragmentBinding;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by lramaswamy on 11/11/16.
@@ -24,9 +22,9 @@ import butterknife.Unbinder;
 public class TravelScanFragment extends Fragment {
 
     private OnScanCompletedListener listener;
-    Unbinder unbinder;
+    private TravelScanFragmentBinding scanFragmentBinding;
 
-    @BindView(R.id.scanImageClick) ImageView scanImageClick;
+    ImageView scanImageClick;
 
     public interface OnScanCompletedListener {
         public void getTripInstance(TripStatus trip);
@@ -46,9 +44,13 @@ public class TravelScanFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.travel_scan_boardingpass_fragment, parent, false);
-        unbinder = ButterKnife.bind(this, view);
-        return view;
+        scanFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.travel_scan_fragment, parent, false);
+        setupBindings();
+        return scanFragmentBinding.getRoot();
+    }
+
+    private void setupBindings() {
+        scanImageClick = scanFragmentBinding.scanImageClick;
     }
 
     @Override
@@ -81,6 +83,5 @@ public class TravelScanFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 }

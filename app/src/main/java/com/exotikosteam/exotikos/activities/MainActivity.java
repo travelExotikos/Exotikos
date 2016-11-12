@@ -10,7 +10,7 @@ import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment.OnButtonsClicks;
 import com.exotikosteam.exotikos.fragments.TravelScanFragment;
-import com.exotikosteam.exotikos.fragments.TravelStatusFragment;
+import com.exotikosteam.exotikos.fragments.TravelSummaryFragment;
 import com.exotikosteam.exotikos.models.trip.FlightStep;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
@@ -144,7 +144,7 @@ OnButtonsClicks{
 
     private void showTravelStatusFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, TravelStatusFragment.newInstance(trip));
+        ft.replace(R.id.frgPlaceholder, TravelSummaryFragment.newInstance(trip));
         ft.commit();
 
     }
