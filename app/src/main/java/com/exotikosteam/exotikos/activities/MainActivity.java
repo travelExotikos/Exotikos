@@ -1,11 +1,9 @@
 package com.exotikosteam.exotikos.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Button;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
@@ -17,16 +15,13 @@ import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TravelScanFragment.OnScanCompletedListener{
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private TripStatus trip;
     private boolean tripExists;
-
-    @BindView(R.id.btnTravelStatus) Button btnTravelStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                         () -> Log.i(TAG, "Done with schedule")
                 );
 
-        setupListeners();
+
         setupStarterFragment();
 
     }
@@ -132,19 +127,27 @@ public class MainActivity extends AppCompatActivity {
         // we show the travel summary or the scanner fragment here
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         if(tripExists != false) //replace with some logic to see if the use has created a trip before
-            ft.replace(R.id.frgPlaceholder, TravelStatusFragment.newInstance("Travel Status"));
+            showTravelStatusFragment(ft);
         else
-            ft.replace(R.id.frgPlaceholder, TravelScanFragment.newInstance("Travel Status"));
-
-        ft.commit();
+            showTravelScanFragment(ft);
     }
 
-    private void setupListeners() {
-        btnTravelStatus.setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this, TravelStatusActivity.class);
-            startActivity(i);
-        });
+    private void showTravelStatusFragment(FragmentTransaction ft) {
+        ft.replace(R.id.frgPlaceholder, TravelStatusFragment.newInstance(trip));
+        ft.commit();
 
+    }
 
+    private void showTravelScanFragment(FragmentTransaction ft) {
+        ft.replace(R.id.frgPlaceholder, TravelScanFragment.newInstance("Travel Status"));
+        ft.commit();
+
+    }
+
+    @Override
+    public void getTripInstance(TripStatus trip) {
+        this.trip = trip;
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        showTravelStatusFragment(ft);
     }
 }

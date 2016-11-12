@@ -62,7 +62,7 @@ public class Flight extends BaseModel {
     //Empty constructor for Parceler
     public Flight() {}
 
-    public Flight createFlightItem(FlightStatus flightStatus, ScheduledFlight scheduledFlight, String seatNumber) {
+    public static Flight newInstance(FlightStatus flightStatus, ScheduledFlight scheduledFlight, String seatNumber) {
         Flight flight = new Flight();
         flight.setArrivalDate(flightStatus.getArrivalDate().getDateUtc());
         flight.setDepartureDate(flightStatus.getDepartureDate().getDateUtc());
@@ -71,6 +71,22 @@ public class Flight extends BaseModel {
         flight.setDepartureTerminal(scheduledFlight.getDepartureTerminal());
         flight.setArrivalTime(scheduledFlight.getArrivalTime());
         flight.setArrivalTerminal(scheduledFlight.getArrivalTerminal());
+        flight.setSeatNumber(seatNumber);
+
+        return flight;
+    }
+
+    public static Flight newInstance(String arrivalDate, String departureDate, String flightNumber, String departureTime,
+    String departureTerminal, String arrivalTime, String arrivalTerminal, String seatNumber)
+    {
+        Flight flight = new Flight();
+        flight.setArrivalDate(arrivalDate);
+        flight.setDepartureDate(departureDate);
+        flight.setFlightNumber(flightNumber);
+        flight.setDepartureTime(departureTime);
+        flight.setDepartureTerminal(departureTerminal);
+        flight.setArrivalTime(arrivalTime);
+        flight.setArrivalTerminal(arrivalTerminal);
         flight.setSeatNumber(seatNumber);
 
         return flight;
