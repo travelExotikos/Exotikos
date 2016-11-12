@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(
                         airline -> Log.i(TAG, airline.getName()),
                         throwable -> Log.e(TAG, "Error getting airline", throwable),
-                        () -> Log.i(TAG, "Done with airline by ICAO")
+                        () -> Log.i(TAG, "Done with airline by IATA")
                 );
 
         // Get airports by city

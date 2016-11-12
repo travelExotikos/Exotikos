@@ -1,50 +1,70 @@
 package com.exotikosteam.exotikos.models.trip;
 
-import com.exotikosteam.exotikos.models.flightstatus.DateLocalAndUTC;
+import com.exotikosteam.exotikos.models.ExotikosDatabase;
 import com.exotikosteam.exotikos.models.flightstatus.FlightStatus;
 import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import org.parceler.Parcel;
+
+import java.util.List;
 
 /**
  * Created by lramaswamy on 11/9/16.
  */
-@Parcel
-public class Flight {
+@Parcel(analyze = {Flight.class})
+@Table(database = ExotikosDatabase.class)
+public class Flight extends BaseModel {
 
-    //Get these from Scheduled flight API
-    //Flight number of the flight
-    private String flightNumber;
-    //private Integer stops; Not sure if this is needed...I think this will be handled through Trips
+    @Column
+    @PrimaryKey(autoincrement = true)
+    Integer id;
 
-    //Departure Time of the flight
-    private String departureTime;
+    @Column
+    Integer order;
 
-    //Arrival time for the flight
-    private String arrivalTime;
+    @Column(name = "trip_id")
+    Integer tripId;
 
-    //Terminal for the flight departure
-    private String departureTerminal;
+    @Column(name = "flight_number")
+    String flightNumber;
+    //Integer stops; Not sure if this is needed...I think this will be handled through Trips
 
-    //Terminal for the flight arrival
-    private String arrivalTerminal;
+    //TODO LocalDataTime? - need converter
+    @Column(name = "departure_time")
+    String departureTime;
+
+    //TODO LocalDataTime> - need convertor
+    @Column(name = "arrival_time")
+    String arrivalTime;
+
+    @Column(name = "departure_terminal")
+    String departureTerminal;
+
+    @Column(name = "arrival_terminal")
+    String arrivalTerminal;
 
     //Get these from FlightStatus API
-    //Date of the departure of the flight
-    private DateLocalAndUTC departureDate;
+    @Column(name = "departure_date")
+    String departureDate;
 
-    //Date of the arrival of the flight
-    private DateLocalAndUTC arrivalDate;
+    @Column(name = "arrival_date")
+    String arrivalDate;
 
-    private String seatNumber;
+    @Column(name = "seat_number")
+    String seatNumber;
 
     //Empty constructor for Parceler
     public Flight() {}
 
     public Flight createFlightItem(FlightStatus flightStatus, ScheduledFlight scheduledFlight, String seatNumber) {
         Flight flight = new Flight();
-        flight.setArrivalDate(flightStatus.getArrivalDate());
-        flight.setDepartureDate(flightStatus.getDepartureDate());
+        flight.setArrivalDate(flightStatus.getArrivalDate().getDateUtc());
+        flight.setDepartureDate(flightStatus.getDepartureDate().getDateUtc());
         flight.setFlightNumber(scheduledFlight.getFlightNumber());
         flight.setDepartureTime(scheduledFlight.getDepartureTime());
         flight.setDepartureTerminal(scheduledFlight.getDepartureTerminal());
@@ -53,6 +73,22 @@ public class Flight {
         flight.setSeatNumber(seatNumber);
 
         return flight;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 
     public String getFlightNumber() {
@@ -95,19 +131,19 @@ public class Flight {
         this.arrivalTerminal = arrivalTerminal;
     }
 
-    public DateLocalAndUTC getDepartureDate() {
+    public String getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(DateLocalAndUTC departureDate) {
+    public void setDepartureDate(String departureDate) {
         this.departureDate = departureDate;
     }
 
-    public DateLocalAndUTC getArrivalDate() {
+    public String getArrivalDate() {
         return arrivalDate;
     }
 
-    public void setArrivalDate(DateLocalAndUTC arrivalDate) {
+    public void setArrivalDate(String arrivalDate) {
         this.arrivalDate = arrivalDate;
     }
 
@@ -117,5 +153,25 @@ public class Flight {
 
     public void setSeatNumber(String seatNumber) {
         this.seatNumber = seatNumber;
+    }
+
+    public Integer getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Integer tripId) {
+        this.tripId = tripId;
+    }
+
+    public static Flight get(Integer id) {
+        return SQLite.select().from(Flight.class).where(Flight_Table.id.eq(id)).querySingle();
+    }
+
+    public static List<Flight> getAll() {
+        return SQLite.select().from(Flight.class).queryList();
+    }
+
+    public static void save(Flight flight) {
+        flight.save();
     }
 }
