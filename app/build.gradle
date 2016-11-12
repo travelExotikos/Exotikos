@@ -12,8 +12,8 @@ buildscript {
 
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-apply plugin: 'android-apt'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
 
 repositories {
     mavenCentral()
@@ -45,6 +45,8 @@ android {
     }
 }
 
+def dbflow_version = "3.1.1"
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -70,6 +72,11 @@ dependencies {
     }
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
+    compile 'org.parceler:parceler-api:1.1.1'
+    // DBFlow for simple persistence with an ORM
+    apt "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    compile "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
 
     testCompile 'junit:junit:4.12'
 }

@@ -1,6 +1,8 @@
 
 package com.exotikosteam.exotikos.models.flightstatus;
 
+import com.exotikosteam.exotikos.models.airline.Airline;
+import com.exotikosteam.exotikos.models.airport.Airport;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

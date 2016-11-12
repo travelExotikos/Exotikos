@@ -12,6 +12,9 @@ import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowLog;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
 import io.fabric.sdk.android.Fabric;
 import okhttp3.OkHttpClient;
@@ -35,6 +38,9 @@ public class ExotikosApplication extends Application {
         Stetho.initializeWithDefaults(this);
 
         Fabric.with(this, new Crashlytics());
+
+        FlowManager.init(new FlowConfig.Builder(this).build());
+        FlowLog.setMinimumLoggingLevel(FlowLog.Level.V);
 
         try {
             ApplicationInfo ai = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
