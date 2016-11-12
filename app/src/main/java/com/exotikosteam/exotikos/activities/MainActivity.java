@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get single airline using ICAO code
         airlinesService.getByICAOCode("AAL", appId, appKey)
-                .map(airlinesResponse -> airlinesResponse.getAirline())
+                .concatMapIterable(airlinesResponse -> airlinesResponse.getAirlines())
                 .subscribe(
                         airline -> Log.i(TAG, airline.getName()),
                         throwable -> Log.e(TAG, "Error getting airline", throwable),
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get single airline using IATA code
         airlinesService.getByIATACode("AA", appId, appKey)
-                .map(airlinesResponse -> airlinesResponse.getAirline())
+                .concatMapIterable(airlinesResponse -> airlinesResponse.getAirlines())
                 .subscribe(
                         airline -> Log.i(TAG, airline.getName()),
                         throwable -> Log.e(TAG, "Error getting airline", throwable),
