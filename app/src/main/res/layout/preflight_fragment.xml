@@ -31,7 +31,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="San Francisco"
+        tools:text="San Francisco"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
@@ -41,36 +41,82 @@
         android:layout_alignStart="@+id/etFlightNumber" />
 
     <Button
+        android:text="Get Details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/etFlightNumber"
+        android:layout_toRightOf="@+id/etFlightNumber"
+        android:layout_toEndOf="@+id/etFlightNumber"
+        android:layout_marginLeft="31dp"
+        android:layout_marginStart="31dp"
+        android:id="@+id/btnDetails" />
+
+
+    <TextView
+        android:text="Boardng in 32Days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvBoarding"
+        android:background="@android:color/holo_green_dark"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="5dp"/>
+
+    <Button
         android:text="Where is the Airport?"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:id="@+id/button2"
-        android:layout_below="@+id/tvPreflightDeparture"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/btnAirportPage"
+        android:layout_above="@+id/tvCheckinDaysLeft"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="5dp" />
 
     <TextView
-        android:text="Delayed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView11"
-        android:layout_above="@+id/button2"
-        android:layout_toRightOf="@+id/etFlightNumber"
-        android:layout_toEndOf="@+id/etFlightNumber"
-        android:layout_marginLeft="45dp"
-        android:layout_marginStart="45dp" />
-
-    <TextView
-        android:text="6:30 AM"
+        tools:text="6:30 AM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvPreflightDepTime"
-        android:layout_above="@+id/button2"
-        android:layout_alignRight="@+id/etFlightNumber"
-        android:layout_alignEnd="@+id/etFlightNumber"
-        android:layout_marginRight="19dp"
-        android:layout_marginEnd="19dp" />
+        android:layout_marginRight="33dp"
+        android:layout_marginEnd="33dp"
+        android:layout_alignBottom="@+id/tvPreflightDeparture"
+        android:layout_toLeftOf="@+id/btnDetails"
+        android:layout_toStartOf="@+id/btnDetails"
+        android:layout_alignTop="@+id/tvPreflightDeparture" />
 
+    <TextView
+        tools:text="Delayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView11"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_alignBaseline="@+id/tvPreflightDepTime"
+        android:layout_alignBottom="@+id/tvPreflightDepTime"
+        android:layout_alignLeft="@+id/btnDetails"
+        android:layout_alignStart="@+id/btnDetails" />
+
+    <TextView
+        tools:text="Checkin before 31Days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light"
+        android:id="@+id/tvCheckinDaysLeft"
+        android:layout_above="@+id/btnLaunchScanPage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp" />
+
+    <Button
+        android:text="Checkin Completed: Scan Boarding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLaunchScanPage"
+        android:layout_above="@+id/tvBoarding"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp" />
 
 
 </RelativeLayout>

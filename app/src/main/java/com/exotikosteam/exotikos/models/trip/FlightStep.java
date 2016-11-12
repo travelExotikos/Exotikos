@@ -5,8 +5,9 @@ package com.exotikosteam.exotikos.models.trip;
  */
 
 public enum FlightStep {
-    //PREPARATION, I dont think we will have this state of trip...we are starting with scanning the boarding card which we get after checkin
+    PREPARATION,
     CHECK_IN,
+    CHECKIN_IN_DONE,
     SECURITY_CHECK_IN,
     BOARDING,
     PLANE,

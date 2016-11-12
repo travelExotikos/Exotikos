@@ -7,8 +7,11 @@ import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
+import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
+import com.exotikosteam.exotikos.fragments.TravelPrepFragment.OnButtonsClicks;
 import com.exotikosteam.exotikos.fragments.TravelScanFragment;
 import com.exotikosteam.exotikos.fragments.TravelStatusFragment;
+import com.exotikosteam.exotikos.models.trip.FlightStep;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
@@ -17,17 +20,17 @@ import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
 
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements TravelScanFragment.OnScanCompletedListener{
+public class MainActivity extends AppCompatActivity implements TravelScanFragment.OnScanCompletedListener,
+OnButtonsClicks{
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private TripStatus trip;
-    private boolean tripExists;
+    private  FlightStep fStep = FlightStep.PREPARATION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        tripExists = false;
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -125,20 +128,29 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
     private void setupStarterFragment() {
         //Depending on whether the user has scanned the boarding pass or not,
         // we show the travel summary or the scanner fragment here
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        if(tripExists != false) //replace with some logic to see if the use has created a trip before
-            showTravelStatusFragment(ft);
-        else
-            showTravelScanFragment(ft);
+        if(fStep == FlightStep.PREPARATION)
+            showTravelPreparationFragment();
+        if(fStep == FlightStep.CHECKIN_IN_DONE) //replace with some logic to see if the use has created a trip before
+            showTravelStatusFragment();
+        if(fStep == FlightStep.CHECK_IN)
+            showTravelScanFragment();
     }
 
-    private void showTravelStatusFragment(FragmentTransaction ft) {
+    private void showTravelPreparationFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, TravelPrepFragment.newInstance());
+        ft.commit();
+    }
+
+    private void showTravelStatusFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frgPlaceholder, TravelStatusFragment.newInstance(trip));
         ft.commit();
 
     }
 
-    private void showTravelScanFragment(FragmentTransaction ft) {
+    private void showTravelScanFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frgPlaceholder, TravelScanFragment.newInstance("Travel Status"));
         ft.commit();
 
@@ -147,7 +159,13 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
     @Override
     public void getTripInstance(TripStatus trip) {
         this.trip = trip;
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        showTravelStatusFragment(ft);
+        showTravelStatusFragment();
+    }
+
+    @Override
+    public void handleButtonsClicks(String buttonName) {
+        if(buttonName.equals("LaunchScanPage")) {
+            showTravelScanFragment();
+        }
     }
 }
