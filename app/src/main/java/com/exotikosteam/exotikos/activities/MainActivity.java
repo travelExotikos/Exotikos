@@ -1,30 +1,36 @@
 package com.exotikosteam.exotikos.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.Button;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
+import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
+import com.exotikosteam.exotikos.fragments.TravelPrepFragment.OnButtonsClicks;
+import com.exotikosteam.exotikos.fragments.TravelScanFragment;
+import com.exotikosteam.exotikos.fragments.TravelStatusFragment;
+import com.exotikosteam.exotikos.models.trip.FlightStep;
+import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TravelScanFragment.OnScanCompletedListener,
+OnButtonsClicks{
 
     public static final String TAG = MainActivity.class.getSimpleName();
-
-    @BindView(R.id.btnTravelStatus) Button btnTravelStatus;
+    private TripStatus trip;
+    private  FlightStep fStep = FlightStep.PREPARATION;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -114,14 +120,52 @@ public class MainActivity extends AppCompatActivity {
                         () -> Log.i(TAG, "Done with schedule")
                 );
 
-        setupListeners();
+
+        setupStarterFragment();
 
     }
 
-    private void setupListeners() {
-        btnTravelStatus.setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this, TravelStatusActivity.class);
-            startActivity(i);
-        });
+    private void setupStarterFragment() {
+        //Depending on whether the user has scanned the boarding pass or not,
+        // we show the travel summary or the scanner fragment here
+        if(fStep == FlightStep.PREPARATION)
+            showTravelPreparationFragment();
+        if(fStep == FlightStep.CHECKIN_IN_DONE) //replace with some logic to see if the use has created a trip before
+            showTravelStatusFragment();
+        if(fStep == FlightStep.CHECK_IN)
+            showTravelScanFragment();
+    }
+
+    private void showTravelPreparationFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, TravelPrepFragment.newInstance());
+        ft.commit();
+    }
+
+    private void showTravelStatusFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, TravelStatusFragment.newInstance(trip));
+        ft.commit();
+
+    }
+
+    private void showTravelScanFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, TravelScanFragment.newInstance("Travel Status"));
+        ft.commit();
+
+    }
+
+    @Override
+    public void getTripInstance(TripStatus trip) {
+        this.trip = trip;
+        showTravelStatusFragment();
+    }
+
+    @Override
+    public void handleButtonsClicks(String buttonName) {
+        if(buttonName.equals("LaunchScanPage")) {
+            showTravelScanFragment();
+        }
     }
 }

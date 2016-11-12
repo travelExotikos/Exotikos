@@ -106,4 +106,17 @@ public class TripStatus extends BaseModel {
     public static void save(TripStatus tripStatus) {
         tripStatus.save();
     }
+
+    public static TripStatus newMockInstance() {
+        TripStatus trip = new TripStatus();
+        trip.setFlightStep(FlightStep.CHECK_IN);
+        List<Flight> flights = new ArrayList<Flight>();
+        //String arrivalDate, String departureDate, String flightNumber, String departureTime,
+        // String departureTerminal, String arrivalTime, String arrivalTerminal, String seatNumber
+        flights.add(0, Flight.newInstance("", "January 19, 2017 ", "BX456", "6:44 AM", "A14", "12:30 PM","", "23B"));
+        flights.add(1, Flight.newInstance("January 19, 2017", "January 19, 2017", "ZK250", "1:44 PM", "B9", "3:45 PM","A23", "6C"));
+        flights.add(2, Flight.newInstance("January 19, 2017", "January 19, 2017", "BN05", "6:44 PM", "C34", "8:45 PM","D43", "2B"));
+        trip.setFlights(flights);
+        return trip;
+    }
 }

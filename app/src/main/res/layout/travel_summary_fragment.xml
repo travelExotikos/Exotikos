@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="January 19, 2017 "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+
+        android:id="@+id/tvTravelDate1" />
+
+    <TextView
+        android:text="San Francisco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTravelDate1"
+        android:layout_alignLeft="@+id/tvTravelDate1"
+        android:layout_alignStart="@+id/tvTravelDate1"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:layout_marginTop="41dp"
+        android:id="@+id/tvTravelDest1" />
+
+    <TextView
+        android:text="10:30AM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvTravelDest1"
+        android:layout_toRightOf="@+id/tvTravelDest1"
+        android:layout_toEndOf="@+id/tvTravelDest1"
+        android:layout_marginLeft="67dp"
+        android:layout_marginStart="67dp"
+        android:id="@+id/tvDepartureTime1" />
+
+    <TextView
+        android:text="Stop1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTravelDest1"
+        android:layout_alignLeft="@+id/tvTravelDest1"
+        android:layout_alignStart="@+id/tvTravelDest1"
+        android:layout_marginTop="47dp"
+        android:id="@+id/tvStop1" />
+
+    <TextView
+        android:text="2:30PM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvStop1"
+        android:layout_alignLeft="@+id/tvDepartureTime1"
+        android:layout_alignStart="@+id/tvDepartureTime1"
+        android:id="@+id/tvArrivalTime1" />
+
+    <TextView
+        android:text="3:45PM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvArrivalTime1"
+        android:layout_alignLeft="@+id/tvArrivalTime1"
+        android:layout_alignStart="@+id/tvArrivalTime1"
+        android:layout_marginTop="15dp"
+        android:id="@+id/tvDepartureTime2" />
+
+    <TextView
+        android:text="Miami"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvDepartureTime2"
+        android:layout_alignLeft="@+id/tvStop1"
+        android:layout_alignStart="@+id/tvStop1"
+        android:layout_marginTop="57dp"
+        android:id="@+id/tvDestination" />
+
+    <TextView
+        android:text="7:30PM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvDestination"
+        android:layout_alignLeft="@+id/tvDepartureTime2"
+        android:layout_alignStart="@+id/tvDepartureTime2"
+        android:id="@+id/tvArrivalTime2" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/departure"
+        android:layout_alignTop="@+id/tvDepartureTime1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="41dp"
+        android:layout_marginEnd="41dp"
+        android:id="@+id/ivDeparture" />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:srcCompat="@drawable/stopover"
+        android:id="@+id/ivStopOver"
+        android:layout_alignTop="@+id/tvArrivalTime1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="23dp"
+        android:layout_marginEnd="23dp" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/arrivals"
+        android:id="@+id/ivArrival"
+        android:layout_alignTop="@+id/tvArrivalTime2"
+        android:layout_alignLeft="@+id/ivDeparture"
+        android:layout_alignStart="@+id/ivDeparture" />
+
+    <Button
+        android:text="Start the Trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnTravelStatus"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="11dp" />
+
+</RelativeLayout>
