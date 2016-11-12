@@ -1,0 +1,33 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Lets Start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            android:textSize="40dp"
+            android:background="@color/colorAccent"
+            android:id="@+id/textView" />
+
+        <TextView
+            android:text="Please scan Ticket Barcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+
+            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            android:id="@+id/textView2" />
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            app:srcCompat="@drawable/qrcode_scan"
+            android:id="@+id/scanImageClick" />
+
+    </LinearLayout>
+</layout>

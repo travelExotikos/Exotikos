@@ -1,6 +1,7 @@
 package com.exotikosteam.exotikos.fragments;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.activities.TravelStatusActivity;
+import com.exotikosteam.exotikos.databinding.TravelSummaryFragmentBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 
@@ -19,29 +21,26 @@ import org.parceler.Parcels;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Created by lramaswamy on 11/11/16.
  */
 
-public class TravelStatusFragment extends Fragment {
+public class TravelSummaryFragment extends Fragment {
 
     TripStatus trips;
     List<Flight> flights;
-    private Unbinder unbinder;
+    private TravelSummaryFragmentBinding summaryFragmentBinding;
 
-    @BindView(R.id.btnTravelStatus) Button btnTravelStatus;
-    @BindView(R.id.tvTravelDate1) TextView tvTravelDate1;
-    @BindView(R.id.tvTravelDest1) TextView tvTravelDest1;
-    @BindView(R.id.tvDepartureTime1) TextView tvDepartureTime1;
-    @BindView(R.id.tvStop1) TextView tvStop1;
-    @BindView(R.id.tvArrivalTime1) TextView tvArrivalTime1;
-    @BindView(R.id.tvDepartureTime2) TextView tvDepartureTime2;
-    @BindView(R.id.tvDestination) TextView tvDestination;
-    @BindView(R.id.tvArrivalTime2) TextView tvArrivalTime2;
+
+    Button btnTravelStatus;
+    TextView tvTravelDate1;
+    TextView tvTravelDest1;
+    TextView tvDepartureTime1;
+    TextView tvStop1;
+    TextView tvArrivalTime1;
+    TextView tvDepartureTime2;
+    TextView tvDestination;
+    TextView tvArrivalTime2;
 
 
 
@@ -51,21 +50,27 @@ public class TravelStatusFragment extends Fragment {
         super.onCreate(savedInstanceState);
         trips = (TripStatus) Parcels.unwrap(getArguments().getParcelable("tripStatus"));
         flights = trips.getFlights();
-        //mockData();
-    }
-
-    private void mockData() {
-        trips = TripStatus.newMockInstance();
-        this.flights = trips.getFlights();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.travel_summary_fragment, parent, false);
-        unbinder = ButterKnife.bind(this, v);
+        summaryFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.travel_summary_fragment, parent, false);
+        setupBindings();
         setupListeners();
-        return  v;
+        return  summaryFragmentBinding.getRoot();
+    }
+
+    private void setupBindings() {
+        tvTravelDate1 = summaryFragmentBinding.tvTravelDate1;
+        btnTravelStatus = summaryFragmentBinding.btnTravelStatus;
+        tvTravelDest1 = summaryFragmentBinding.tvTravelDest1;
+        tvDepartureTime1 = summaryFragmentBinding.tvDepartureTime1;
+        tvStop1 = summaryFragmentBinding.tvStop1;
+        tvArrivalTime1 = summaryFragmentBinding.tvArrivalTime1;
+        tvDepartureTime2 = summaryFragmentBinding.tvDepartureTime2;
+        tvDestination = summaryFragmentBinding.tvDestination;
+        tvArrivalTime2 = summaryFragmentBinding.tvArrivalTime2;
     }
 
     @Override
@@ -90,8 +95,8 @@ public class TravelStatusFragment extends Fragment {
         tvArrivalTime2.setText(flights.get(2).getArrivalTime());
     }
 
-    public static TravelStatusFragment newInstance(TripStatus trips) {
-        TravelStatusFragment frag = new TravelStatusFragment();
+    public static TravelSummaryFragment newInstance(TripStatus trips) {
+        TravelSummaryFragment frag = new TravelSummaryFragment();
         Bundle args = new Bundle();
         args.putParcelable("tripStatus", Parcels.wrap(trips));
         frag.setArguments(args);
@@ -108,6 +113,6 @@ public class TravelStatusFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+        //unbinder.unbind();
     }
 }
