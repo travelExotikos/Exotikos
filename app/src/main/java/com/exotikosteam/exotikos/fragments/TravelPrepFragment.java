@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.TravelPrepFragmentBinding;
+import com.google.android.gms.maps.model.LatLng;
 
 import butterknife.Unbinder;
 
@@ -27,14 +28,14 @@ public class TravelPrepFragment extends Fragment {
     Button btnAirportPage;
 
     public interface OnButtonsClicks {
-        void handleButtonsClicks(String buttonName);
+        void handleButtonsClicks(String buttonName, LatLng latLng);
     }
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        prepFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.travel_prep_fragment, container, false);
+        prepFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_travel_prep, container, false);
         setupBindings();
         setOnClickListener();
 
@@ -65,12 +66,15 @@ public class TravelPrepFragment extends Fragment {
         });
 
         btnAirportPage.setOnClickListener(v -> {
-
+            handleLaunchAirportMapPage();
         });
     }
 
+    private void handleLaunchAirportMapPage() {
+        listener.handleButtonsClicks("LaunchAirportPage", new LatLng(37.6213129,-122.3811494));
+    }
     private void handleLaunchScanPage() {
-        listener.handleButtonsClicks("LaunchScanPage");
+        listener.handleButtonsClicks("LaunchScanPage", null);
     }
 
     public static TravelPrepFragment newInstance() {

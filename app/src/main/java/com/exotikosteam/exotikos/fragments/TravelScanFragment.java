@@ -61,7 +61,7 @@ public class TravelScanFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
-        scanFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.travel_scan_fragment, parent, false);
+        scanFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_travel_scan, parent, false);
         trip = Parcels.unwrap(getArguments().getParcelable(Constants.PARAM_TRIP));
         return scanFragmentBinding.getRoot();
     }
