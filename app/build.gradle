@@ -89,5 +89,9 @@ dependencies {
     compile "com.android.support:support-vector-drawable:${supportLibVersion}" // VectorDrawableCompat
     compile "com.android.support:animated-vector-drawable:${supportLibVersion}" // AnimatedVectorDrawableCompat
     apt 'org.parceler:parceler:1.1.1'
+    compile 'com.google.android.gms:play-services-location:9.8.0'
+    compile 'com.google.android.gms:play-services-maps:9.8.0'
+
+
     testCompile 'junit:junit:4.12'
 }
