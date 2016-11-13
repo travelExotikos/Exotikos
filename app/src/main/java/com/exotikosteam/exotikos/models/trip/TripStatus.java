@@ -40,7 +40,9 @@ public class TripStatus extends BaseModel {
     List<Flight> flights = new ArrayList<>();
 
     //Empty constructor for Parceler
-    public TripStatus() {}
+    public TripStatus() {
+        super();
+    }
 
     public TripStatus(List<Flight> flights) {
         this.flights = flights;

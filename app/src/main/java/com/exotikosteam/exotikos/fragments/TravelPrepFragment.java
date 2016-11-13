@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.TravelPrepFragmentBinding;
@@ -29,7 +28,6 @@ public class TravelPrepFragment extends Fragment {
         void handleButtonsClicks(String buttonName);
     }
 
-    Button launchScan;
 
     @Nullable
     @Override
@@ -59,7 +57,7 @@ public class TravelPrepFragment extends Fragment {
     }
 
     private void setOnClickListener() {
-        launchScan.setOnClickListener(v -> {
+        prepFragmentBinding.btnLaunchScanPage.setOnClickListener(v -> {
             handleLaunchScanPage();
         });
     }
