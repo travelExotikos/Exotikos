@@ -93,4 +93,5 @@ public class SampleCardFragment extends Fragment implements ExpandableCard {
             rlCardContents.toggle();
         }
     }
+
 }

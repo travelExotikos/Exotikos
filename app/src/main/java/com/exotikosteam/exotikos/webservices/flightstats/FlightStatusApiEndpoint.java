@@ -35,4 +35,15 @@ public interface FlightStatusApiEndpoint {
             @Query("appId") String appId,
             @Query("appKey") String appKey);
 
+    @GET("/flex/flightstatus/rest/v2/json/flight/status/{carrier}/{flightNumber}/dep/{year}/{month}/{day}")
+    rx.Observable<FlightStatusResponse> getByDepartingDateAndAirportIATA(
+            @Path("carrier") String carrier,
+            @Path("flightNumber") String flightNumber,
+            @Path("year") int year,
+            @Path("month") int month,
+            @Path("day") int day,
+            @Query("airport") String airportIATA,
+            @Query("appId") String appId,
+            @Query("appKey") String appKey);
+
 }

@@ -88,11 +88,7 @@ public class TravelSummaryFragment extends Fragment {
         tvTravelDate1.setText(flights.get(0).getDepartureDate());
         tvTravelDest1.setText(flights.get(0).getDepartureTerminal()); //This should be departure city, not terminal
         tvDepartureTime1.setText(flights.get(0).getDepartureTime());
-        tvStop1.setText(flights.get(1).getArrivalTerminal());
-        tvArrivalTime1.setText(flights.get(1).getArrivalTime());
-        tvDepartureTime2.setText(flights.get(1).getDepartureTime());
-        tvDestination.setText(flights.get(2).getArrivalTerminal());
-        tvArrivalTime2.setText(flights.get(2).getArrivalTime());
+
     }
 
     public static TravelSummaryFragment newInstance(TripStatus trips) {

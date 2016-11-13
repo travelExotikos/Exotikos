@@ -1,5 +1,6 @@
 package com.exotikosteam.exotikos.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -133,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
                         () -> Log.i(TAG, "Done with schedule")
                 );
 
-
         setupStarterFragment();
         setupGoogleClient();
 
@@ -148,14 +148,22 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
     }
 
     private void setupStarterFragment() {
+        //TODO the temporary code. Remove after implement PREPARATION step
+        this.trip = new TripStatus();
+        this.trip.setFlightStep(FlightStep.PREPARATION);
+        this.trip.save();
+        Log.d(TAG, String.format("trip saved %s, %d", this.trip.getFlightStep(), this.trip.getId()));
+        //TODO end of temp code
         //Depending on whether the user has scanned the boarding pass or not,
         // we show the travel summary or the scanner fragment here
-        if(fStep == FlightStep.PREPARATION)
+        if (fStep == FlightStep.PREPARATION) {
+            //TODO trip should be created in this step will create temporary trip for test
             showTravelPreparationFragment();
-        if(fStep == FlightStep.CHECKIN_IN_DONE) //replace with some logic to see if the use has created a trip before
+        } if (fStep == FlightStep.CHECKIN_IN_DONE) {//replace with some logic to see if the use has created a trip before
             showTravelStatusFragment();
-        if(fStep == FlightStep.CHECK_IN)
+        } if (fStep == FlightStep.CHECK_IN) {
             showTravelScanFragment();
+        }
     }
 
     private void showTravelPreparationFragment() {
@@ -173,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
 
     private void showTravelScanFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, TravelScanFragment.newInstance("Travel Status"));
+        ft.replace(R.id.frgPlaceholder, TravelScanFragment.newInstance(this.trip));
         ft.commit();
 
     }
@@ -211,4 +219,12 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+
 }

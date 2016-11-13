@@ -30,7 +30,6 @@ public class TravelPrepFragment extends Fragment {
         void handleButtonsClicks(String buttonName);
     }
 
-    Button launchScan;
 
     @Nullable
     @Override
@@ -45,7 +44,6 @@ public class TravelPrepFragment extends Fragment {
     private void setupBindings() {
         //bind any view elements here to PrepFragmentBinding
         btnAirportPage = prepFragmentBinding.btnAirportPage;
-        launchScan = prepFragmentBinding.btnLaunchScanPage;
     }
 
     @Override
@@ -62,7 +60,7 @@ public class TravelPrepFragment extends Fragment {
     }
 
     private void setOnClickListener() {
-        launchScan.setOnClickListener(v -> {
+        prepFragmentBinding.btnLaunchScanPage.setOnClickListener(v -> {
             handleLaunchScanPage();
         });
 

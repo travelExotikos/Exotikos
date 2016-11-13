@@ -1,8 +1,8 @@
 package com.exotikosteam.exotikos.models.trip;
 
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
+import com.exotikosteam.exotikos.models.flightstatus.AirportResources;
 import com.exotikosteam.exotikos.models.flightstatus.FlightStatus;
-import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -32,53 +32,78 @@ public class Flight extends BaseModel {
 
     @Column(name = "flight_number")
     String flightNumber;
-    //Integer stops; Not sure if this is needed...I think this will be handled through Trips
 
-    //TODO LocalDataTime? - need converter
-    @Column(name = "departure_time")
-    String departureTime;
-
-    //TODO LocalDataTime> - need convertor
-    @Column(name = "arrival_time")
-    String arrivalTime;
-
-    //Terminal for the flight departure
-    @Column(name = "departure_terminal")
-    String departureTerminal;
-
-    @Column(name = "arrival_terminal")
-    String arrivalTerminal;
-
-    //Get these from FlightStatus API
-    @Column(name = "departure_date")
-    String departureDate;
-
-    @Column(name = "arrival_date")
-    String arrivalDate;
+    @Column(name = "flight_id")
+    Integer flightId;
 
     @Column(name = "seat_number")
     String seatNumber;
 
-    //Empty constructor for Parceler
-    public Flight() {}
+    @Column(name = "departure_gate")
+    String departureGate;
 
-    public static Flight newInstance(FlightStatus flightStatus, ScheduledFlight scheduledFlight, String seatNumber) {
+    @Column(name = "departure_date")
+    String departureDate;
+
+    @Column(name = "departure_terminal")
+    String departureTerminal;
+
+    @Column(name = "departure_time")
+    String departureTime;
+
+    @Column(name = "departure_airport_IATA")
+    String departureAirportIATA;
+
+    @Column(name = "departure_city")
+    String departureCity;
+
+    @Column(name = "arrival_date")
+    String arrivalDate;
+
+    @Column(name = "arrival_terminal")
+    String arrivalTerminal;
+
+    @Column(name = "arrival_time")
+    String arrivalTime;
+
+    @Column(name = "arrival_airport_IATA")
+    String arrivalAirportIATA;
+
+    @Column(name = "arrival_city")
+    String arrivalCity;
+
+
+    //Empty constructor for Parceler
+    public Flight() {
+    }
+
+    public static Flight newInstance(Integer tripId, FlightStatus flightStatus, String seatNumber) {
         Flight flight = new Flight();
-        flight.setArrivalDate(flightStatus.getArrivalDate().getDateUtc());
-        flight.setDepartureDate(flightStatus.getDepartureDate().getDateUtc());
-        flight.setFlightNumber(scheduledFlight.getFlightNumber());
-        flight.setDepartureTime(scheduledFlight.getDepartureTime());
-        flight.setDepartureTerminal(scheduledFlight.getDepartureTerminal());
-        flight.setArrivalTime(scheduledFlight.getArrivalTime());
-        flight.setArrivalTerminal(scheduledFlight.getArrivalTerminal());
+        flight.setTripId(tripId);
+        flight.setFlightNumber(flightStatus.getFlightNumber());
+        flight.setDepartureTime(flightStatus.getDepartureDate().getDateUtc().substring(11, 16));
+        flight.setDepartureDate(flightStatus.getDepartureDate().getDateUtc().substring(0, 10));
+        flight.setDepartureAirportIATA(flightStatus.getDepartureAirportFsCode());
+        flight.setDepartureCity("TODO");
+        flight.setArrivalTime(flightStatus.getArrivalDate().getDateUtc().substring(11, 16));
+        flight.setArrivalDate(flightStatus.getArrivalDate().getDateUtc().substring(0, 10));
+        flight.setArrivalAirportIATA(flightStatus.getArrivalAirportFsCode());
+        flight.setArrivalCity("TODO");
         flight.setSeatNumber(seatNumber);
+        flight.setFlightId(flightStatus.getFlightId());
+
+        AirportResources ar = flightStatus.getAirportResources();
+        if (ar != null) {
+            flight.setDepartureGate(ar.getDepartureGate());
+            flight.setDepartureTerminal(ar.getDepartureTerminal());
+            flight.setArrivalTerminal(ar.getArrivalTerminal());
+        }
 
         return flight;
     }
 
     public static Flight newInstance(String arrivalDate, String departureDate, String flightNumber, String departureTime,
-    String departureTerminal, String arrivalTime, String arrivalTerminal, String seatNumber)
-    {
+                                     String departureTerminal, String arrivalTime, String arrivalTerminal, String seatNumber) {
         Flight flight = new Flight();
         flight.setArrivalDate(arrivalDate);
         flight.setDepartureDate(departureDate);
@@ -190,5 +215,53 @@ public class Flight extends BaseModel {
 
     public static void save(Flight flight) {
         flight.save();
+    }
+
+    public Integer getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(Integer flightId) {
+        this.flightId = flightId;
+    }
+
+    public String getDepartureGate() {
+        return departureGate;
+    }
+
+    public void setDepartureGate(String departureGate) {
+        this.departureGate = departureGate;
+    }
+
+    public String getDepartureAirportIATA() {
+        return departureAirportIATA;
+    }
+
+    public void setDepartureAirportIATA(String departureAirportIATA) {
+        this.departureAirportIATA = departureAirportIATA;
+    }
+
+    public String getDepartureCity() {
+        return departureCity;
+    }
+
+    public void setDepartureCity(String departureCity) {
+        this.departureCity = departureCity;
+    }
+
+    public String getArrivalAirportIATA() {
+        return arrivalAirportIATA;
+    }
+
+    public void setArrivalAirportIATA(String arrivalAirportIATA) {
+        this.arrivalAirportIATA = arrivalAirportIATA;
+    }
+
+    public String getArrivalCity() {
+        return arrivalCity;
+    }
+
+    public void setArrivalCity(String arrivalCity) {
+        this.arrivalCity = arrivalCity;
     }
 }
