@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.databinding.TravelScanFragmentBinding;
+import com.exotikosteam.exotikos.databinding.FragmentTravelScanBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.utils.Constants;
@@ -36,10 +36,10 @@ import java.util.Calendar;
  * Created by lramaswamy on 11/11/16.
  */
 
-public class TravelScanFragment extends Fragment {
+public class FragmentTravelScan extends Fragment {
 
     private OnScanCompletedListener listener;
-    private TravelScanFragmentBinding scanFragmentBinding;
+    private FragmentTravelScanBinding scanFragmentBinding;
     private static String TAG = "ScanAction";
     private TripStatus trip;
 
@@ -54,7 +54,7 @@ public class TravelScanFragment extends Fragment {
             listener = (OnScanCompletedListener) context;
         } else {
             throw new ClassCastException(context.toString()
-                    + " must implement TravelScanFragment.OnScanCompletedListener");
+                    + " must implement FragmentTravelScan.OnScanCompletedListener");
         }
     }
 
@@ -179,12 +179,12 @@ public class TravelScanFragment extends Fragment {
         startActivityForResult(intent, Constants.REQUEST_CODE_SCAN);
     }
 
-    public static TravelScanFragment newInstance(TripStatus trip) {
-        TravelScanFragment travelScanFragment = new TravelScanFragment();
+    public static FragmentTravelScan newInstance(TripStatus trip) {
+        FragmentTravelScan fragmentTravelScan = new FragmentTravelScan();
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trip));
-        travelScanFragment.setArguments(bundle);
-        return travelScanFragment;
+        fragmentTravelScan.setArguments(bundle);
+        return fragmentTravelScan;
     }
 
     public void scanCompleted(TripStatus trip) {

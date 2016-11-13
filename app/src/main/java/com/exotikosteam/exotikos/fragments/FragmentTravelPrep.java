@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.databinding.TravelPrepFragmentBinding;
+import com.exotikosteam.exotikos.databinding.FragmentTravelPrepBinding;
 import com.google.android.gms.maps.model.LatLng;
 
 import butterknife.Unbinder;
@@ -20,11 +20,11 @@ import butterknife.Unbinder;
  * Created by lramaswamy on 11/12/16.
  */
 
-public class TravelPrepFragment extends Fragment {
+public class FragmentTravelPrep extends Fragment {
 
     Unbinder unbinder;
     OnButtonsClicks listener;
-    TravelPrepFragmentBinding prepFragmentBinding;
+    FragmentTravelPrepBinding prepFragmentBinding;
     Button btnAirportPage;
 
     public interface OnButtonsClicks {
@@ -77,8 +77,8 @@ public class TravelPrepFragment extends Fragment {
         listener.handleButtonsClicks("LaunchScanPage", null);
     }
 
-    public static TravelPrepFragment newInstance() {
-        TravelPrepFragment frag = new TravelPrepFragment();
+    public static FragmentTravelPrep newInstance() {
+        FragmentTravelPrep frag = new FragmentTravelPrep();
         Bundle args = new Bundle();
         //args.putParcelable("tripStatus", Parcels.wrap(trips));
         frag.setArguments(args);

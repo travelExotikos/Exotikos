@@ -17,7 +17,7 @@ import org.parceler.Parcels;
  * Created by lramaswamy on 11/12/16.
  */
 
-public class TravelAirportFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
+public class FragmentTravelAirport extends Fragment implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
     private GoogleApiClient mGoogleApiClient;
@@ -54,8 +54,8 @@ public class TravelAirportFragment extends Fragment implements GoogleApiClient.C
                 .addOnConnectionFailedListener(this).build();
     }
 
-    public static TravelAirportFragment newInstance(String title, LatLng latLng) {
-        TravelAirportFragment travelAirportFragment = new TravelAirportFragment();
+    public static FragmentTravelAirport newInstance(String title, LatLng latLng) {
+        FragmentTravelAirport travelAirportFragment = new FragmentTravelAirport();
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
         bundle.putParcelable("latlong", Parcels.wrap(latLng));

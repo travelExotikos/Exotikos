@@ -8,11 +8,11 @@ import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.fragments.TravelAirportFragment;
-import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
-import com.exotikosteam.exotikos.fragments.TravelPrepFragment.OnButtonsClicks;
-import com.exotikosteam.exotikos.fragments.TravelScanFragment;
-import com.exotikosteam.exotikos.fragments.TravelSummaryFragment;
+import com.exotikosteam.exotikos.fragments.FragmentTravelAirport;
+import com.exotikosteam.exotikos.fragments.FragmentTravelPrep;
+import com.exotikosteam.exotikos.fragments.FragmentTravelPrep.OnButtonsClicks;
+import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
+import com.exotikosteam.exotikos.fragments.FragmentTravelSummary;
 import com.exotikosteam.exotikos.models.trip.FlightStep;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
@@ -23,7 +23,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements TravelScanFragment.OnScanCompletedListener,
+public class MainActivity extends AppCompatActivity implements FragmentTravelScan.OnScanCompletedListener,
                                                                 OnButtonsClicks{
 
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -150,20 +150,20 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
 
     private void showTravelPreparationFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, TravelPrepFragment.newInstance());
+        ft.replace(R.id.frgPlaceholder, FragmentTravelPrep.newInstance());
         ft.commit();
     }
 
     private void showTravelStatusFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, TravelSummaryFragment.newInstance(trip));
+        ft.replace(R.id.frgPlaceholder, FragmentTravelSummary.newInstance(trip));
         ft.commit();
 
     }
 
     private void showTravelScanFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, TravelScanFragment.newInstance(this.trip));
+        ft.replace(R.id.frgPlaceholder, FragmentTravelScan.newInstance(this.trip));
         ft.commit();
     }
 
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
 
     private void showAiportLocationPage(LatLng latLng) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, TravelAirportFragment.newInstance("Airport Location", latLng));
+        ft.replace(R.id.frgPlaceholder, FragmentTravelAirport.newInstance("Airport Location", latLng));
         ft.commit();
     }
 

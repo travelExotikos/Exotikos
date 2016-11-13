@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.activities.TravelStatusActivity;
-import com.exotikosteam.exotikos.databinding.TravelSummaryFragmentBinding;
+import com.exotikosteam.exotikos.databinding.FragmentTravelSummaryBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 
@@ -25,11 +25,11 @@ import java.util.List;
  * Created by lramaswamy on 11/11/16.
  */
 
-public class TravelSummaryFragment extends Fragment {
+public class FragmentTravelSummary extends Fragment {
 
     TripStatus trips;
     List<Flight> flights;
-    private TravelSummaryFragmentBinding summaryFragmentBinding;
+    private FragmentTravelSummaryBinding summaryFragmentBinding;
     Button btnTravelStatus;
     TextView tvTravelDate1;
     TextView tvTravelDest1;
@@ -86,8 +86,8 @@ public class TravelSummaryFragment extends Fragment {
 
     }
 
-    public static TravelSummaryFragment newInstance(TripStatus trips) {
-        TravelSummaryFragment frag = new TravelSummaryFragment();
+    public static FragmentTravelSummary newInstance(TripStatus trips) {
+        FragmentTravelSummary frag = new FragmentTravelSummary();
         Bundle args = new Bundle();
         args.putParcelable("tripStatus", Parcels.wrap(trips));
         frag.setArguments(args);
