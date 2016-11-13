@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.TravelPrepFragmentBinding;
@@ -23,6 +24,7 @@ public class TravelPrepFragment extends Fragment {
     Unbinder unbinder;
     OnButtonsClicks listener;
     TravelPrepFragmentBinding prepFragmentBinding;
+    Button btnAirportPage;
 
     public interface OnButtonsClicks {
         void handleButtonsClicks(String buttonName);
@@ -41,6 +43,7 @@ public class TravelPrepFragment extends Fragment {
 
     private void setupBindings() {
         //bind any view elements here to PrepFragmentBinding
+        btnAirportPage = prepFragmentBinding.btnAirportPage;
     }
 
     @Override
@@ -59,6 +62,10 @@ public class TravelPrepFragment extends Fragment {
     private void setOnClickListener() {
         prepFragmentBinding.btnLaunchScanPage.setOnClickListener(v -> {
             handleLaunchScanPage();
+        });
+
+        btnAirportPage.setOnClickListener(v -> {
+
         });
     }
 

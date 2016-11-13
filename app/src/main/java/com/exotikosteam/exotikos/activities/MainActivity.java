@@ -2,6 +2,8 @@ package com.exotikosteam.exotikos.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,15 +20,26 @@ import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements TravelScanFragment.OnScanCompletedListener,
-OnButtonsClicks {
+                                                                OnButtonsClicks,
+                                                                GoogleApiClient.ConnectionCallbacks,
+                                                                GoogleApiClient.OnConnectionFailedListener{
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private TripStatus trip;
     private  FlightStep fStep = FlightStep.PREPARATION;
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
+
+    LatLng latLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +135,16 @@ OnButtonsClicks {
                 );
 
         setupStarterFragment();
+        setupGoogleClient();
 
+    }
+
+    private void setupGoogleClient() {
+        // Create the location client to start receiving updates
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this).build();
     }
 
     private void setupStarterFragment() {
@@ -175,6 +197,27 @@ OnButtonsClicks {
         if(buttonName.equals("LaunchScanPage")) {
             showTravelScanFragment();
         }
+        if(buttonName.equals("LaunchAirportPage")) {
+            showAiportLocationPage(latLng);
+        }
+    }
+
+    private void showAiportLocationPage(LatLng latLng) {
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 
     @Override

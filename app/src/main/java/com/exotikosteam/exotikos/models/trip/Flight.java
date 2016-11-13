@@ -81,10 +81,12 @@ public class Flight extends BaseModel {
         Flight flight = new Flight();
         flight.setTripId(tripId);
         flight.setFlightNumber(flightStatus.getFlightNumber());
-        flight.setDepartureTime(flightStatus.getDepartureDate().getDateUtc());
+        flight.setDepartureTime(flightStatus.getDepartureDate().getDateUtc().substring(11, 16));
+        flight.setDepartureDate(flightStatus.getDepartureDate().getDateUtc().substring(0, 10));
         flight.setDepartureAirportIATA(flightStatus.getDepartureAirportFsCode());
         flight.setDepartureCity("TODO");
-        flight.setArrivalTime(flightStatus.getArrivalDate().getDateUtc());
+        flight.setArrivalTime(flightStatus.getArrivalDate().getDateUtc().substring(11, 16));
+        flight.setArrivalDate(flightStatus.getArrivalDate().getDateUtc().substring(0, 10));
         flight.setArrivalAirportIATA(flightStatus.getArrivalAirportFsCode());
         flight.setArrivalCity("TODO");
         flight.setSeatNumber(seatNumber);
