@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.activities.TravelStatusActivity;
-import com.exotikosteam.exotikos.databinding.TravelSummaryFragmentBinding;
+import com.exotikosteam.exotikos.databinding.FragmentTravelSummaryBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 
@@ -25,13 +25,11 @@ import java.util.List;
  * Created by lramaswamy on 11/11/16.
  */
 
-public class TravelSummaryFragment extends Fragment {
+public class FragmentTravelSummary extends Fragment {
 
     TripStatus trips;
     List<Flight> flights;
-    private TravelSummaryFragmentBinding summaryFragmentBinding;
-
-
+    private FragmentTravelSummaryBinding summaryFragmentBinding;
     Button btnTravelStatus;
     TextView tvTravelDate1;
     TextView tvTravelDest1;
@@ -41,9 +39,6 @@ public class TravelSummaryFragment extends Fragment {
     TextView tvDepartureTime2;
     TextView tvDestination;
     TextView tvArrivalTime2;
-
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +50,7 @@ public class TravelSummaryFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
-        summaryFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.travel_summary_fragment, parent, false);
+        summaryFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_travel_summary, parent, false);
         setupBindings();
         setupListeners();
         return  summaryFragmentBinding.getRoot();
@@ -91,8 +86,8 @@ public class TravelSummaryFragment extends Fragment {
 
     }
 
-    public static TravelSummaryFragment newInstance(TripStatus trips) {
-        TravelSummaryFragment frag = new TravelSummaryFragment();
+    public static FragmentTravelSummary newInstance(TripStatus trips) {
+        FragmentTravelSummary frag = new FragmentTravelSummary();
         Bundle args = new Bundle();
         args.putParcelable("tripStatus", Parcels.wrap(trips));
         frag.setArguments(args);

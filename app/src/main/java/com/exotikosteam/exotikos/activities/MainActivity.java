@@ -2,44 +2,33 @@ package com.exotikosteam.exotikos.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
-import com.exotikosteam.exotikos.fragments.TravelPrepFragment.OnButtonsClicks;
-import com.exotikosteam.exotikos.fragments.TravelScanFragment;
-import com.exotikosteam.exotikos.fragments.TravelSummaryFragment;
+import com.exotikosteam.exotikos.fragments.FragmentTravelAirport;
+import com.exotikosteam.exotikos.fragments.FragmentTravelPrep;
+import com.exotikosteam.exotikos.fragments.FragmentTravelPrep.OnButtonsClicks;
+import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
+import com.exotikosteam.exotikos.fragments.FragmentTravelSummary;
 import com.exotikosteam.exotikos.models.trip.FlightStep;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements TravelScanFragment.OnScanCompletedListener,
-                                                                OnButtonsClicks,
-                                                                GoogleApiClient.ConnectionCallbacks,
-                                                                GoogleApiClient.OnConnectionFailedListener{
+public class MainActivity extends AppCompatActivity implements FragmentTravelScan.OnScanCompletedListener,
+                                                                OnButtonsClicks{
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private TripStatus trip;
     private  FlightStep fStep = FlightStep.PREPARATION;
-    private GoogleApiClient mGoogleApiClient;
-    private LocationRequest mLocationRequest;
-
-    LatLng latLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,17 +124,10 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
                 );
 
         setupStarterFragment();
-        setupGoogleClient();
 
     }
 
-    private void setupGoogleClient() {
-        // Create the location client to start receiving updates
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this).build();
-    }
+
 
     private void setupStarterFragment() {
         //TODO the temporary code. Remove after implement PREPARATION step
@@ -168,22 +150,21 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
 
     private void showTravelPreparationFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, TravelPrepFragment.newInstance());
+        ft.replace(R.id.frgPlaceholder, FragmentTravelPrep.newInstance());
         ft.commit();
     }
 
     private void showTravelStatusFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, TravelSummaryFragment.newInstance(trip));
+        ft.replace(R.id.frgPlaceholder, FragmentTravelSummary.newInstance(trip));
         ft.commit();
 
     }
 
     private void showTravelScanFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, TravelScanFragment.newInstance(this.trip));
+        ft.replace(R.id.frgPlaceholder, FragmentTravelScan.newInstance(this.trip));
         ft.commit();
-
     }
 
     @Override
@@ -193,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
     }
 
     @Override
-    public void handleButtonsClicks(String buttonName) {
+    public void handleButtonsClicks(String buttonName, LatLng latLng) {
         if(buttonName.equals("LaunchScanPage")) {
             showTravelScanFragment();
         }
@@ -203,21 +184,9 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
     }
 
     private void showAiportLocationPage(LatLng latLng) {
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, FragmentTravelAirport.newInstance("Airport Location", latLng));
+        ft.commit();
     }
 
     @Override
@@ -225,6 +194,4 @@ public class MainActivity extends AppCompatActivity implements TravelScanFragmen
         super.onActivityResult(requestCode, resultCode, data);
 
     }
-
-
 }
