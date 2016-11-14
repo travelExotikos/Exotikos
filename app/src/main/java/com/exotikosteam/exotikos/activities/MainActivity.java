@@ -13,6 +13,7 @@ import com.exotikosteam.exotikos.fragments.FragmentTravelPrep;
 import com.exotikosteam.exotikos.fragments.FragmentTravelPrep.OnButtonsClicks;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.FragmentTravelSummary;
+import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.FlightStep;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
@@ -20,6 +21,8 @@ import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -123,6 +126,14 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
                         () -> Log.i(TAG, "Done with schedule")
                 );
 
+        List<TripStatus> trips = TripStatus.getAll();
+        for (TripStatus t: trips) {
+            Log.i(TAG, String.format("tripId = %d,  #fligts = %d", t.getId(), t.getFlights().size()));
+        }
+        List<Flight> flights = Flight.getAll();
+        for (Flight f: flights) {
+            Log.i(TAG, String.format("flightId = %d,  tripId = %d", f.getId(), f.getTripId()));
+        }
         setupStarterFragment();
 
     }
