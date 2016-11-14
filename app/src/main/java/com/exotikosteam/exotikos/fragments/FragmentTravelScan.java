@@ -223,21 +223,17 @@ public class FragmentTravelScan extends Fragment {
                 Pdf417ScanResult result = (Pdf417ScanResult) res;
                 try {
                     ScanData scanData = new ScanData(result);
-                    android.util.Log.d(TAG, String.format("query params: %s, %s, %s, %s, %s, %s",
-                            scanData.airlineIATA,
-                            scanData.flightNo,
-                            scanData.departureYear,
-                            scanData.departuteMonth,
-                            scanData.departureDay,
-                            scanData.departureAirportIATA));
+                    String flightQuery = getQueryParamsInfo(scanData);
+                    android.util.Log.d(TAG, flightQuery);
                     flightStatusService.getByDepartingDateAndAirportIATA(scanData.airlineIATA, scanData.flightNo, scanData.departureYear, scanData.departuteMonth, scanData.departureDay, scanData.departureAirportIATA, appId, appKey)
                             .subscribe(
                                     statusResponse -> {
-                                        //TODO probably the save should be done on summary page
-                                        Flight flight = Flight.newInstance(this.trip.getId(), statusResponse.getFlightStatuses().get(0), scanData.seatNo);
-                                        flight.save();
-                                        trip.getFlights().add(flight);
-                                        scanCompleted(trip);
+                                        if (statusResponse == null || statusResponse.getFlightStatuses() == null || statusResponse.getFlightStatuses().size() < 1) {
+                                            Log.e(TAG, "Cannot find flight. " + flightQuery);
+                                        }
+                                        Flight flight = Flight.newInstance((this.trip == null ? null : this.trip.getId()), statusResponse.getFlightStatuses().get(0), scanData.seatNo);
+                                        this.trip = Flight.createNewFlight(flight);
+                                        scanCompleted(this.trip);
                                     },
                                     throwable -> android.util.Log.e(TAG, "Error getting status", throwable),
                                     () -> android.util.Log.i(TAG, "Done with status")
@@ -250,6 +246,7 @@ public class FragmentTravelScan extends Fragment {
                 }
             }
         }
+
     }
 
     private class ScanData {
@@ -286,5 +283,15 @@ public class FragmentTravelScan extends Fragment {
             this.cabin = barcodeDataArray[4].substring(3,4);
             this.seatNo = barcodeDataArray[4].substring(4,barcodeDataArray[4].length());
         }
+    }
+
+    private String getQueryParamsInfo(ScanData scanData) {
+        return String.format("query params: airlineIATA:%s, flightNo:%s, departureYear:%s, departuteMonth:%s, departureDay:%s, departureAirportIATA:%s",
+                scanData.airlineIATA,
+                scanData.flightNo,
+                scanData.departureYear,
+                scanData.departuteMonth,
+                scanData.departureDay,
+                scanData.departureAirportIATA);
     }
 }
