@@ -1,6 +1,7 @@
 package com.exotikosteam.exotikos.models.trip;
 
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
+import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.OneToMany;
@@ -120,6 +121,17 @@ public class TripStatus extends BaseModel {
         flights.add(1, Flight.newInstance("January 19, 2017", "January 19, 2017", "ZK250", "1:44 PM", "B9", "3:45 PM","A23", "6C"));
         flights.add(2, Flight.newInstance("January 19, 2017", "January 19, 2017", "BN05", "6:44 PM", "C34", "8:45 PM","D43", "2B"));
         trip.setFlights(flights);
+        return trip;
+    }
+
+    public static TripStatus fromScheduledFlights(List<ScheduledFlight> flights) {
+        TripStatus trip = new TripStatus();
+        trip.setFlightStep(FlightStep.CHECK_IN);
+        List<Flight> fs = new ArrayList<Flight>();
+        for (ScheduledFlight s: flights) {
+            fs.add(Flight.fromScheduledFlight(s));
+        }
+        trip.setFlights(fs);
         return trip;
     }
 }

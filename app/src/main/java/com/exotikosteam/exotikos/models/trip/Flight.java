@@ -3,6 +3,7 @@ package com.exotikosteam.exotikos.models.trip;
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
 import com.exotikosteam.exotikos.models.flightstatus.AirportResources;
 import com.exotikosteam.exotikos.models.flightstatus.FlightStatus;
+import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -113,6 +114,22 @@ public class Flight extends BaseModel {
         flight.setArrivalTime(arrivalTime);
         flight.setArrivalTerminal(arrivalTerminal);
         flight.setSeatNumber(seatNumber);
+
+        return flight;
+    }
+
+    public static Flight fromScheduledFlight(ScheduledFlight sch) {
+        Flight flight = new Flight();
+        // TODO - We have date and time in here? why not a date object?
+        flight.setArrivalDate(sch.getArrivalTime());
+        flight.setDepartureDate(sch.getDepartureTime());
+        flight.setFlightNumber(sch.getFlightNumber());
+        flight.setArrivalTime(sch.getArrivalTime());
+        flight.setDepartureTime(sch.getDepartureTime());
+        flight.setArrivalAirportIATA(sch.getArrivalAirportFsCode());
+        flight.setDepartureAirportIATA(sch.getDepartureAirportFsCode());
+        flight.setDepartureTerminal(sch.getDepartureTerminal());
+        flight.setArrivalTerminal(sch.getArrivalTerminal());
 
         return flight;
     }

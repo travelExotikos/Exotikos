@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.AirlinePickDialogFragment;
 import com.exotikosteam.exotikos.models.airline.Airline;
+import com.exotikosteam.exotikos.models.trip.TripStatus;
 
 import org.parceler.Parcels;
 
@@ -18,6 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewTripActivity extends AppCompatActivity {
+
+    public static final int REQUEST_FLIGHT_SELECTION = 20;
 
     private Airline mSelectedAirline;
 
@@ -54,14 +57,24 @@ public class NewTripActivity extends AppCompatActivity {
         });
 
         btnSelectFlights.setOnClickListener(view -> {
-            // TODO where to go?
             Intent i = new Intent(NewTripActivity.this, FlightResultsActivity.class);
             i.putExtra("airline", Parcels.wrap(mSelectedAirline));
             i.putExtra("year", dpDepartureDate.getYear());
             i.putExtra("month", dpDepartureDate.getMonth() + 1);
             i.putExtra("day", dpDepartureDate.getDayOfMonth());
             i.putExtra("flightNumber", etFlightNumber.getText().toString());
-            startActivity(i);
+            startActivityForResult(i, REQUEST_FLIGHT_SELECTION);
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_FLIGHT_SELECTION && resultCode == RESULT_OK) {
+            TripStatus trip = Parcels.unwrap(data.getParcelableExtra("trip"));
+            trip.save();
+            finish();
+        }
     }
 }

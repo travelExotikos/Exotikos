@@ -1,5 +1,6 @@
 package com.exotikosteam.exotikos.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.FlightResultsAdapter;
 import com.exotikosteam.exotikos.models.airline.Airline;
 import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
+import com.exotikosteam.exotikos.models.trip.TripStatus;
 
 import org.parceler.Parcels;
 
@@ -72,7 +74,18 @@ public class FlightResultsActivity extends AppCompatActivity {
         lvFlights.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent result = new Intent();
 
+                ScheduledFlight selectedFlight = flights.get(i);
+
+                // TODO is only handling one flight per schedule
+                ArrayList<ScheduledFlight> flights= new ArrayList<>();
+                flights.add(selectedFlight);
+
+                TripStatus trip = TripStatus.fromScheduledFlights(flights);
+                result.putExtra("trip", Parcels.wrap(trip));
+                setResult(RESULT_OK, result);
+                finish();
             }
         });
     }
