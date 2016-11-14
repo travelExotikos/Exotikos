@@ -2,6 +2,7 @@ package com.exotikosteam.exotikos.models.trip;
 
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.OneToMany;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 
 @Parcel(analyze = {TripStatus.class})
+@ModelContainer
 @Table(database = ExotikosDatabase.class)
 public class TripStatus extends BaseModel {
 
@@ -68,9 +70,9 @@ public class TripStatus extends BaseModel {
         this.flightStep = flightStep;
     }
 
-    @OneToMany(methods = OneToMany.Method.ALL, variableName = "flights")
+    @OneToMany(methods = OneToMany.Method.LOAD, variableName = "flights")
     public List<Flight> getFlights() {
-        if (flights == null) {
+        if (flights == null || flights.size() < 1) {
             flights = SQLite.select()
                     .from(Flight.class)
                     .where(Flight_Table.trip_id.eq(id))
