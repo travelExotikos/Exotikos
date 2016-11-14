@@ -1,6 +1,7 @@
 package com.exotikosteam.exotikos.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.exotikosteam.exotikos.R;
+import com.exotikosteam.exotikos.activities.HelpActivity;
 import com.exotikosteam.exotikos.databinding.FragmentTravelPrepBinding;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -21,6 +23,8 @@ import butterknife.Unbinder;
  */
 
 public class FragmentTravelPrep extends Fragment {
+
+    private static final String TAG = FragmentTravelPrep.class.getSimpleName();
 
     Unbinder unbinder;
     OnButtonsClicks listener;
@@ -68,6 +72,10 @@ public class FragmentTravelPrep extends Fragment {
         btnAirportPage.setOnClickListener(v -> {
             handleLaunchAirportMapPage();
         });
+
+        prepFragmentBinding.btnHelp.setOnClickListener( v -> {
+            handleHelpAction();
+        });
     }
 
     private void handleLaunchAirportMapPage() {
@@ -75,6 +83,10 @@ public class FragmentTravelPrep extends Fragment {
     }
     private void handleLaunchScanPage() {
         listener.handleButtonsClicks("LaunchScanPage", null);
+    }
+
+    private void handleHelpAction() {
+        startActivity(new Intent(getContext(), HelpActivity.class));
     }
 
     public static FragmentTravelPrep newInstance() {
