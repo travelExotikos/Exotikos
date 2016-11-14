@@ -47,6 +47,7 @@ public class TripListActivity extends AppCompatActivity {
         for (TripStatus ts : trips) {
             flights.addAll(ts.getFlights());
         }
+        flightListAdapter.notifyDataSetChanged();
     }
 
     private void setupListeners() {

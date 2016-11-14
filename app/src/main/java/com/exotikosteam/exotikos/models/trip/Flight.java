@@ -34,6 +34,9 @@ public class Flight extends BaseModel {
     @Column(name = "flight_number")
     String flightNumber;
 
+    @Column(name = "flight_carrier")
+    String flightCarrier;
+
     @Column(name = "flight_id")
     Integer flightId;
 
@@ -122,6 +125,7 @@ public class Flight extends BaseModel {
         Flight flight = new Flight();
         // TODO - We have date and time in here? why not a date object?
         flight.setArrivalDate(sch.getArrivalTime());
+        flight.setFlightCarrier(sch.getCarrierFsCode());
         flight.setDepartureDate(sch.getDepartureTime());
         flight.setFlightNumber(sch.getFlightNumber());
         flight.setArrivalTime(sch.getArrivalTime());
@@ -156,6 +160,18 @@ public class Flight extends BaseModel {
 
     public void setFlightNumber(String flightNumber) {
         this.flightNumber = flightNumber;
+    }
+
+    public String getFlightCarrier() {
+        return flightCarrier;
+    }
+
+    public void setFlightCarrier(String flightCarrier) {
+        this.flightCarrier = flightCarrier;
+    }
+
+    public String getAirlineIconUrl() {
+        return String.format("http://www.gstatic.com/flights/airline_logos/70px/%s.png", flightCarrier);
     }
 
     public String getDepartureTime() {

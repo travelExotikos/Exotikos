@@ -107,7 +107,10 @@ public class TripStatus extends BaseModel {
         return SQLite.select().from(TripStatus.class).queryList();
     }
 
-    public static void save(TripStatus tripStatus) {
+    public static void persist(TripStatus tripStatus) {
+        for (Flight f: tripStatus.getFlights()) {
+            f.save();
+        }
         tripStatus.save();
     }
 
