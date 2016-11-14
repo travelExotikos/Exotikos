@@ -8,11 +8,14 @@ import android.widget.Button;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.AirlinePickDialogFragment;
+import com.exotikosteam.exotikos.models.airline.Airline;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewTripActivity extends AppCompatActivity {
+
+    private Airline mSelectedAirline;
 
     @BindView(R.id.btnSelectAirline) Button btnSelectAirline;
 
@@ -31,7 +34,15 @@ public class NewTripActivity extends AppCompatActivity {
             public void onClick(View view) {
                 FragmentManager fm = getSupportFragmentManager();
                 AirlinePickDialogFragment pickAirlineDialogFragment = AirlinePickDialogFragment.newInstance();
+                pickAirlineDialogFragment.getSelectSubject()
+                        .subscribe(airline -> {
+                            mSelectedAirline = airline;
+                            btnSelectAirline.setText(airline.getName());
+                            pickAirlineDialogFragment.dismiss();
+                        });
                 pickAirlineDialogFragment.show(fm, "fragment_dialog_pick_airline");
+
+
             }
         });
     }

@@ -94,7 +94,7 @@ public class AirlinePickDialogFragment extends DialogFragment {
         lvAirlines.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                selectSubject.onNext(airlines.get(i));
+                selectSubject.onNext(adapter.getItem(i));
                 selectSubject.onCompleted();
             }
         });
