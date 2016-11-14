@@ -1,11 +1,56 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+        <item name="colorAccent">@color/twitter_blue</item>
     </style>
 
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="colorAccent">@color/twitter_blue</item>
+        <item name="actionBarStyle">@style/ExotikosActionBar</item>
+        <item name="android:actionBarStyle">@style/ExotikosActionBar</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/twitter_lighter_grey</item>
+    </style>
+
+    <style name="AppThemeActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="colorAccent">@color/twitter_blue</item>
+        <item name="actionBarStyle">@style/ExotikosActionBar</item>
+        <item name="android:actionBarStyle">@style/ExotikosActionBar</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/twitter_lighter_grey</item>
+    </style>
+
+    <style name="ExotikosActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/twitter_blue</item>
+        <item name="background">@color/twitter_blue</item>
+    </style>
+
+    <style name="ExotikosToolbar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:textColorPrimary">@color/twitter_lighter_grey</item>
+        <item name="android:textColorSecondary">@color/twitter_light_grey</item>
+        <item name="actionMenuTextColor">@color/twitter_lighter_grey</item>
+        <item name="android:background">@color/twitter_blue</item>
+        <item name="background">@color/twitter_blue</item>
+        <item name="colorControlNormal">@color/twitter_light_grey</item>
+    </style>
+
+    <color name="twitter_blue">#55acee</color>
+    <color name="twitter_lighter_grey">#fff5f8fa</color>
+    <color name="twitter_light_grey">#ffe1e8ed</color>
+    <color name="twitter_mild_grey">#ffccd6dd</color>
+    <color name="twitter_grey">#ff8899a6</color>
+    <color name="twitter_dark_grey">#ff66757f</color>
+    <color name="twitter_darker_grey">#ff292f33</color>
+    <color name="tweet_transparent_bg">#80000000</color>
+    <color name="twitter_active_retweet">#ff5fba7d</color>
+    <color name="twitter_active_fav">#ffe81c4f</color>
 </resources>

@@ -19,7 +19,7 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Vi
     private List<Flight> mFlights;
     private Context mContext;
 
-    public FlightListAdapter(List<Flight> mFlights, Context mContext) {
+    public FlightListAdapter(Context mContext, List<Flight> mFlights) {
         this.mFlights = mFlights;
         this.mContext = mContext;
     }

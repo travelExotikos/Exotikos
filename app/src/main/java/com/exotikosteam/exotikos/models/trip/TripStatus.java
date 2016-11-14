@@ -71,7 +71,7 @@ public class TripStatus extends BaseModel {
         this.flightStep = flightStep;
     }
 
-    @OneToMany(methods = OneToMany.Method.LOAD, variableName = "flights")
+    @OneToMany(methods = OneToMany.Method.ALL, variableName = "flights")
     public List<Flight> getFlights() {
         if (flights == null || flights.size() < 1) {
             flights = SQLite.select()
@@ -129,12 +129,18 @@ public class TripStatus extends BaseModel {
 
     public static TripStatus fromScheduledFlights(List<ScheduledFlight> flights) {
         TripStatus trip = new TripStatus();
-        trip.setFlightStep(FlightStep.CHECK_IN);
+        trip.setFlightStep(FlightStep.PREPARATION);
+        trip.setCurrentFlight(0);
+        trip.save();
         List<Flight> fs = new ArrayList<Flight>();
         for (ScheduledFlight s: flights) {
-            fs.add(Flight.fromScheduledFlight(s));
+            Flight f = Flight.fromScheduledFlight(s);
+            f.setTripId(trip.getId());
+            f.save();
+            fs.add(f);
         }
         trip.setFlights(fs);
+        trip.save();
         return trip;
     }
 }
