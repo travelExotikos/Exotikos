@@ -130,16 +130,10 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
 
 
     private void setupStarterFragment() {
-        //TODO the temporary code. Remove after implement PREPARATION step
-        this.trip = new TripStatus();
-        this.trip.setFlightStep(FlightStep.PREPARATION);
-        this.trip.save();
-        Log.d(TAG, String.format("trip saved %s, %d", this.trip.getFlightStep(), this.trip.getId()));
-        //TODO end of temp code
         //Depending on whether the user has scanned the boarding pass or not,
         // we show the travel summary or the scanner fragment here
+        //TODO the step statuses are for card view
         if (fStep == FlightStep.PREPARATION) {
-            //TODO trip should be created in this step will create temporary trip for test
             showTravelPreparationFragment();
         } if (fStep == FlightStep.CHECKIN_IN_DONE) {//replace with some logic to see if the use has created a trip before
             showTravelStatusFragment();

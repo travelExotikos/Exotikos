@@ -2,7 +2,6 @@ package com.exotikosteam.exotikos.models.trip;
 
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
 import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.ForeignKey;
 import com.raizlabs.android.dbflow.annotation.OneToMany;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -34,8 +33,8 @@ public class TripStatus extends BaseModel {
 
     FlightStep flightStep;
 
-    @ForeignKey(saveForeignKeyModel = false)
-    Flight currentFlight;
+    @Column
+    Integer currentFlight;
 
     List<Flight> flights = new ArrayList<>();
 
@@ -89,11 +88,11 @@ public class TripStatus extends BaseModel {
         return flightStep;
     }
 
-    public Flight getCurrentFlight() {
+    public Integer getCurrentFlight() {
         return currentFlight;
     }
 
-    public void setCurrentFlight(Flight currentFlight) {
+    public void setCurrentFlight(Integer currentFlight) {
         this.currentFlight = currentFlight;
     }
 

@@ -1,0 +1,32 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnTranslator"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="Translator TODO image"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnPhone"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/btnTranslator"
+            android:text="Phone TODO image"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnMap"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@id/btnTranslator"
+            android:layout_centerHorizontal="true"
+            android:text="Map TODO image" />
+
+    </RelativeLayout>
+</layout>

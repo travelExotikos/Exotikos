@@ -205,18 +205,6 @@ public class Flight extends BaseModel {
         this.tripId = tripId;
     }
 
-    public static Flight get(Integer id) {
-        return SQLite.select().from(Flight.class).where(Flight_Table.id.eq(id)).querySingle();
-    }
-
-    public static List<Flight> getAll() {
-        return SQLite.select().from(Flight.class).queryList();
-    }
-
-    public static void save(Flight flight) {
-        flight.save();
-    }
-
     public Integer getFlightId() {
         return flightId;
     }
@@ -263,5 +251,34 @@ public class Flight extends BaseModel {
 
     public void setArrivalCity(String arrivalCity) {
         this.arrivalCity = arrivalCity;
+    }
+
+
+    //=================== DB operations ========================
+
+    public static Flight get(Integer id) {
+        return SQLite.select().from(Flight.class).where(Flight_Table.id.eq(id)).querySingle();
+    }
+
+    public static List<Flight> getAll() {
+        return SQLite.select().from(Flight.class).queryList();
+    }
+
+    public static TripStatus createNewFlight(Flight flight) {
+        TripStatus trip = null;
+        if (flight.getTripId() == null) {
+            trip = new TripStatus();
+            trip.setFlightStep(FlightStep.PREPARATION);
+            trip.setCurrentFlight(0);
+            trip.save();
+            flight.setTripId(trip.getId());
+            flight.setOrder(0);
+        } else {
+            trip = TripStatus.get(flight.getTripId());
+            flight.setOrder(trip.getFlights().size());
+        }
+        flight.save();
+        trip.getFlights().add(flight);
+        return trip;
     }
 }
