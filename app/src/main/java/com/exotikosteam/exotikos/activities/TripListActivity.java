@@ -56,7 +56,7 @@ public class TripListActivity extends AppCompatActivity {
         fabNewTrip.setOnClickListener(v -> {
             // Open create trip activity
             Intent i = new Intent(TripListActivity.this, NewTripActivity.class);
-            startActivity(i);
+            startActivityForResult(i, NewTripActivity.REQUEST_FLIGHT_SELECTION);
         });
 
         ItemClickSupport.addTo(rvTrips).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {

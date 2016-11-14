@@ -74,6 +74,7 @@ public class NewTripActivity extends AppCompatActivity {
         if (requestCode == REQUEST_FLIGHT_SELECTION && resultCode == RESULT_OK) {
             TripStatus trip = Parcels.unwrap(data.getParcelableExtra("trip"));
             TripStatus.persist(trip);
+            setResult(resultCode);
             finish();
         }
     }
