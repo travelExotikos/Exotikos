@@ -24,7 +24,7 @@ import com.exotikosteam.exotikos.utils.Constants;
 
 public class HelpActivity extends AppCompatActivity {
 
-    public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String TAG = HelpActivity.class.getSimpleName();
 
     ActivityHelpBinding binding;
 
@@ -65,6 +65,9 @@ public class HelpActivity extends AppCompatActivity {
 
     private void call(String number) {
         Log.d(TAG, "try calling #" + number);
+        if (number == null) {
+            return;
+        }
         Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse(number));
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -95,8 +98,9 @@ public class HelpActivity extends AppCompatActivity {
         // If the cursor returned is valid, get the phone number
         if (cursor != null && cursor.moveToFirst()) {
             int numberIndex = cursor.getColumnIndex(Phone.NUMBER);
-            String number = cursor.getString(numberIndex);
+            String number = "tel:" + cursor.getString(numberIndex);
             Log.d(TAG, "number : " + number);
+            return number;
         }
         Log.e(TAG, "cannot read phone #");
         return null;
