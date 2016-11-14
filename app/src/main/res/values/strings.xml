@@ -9,4 +9,6 @@
     <string name="new_trip_departure_date">Departure date</string>
     <string name="new_trip_scan_boarding_pass">Or scan your boarding pass</string>
     <string name="new_trip_scan">Scan Boarding Pass</string>
+    <string name="airline_pick_search_by_name">Search by name...</string>
+    <string name="pick_airline">Pick airline</string>
 </resources>
