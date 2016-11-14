@@ -53,9 +53,13 @@
             android:name="FLIGHTSTATS_APP_KEY"
             android:value="cc4a60543606224b369ed138786562f3" />
 
-        <activity android:name=".activities.TravelStatusActivity"></activity>
         <activity android:name=".activities.HelpActivity"></activity>
-        <activity android:name=".activities.NewTripActivity"></activity>
+        <activity
+            android:name=".activities.NewTripActivity"
+            android:label="@string/new_trip"/>
+        <activity
+            android:name=".activities.FlightResultsActivity"
+            android:label="@string/select_flight"></activity>
     </application>
 
 </manifest>

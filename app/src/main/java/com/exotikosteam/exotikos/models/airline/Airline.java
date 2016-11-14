@@ -1,15 +1,14 @@
 
 package com.exotikosteam.exotikos.models.airline;
 
-import android.databinding.BindingAdapter;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import javax.annotation.Generated;
 
+@Parcel
 @Generated("org.jsonschema2pojo")
 public class Airline {
 
@@ -205,13 +204,6 @@ public class Airline {
 
     public String getIconUrl() {
         return String.format("http://www.gstatic.com/flights/airline_logos/70px/%s.png", iata);
-    }
-
-    @BindingAdapter({"bind:imageUrl"})
-    public static void loadImage(ImageView view, String imageUrl) {
-        Glide.with(view.getContext())
-                .load(imageUrl)
-                .into(view);
     }
 
 }

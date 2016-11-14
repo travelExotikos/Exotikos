@@ -13,4 +13,5 @@
     <string name="pick_airline">Pick airline</string>
     <string name="new_trip_select_flight">Select flight</string>
     <string name="new_trip">New trip</string>
+    <string name="select_flight">Select flight</string>
 </resources>

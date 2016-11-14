@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import org.parceler.Parcel;
 
 import javax.annotation.Generated;
-@Parcel
+
 @Generated("org.jsonschema2pojo")
 public class DateLocalAndUTC {
 

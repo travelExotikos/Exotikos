@@ -32,9 +32,10 @@ public class NewTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_trip);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setTitle(R.string.new_trip);
-
         setupListeners();
+
+        // only dates starting tomorrow
+        dpDepartureDate.setMinDate(System.currentTimeMillis() - 1000);
 
         // TODO ticket scan
     }
@@ -52,14 +53,14 @@ public class NewTripActivity extends AppCompatActivity {
             pickAirlineDialogFragment.show(fm, "fragment_dialog_pick_airline");
         });
 
-        btnSelectAirline.setOnClickListener(view -> {
+        btnSelectFlights.setOnClickListener(view -> {
             // TODO where to go?
-            Intent i = new Intent(NewTripActivity.this, null);
+            Intent i = new Intent(NewTripActivity.this, FlightResultsActivity.class);
             i.putExtra("airline", Parcels.wrap(mSelectedAirline));
             i.putExtra("year", dpDepartureDate.getYear());
-            i.putExtra("month", dpDepartureDate.getMonth());
+            i.putExtra("month", dpDepartureDate.getMonth() + 1);
             i.putExtra("day", dpDepartureDate.getDayOfMonth());
-            i.putExtra("flighNumber", Integer.valueOf(etFlightNumber.getText().toString()));
+            i.putExtra("flightNumber", etFlightNumber.getText().toString());
             startActivity(i);
         });
     }

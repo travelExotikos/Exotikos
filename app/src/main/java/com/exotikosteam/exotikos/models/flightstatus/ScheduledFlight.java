@@ -1,11 +1,13 @@
 
 package com.exotikosteam.exotikos.models.flightstatus;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class ScheduledFlight {
@@ -366,6 +368,10 @@ public class ScheduledFlight {
      */
     public void setReferenceCode(String referenceCode) {
         this.referenceCode = referenceCode;
+    }
+
+    public String getAirlineIconUrl() {
+        return String.format("http://www.gstatic.com/flights/airline_logos/70px/%s.png", carrierFsCode);
     }
 
 }
