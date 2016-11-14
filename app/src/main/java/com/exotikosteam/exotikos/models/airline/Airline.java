@@ -4,8 +4,11 @@ package com.exotikosteam.exotikos.models.airline;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import javax.annotation.Generated;
 
+@Parcel
 @Generated("org.jsonschema2pojo")
 public class Airline {
 
@@ -197,6 +200,10 @@ public class Airline {
      */
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getIconUrl() {
+        return String.format("http://www.gstatic.com/flights/airline_logos/70px/%s.png", iata);
     }
 
 }

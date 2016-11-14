@@ -6,4 +6,5 @@
 
     <dimen name="fragment_horizontal_margin">10dp</dimen>
     <dimen name="fragment_horizontal_padding">10dp</dimen>
+    <dimen name="airline_item_padding">10dp</dimen>
 </resources>

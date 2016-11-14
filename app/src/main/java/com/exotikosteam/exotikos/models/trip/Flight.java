@@ -3,6 +3,7 @@ package com.exotikosteam.exotikos.models.trip;
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
 import com.exotikosteam.exotikos.models.flightstatus.AirportResources;
 import com.exotikosteam.exotikos.models.flightstatus.FlightStatus;
+import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -32,6 +33,9 @@ public class Flight extends BaseModel {
 
     @Column(name = "flight_number")
     String flightNumber;
+
+    @Column(name = "flight_carrier")
+    String flightCarrier;
 
     @Column(name = "flight_id")
     Integer flightId;
@@ -117,6 +121,23 @@ public class Flight extends BaseModel {
         return flight;
     }
 
+    public static Flight fromScheduledFlight(ScheduledFlight sch) {
+        Flight flight = new Flight();
+        // TODO - We have date and time in here? why not a date object?
+        flight.setArrivalDate(sch.getArrivalTime());
+        flight.setFlightCarrier(sch.getCarrierFsCode());
+        flight.setDepartureDate(sch.getDepartureTime());
+        flight.setFlightNumber(sch.getFlightNumber());
+        flight.setArrivalTime(sch.getArrivalTime());
+        flight.setDepartureTime(sch.getDepartureTime());
+        flight.setArrivalAirportIATA(sch.getArrivalAirportFsCode());
+        flight.setDepartureAirportIATA(sch.getDepartureAirportFsCode());
+        flight.setDepartureTerminal(sch.getDepartureTerminal());
+        flight.setArrivalTerminal(sch.getArrivalTerminal());
+
+        return flight;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -139,6 +160,18 @@ public class Flight extends BaseModel {
 
     public void setFlightNumber(String flightNumber) {
         this.flightNumber = flightNumber;
+    }
+
+    public String getFlightCarrier() {
+        return flightCarrier;
+    }
+
+    public void setFlightCarrier(String flightCarrier) {
+        this.flightCarrier = flightCarrier;
+    }
+
+    public String getAirlineIconUrl() {
+        return String.format("http://www.gstatic.com/flights/airline_logos/70px/%s.png", flightCarrier);
     }
 
     public String getDepartureTime() {

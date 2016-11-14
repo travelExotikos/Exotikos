@@ -8,6 +8,10 @@ import android.util.Log;
 
 import com.crashlytics.android.Crashlytics;
 import com.exotikosteam.exotikos.thirdparty.LenientGsonConverterFactory;
+import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
+import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
+import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
+import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
@@ -31,6 +35,10 @@ public class ExotikosApplication extends Application {
     private String fligthStatsAppID;
     private String fligthStatsAppKey;
     private Retrofit flightstatsRetrofit;
+    private AirlinesApiEndpoint airlinesService;
+    private AirportsApiEndpoint airportsService;
+    private FlightStatusApiEndpoint flightStatusService;
+    private SchedulesApiEndpoint flightScheduleService;
 
     @Override
     public void onCreate() {
@@ -69,6 +77,18 @@ public class ExotikosApplication extends Application {
                 .addConverterFactory(LenientGsonConverterFactory.create(gson))
                 .addCallAdapterFactory(rxAdapter)
                 .build();
+
+        airlinesService = getFlightstatsRetrofit()
+                .create(AirlinesApiEndpoint.class);
+
+        airportsService = getFlightstatsRetrofit()
+                .create(AirportsApiEndpoint.class);
+
+        flightStatusService = getFlightstatsRetrofit()
+                .create(FlightStatusApiEndpoint.class);
+
+        flightScheduleService = getFlightstatsRetrofit()
+                .create(SchedulesApiEndpoint.class);
     }
 
     public String getFligthStatsAppID() {
@@ -81,5 +101,21 @@ public class ExotikosApplication extends Application {
 
     public Retrofit getFlightstatsRetrofit() {
         return flightstatsRetrofit;
+    }
+
+    public AirlinesApiEndpoint getAirlinesService() {
+        return airlinesService;
+    }
+
+    public AirportsApiEndpoint getAirportsService() {
+        return airportsService;
+    }
+
+    public FlightStatusApiEndpoint getFlightStatusService() {
+        return flightStatusService;
+    }
+
+    public SchedulesApiEndpoint getFlightScheduleService() {
+        return flightScheduleService;
     }
 }

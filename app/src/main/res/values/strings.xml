@@ -2,4 +2,17 @@
     <string name="app_name">Exotikos</string>
     <string name="lorem_ipsum_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="UseWith">Scan</string>
+    <string name="airline">Airline</string>
+    <string name="select_airline">Select airline...</string>
+    <string name="flight_number">Flight Number</string>
+    <string name="new_trip_enter_flight_number">Enter flight number</string>
+    <string name="new_trip_departure_date">Departure date</string>
+    <string name="new_trip_scan_boarding_pass">Or enter your flight information</string>
+    <string name="new_trip_scan">Scan Boarding Pass</string>
+    <string name="airline_pick_search_by_name">Search by name...</string>
+    <string name="pick_airline">Pick airline</string>
+    <string name="new_trip_select_flight">Select flight</string>
+    <string name="new_trip">New trip</string>
+    <string name="select_flight">Select flight</string>
+    <string name="trips_activity">Trips</string>
 </resources>

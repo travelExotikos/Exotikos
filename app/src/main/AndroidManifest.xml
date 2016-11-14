@@ -24,12 +24,34 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.MainActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".activities.TravelStatusActivity" />
+        <activity
+            android:name=".activities.TripListActivity"
+            android:label="@string/trips_activity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.HelpActivity" />
+        <activity
+            android:name=".activities.NewTripActivity"
+            android:label="@string/new_trip" />
+        <activity
+            android:name=".activities.FlightResultsActivity"
+            android:label="@string/select_flight" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -41,8 +63,7 @@
             android:name="FLIGHTSTATS_APP_KEY"
             android:value="cc4a60543606224b369ed138786562f3" />
 
-        <activity android:name=".activities.TravelStatusActivity"></activity>
-        <activity android:name=".activities.HelpActivity"></activity>
+
     </application>
 
 </manifest>

@@ -43,18 +43,6 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
         String appId = ((ExotikosApplication)getApplication()).getFligthStatsAppID();
         String appKey = ((ExotikosApplication)getApplication()).getFligthStatsAppKey();
 
-        AirlinesApiEndpoint airlinesService = ((ExotikosApplication)getApplication()).getFlightstatsRetrofit()
-                .create(AirlinesApiEndpoint.class);
-
-        AirportsApiEndpoint airportsService = ((ExotikosApplication)getApplication()).getFlightstatsRetrofit()
-                .create(AirportsApiEndpoint.class);
-
-        FlightStatusApiEndpoint flightStatusService = ((ExotikosApplication)getApplication()).getFlightstatsRetrofit()
-                .create(FlightStatusApiEndpoint.class);
-
-        SchedulesApiEndpoint flightScheduleService = ((ExotikosApplication)getApplication()).getFlightstatsRetrofit()
-                .create(SchedulesApiEndpoint.class);
-
         // Get the list of all airlines
 //        airlinesService.getAll(appId, appKey)
 //                .flatMapIterable(airlinesResponse -> airlinesResponse.getAirlines())
@@ -63,6 +51,11 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
 //                        throwable -> Log.e(TAG, "Error getting airlines", throwable),
 //                        () -> Log.i(TAG, "Done with airlines")
 //                );
+
+        AirlinesApiEndpoint airlinesService = ((ExotikosApplication) getApplication()).getAirlinesService();
+        AirportsApiEndpoint airportsService = ((ExotikosApplication) getApplication()).getAirportsService();
+        FlightStatusApiEndpoint flightStatusService = ((ExotikosApplication) getApplication()).getFlightStatusService();
+        SchedulesApiEndpoint flightScheduleService = ((ExotikosApplication) getApplication()).getFlightScheduleService();
 
         // Get single airline using ICAO code
         airlinesService.getByICAOCode("AAL", appId, appKey)

@@ -328,4 +328,8 @@ public class FlightStatus {
         this.flightEquipment = flightEquipment;
     }
 
+    public String getAirlineIconUrl() {
+        return String.format("http://www.gstatic.com/flights/airline_logos/70px/%s.png", carrierFsCode);
+    }
+
 }

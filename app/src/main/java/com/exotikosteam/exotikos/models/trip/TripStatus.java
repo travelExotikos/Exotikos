@@ -1,6 +1,7 @@
 package com.exotikosteam.exotikos.models.trip;
 
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
+import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
 import com.raizlabs.android.dbflow.annotation.OneToMany;
@@ -70,7 +71,7 @@ public class TripStatus extends BaseModel {
         this.flightStep = flightStep;
     }
 
-    @OneToMany(methods = OneToMany.Method.LOAD, variableName = "flights")
+    @OneToMany(methods = OneToMany.Method.ALL, variableName = "flights")
     public List<Flight> getFlights() {
         if (flights == null || flights.size() < 1) {
             flights = SQLite.select()
@@ -106,7 +107,10 @@ public class TripStatus extends BaseModel {
         return SQLite.select().from(TripStatus.class).queryList();
     }
 
-    public static void save(TripStatus tripStatus) {
+    public static void persist(TripStatus tripStatus) {
+        for (Flight f: tripStatus.getFlights()) {
+            f.save();
+        }
         tripStatus.save();
     }
 
@@ -120,6 +124,23 @@ public class TripStatus extends BaseModel {
         flights.add(1, Flight.newInstance("January 19, 2017", "January 19, 2017", "ZK250", "1:44 PM", "B9", "3:45 PM","A23", "6C"));
         flights.add(2, Flight.newInstance("January 19, 2017", "January 19, 2017", "BN05", "6:44 PM", "C34", "8:45 PM","D43", "2B"));
         trip.setFlights(flights);
+        return trip;
+    }
+
+    public static TripStatus fromScheduledFlights(List<ScheduledFlight> flights) {
+        TripStatus trip = new TripStatus();
+        trip.setFlightStep(FlightStep.PREPARATION);
+        trip.setCurrentFlight(0);
+        trip.save();
+        List<Flight> fs = new ArrayList<Flight>();
+        for (ScheduledFlight s: flights) {
+            Flight f = Flight.fromScheduledFlight(s);
+            f.setTripId(trip.getId());
+            f.save();
+            fs.add(f);
+        }
+        trip.setFlights(fs);
+        trip.save();
         return trip;
     }
 }
