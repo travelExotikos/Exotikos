@@ -35,5 +35,6 @@
     <string name="startTravel">Time to Start for Travel</string>
     <string name="checkin">Security Checkin</string>
     <string name="boarding">Boarding</string>
+    <string name="security_video">Security Checking Procedure</string>
 </resources>
 
