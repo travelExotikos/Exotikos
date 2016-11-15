@@ -5,7 +5,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:text="Lets Start"
+            android:text="@string/letsStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
@@ -14,7 +14,7 @@
             android:id="@+id/textView" />
 
         <TextView
-            android:text="Please scan Ticket Barcode"
+            android:text="@string/startBarcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/checkin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+        android:id="@+id/tvSecurityCheckin" />
+
+    <CheckedTextView
+        android:text="@string/idString"
+        android:checkMark="@drawable/checkbox_marked_circle_outline"
+        android:checkMarkTint="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:layout_marginRight="@dimen/fragment_horizontal_margin"
+        android:id="@+id/cbID" />
+
+    <CheckedTextView
+        android:text="@string/cabinBags"
+        android:checkMark="@drawable/checkbox_marked_circle_outline"
+        android:checkMarkTint="@color/colorAccent"
+        android:layout_marginRight="@dimen/fragment_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/cbCabinBags" />
+
+    <CheckedTextView
+        android:text="@string/strollerRules"
+        android:checkMark="@drawable/checkbox_marked_circle_outline"
+        android:checkMarkTint="@color/colorAccent"
+        android:layout_marginRight="@dimen/fragment_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/cbStroller" />
+
+    <CheckedTextView
+        android:text="@string/bagRules"
+        android:checkMark="@drawable/checkbox_marked_circle_outline"
+        android:checkMarkTint="@color/colorAccent"
+        android:layout_marginRight="@dimen/fragment_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/cbHandbag" />
+
+    <CheckedTextView
+        android:text="@string/liquidRules1"
+        android:checkMark="@drawable/checkbox_marked_circle_outline"
+        android:checkMarkTint="@color/colorAccent"
+        android:layout_marginRight="@dimen/fragment_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/cbLiquidRules1" />
+
+    <CheckedTextView
+        android:text="@string/liquidRules2"
+        android:checkMark="@drawable/checkbox_marked_circle_outline"
+        android:checkMarkTint="@color/colorAccent"
+        android:layout_marginRight="@dimen/fragment_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/cbLiquidRules2" />
+
+    <CheckedTextView
+        android:text="@string/liquidRules3"
+        android:checkMark="@drawable/checkbox_marked_circle_outline"
+        android:checkMarkTint="@color/colorAccent"
+        android:layout_marginRight="@dimen/fragment_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/cbLiquidRules3" />
+
+    <CheckedTextView
+        android:text="@string/laptopRules"
+        android:checkMark="@drawable/checkbox_marked_circle_outline"
+        android:checkMarkTint="@color/colorAccent"
+        android:layout_marginRight="@dimen/fragment_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/checkBox4" />
+
+    <Button
+        android:text="Temp Next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2" />
+
+
+</LinearLayout>

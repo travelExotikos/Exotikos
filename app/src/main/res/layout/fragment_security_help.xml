@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/checkin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:id="@+id/tvSecurityCheckin" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/screening"
+        android:paddingLeft="@dimen/fragment_horizontal_margin"
+        android:paddingRight="@dimen/fragment_horizontal_margin"
+        android:id="@+id/imageView" />
+
+
+</LinearLayout>

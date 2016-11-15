@@ -23,26 +23,27 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
             android:background="@color/colorAccent"
             android:id="@+id/tvPreFlightHeader" />
 
 
         <EditText
-            tools:text="Enter Flight Number here"
+            tools:text="@string/entryHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="14dp"
-            android:hint="Enter Flight Number here"
+            android:hint="@string/entryHint"
             android:id="@+id/etFlightNumber"
             android:layout_below="@+id/tvPreFlightHeader"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <TextView
+        <EditText
             tools:text="San Francisco"
+            android:hint="Enter Airport here"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="27dp"
@@ -52,7 +53,7 @@
             android:layout_alignStart="@+id/etFlightNumber" />
 
         <Button
-            android:text="Get Details"
+            android:text="@string/getDtls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/etFlightNumber"
@@ -67,6 +68,7 @@
             android:text="Boardng in 32Days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             android:id="@+id/tvBoarding"
             android:background="@android:color/holo_green_dark"
             android:layout_alignParentBottom="true"
@@ -75,7 +77,7 @@
             android:layout_marginBottom="5dp"/>
 
         <Button
-            android:text="Where is the Airport?"
+            android:text="@string/findAiport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnAirportPage"
@@ -85,33 +87,10 @@
             android:layout_marginBottom="5dp" />
 
         <TextView
-            tools:text="6:30 AM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvPreflightDepTime"
-            android:layout_marginRight="33dp"
-            android:layout_marginEnd="33dp"
-            android:layout_alignBottom="@+id/tvPreflightDeparture"
-            android:layout_toLeftOf="@+id/btnDetails"
-            android:layout_toStartOf="@+id/btnDetails"
-            android:layout_alignTop="@+id/tvPreflightDeparture" />
-
-        <TextView
-            tools:text="Delayed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView11"
-            android:layout_marginLeft="22dp"
-            android:layout_marginStart="22dp"
-            android:layout_alignBaseline="@+id/tvPreflightDepTime"
-            android:layout_alignBottom="@+id/tvPreflightDepTime"
-            android:layout_alignLeft="@+id/btnDetails"
-            android:layout_alignStart="@+id/btnDetails" />
-
-        <TextView
             tools:text="Checkin before 31Days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             android:background="@android:color/holo_green_light"
             android:id="@+id/tvCheckinDaysLeft"
             android:layout_above="@+id/btnLaunchScanPage"
@@ -120,7 +99,7 @@
             android:layout_marginBottom="13dp" />
 
         <Button
-            android:text="Checkin Completed: Scan Boarding"
+            android:text="@string/launchScan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnLaunchScanPage"
@@ -128,6 +107,60 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="12dp" />
+
+        <EditText
+            tools:text="12/31/1970"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPreflightDepDate"
+            android:inputType="date"
+            android:hint="@string/travelDatehint"
+            android:layout_alignBaseline="@+id/tvPreflightDeparture"
+            android:layout_alignBottom="@+id/tvPreflightDeparture"
+            android:layout_toRightOf="@+id/tvPreflightDeparture"
+            android:layout_toEndOf="@+id/tvPreflightDeparture"
+            android:layout_marginLeft="21dp"
+            android:layout_marginStart="21dp" />
+
+        <TextView
+            android:text="6:30 AM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvDeptTimeTxt"
+            android:layout_alignLeft="@+id/tvPreflightDepDate"
+            android:layout_alignStart="@+id/tvPreflightDepDate"
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
+            android:id="@+id/tvDepartureTime" />
+
+        <TextView
+            android:text="@string/startTravel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvDeptTimeTxt"
+            android:layout_marginTop="27dp"
+            android:id="@+id/textView5"
+            android:layout_alignLeft="@+id/tvDeptTimeTxt"
+            android:layout_alignStart="@+id/tvDeptTimeTxt" />
+
+        <TextView
+            android:text="5:00 AM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_alignLeft="@+id/tvDepartureTime"
+            android:layout_alignStart="@+id/tvDepartureTime"
+            android:id="@+id/tvStartTrip" />
+
+        <TextView
+            android:text="@string/timeofFlight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:id="@+id/tvDeptTimeTxt"
+            android:layout_below="@+id/tvPreflightDeparture"
+            android:layout_alignLeft="@+id/tvPreflightDeparture"
+            android:layout_alignStart="@+id/tvPreflightDeparture" />
 
 
 
