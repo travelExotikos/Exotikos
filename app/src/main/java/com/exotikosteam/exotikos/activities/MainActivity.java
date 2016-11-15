@@ -1,6 +1,7 @@
 package com.exotikosteam.exotikos.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,6 @@ import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.fragments.FragmentTravelAirport;
 import com.exotikosteam.exotikos.fragments.FragmentTravelPrep;
 import com.exotikosteam.exotikos.fragments.FragmentTravelPrep.OnButtonsClicks;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
@@ -182,9 +182,19 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
     }
 
     private void showAiportLocationPage(LatLng latLng) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, FragmentTravelAirport.newInstance("Airport Location", latLng));
-        ft.commit();
+        double latitude = latLng.latitude;
+        double longitude = latLng.longitude;
+        String label = "SF Airport";
+        String uriBegin = "geo:" + latitude + "," + longitude + "(" + label + ")";
+        String query = "San Francisco Airport, San Francisco, California, CA, 94128, USA";
+        String encodedQuery = Uri.encode(query);
+        String uriString = uriBegin + "?q=" + encodedQuery + "&z=21";
+        Uri uri = Uri.parse(uriString);
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+        intent.setPackage("com.google.android.apps.maps");
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     @Override

@@ -28,6 +28,7 @@ public class NewTripActivity extends AppCompatActivity {
     @BindView(R.id.btnSelectFlights) Button btnSelectFlights;
     @BindView(R.id.etFlightNumber) EditText etFlightNumber;
     @BindView(R.id.dpDepartureDate) DatePicker dpDepartureDate;
+    @BindView(R.id.btnScan) Button btnScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class NewTripActivity extends AppCompatActivity {
             i.putExtra("flightNumber", etFlightNumber.getText().toString());
             startActivityForResult(i, REQUEST_FLIGHT_SELECTION);
         });
+        
     }
 
     @Override
