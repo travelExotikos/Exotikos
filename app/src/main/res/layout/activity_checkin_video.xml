@@ -1,11 +1,16 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
         android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/videoLayout"
+        tools:context="com.exotikosteam.exotikos.activities.SecurityVideoActivity">
 
         <com.google.android.youtube.player.YouTubePlayerView
-            android:id="@+id/player"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/videoView"
+            android:layout_alignParentTop="true" />
+    </RelativeLayout>
 </layout>
