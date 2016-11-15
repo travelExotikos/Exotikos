@@ -15,4 +15,25 @@
     <string name="new_trip">New trip</string>
     <string name="select_flight">Select flight</string>
     <string name="trips_activity">Trips</string>
+    <string name="idString">ID/Passport</string>
+    <string name="cabinBags">Cabin Bags</string>
+    <string name="liquidRules1">Quart-sized bag of Liquids</string>
+    <string name="liquidRules2">Children Formula, Juice or Milk allowed</string>
+    <string name="liquidRules3">Medication allowed, presciption recommended</string>
+    <string name="tripStart">Start the Trip</string>
+    <string name="letsStart">Lets Start</string>
+    <string name="startBarcode">Please Scan Ticket Barcode</string>
+    <string name="entryHint">Enter Flight Number Here</string>
+    <string name="getDtls">Get Details</string>
+    <string name="findAiport">Where is the Airport?</string>
+    <string name="launchScan">Checkin Completed: Scan Boarding</string>
+    <string name="laptopRules">Remove Laptop, Tabs, and Camera from bags.</string>
+    <string name="strollerRules">Check in Stroller</string>
+    <string name="bagRules">One additional bagpack or handbag</string>
+    <string name="travelDatehint">Date of travel</string>
+    <string name="timeofFlight">Time of Flight</string>
+    <string name="startTravel">Time to Start for Travel</string>
+    <string name="checkin">Security Checkin</string>
+    <string name="boarding">Boarding</string>
 </resources>
+
