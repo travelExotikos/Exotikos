@@ -22,8 +22,6 @@ public class NewTripActivity extends AppCompatActivity {
 
     public static final int REQUEST_FLIGHT_SELECTION = 20;
 
-    public static final int REQUEST_FLIGHT_SELECTION1 = 22;
-
     private Airline mSelectedAirline;
 
     @BindView(R.id.btnSelectAirline) Button btnSelectAirline;
@@ -68,11 +66,7 @@ public class NewTripActivity extends AppCompatActivity {
             i.putExtra("flightNumber", etFlightNumber.getText().toString());
             startActivityForResult(i, REQUEST_FLIGHT_SELECTION);
         });
-
-        btnScan.setOnClickListener(view -> {
-            Intent i = new Intent(NewTripActivity.this, SecurityVideoActivity.class);
-            startActivityForResult(i, REQUEST_FLIGHT_SELECTION1);
-        });
+        
     }
 
     @Override
