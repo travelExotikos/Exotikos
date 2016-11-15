@@ -66,7 +66,7 @@ public class NewTripActivity extends AppCompatActivity {
             i.putExtra("flightNumber", etFlightNumber.getText().toString());
             startActivityForResult(i, REQUEST_FLIGHT_SELECTION);
         });
-        
+
     }
 
     @Override
