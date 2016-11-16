@@ -23,7 +23,7 @@
     <string name="tripStart">Start the Trip</string>
     <string name="letsStart">Lets Start</string>
     <string name="startBarcode">Please Scan Ticket Barcode</string>
-    <string name="entryHint">Enter Flight Number Here</string>
+    <string name="flightNumberlbl">Flight Number</string>
     <string name="getDtls">Get Details</string>
     <string name="findAiport">Where is the Airport?</string>
     <string name="launchScan">Checkin Completed: Scan Boarding</string>
@@ -32,9 +32,10 @@
     <string name="bagRules">One additional bagpack or handbag</string>
     <string name="travelDatehint">Date of travel</string>
     <string name="timeofFlight">Time of Flight</string>
-    <string name="startTravel">Time to Start for Travel</string>
+    <string name="startTravel">Travel Start Time</string>
     <string name="checkin">Security Checkin</string>
     <string name="boarding">Boarding</string>
     <string name="security_video">Security Checking Procedure</string>
+    <string name="launchSecurityCheck">Security Checkin</string>
 </resources>
 

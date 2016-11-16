@@ -1,28 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:text="@string/boarding"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
-        android:background="@color/colorAccent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/tvBoarding" />
+        <TextView
+            android:text="@string/boarding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+            android:background="@color/colorAccent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/tvBoarding" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvBoarding"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="true"
-        android:id="@+id/textView4" />
+        <TextView
+            android:text="Boarding Gate"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvBoarding"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="65dp"
+            android:id="@+id/tvBoardingGateLbl" />
 
+        <TextView
+            tools:text="A54"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display2"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dmGateSize"
+            android:layout_below="@+id/tvBoardingGateLbl"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="37dp"
+            android:id="@+id/tvBoardingGate" />
 
-</RelativeLayout>
+        <TextView
+            tools:text="Terminal 3"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+            android:textSize="@dimen/dmTerminalSize"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvBoardingGate"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:id="@+id/tvTerminal" />
+
+        <TextView
+            android:text="You have 1hr 45min to board"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:id="@+id/textView8"
+            android:layout_below="@+id/tvTerminal"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+</layout>
