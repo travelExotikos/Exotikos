@@ -80,7 +80,7 @@ public class FragmentTravelSummary extends Fragment {
         //Assumption: Flight 0 will be the first top flight...any further flights will
         // be additional stops and the last entry will be the destination
         // For now, I am assuming 1 departure, 1 stop and 1 destination
-        tvTravelDate1.setText(flights.get(0).getDepartureDate());
+        tvTravelDate1.setText(flights.get(0).getDepartureTime());
         tvTravelDest1.setText(flights.get(0).getDepartureTerminal()); //This should be departure city, not terminal
         tvDepartureTime1.setText(flights.get(0).getDepartureTime());
 

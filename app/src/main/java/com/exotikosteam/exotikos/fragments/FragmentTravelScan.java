@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.FragmentTravelScanBinding;
-import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.utils.Constants;
 import com.exotikosteam.exotikos.utils.Utils;
@@ -225,15 +224,16 @@ public class FragmentTravelScan extends Fragment {
                     ScanData scanData = new ScanData(result);
                     String flightQuery = getQueryParamsInfo(scanData);
                     android.util.Log.d(TAG, flightQuery);
+                    //I can use here flightStatus endpoint since user has already boarding card => it is 1-2 days to departur
                     flightStatusService.getByDepartingDateAndAirportIATA(scanData.airlineIATA, scanData.flightNo, scanData.departureYear, scanData.departuteMonth, scanData.departureDay, scanData.departureAirportIATA, appId, appKey)
                             .subscribe(
                                     statusResponse -> {
                                         if (statusResponse == null || statusResponse.getFlightStatuses() == null || statusResponse.getFlightStatuses().size() < 1) {
                                             Log.e(TAG, "Cannot find flight. " + flightQuery);
+                                        } else {
+                                            this.trip = TripStatus.saveOrUpdateTrip(this.trip, statusResponse.getFlightStatuses().get(0), scanData.seatNo);
+                                            scanCompleted(this.trip);
                                         }
-                                        Flight flight = Flight.newInstance((this.trip == null ? null : this.trip.getId()), statusResponse.getFlightStatuses().get(0), scanData.seatNo);
-                                        this.trip = Flight.createNewFlight(flight);
-                                        scanCompleted(this.trip);
                                     },
                                     throwable -> android.util.Log.e(TAG, "Error getting status", throwable),
                                     () -> android.util.Log.i(TAG, "Done with status")
