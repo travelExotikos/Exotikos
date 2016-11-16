@@ -10,7 +10,6 @@ import android.widget.ListView;
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.FlightResultsAdapter;
-import com.exotikosteam.exotikos.models.airline.Airline;
 import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 
@@ -40,14 +39,14 @@ public class FlightResultsActivity extends AppCompatActivity {
         flights = new ArrayList<>();
 
         // Read arguments
-        Airline airline = Parcels.unwrap(getIntent().getParcelableExtra("airline"));
+        String airlineCode = getIntent().getStringExtra("airline");
         int year = getIntent().getIntExtra("year", -1);
         int month = getIntent().getIntExtra("month", -1);
         int day = getIntent().getIntExtra("day", -1);
         String flightNumber = getIntent().getStringExtra("flightNumber");
 
         ExotikosApplication app = ((ExotikosApplication)getApplicationContext());
-        app.getFlightScheduleService().getByDepartingDate(airline.getFs(),
+        app.getFlightScheduleService().getByDepartingDate(airlineCode,
                 flightNumber,
                 year,
                 month,
