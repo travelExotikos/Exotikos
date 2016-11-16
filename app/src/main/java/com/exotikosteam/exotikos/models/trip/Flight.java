@@ -41,6 +41,9 @@ public class Flight extends BaseModel {
     @Column(name = "flight_carrier")
     String flightCarrier;
 
+    @Column(name = "flight_carrier_name")
+    String flightCarrierName;
+
     @Column(name = "flight_id")
     Integer flightId;
 
@@ -178,6 +181,14 @@ public class Flight extends BaseModel {
 
     public void setFlightCarrier(String flightCarrier) {
         this.flightCarrier = flightCarrier;
+    }
+
+    public String getFlightCarrierName() {
+        return flightCarrierName;
+    }
+
+    public void setFlightCarrierName(String flightCarrierName) {
+        this.flightCarrierName = flightCarrierName;
     }
 
     public String getAirlineIconUrl() {
