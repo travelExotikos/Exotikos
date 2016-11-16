@@ -11,8 +11,11 @@ import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.FragmentTravelSummary;
+import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
+import com.exotikosteam.exotikos.fragments.SecurityCheckingHelpFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment.OnButtonsClicks;
+import com.exotikosteam.exotikos.models.airport.Airport;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.FlightStep;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
@@ -21,7 +24,6 @@ import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
-import com.google.android.gms.maps.model.LatLng;
 
 import org.parceler.Parcels;
 
@@ -30,11 +32,20 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements FragmentTravelScan.OnScanCompletedListener,
-                                                                OnButtonsClicks{
+                                                                OnButtonsClicks {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private TripStatus trip;
     private  FlightStep fStep = FlightStep.PREPARATION;
+    AirlinesApiEndpoint airlinesService;
+    AirportsApiEndpoint airportsService;
+    FlightStatusApiEndpoint flightStatusService;
+    SchedulesApiEndpoint flightScheduleService;
+    String appId;
+    String appKey;
+
+    //Airport Information
+    Airport departureAirport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        String appId = ((ExotikosApplication)getApplication()).getFligthStatsAppID();
-        String appKey = ((ExotikosApplication)getApplication()).getFligthStatsAppKey();
+        appId = ((ExotikosApplication)getApplication()).getFligthStatsAppID();
+        appKey = ((ExotikosApplication)getApplication()).getFligthStatsAppKey();
 
         // Get the list of all airlines
 //        airlinesService.getAll(appId, appKey)
@@ -56,10 +67,10 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
 //                        () -> Log.i(TAG, "Done with airlines")
 //                );
 
-        AirlinesApiEndpoint airlinesService = ((ExotikosApplication) getApplication()).getAirlinesService();
-        AirportsApiEndpoint airportsService = ((ExotikosApplication) getApplication()).getAirportsService();
-        FlightStatusApiEndpoint flightStatusService = ((ExotikosApplication) getApplication()).getFlightStatusService();
-        SchedulesApiEndpoint flightScheduleService = ((ExotikosApplication) getApplication()).getFlightScheduleService();
+        airlinesService = ((ExotikosApplication) getApplication()).getAirlinesService();
+        airportsService = ((ExotikosApplication) getApplication()).getAirportsService();
+        flightStatusService = ((ExotikosApplication) getApplication()).getFlightStatusService();
+        flightScheduleService = ((ExotikosApplication) getApplication()).getFlightScheduleService();
 
         // Get single airline using ICAO code
         airlinesService.getByICAOCode("AAL", appId, appKey)
@@ -173,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
 
     private void showSecurityCheckinFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, FragmentTravelScan.newInstance(this.trip));
+        ft.replace(R.id.frgPlaceholder, SecurityCheckinFragment.newInstance(this.trip));
         ft.commit();
     }
 
@@ -184,22 +195,67 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
     }
 
     @Override
-    public void handleButtonsClicks(String buttonName, LatLng latLng) {
-        if(buttonName.equals("LaunchScanPage")) {
+    public void handleButtonsClicks(String buttonName, String departureAirportIATA) {
+
+        if(buttonName.equals("LaunchAirportPage")) {
+            getAirport(departureAirportIATA);
+            showAiportLocationPage();
+        }
+        if(buttonName.equals("LaunchScan")) {
             showTravelScanFragment();
         }
-        if(buttonName.equals("LaunchAirportPage")) {
-            showAiportLocationPage(latLng);
+        if(buttonName.equals("LaunchSecurityCheckin")) {
+            showSecurityCheckinFragment();
+        }
+        if(buttonName.equals("LaunchSecurityCheckinHelpPage")) {
+            showSecurityCheckinHelpFragment();
+        }
+        if(buttonName.equals("LaunchSecurityCheckinVideoHelpPage")) {
+            showSecurityCheckinHelpVideoActivity();
         }
     }
 
-    private void showAiportLocationPage(LatLng latLng) {
-        double latitude = latLng.latitude;
-        double longitude = latLng.longitude;
-        String label = "SF Airport";
+    private void getAirport(String departureAirportIATA) {
+        //Once departure city code is completed, remove this temp code
+        if(departureAirportIATA.isEmpty() || departureAirportIATA == null) {
+            departureAirportIATA = "SFO";
+        }
+        airportsService.getByIATACode(departureAirportIATA, appId, appKey)
+                .flatMapIterable(airportsResponse -> airportsResponse.getAirports())
+                .subscribe(
+                        airport -> setDepartureAirport(airport),
+                        throwable -> Log.e(TAG, "Error getting airline", throwable),
+                        () -> Log.i(TAG, "Done with airline by IATA")
+                );
+    }
+
+    private void setDepartureAirport(Airport airport) {
+        departureAirport = airport;
+    }
+
+    private void showSecurityCheckinHelpVideoActivity() {
+        Intent i = new Intent(MainActivity.this, SecurityVideoActivity.class);
+        startActivity(i);
+    }
+
+    private void showSecurityCheckinHelpFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, SecurityCheckingHelpFragment.newInstance(this.trip));
+        ft.commit();
+    }
+
+
+    private void showAiportLocationPage() {
+
+        double latitude = departureAirport.getLatitude();
+        double longitude = departureAirport.getLongitude();
+
+        String label = departureAirport.getName();
         String uriBegin = "geo:" + latitude + "," + longitude + "(" + label + ")";
-        String query = "San Francisco Airport, San Francisco, California, CA, 94128, USA";
-        String encodedQuery = Uri.encode(query);
+        String query1 = departureAirport.getStreet1() + " " + departureAirport.getStreet2() +
+                        " " + departureAirport.getCity() + " " + departureAirport.getStateCode() + " "
+                        + departureAirport.getPostalCode() + " " + departureAirport.getCountryName();
+        String encodedQuery = Uri.encode(query1);
         String uriString = uriBegin + "?q=" + encodedQuery + "&z=21";
         Uri uri = Uri.parse(uriString);
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);

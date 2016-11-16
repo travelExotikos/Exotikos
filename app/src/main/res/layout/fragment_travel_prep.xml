@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnHelp"
-            android:layout_below="@+id/btnLaunchScanPage"
+            android:layout_below="@+id/btnScan"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -80,7 +80,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             android:background="@android:color/holo_green_light"
             android:id="@+id/tvCheckinDaysLeft"
-            android:layout_above="@+id/btnLaunchScanPage"
+            android:layout_above="@+id/btnScan"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="13dp" />
@@ -166,15 +166,22 @@
             android:layout_alignTop="@+id/tvDestinationLbl" />
 
         <Button
-            android:text="@string/launchSecurityCheck"
+            android:text="@string/launchScan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnLaunchSecurityFragment"
+            android:id="@+id/btnScan"
             android:layout_marginBottom="12dp"
             android:layout_above="@+id/tvBoarding"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
+        <Button
+            android:text="Proceed to Security Checkin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnAirportPage"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btnSecurity" />
 
     </RelativeLayout>
 </layout>
