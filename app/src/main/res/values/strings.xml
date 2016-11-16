@@ -37,5 +37,6 @@
     <string name="boarding">Boarding</string>
     <string name="security_video">Security Checking Procedure</string>
     <string name="launchSecurityCheck">Security Checkin</string>
+    <string name="scan_parsing_error">Error scanning boarding ticket</string>
 </resources>
 
