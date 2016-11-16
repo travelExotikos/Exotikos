@@ -99,11 +99,5 @@
         android:layout_marginLeft="@dimen/fragment_horizontal_margin"
         android:id="@+id/checkBox4" />
 
-    <Button
-        android:text="Temp Next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2" />
-
 
 </LinearLayout>

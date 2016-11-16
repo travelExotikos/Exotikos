@@ -15,6 +15,7 @@ import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.thirdparty.ItemClickSupport;
 import com.exotikosteam.exotikos.thirdparty.SimpleDividerItemDecoration;
+import com.exotikosteam.exotikos.utils.Constants;
 
 import org.parceler.Parcels;
 
@@ -48,7 +49,6 @@ public class TripListActivity extends AppCompatActivity {
         setupListeners();
 
         setSupportActionBar(toolbar);
-
         fetchTrips();
     }
 
@@ -64,7 +64,7 @@ public class TripListActivity extends AppCompatActivity {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Intent i = new Intent(TripListActivity.this, MainActivity.class);
                 TripStatus trip = getTripForFlight(flights.get(position));
-                i.putExtra("trip", Parcels.wrap(trip));
+                i.putExtra(Constants.PARAM_TRIP, Parcels.wrap(trip));
                 startActivity(i);
             }
         });
