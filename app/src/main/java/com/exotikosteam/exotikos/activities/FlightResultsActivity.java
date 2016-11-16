@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.FlightResultsAdapter;
+import com.exotikosteam.exotikos.models.flightstatus.FlightScheduleResponse;
 import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 
@@ -28,6 +29,7 @@ public class FlightResultsActivity extends AppCompatActivity {
     @BindView(R.id.lvFlights) ListView lvFlights;
 
     private List<ScheduledFlight> flights;
+    private FlightScheduleResponse response;
     private FlightResultsAdapter adapter;
 
     @Override
@@ -56,6 +58,7 @@ public class FlightResultsActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(flightScheduleResponse -> {
+                    response = flightScheduleResponse;
                     flights.addAll(flightScheduleResponse.getScheduledFlights());
                     adapter.notifyDataSetChanged();
                 });
@@ -81,7 +84,7 @@ public class FlightResultsActivity extends AppCompatActivity {
                 ArrayList<ScheduledFlight> flights= new ArrayList<>();
                 flights.add(selectedFlight);
 
-                TripStatus trip = TripStatus.createTrip(flights);
+                TripStatus trip = TripStatus.createTrip(flights, response);
                 result.putExtra("trip", Parcels.wrap(trip));
                 setResult(RESULT_OK, result);
                 finish();
