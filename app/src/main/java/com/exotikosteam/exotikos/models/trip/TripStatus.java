@@ -1,6 +1,7 @@
 package com.exotikosteam.exotikos.models.trip;
 
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
+import com.exotikosteam.exotikos.models.flightstatus.FlightStatus;
 import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ModelContainer;
@@ -13,6 +14,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -127,20 +129,73 @@ public class TripStatus extends BaseModel {
         return trip;
     }
 
-    public static TripStatus fromScheduledFlights(List<ScheduledFlight> flights) {
+    public static void saveFlight() {
+
+    }
+
+    public static TripStatus saveTrip(TripStatus trip, ScheduledFlight flight) {
+        if (trip == null || trip.getId() == null) {
+            return createTrip(Arrays.asList(flight));
+        }
+        return updateTrip(trip, new Flight(flight));
+    }
+
+
+
+    public static TripStatus saveTrip(TripStatus trip, FlightStatus flight, String seatNo) {
+        if (trip == null || trip.getId() == null) {
+            return createTrip(flight);
+        }
+        return updateTrip(trip, new Flight(flight, seatNo));
+    }
+
+    public static TripStatus updateTrip(TripStatus trip, Flight flight) {
+        boolean isNewFlight = true;
+        for (int i = 0; i < trip.getFlights().size(); i++) {
+            Flight f = trip.getFlights().get(i);
+            if (f.getFlightNumber() == flight.getFlightNumber() && f.getDepartureAirportIATA() == flight.getDepartureAirportIATA()) {
+                Flight.mergeFlights(f, flight);
+                isNewFlight = false;
+                break;
+            }
+        }
+        if (isNewFlight) {
+            flight.setOrder(trip.getFlights().size());
+            flight.setTripId(trip.getId());
+            trip.getFlights().add(flight);
+            flight.save();
+        }
+        trip.save();
+        return trip;
+    }
+
+    public static TripStatus createTrip(List<ScheduledFlight> flights) {
         TripStatus trip = new TripStatus();
         trip.setFlightStep(FlightStep.PREPARATION);
         trip.setCurrentFlight(0);
         trip.save();
-        List<Flight> fs = new ArrayList<Flight>();
+        int i = 0;
         for (ScheduledFlight s: flights) {
-            Flight f = Flight.fromScheduledFlight(s);
+            Flight f = new Flight(s);
             f.setTripId(trip.getId());
+            f.setOrder(++i);
             f.save();
-            fs.add(f);
         }
-        trip.setFlights(fs);
-        trip.save();
-        return trip;
+        return TripStatus.get(trip.getId());
     }
+
+
+    private static TripStatus createTrip(FlightStatus flightStatus) {
+        TripStatus trip = null;
+        Flight flight = new Flight(flightStatus, null);
+        trip = new TripStatus();
+        trip.setFlightStep(FlightStep.PREPARATION);
+        trip.setCurrentFlight(0);
+        trip.save();
+        flight.setTripId(trip.getId());
+        flight.setOrder(0);
+        flight.save();
+        return TripStatus.get(trip.getId());
+    }
+
 }
