@@ -13,14 +13,15 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/tvBoarding" />
+            android:id="@+id/tvBoardingHeaderLbl" />
 
         <TextView
-            android:text="Boarding Gate"
+            android:text="@string/boardingGate"
             android:layout_width="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:textSize="40dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvBoarding"
+            android:layout_below="@+id/tvBoardingHeaderLbl"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="65dp"
             android:id="@+id/tvBoardingGateLbl" />
@@ -53,9 +54,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-            android:id="@+id/textView8"
+            android:id="@+id/tvTimetoBoard"
             android:layout_below="@+id/tvTerminal"
             android:layout_centerHorizontal="true" />
+
+        <Button
+            android:text="Temporary In Flight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTimetoBoard"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:id="@+id/button2" />
+
+        <Button
+            android:text="Temp Destination Launch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btnDestination" />
 
     </RelativeLayout>
 </layout>

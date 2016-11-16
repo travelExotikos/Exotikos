@@ -38,5 +38,7 @@
     <string name="security_video">Security Checking Procedure</string>
     <string name="launchSecurityCheck">Security Checkin</string>
     <string name="scan_parsing_error">Error scanning boarding ticket</string>
+    <string name="boardingGate">Boarding Information</string>
+    <string name="landing">Flight Landing Time</string>
 </resources>
 

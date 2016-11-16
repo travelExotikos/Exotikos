@@ -7,6 +7,6 @@
     <dimen name="fragment_horizontal_margin">10dp</dimen>
     <dimen name="fragment_horizontal_padding">10dp</dimen>
     <dimen name="airline_item_padding">10dp</dimen>
-    <dimen name="dmGateSize">100dp</dimen>
+    <dimen name="dmGateSize">70dp</dimen>
     <dimen name="dmTerminalSize">50dp</dimen>
 </resources>

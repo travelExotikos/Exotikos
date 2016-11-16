@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
+import com.exotikosteam.exotikos.fragments.BoardingGateFragment;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.FragmentTravelSummary;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
@@ -151,12 +152,11 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
 
 
     private void setupStarterFragment() {
-        //Depending on whether the user has scanned the boarding pass or not,
-        // we show the travel summary or the scanner fragment here
+
         //TODO the step statuses are for card view
         if (fStep == FlightStep.PREPARATION) {
             showTravelPreparationFragment();
-        } if (fStep == FlightStep.CHECKIN_IN_DONE) {//replace with some logic to see if the use has created a trip before
+        } if (fStep == FlightStep.CHECKIN_IN_DONE) {
             showTravelStatusFragment();
         } if (fStep == FlightStep.CHECK_IN) {
             showTravelScanFragment();
@@ -213,13 +213,24 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
         if(buttonName.equals("LaunchSecurityCheckinVideoHelpPage")) {
             showSecurityCheckinHelpVideoActivity();
         }
+        if(buttonName.equals("LaunchBoardingPage")) {
+            showBoardingPageFragment();
+        }
+        if(buttonName.equals("launchDestinationPage")) {
+            showDestinationPageFragment();
+        }
+
+
+
+    }
+
+    private void showDestinationPageFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, SecurityCheckingHelpFragment.newInstance(this.trip));
+        ft.commit();
     }
 
     private void getAirport(String departureAirportIATA) {
-        //Once departure city code is completed, remove this temp code
-        if(departureAirportIATA.isEmpty() || departureAirportIATA == null) {
-            departureAirportIATA = "SFO";
-        }
         airportsService.getByIATACode(departureAirportIATA, appId, appKey)
                 .flatMapIterable(airportsResponse -> airportsResponse.getAirports())
                 .subscribe(
@@ -242,11 +253,15 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frgPlaceholder, SecurityCheckingHelpFragment.newInstance(this.trip));
         ft.commit();
+    };
+
+    private void showBoardingPageFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, BoardingGateFragment.newInstance(this.trip));
+        ft.commit();
     }
 
-
     private void showAiportLocationPage() {
-
         double latitude = departureAirport.getLatitude();
         double longitude = departureAirport.getLongitude();
 

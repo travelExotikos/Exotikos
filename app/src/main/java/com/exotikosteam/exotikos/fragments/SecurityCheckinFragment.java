@@ -55,7 +55,15 @@ public class SecurityCheckinFragment extends Fragment {
             handleLaunchSecurityVidoeHelpPage();
         });
 
+        securityCheckinBinding.btnBoarding.setOnClickListener(v -> {
+            handleLaunchBoardingPage();
+        });
+
         return securityCheckinBinding.getRoot();
+    }
+
+    private void handleLaunchBoardingPage() {
+        listener.handleButtonsClicks("LaunchBoardingPage", null);
     }
 
     private void handleLaunchSecurityVidoeHelpPage() {

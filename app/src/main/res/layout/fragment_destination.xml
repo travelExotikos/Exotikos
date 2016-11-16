@@ -1,0 +1,44 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="@string/landing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            android:id="@+id/tvLandingLbl" />
+
+        <TextView
+            android:text="9:30 AM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_alignBottom="@+id/tvLandingLbl"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"
+            android:id="@+id/tvArrivalTime" />
+
+        <TextView
+            android:text="Baggage Information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLandingLbl"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tvBaggageInfoLbl" />
+
+
+
+
+    </RelativeLayout>
+</layout>
