@@ -47,6 +47,7 @@ public class FragmentTravelScan extends Fragment {
         public void getTripInstance(TripStatus trip);
     }
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -74,6 +75,8 @@ public class FragmentTravelScan extends Fragment {
             launchCameraView(v);
         });
     }
+
+
 
     //TODO remove comments, but first read about options
     private void launchCameraView(View view) {

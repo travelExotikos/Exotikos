@@ -18,12 +18,8 @@ import com.exotikosteam.exotikos.databinding.FragmentTravelPrepBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.utils.Constants;
-import com.google.android.gms.maps.model.LatLng;
 
 import org.parceler.Parcels;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 /**
  * Created by lramaswamy on 11/12/16.
@@ -43,9 +39,10 @@ public class TravelPrepFragment extends Fragment {
     TextView tvDepartureCity;
     TripStatus trip;
     TextView tvDestination;
+    String departureAirportIATA;
     
     public interface OnButtonsClicks {
-        void handleButtonsClicks(String buttonName, LatLng latLng);
+        void handleButtonsClicks(String buttonName, String departureAirportIATA);
     }
 
 
@@ -66,6 +63,7 @@ public class TravelPrepFragment extends Fragment {
         tvDepartureCity.setText(flight.getDepartureCity()); // @TODO empty : ada/yeyus
         tvDepDate.setText(flight.getDepartureDate()); // @TODO need to parse this: Lakshmy
         tvDestination.setText(flight.getArrivalCity()); // @TODO empty : ada/yeyus
+        departureAirportIATA = flight.getDepartureAirportIATA();
     }
 
     private void setupBindings() {
@@ -86,30 +84,36 @@ public class TravelPrepFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 
     private void setOnClickListener() {
-        prepFragmentBinding.btnLaunchSecurityFragment.setOnClickListener(v -> {
-            handleLaunchSecurityPage();
+        prepFragmentBinding.btnScan.setOnClickListener(v -> {
+            handleLaunchScanPage();
         });
 
         btnAirportPage.setOnClickListener(v -> {
-            handleLaunchAirportMapPage();
+            handleLaunchAirportMapPage(departureAirportIATA);
         });
 
         prepFragmentBinding.btnHelp.setOnClickListener( v -> {
             handleHelpAction();
         });
+
+        prepFragmentBinding.btnSecurity.setOnClickListener(v -> {
+            launchSecurityCheckin();
+        });
     }
 
-    private void handleLaunchAirportMapPage() {
-        listener.handleButtonsClicks("LaunchAirportPage", new LatLng(37.6213129,-122.3811494));
+
+    private void launchSecurityCheckin() {
+        listener.handleButtonsClicks("LaunchSecurityCheckin", null);
     }
-    private void handleLaunchSecurityPage() {
-        listener.handleButtonsClicks("LaunchSecurityFragment", null);
+
+    private void handleLaunchAirportMapPage(String departureAirportIATA) {
+        listener.handleButtonsClicks("LaunchAirportPage", departureAirportIATA);
+    }
+
+    private void handleLaunchScanPage() {
+        listener.handleButtonsClicks("LaunchScan", null);
     }
 
     private void handleHelpAction() {
@@ -124,20 +128,5 @@ public class TravelPrepFragment extends Fragment {
         return frag;
     }
 
-    public String getDate(String date) { // TODO: make the date not UTC - Lakshmy
-        DateFormat parsedDate =
-                new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss");
-
-//        if (date == null) {
-//            return formatDateTime (new Date());
-//        }
-
-        // format in (almost) ISO8601 format
-        String dateStr = parsedDate.format(date);
-
-        // remap the timezone from 0000 to 00:00 (starts at char 22)
-        return dateStr.substring (0, 22)
-                + ":" + dateStr.substring (22);
-    }
 
 }
