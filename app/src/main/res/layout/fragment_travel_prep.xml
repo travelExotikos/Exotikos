@@ -28,44 +28,31 @@
             android:id="@+id/tvPreFlightHeader" />
 
 
-        <EditText
-            tools:text="@string/entryHint"
+        <TextView
+            android:text="@string/flightNumberlbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="14dp"
-            android:hint="@string/entryHint"
-            android:id="@+id/etFlightNumber"
+            android:id="@+id/tvFlightNumberLbl"
             android:layout_below="@+id/tvPreFlightHeader"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <EditText
-            tools:text="San Francisco"
-            android:hint="Enter Airport here"
+        <TextView
+            android:text="Date of Travel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="27dp"
-            android:id="@+id/tvPreflightDeparture"
-            android:layout_below="@+id/etFlightNumber"
-            android:layout_alignLeft="@+id/etFlightNumber"
-            android:layout_alignStart="@+id/etFlightNumber" />
-
-        <Button
-            android:text="@string/getDtls"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/etFlightNumber"
-            android:layout_toRightOf="@+id/etFlightNumber"
-            android:layout_toEndOf="@+id/etFlightNumber"
-            android:layout_marginLeft="31dp"
-            android:layout_marginStart="31dp"
-            android:id="@+id/btnDetails" />
+            android:id="@+id/tvDateOfTravelLbl"
+            android:layout_below="@+id/tvFlightNumberLbl"
+            android:layout_alignLeft="@+id/tvFlightNumberLbl"
+            android:layout_alignStart="@+id/tvFlightNumberLbl" />
 
 
         <TextView
-            android:text="Boardng in 32Days"
+            tools:text="Boardng in 32 Days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
@@ -98,71 +85,95 @@
             android:layout_alignParentStart="true"
             android:layout_marginBottom="13dp" />
 
-        <Button
-            android:text="@string/launchScan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnLaunchScanPage"
-            android:layout_above="@+id/tvBoarding"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="12dp" />
 
-        <EditText
-            tools:text="12/31/1970"
+        <TextView
+            android:text="@string/timeofFlight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tvPreflightDepDate"
-            android:inputType="date"
-            android:hint="@string/travelDatehint"
-            android:layout_alignBaseline="@+id/tvPreflightDeparture"
-            android:layout_alignBottom="@+id/tvPreflightDeparture"
-            android:layout_toRightOf="@+id/tvPreflightDeparture"
-            android:layout_toEndOf="@+id/tvPreflightDeparture"
-            android:layout_marginLeft="21dp"
-            android:layout_marginStart="21dp" />
+            android:layout_marginTop="25dp"
+            android:id="@+id/tvDeptTimeTxt"
+            android:layout_below="@+id/tvDateOfTravelLbl"
+            android:layout_alignLeft="@+id/tvDateOfTravelLbl"
+            android:layout_alignStart="@+id/tvDateOfTravelLbl" />
+
+        <TextView
+            android:text="1577"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvFlightNumberLbl"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="56dp"
+            android:layout_marginEnd="56dp"
+            android:id="@+id/tvFlightNumber" />
+
+        <TextView
+            android:text="12/31/1970"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvDateOfTravelLbl"
+            android:layout_alignRight="@+id/tvFlightNumber"
+            android:layout_alignEnd="@+id/tvFlightNumber"
+            android:id="@+id/tvDepDate" />
 
         <TextView
             android:text="6:30 AM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/tvDeptTimeTxt"
-            android:layout_alignLeft="@+id/tvPreflightDepDate"
-            android:layout_alignStart="@+id/tvPreflightDepDate"
-            android:layout_marginLeft="13dp"
-            android:layout_marginStart="13dp"
+            android:layout_alignRight="@+id/tvDepDate"
+            android:layout_alignEnd="@+id/tvDepDate"
             android:id="@+id/tvDepartureTime" />
 
+
         <TextView
-            android:text="@string/startTravel"
+            android:text="Destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvDeptTimeTxt"
-            android:layout_marginTop="27dp"
-            android:id="@+id/textView5"
+            android:layout_below="@+id/tvFromLbl"
+            android:layout_alignLeft="@+id/tvFromLbl"
+            android:layout_alignStart="@+id/tvFromLbl"
+            android:layout_marginTop="22dp"
+            android:id="@+id/tvDestinationLbl" />
+
+        <TextView
+            tools:text="San Francisco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDepartureCity"
+            android:layout_below="@+id/tvDepartureTime"
+            android:layout_alignRight="@+id/tvDepartureTime"
+            android:layout_alignEnd="@+id/tvDepartureTime"
+            android:layout_marginTop="24dp" />
+
+        <TextView
+            android:text="Origin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvDepartureCity"
             android:layout_alignLeft="@+id/tvDeptTimeTxt"
-            android:layout_alignStart="@+id/tvDeptTimeTxt" />
+            android:layout_alignStart="@+id/tvDeptTimeTxt"
+            android:id="@+id/tvFromLbl" />
 
         <TextView
-            android:text="5:00 AM"
+            android:text="Miami"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textView5"
-            android:layout_alignLeft="@+id/tvDepartureTime"
-            android:layout_alignStart="@+id/tvDepartureTime"
-            android:id="@+id/tvStartTrip" />
+            android:layout_alignBottom="@+id/tvDestinationLbl"
+            android:layout_alignLeft="@+id/tvFlightNumber"
+            android:layout_alignStart="@+id/tvFlightNumber"
+            android:id="@+id/tvDestination"
+            android:layout_alignTop="@+id/tvDestinationLbl" />
 
-        <TextView
-            android:text="@string/timeofFlight"
-            android:layout_width="wrap_content"
+        <Button
+            android:text="@string/launchSecurityCheck"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:id="@+id/tvDeptTimeTxt"
-            android:layout_below="@+id/tvPreflightDeparture"
-            android:layout_alignLeft="@+id/tvPreflightDeparture"
-            android:layout_alignStart="@+id/tvPreflightDeparture" />
-
-
+            android:id="@+id/btnLaunchSecurityFragment"
+            android:layout_marginBottom="12dp"
+            android:layout_above="@+id/tvBoarding"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
 
     </RelativeLayout>

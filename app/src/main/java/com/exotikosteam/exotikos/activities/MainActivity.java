@@ -9,18 +9,21 @@ import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.fragments.FragmentTravelPrep;
-import com.exotikosteam.exotikos.fragments.FragmentTravelPrep.OnButtonsClicks;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.FragmentTravelSummary;
+import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
+import com.exotikosteam.exotikos.fragments.TravelPrepFragment.OnButtonsClicks;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.FlightStep;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
+import com.exotikosteam.exotikos.utils.Constants;
 import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
 import com.google.android.gms.maps.model.LatLng;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        trip = Parcels.unwrap(getIntent().getParcelableExtra(Constants.PARAM_TRIP));
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -119,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
                         () -> Log.i(TAG, "Done with schedule")
                 );
 
+        //@TODO Not sure what this is for? We are getting the trip selected from TripListActivity
         List<TripStatus> trips = TripStatus.getAll();
         for (TripStatus t: trips) {
             Log.i(TAG, String.format("tripId = %d,  #fligts = %d", t.getId(), t.getFlights().size()));
@@ -127,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
         for (Flight f: flights) {
             Log.i(TAG, String.format("flightId = %d,  tripId = %d", f.getId(), f.getTripId()));
         }
+
         setupStarterFragment();
 
     }
@@ -148,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
 
     private void showTravelPreparationFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, FragmentTravelPrep.newInstance());
+        ft.replace(R.id.frgPlaceholder, TravelPrepFragment.newInstance(trip));
         ft.commit();
     }
 
@@ -160,6 +166,12 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
     }
 
     private void showTravelScanFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, FragmentTravelScan.newInstance(this.trip));
+        ft.commit();
+    }
+
+    private void showSecurityCheckinFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frgPlaceholder, FragmentTravelScan.newInstance(this.trip));
         ft.commit();
