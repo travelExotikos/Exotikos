@@ -2,18 +2,25 @@ package com.exotikosteam.exotikos.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.AirlinePickDialogFragment;
+import com.exotikosteam.exotikos.models.BoardingPassScan;
 import com.exotikosteam.exotikos.models.airline.Airline;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
+import com.exotikosteam.exotikos.utils.Constants;
+import com.exotikosteam.exotikos.utils.PDF417Utils;
 
 import org.parceler.Parcels;
+
+import java.text.ParseException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,10 +37,13 @@ public class NewTripActivity extends AppCompatActivity {
     @BindView(R.id.dpDepartureDate) DatePicker dpDepartureDate;
     @BindView(R.id.btnScan) Button btnScan;
 
+    private View rootView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_trip);
+        rootView = getLayoutInflater().inflate(R.layout.activity_new_trip, null);
+        setContentView(rootView);
         ButterKnife.bind(this);
 
         setupListeners();
@@ -58,15 +68,34 @@ public class NewTripActivity extends AppCompatActivity {
         });
 
         btnSelectFlights.setOnClickListener(view -> {
-            Intent i = new Intent(NewTripActivity.this, FlightResultsActivity.class);
-            i.putExtra("airline", Parcels.wrap(mSelectedAirline));
-            i.putExtra("year", dpDepartureDate.getYear());
-            i.putExtra("month", dpDepartureDate.getMonth() + 1);
-            i.putExtra("day", dpDepartureDate.getDayOfMonth());
-            i.putExtra("flightNumber", etFlightNumber.getText().toString());
-            startActivityForResult(i, REQUEST_FLIGHT_SELECTION);
+            showResultsForFlightData(
+                    mSelectedAirline.getIata(),
+                    etFlightNumber.getText().toString(),
+                    dpDepartureDate.getYear(),
+                    dpDepartureDate.getMonth() + 1,
+                    dpDepartureDate.getDayOfMonth()
+            );
         });
 
+        btnScan.setOnClickListener(v -> {
+            PDF417Utils.launchCameraView(NewTripActivity.this);
+        });
+
+    }
+
+    private void parsingError() {
+        Snackbar.make(rootView, R.string.scan_parsing_error, Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    private void showResultsForFlightData(String airline, String flightNumber, int year, int month, int day) {
+        Intent i = new Intent(NewTripActivity.this, FlightResultsActivity.class);
+        i.putExtra("airline", airline);
+        i.putExtra("year", year);
+        i.putExtra("month", month);
+        i.putExtra("day", day);
+        i.putExtra("flightNumber", flightNumber);
+        startActivityForResult(i, REQUEST_FLIGHT_SELECTION);
     }
 
     @Override
@@ -78,6 +107,23 @@ public class NewTripActivity extends AppCompatActivity {
             TripStatus.persist(trip);
             setResult(resultCode);
             finish();
+        } else if (requestCode == Constants.REQUEST_CODE_SCAN) {
+            if (resultCode == RESULT_OK) {
+                try {
+                    BoardingPassScan bps = PDF417Utils.parseIntentData(data);
+                    showResultsForFlightData(
+                            bps.getAirlineIATA(),
+                            bps.getFlightNo(),
+                            bps.getDepartureYear(),
+                            bps.getDepartuteMonth(),
+                            bps.getDepartureDay()
+                    );
+                } catch (ParseException e) {
+                    parsingError();
+                }
+            } else {
+                parsingError();
+            }
         }
     }
 }
