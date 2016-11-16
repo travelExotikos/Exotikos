@@ -2,6 +2,7 @@ package com.exotikosteam.exotikos.utils;
 
 import android.databinding.BindingAdapter;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ public class BindingUtils {
 
     @BindingAdapter({"bind:asShortTime"})
     public static void convertToShortTime(TextView view, String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
         try {
             Date d = format.parse(date);
             view.setText(DateFormat.format("hh:mma", d));

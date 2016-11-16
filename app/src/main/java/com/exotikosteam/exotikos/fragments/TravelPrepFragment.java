@@ -64,7 +64,7 @@ public class TravelPrepFragment extends Fragment {
         Flight flight = trip.getFlights().get(trip.getCurrentFlight());
         tvFlightNumber.setText(flight.getFlightNumber());
         tvDepartureCity.setText(flight.getDepartureCity()); // @TODO empty : ada/yeyus
-        tvDepDate.setText(flight.getDepartureDate()); // @TODO need to parse this: Lakshmy
+        tvDepDate.setText(flight.getDepartureTime()); // @TODO need to parse this: Lakshmy
         tvDestination.setText(flight.getArrivalCity()); // @TODO empty : ada/yeyus
     }
 

@@ -87,49 +87,47 @@ public class Flight extends BaseModel {
 
     public Flight(ScheduledFlight sch) {
         super();
-        Flight flight = new Flight();
-        flight.setArrivalAirportIATA(sch.getArrivalAirportFsCode());
+        this.setArrivalAirportIATA(sch.getArrivalAirportFsCode());
         //TODO set city
-        flight.setArrivalCity("TODO");
-        flight.setArrivalTerminal(sch.getArrivalTerminal());
-        flight.setArrivalTime(sch.getArrivalTime());
-        flight.setDepartureAirportIATA(sch.getDepartureAirportFsCode());
+        this.setArrivalCity("TODO");
+        this.setArrivalTerminal(sch.getArrivalTerminal());
+        this.setArrivalTime(sch.getArrivalTime());
+        this.setDepartureAirportIATA(sch.getDepartureAirportFsCode());
         //TODO set city
-        flight.setDepartureCity("TODO");
-        flight.setDepartureTerminal(sch.getDepartureTerminal());
-        flight.setDepartureTime(sch.getDepartureTime());
-        flight.setFlightCarrier(sch.getCarrierFsCode());
-        flight.setFlightNumber(sch.getFlightNumber());
+        this.setDepartureCity("TODO");
+        this.setDepartureTerminal(sch.getDepartureTerminal());
+        this.setDepartureTime(sch.getDepartureTime());
+        this.setFlightCarrier(sch.getCarrierFsCode());
+        this.setFlightNumber(sch.getFlightNumber());
     }
 
     public Flight(FlightStatus flightStatus, String seatNo) {
         super();
-        Flight flight = new Flight();
-        flight.setArrivalAirportIATA(flightStatus.getArrivalAirportFsCode());
+        this.setArrivalAirportIATA(flightStatus.getArrivalAirportFsCode());
         //TODO set city
-        flight.setArrivalCity("TODO");
-        flight.setArrivalTime(flightStatus.getArrivalDate().getDateLocal());
-        flight.setDepartureAirportIATA(flightStatus.getDepartureAirportFsCode());
+        this.setArrivalCity("TODO");
+        this.setArrivalTime(flightStatus.getArrivalDate().getDateLocal());
+        this.setDepartureAirportIATA(flightStatus.getDepartureAirportFsCode());
         //TODO set city
-        flight.setDepartureCity("TODO");
-        flight.setDepartureTime(flightStatus.getDepartureDate().getDateLocal());
+        this.setDepartureCity("TODO");
+        this.setDepartureTime(flightStatus.getDepartureDate().getDateLocal());
 
-        flight.setArrivalTimeUTC(Utils.parseFlightstatsDate(flightStatus.getArrivalDate().getDateUtc()));
-        flight.setDepartureTimeUTC(Utils.parseFlightstatsDate(flightStatus.getArrivalDate().getDateUtc()));
+        this.setArrivalTimeUTC(Utils.parseFlightstatsDate(flightStatus.getArrivalDate().getDateUtc()));
+        this.setDepartureTimeUTC(Utils.parseFlightstatsDate(flightStatus.getArrivalDate().getDateUtc()));
 
-        flight.setFlightId(flightStatus.getFlightId());
-        flight.setFlightCarrier(flightStatus.getCarrierFsCode());
-        flight.setFlightNumber(flightStatus.getFlightNumber());
+        this.setFlightId(flightStatus.getFlightId());
+        this.setFlightCarrier(flightStatus.getCarrierFsCode());
+        this.setFlightNumber(flightStatus.getFlightNumber());
 
         AirportResources ar = flightStatus.getAirportResources();
         if (ar != null) {
-            flight.setDepartureGate(ar.getDepartureGate());
-            flight.setDepartureTerminal(ar.getDepartureTerminal());
-            flight.setArrivalTerminal(ar.getArrivalTerminal());
+            this.setDepartureGate(ar.getDepartureGate());
+            this.setDepartureTerminal(ar.getDepartureTerminal());
+            this.setArrivalTerminal(ar.getArrivalTerminal());
         }
 
         if (!TextUtils.isEmpty(seatNo)) {
-            flight.setSeatNumber(seatNo);
+            this.setSeatNumber(seatNo);
         }
     }
 
@@ -322,5 +320,6 @@ public class Flight extends BaseModel {
         to.setDepartureGate((!TextUtils.isEmpty(from.getDepartureGate()) ? from.getDepartureGate() : to.getDepartureGate()));
         to.setFlightCarrier((!TextUtils.isEmpty(from.getFlightCarrier()) ? from.getFlightCarrier() : to.getFlightCarrier()));
         to.setFlightId((from.getFlightId() != null ? from.getFlightId() : to.getFlightId()));
+        to.setSeatNumber((!TextUtils.isEmpty(from.getSeatNumber()) ? from.getSeatNumber() : to.getSeatNumber()));
     }
 }

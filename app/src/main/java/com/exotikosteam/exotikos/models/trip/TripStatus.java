@@ -116,24 +116,7 @@ public class TripStatus extends BaseModel {
         tripStatus.save();
     }
 
-    public static TripStatus newMockInstance() {
-        TripStatus trip = new TripStatus();
-        trip.setFlightStep(FlightStep.CHECK_IN);
-        List<Flight> flights = new ArrayList<Flight>();
-        //String arrivalDate, String departureDate, String flightNumber, String departureTime,
-        // String departureTerminal, String arrivalTime, String arrivalTerminal, String seatNumber
-        flights.add(0, Flight.newInstance("", "January 19, 2017 ", "BX456", "6:44 AM", "A14", "12:30 PM","", "23B"));
-        flights.add(1, Flight.newInstance("January 19, 2017", "January 19, 2017", "ZK250", "1:44 PM", "B9", "3:45 PM","A23", "6C"));
-        flights.add(2, Flight.newInstance("January 19, 2017", "January 19, 2017", "BN05", "6:44 PM", "C34", "8:45 PM","D43", "2B"));
-        trip.setFlights(flights);
-        return trip;
-    }
-
-    public static void saveFlight() {
-
-    }
-
-    public static TripStatus saveTrip(TripStatus trip, ScheduledFlight flight) {
+    public static TripStatus saveOrUpdateTrip(TripStatus trip, ScheduledFlight flight) {
         if (trip == null || trip.getId() == null) {
             return createTrip(Arrays.asList(flight));
         }
@@ -141,20 +124,30 @@ public class TripStatus extends BaseModel {
     }
 
 
-
-    public static TripStatus saveTrip(TripStatus trip, FlightStatus flight, String seatNo) {
+    public static TripStatus saveOrUpdateTrip(TripStatus trip, FlightStatus flight, String seatNo) {
         if (trip == null || trip.getId() == null) {
-            return createTrip(flight);
+            return createNewTrip(Arrays.asList(new Flight(flight, seatNo)));
         }
         return updateTrip(trip, new Flight(flight, seatNo));
     }
 
-    public static TripStatus updateTrip(TripStatus trip, Flight flight) {
+    public static TripStatus createTrip(List<ScheduledFlight> scheduleFlights) {
+        //only for API 24 List<Flight> flights = scheduleFlights.stream().map(f -> new Flight(f)).collect(Collectors.toList());
+        List<Flight> flights = new ArrayList<>();
+        for (ScheduledFlight s: scheduleFlights) {
+            flights.add(new Flight(s));
+        }
+        return createNewTrip(flights);
+    }
+
+
+    private static TripStatus updateTrip(TripStatus trip, Flight flight) {
         boolean isNewFlight = true;
         for (int i = 0; i < trip.getFlights().size(); i++) {
             Flight f = trip.getFlights().get(i);
             if (f.getFlightNumber() == flight.getFlightNumber() && f.getDepartureAirportIATA() == flight.getDepartureAirportIATA()) {
                 Flight.mergeFlights(f, flight);
+                f.save();
                 isNewFlight = false;
                 break;
             }
@@ -162,40 +155,24 @@ public class TripStatus extends BaseModel {
         if (isNewFlight) {
             flight.setOrder(trip.getFlights().size());
             flight.setTripId(trip.getId());
-            trip.getFlights().add(flight);
             flight.save();
+            trip.getFlights().add(flight);
         }
         trip.save();
         return trip;
     }
 
-    public static TripStatus createTrip(List<ScheduledFlight> flights) {
+    private static TripStatus createNewTrip(List<Flight> flights) {
         TripStatus trip = new TripStatus();
         trip.setFlightStep(FlightStep.PREPARATION);
         trip.setCurrentFlight(0);
         trip.save();
         int i = 0;
-        for (ScheduledFlight s: flights) {
-            Flight f = new Flight(s);
+        for (Flight f: flights) {
             f.setTripId(trip.getId());
             f.setOrder(++i);
             f.save();
         }
         return TripStatus.get(trip.getId());
     }
-
-
-    private static TripStatus createTrip(FlightStatus flightStatus) {
-        TripStatus trip = null;
-        Flight flight = new Flight(flightStatus, null);
-        trip = new TripStatus();
-        trip.setFlightStep(FlightStep.PREPARATION);
-        trip.setCurrentFlight(0);
-        trip.save();
-        flight.setTripId(trip.getId());
-        flight.setOrder(0);
-        flight.save();
-        return TripStatus.get(trip.getId());
-    }
-
 }
