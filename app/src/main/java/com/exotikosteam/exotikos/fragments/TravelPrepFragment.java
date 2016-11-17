@@ -101,6 +101,10 @@ public class TravelPrepFragment extends Fragment {
         prepFragmentBinding.btnSecurity.setOnClickListener(v -> {
             launchSecurityCheckin();
         });
+
+        prepFragmentBinding.btnTravelStatus.setOnClickListener(v -> {
+            listener.handleButtonsClicks("LaunchCardLayout", null);
+        });
     }
 
 

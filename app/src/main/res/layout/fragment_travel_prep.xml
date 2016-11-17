@@ -183,5 +183,14 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/btnSecurity" />
 
+        <Button
+            android:text="Show Card Layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnSecurity"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/btnTravelStatus" />
+
+
     </RelativeLayout>
 </layout>

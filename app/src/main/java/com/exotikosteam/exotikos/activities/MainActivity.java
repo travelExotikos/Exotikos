@@ -219,9 +219,15 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
         if(buttonName.equals("launchDestinationPage")) {
             showDestinationPageFragment();
         }
+        if(buttonName.equals("LaunchCardLayout")) {
+            showCardActivity();
+        }
 
+    }
 
-
+    private void showCardActivity() {
+        Intent i = new Intent(MainActivity.this, TravelStatusActivity.class);
+        startActivity(i);
     }
 
     private void showDestinationPageFragment() {
