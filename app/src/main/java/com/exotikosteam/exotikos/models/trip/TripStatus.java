@@ -1,6 +1,9 @@
 package com.exotikosteam.exotikos.models.trip;
 
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
+import com.exotikosteam.exotikos.models.airline.Airline;
+import com.exotikosteam.exotikos.models.airport.Airport;
+import com.exotikosteam.exotikos.models.flightstatus.FlightScheduleResponse;
 import com.exotikosteam.exotikos.models.flightstatus.FlightStatus;
 import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.raizlabs.android.dbflow.annotation.Column;
@@ -136,6 +139,39 @@ public class TripStatus extends BaseModel {
         List<Flight> flights = new ArrayList<>();
         for (ScheduledFlight s: scheduleFlights) {
             flights.add(new Flight(s));
+        }
+        return createNewTrip(flights);
+    }
+
+    public static TripStatus createTrip(List<ScheduledFlight> scheduleFlights, FlightScheduleResponse response) {
+        //only for API 24 List<Flight> flights = scheduleFlights.stream().map(f -> new Flight(f)).collect(Collectors.toList());
+        List<Airport> airports = response.getAppendix().getAirports();
+        List<Airline> airlines = response.getAppendix().getAirlines();
+
+        List<Flight> flights = new ArrayList<>();
+        for (ScheduledFlight s: scheduleFlights) {
+            Flight f = new Flight(s);
+            // Find arrival airport payload
+            for (Airport a: airports) {
+                if (a.getFs().equals(s.getArrivalAirportFsCode())) {
+                    f.setArrivalCity(a.getCity());
+                }
+            }
+            // Find departure airport payload
+            for (Airport a: airports) {
+                if (a.getFs().equals(s.getDepartureAirportFsCode())) {
+                    f.setDepartureCity(a.getCity());
+                }
+            }
+
+            // Find carrier name
+            for (Airline al: airlines) {
+                if (al.getFs().equals(s.getCarrierFsCode())) {
+                    f.setFlightCarrierName(al.getName());
+                }
+            }
+
+            flights.add(f);
         }
         return createNewTrip(flights);
     }

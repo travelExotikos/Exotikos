@@ -25,7 +25,7 @@
 
         <TextView
             tools:text="Airline Name"
-            android:text='@{flight.flightCarrier}'
+            android:text='@{flight.flightCarrierName}'
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -34,18 +34,21 @@
             android:id="@+id/tvAirlineName" />
 
         <TextView
-            tools:text="123"
-            android:text='@{flight.flightNumber}'
+            tools:text="XY123"
+            android:text='@{flight.flightCarrier + flight.flightNumber}'
+            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/tvAirlineName"
             android:layout_toEndOf="@+id/tvAirlineName"
+            android:layout_marginLeft="5dp"
             android:id="@+id/tvFlightNumber" />
 
         <TextView
             tools:text="FROM"
-            android:text='@{flight.departureAirportIATA}'
+            android:text='@{flight.departureCity}'
+            android:textStyle="italic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -53,6 +56,27 @@
             android:layout_toRightOf="@+id/ivAirlineImage"
             android:layout_toEndOf="@+id/ivAirlineImage"
             android:id="@+id/tvFromAirport" />
+
+        <TextView
+            tools:text="XXX"
+            android:text='@{flight.departureAirportIATA}'
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvFromAirport"
+            android:layout_toRightOf="@+id/ivAirlineImage"
+            android:layout_toEndOf="@+id/ivAirlineImage"
+            android:id="@+id/tvFromCode" />
+
+        <TextView
+            tools:text="0:00AM"
+            app:asShortTime='@{flight.departureTime}'
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvFromCode"
+            android:layout_toRightOf="@+id/ivAirlineImage"
+            android:layout_toEndOf="@+id/ivAirlineImage"
+            android:id="@+id/tvFromTime" />
 
         <View
             android:layout_width="match_parent"
@@ -67,7 +91,8 @@
 
         <TextView
             tools:text="TO"
-            android:text='@{flight.arrivalAirportIATA}'
+            android:text='@{flight.arrivalCity}'
+            android:textStyle="italic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tvFromAirport"
@@ -76,23 +101,25 @@
             android:id="@+id/tvToAirport" />
 
         <TextView
-            tools:text="0:00AM"
-            app:asShortTime='@{flight.departureTime}'
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvFromAirport"
-            android:layout_toRightOf="@+id/ivAirlineImage"
-            android:layout_toEndOf="@+id/ivAirlineImage"
-            android:id="@+id/tvFromTime" />
-
-        <TextView
-            tools:text="0:00AM"
-            app:asShortTime='@{flight.arrivalTime}'
+            tools:text="XXX"
+            android:text='@{flight.arrivalAirportIATA}'
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvToAirport"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:id="@+id/tvToCode" />
+
+        <TextView
+            tools:text="0:00AM"
+            app:asShortTime='@{flight.arrivalTime}'
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvToCode"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:id="@+id/tvToTime" />
+
     </RelativeLayout>
 </layout>
