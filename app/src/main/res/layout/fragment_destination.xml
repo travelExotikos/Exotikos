@@ -37,7 +37,17 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/tvBaggageInfoLbl" />
 
-
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvBaggageInfoLbl"
+            android:layout_alignLeft="@+id/tvLandingLbl"
+            android:layout_alignStart="@+id/tvLandingLbl"
+            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginStart="@dimen/fragment_horizontal_margin"
+            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            android:id="@+id/textView3" />
 
 
     </RelativeLayout>

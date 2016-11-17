@@ -5,34 +5,12 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:text="@string/boarding"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
-            android:background="@color/colorAccent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/tvBoardingHeaderLbl" />
-
-        <TextView
-            android:text="@string/boardingGate"
-            android:layout_width="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-            android:textSize="40dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvBoardingHeaderLbl"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="65dp"
-            android:id="@+id/tvBoardingGateLbl" />
-
-        <TextView
             tools:text="A54"
             android:layout_width="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Display2"
             android:layout_height="wrap_content"
             android:textSize="@dimen/dmGateSize"
-            android:layout_below="@+id/tvBoardingGateLbl"
+            android:layout_below="@+id/tvBoardingHeaderLbl"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="37dp"
             android:id="@+id/tvBoardingGate" />
@@ -74,6 +52,17 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:id="@+id/btnDestination" />
+
+        <TextView
+            android:text="@string/boarding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+            android:background="@color/colorAccent"
+            android:id="@+id/tvBoardingHeaderLbl"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 </layout>
