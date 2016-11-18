@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.BoardingGateFragment;
 import com.exotikosteam.exotikos.fragments.CardViewFragment;
+import com.exotikosteam.exotikos.fragments.DestinationFragment;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
@@ -46,9 +47,9 @@ public class TravelStatusActivity extends AppCompatActivity {
         BoardingGateFragment boardingGateFragment = BoardingGateFragment.newInstance(trip);
         cardViewFragmentList.get(3).setFragment(boardingGateFragment);
 
-        /*cardViewFragmentList.add(4, CardViewFragment.newInstance("Destination", "Test", true));
+        cardViewFragmentList.add(4, CardViewFragment.newInstance("Destination", "Test", true));
         DestinationFragment destinationFragment = DestinationFragment.newInstance(trip);
-        cardViewFragmentList.get(4).setFragment(destinationFragment);*/
+        cardViewFragmentList.get(4).setFragment(destinationFragment);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.flCard1, cardViewFragmentList.get(0));
@@ -66,6 +67,10 @@ public class TravelStatusActivity extends AppCompatActivity {
         ft.replace(R.id.flCard4, cardViewFragmentList.get(3));
         ft.commit();
 
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.flCard5, cardViewFragmentList.get(4));
+        ft.commit();
+
         setupListeners();
     }
 
@@ -74,7 +79,8 @@ public class TravelStatusActivity extends AppCompatActivity {
                 cardViewFragmentList.get(0).getTitleClickSubject(),
                 cardViewFragmentList.get(1).getTitleClickSubject(),
                 cardViewFragmentList.get(2).getTitleClickSubject(),
-                cardViewFragmentList.get(3).getTitleClickSubject()
+                cardViewFragmentList.get(3).getTitleClickSubject(),
+                cardViewFragmentList.get(4).getTitleClickSubject()
         ).subscribe(fragment -> ((CardViewFragment)fragment).toggle());
     }
 }

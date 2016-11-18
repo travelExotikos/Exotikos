@@ -2,7 +2,8 @@
 
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
         <TextView
             android:text="@string/checkin"
@@ -101,10 +102,12 @@
             android:id="@+id/checkBox4" />
 
         <Button
-            android:text="Security Help"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnSecurityHelp" />
+
+            android:background="@drawable/arrow_right_bold_circle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right"
+            android:id="@+id/button2" />
 
         <Button
             android:text="Watch Security Video Help"
@@ -113,10 +116,10 @@
             android:id="@+id/btnSecurityVideo" />
 
         <Button
-            android:text="Go to Boarding"
+            android:text="Security Help"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnBoarding" />
+            android:id="@+id/btnSecurityHelp" />
 
     </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.exotikosteam.exotikos.fragments;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.exotikosteam.exotikos.R;
+import com.exotikosteam.exotikos.databinding.FragmentDestinationBinding;
+import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.utils.Constants;
 
@@ -19,13 +22,23 @@ import org.parceler.Parcels;
 
 public class DestinationFragment extends Fragment {
 
-    DestinationFragment destinationFragment;
+    FragmentDestinationBinding destinationFragment;
     TripStatus trip;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_destination, container, false);
+        destinationFragment = DataBindingUtil.inflate(inflater, R.layout.fragment_destination, container, false);
+        trip = Parcels.unwrap(getArguments().getParcelable(Constants.PARAM_TRIP));
+        populateData();
+        return destinationFragment.getRoot();
+    }
+
+    private void populateData() {
+        Flight flight = trip.getFlights().get(trip.getCurrentFlight());
+        destinationFragment.tvArrivalTime.setText(flight.getArrivalTime());
+        destinationFragment.tvCarousel.setText(flight.getBaggage());
+        destinationFragment.tvArrivalGate.setText(flight.getArrivalGate());
     }
 
     public static DestinationFragment newInstance(TripStatus trip) {
