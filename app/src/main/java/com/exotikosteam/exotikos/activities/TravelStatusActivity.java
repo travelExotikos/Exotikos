@@ -52,24 +52,18 @@ public class TravelStatusActivity extends AppCompatActivity {
         cardViewFragmentList.get(4).setFragment(destinationFragment);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flCard1, cardViewFragmentList.get(0));
-        ft.commit();
+        //ft.add(R.id.llContainer, fragment1, "fragment_one");
+        ft.add(R.id.flCard1, cardViewFragmentList.get(0), "fragment_one");
 
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flCard2, cardViewFragmentList.get(1));
-        ft.commit();
+        ft.add(R.id.flCard1, cardViewFragmentList.get(1), "fragment_two");
 
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flCard3, cardViewFragmentList.get(2));
-        ft.commit();
+        ft.add(R.id.flCard1, cardViewFragmentList.get(2), "fragment_three");
 
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flCard4, cardViewFragmentList.get(3));
+        ft.add(R.id.flCard1, cardViewFragmentList.get(3), "fragment_four");
         ft.commit();
-
-        ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flCard5, cardViewFragmentList.get(4));
-        ft.commit();
+//
+//        ft.replace(R.id.flCard5, cardViewFragmentList.get(4));
+//        ft.commit();
 
         setupListeners();
     }
@@ -84,8 +78,3 @@ public class TravelStatusActivity extends AppCompatActivity {
         ).subscribe(fragment -> ((CardViewFragment)fragment).toggle());
     }
 }
- /*
- ,
-                cardViewFragmentList.get(3).getTitleClickSubject(),
-                cardViewFragmentList.get(4).getTitleClickSubject()
-  */

@@ -3,11 +3,9 @@ package com.exotikosteam.exotikos.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.exotikosteam.exotikos.R;
@@ -17,39 +15,33 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.subjects.PublishSubject;
 
-public class CardViewFragment <T extends Fragment> extends Fragment implements ExpandableCard {
+public class CardsViewFragment extends Fragment implements ExpandableCard {
 
     private View rootView;
 
     private String cardName;
     private String relativeTime;
-    private T  f;
 
     // Bindings
     @BindView(R.id.tvCardName) TextView tvCardName;
     @BindView(R.id.tvTime) TextView tvTime;
     @BindView(R.id.rlCardContents)
     ExpandableRelativeLayout rlCardContents;
-    @BindView(R.id.cards)
-    FrameLayout card;
-    // Event topics
-    private final PublishSubject<CardViewFragment> titleClickSubject = PublishSubject.create();
 
-    public static CardViewFragment newInstance(String name, String time,
-                                               boolean isCollapsed) {
+    // Event topics
+    private final PublishSubject<CardsViewFragment> titleClickSubject = PublishSubject.create();
+
+    public static CardsViewFragment newInstance(String name, String time,
+                                                boolean isCollapsed) {
 
         Bundle args = new Bundle();
         args.putString("name", name);
         args.putString("time", time);
         args.putBoolean("collapsed", isCollapsed);
 
-        CardViewFragment fragment = new CardViewFragment();
+        CardsViewFragment fragment = new CardsViewFragment();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public void setFragment(T fragment) {
-        f = fragment;
     }
 
     @Nullable
@@ -69,9 +61,9 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
 
         tvCardName.setText(cardName);
         tvTime.setText(relativeTime);
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.cards, f, cardName);
-        ft.commit();
+//        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//        ft.add(R.id.cards, f, cardName);
+//        ft.commit();
 
         //rlCardContents.setVisibility(getArguments().getBoolean("collapsed") ? View.GONE : View.VISIBLE);
 
@@ -79,10 +71,10 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     }
 
     private void setupListeners() {
-        tvCardName.setOnClickListener(v -> titleClickSubject.onNext(CardViewFragment.this));
+        tvCardName.setOnClickListener(v -> titleClickSubject.onNext(CardsViewFragment.this));
     }
 
-    public PublishSubject<CardViewFragment> getTitleClickSubject() {
+    public PublishSubject<CardsViewFragment> getTitleClickSubject() {
         return titleClickSubject;
     }
 
