@@ -1,4 +1,5 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
         android:orientation="vertical" android:layout_width="match_parent"
@@ -26,28 +27,46 @@
             android:id="@+id/tvArrivalTime" />
 
         <TextView
-            android:text="Baggage Information"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvLandingLbl"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
-            android:background="@color/colorAccent"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/fragment_horizontal_margin"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/tvBaggageInfoLbl" />
-
-        <TextView
-            android:text="TextView"
+            android:text="@string/carouselLbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvBaggageInfoLbl"
+            android:layout_below="@+id/tvLandingLbl"
             android:layout_alignLeft="@+id/tvLandingLbl"
             android:layout_alignStart="@+id/tvLandingLbl"
-            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
-            android:layout_marginStart="@dimen/fragment_horizontal_margin"
-            android:layout_marginTop="@dimen/fragment_horizontal_margin"
-            android:id="@+id/textView3" />
+            android:layout_marginTop="21dp"
+            android:id="@+id/tvCarouselLbl" />
+
+        <TextView
+            tools:text="2B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvCarouselLbl"
+            android:layout_alignLeft="@+id/tvArrivalTime"
+            android:layout_alignStart="@+id/tvArrivalTime"
+            android:id="@+id/tvCarousel" />
+
+        <TextView
+            android:text="@string/baggageCarousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+            android:gravity="center"
+            android:layout_below="@+id/tvCarouselLbl"
+            android:layout_alignLeft="@+id/tvCarouselLbl"
+            android:layout_alignStart="@+id/tvCarouselLbl"
+            android:layout_marginTop="47dp"
+            android:id="@+id/tvBaggageCarouselLbl" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/baggage_claim"
+            android:layout_below="@+id/tvBaggageCarouselLbl"
+            android:id="@+id/imageView2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
 
     </RelativeLayout>

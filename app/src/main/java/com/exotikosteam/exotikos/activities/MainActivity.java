@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
 
         //TODO the step statuses are for card view
         if (fStep == FlightStep.PREPARATION) {
-            showTravelPreparationFragment();
+            showCardActivity();
         } if (fStep == FlightStep.CHECKIN_IN_DONE) {
             showTravelStatusFragment();
         } if (fStep == FlightStep.CHECK_IN) {
@@ -227,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
 
     private void showCardActivity() {
         Intent i = new Intent(MainActivity.this, TravelStatusActivity.class);
+        i.putExtra("trip", Parcels.wrap(this.trip));
         startActivity(i);
     }
 

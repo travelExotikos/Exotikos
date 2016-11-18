@@ -5,29 +5,65 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.fragments.SampleCardFragment;
+import com.exotikosteam.exotikos.fragments.BoardingGateFragment;
+import com.exotikosteam.exotikos.fragments.CardViewFragment;
+import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
+import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
+import com.exotikosteam.exotikos.models.trip.TripStatus;
+
+import org.parceler.Parcels;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import rx.Observable;
 
 public class TravelStatusActivity extends AppCompatActivity {
 
-    private SampleCardFragment c1, c2, c3, c4;
+    private List<CardViewFragment> cardViewFragmentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_status);
+        cardViewFragmentList = new ArrayList<>(5);
+        TripStatus trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
 
-        c1 = SampleCardFragment.newInstance("Card 1", "Test", true);
-        c2 = SampleCardFragment.newInstance("Card 2", "Test", false);
-        c3 = SampleCardFragment.newInstance("Card 3", "Test", true);
-        c4 = SampleCardFragment.newInstance("Card 4", "Test", true);
+        cardViewFragmentList.add(0, CardViewFragment.newInstance("Travel Preparation", "Test", true));
+        TravelPrepFragment prepFragment = TravelPrepFragment.newInstance(trip);
+        cardViewFragmentList.get(0).setFragment(prepFragment);
+
+        cardViewFragmentList.add(1, CardViewFragment.newInstance("Checkin", "Test", true));
+        //Change this to Checking Fragment once ada is done
+        SecurityCheckinFragment checkinFragment = SecurityCheckinFragment.newInstance(trip);
+        cardViewFragmentList.get(1).setFragment(checkinFragment);
+
+        cardViewFragmentList.add(2, CardViewFragment.newInstance("Security Checkin", "Test", true));
+        SecurityCheckinFragment securityCheckinFragment = SecurityCheckinFragment.newInstance(trip);
+        cardViewFragmentList.get(2).setFragment(securityCheckinFragment);
+
+        cardViewFragmentList.add(3, CardViewFragment.newInstance("Boarding", "Test", true));
+        BoardingGateFragment boardingGateFragment = BoardingGateFragment.newInstance(trip);
+        cardViewFragmentList.get(3).setFragment(boardingGateFragment);
+
+        /*cardViewFragmentList.add(4, CardViewFragment.newInstance("Destination", "Test", true));
+        DestinationFragment destinationFragment = DestinationFragment.newInstance(trip);
+        cardViewFragmentList.get(4).setFragment(destinationFragment);*/
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flCard1, c1);
-        ft.replace(R.id.flCard2, c2);
-        ft.replace(R.id.flCard3, c3);
-        ft.replace(R.id.flCard4, c4);
+        ft.replace(R.id.flCard1, cardViewFragmentList.get(0));
+        ft.commit();
+
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.flCard2, cardViewFragmentList.get(1));
+        ft.commit();
+
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.flCard3, cardViewFragmentList.get(2));
+        ft.commit();
+
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.flCard4, cardViewFragmentList.get(3));
         ft.commit();
 
         setupListeners();
@@ -35,10 +71,15 @@ public class TravelStatusActivity extends AppCompatActivity {
 
     private void setupListeners() {
         Observable.merge(
-                c1.getTitleClickSubject(),
-                c2.getTitleClickSubject(),
-                c3.getTitleClickSubject(),
-                c4.getTitleClickSubject()
-        ).subscribe(fragment -> fragment.toggle());
+                cardViewFragmentList.get(0).getTitleClickSubject(),
+                cardViewFragmentList.get(1).getTitleClickSubject(),
+                cardViewFragmentList.get(2).getTitleClickSubject(),
+                cardViewFragmentList.get(3).getTitleClickSubject()
+        ).subscribe(fragment -> ((CardViewFragment)fragment).toggle());
     }
 }
+ /*
+ ,
+                cardViewFragmentList.get(3).getTitleClickSubject(),
+                cardViewFragmentList.get(4).getTitleClickSubject()
+  */

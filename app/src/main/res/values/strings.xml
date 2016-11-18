@@ -40,5 +40,7 @@
     <string name="scan_parsing_error">Error scanning boarding ticket</string>
     <string name="boardingGate">Boarding Information</string>
     <string name="landing">Flight Landing Time</string>
+    <string name="carouselLbl">Carousel Number</string>
+    <string name="baggageCarousel">Baggage Carousel</string>
 </resources>
 

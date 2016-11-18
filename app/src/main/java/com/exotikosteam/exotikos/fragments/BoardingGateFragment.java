@@ -33,9 +33,6 @@ public class BoardingGateFragment extends Fragment {
         fragmentBoardingMainBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_boarding_main, container, false);
         trip = Parcels.unwrap(getArguments().getParcelable(Constants.PARAM_TRIP));
         populateFields();
-        fragmentBoardingMainBinding.btnDestination.setOnClickListener(v -> {
-            listener.handleButtonsClicks("launchDestinationPage", null);
-        });
         return fragmentBoardingMainBinding.getRoot();
     }
 
