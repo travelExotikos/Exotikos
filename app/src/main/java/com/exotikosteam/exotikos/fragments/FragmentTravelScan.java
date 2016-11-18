@@ -123,7 +123,7 @@ public class FragmentTravelScan extends Fragment {
                                         if (statusResponse == null || statusResponse.getFlightStatuses() == null || statusResponse.getFlightStatuses().size() < 1) {
                                             Log.e(TAG, "Cannot find flight. " + flightQuery);
                                         } else {
-                                            this.trip = TripStatus.saveOrUpdateTrip(this.trip, statusResponse.getFlightStatuses().get(0), scanData.getSeatNo());
+                                            this.trip = TripStatus.saveOrUpdateTrip(this.trip, statusResponse.getFlightStatuses().get(0), scanData.getSeatNo(), statusResponse.getAppendix());
                                             scanCompleted(this.trip);
                                         }
                                     },

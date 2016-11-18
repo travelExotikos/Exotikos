@@ -18,6 +18,28 @@ public class AirportResources {
     @SerializedName("arrivalTerminal")
     @Expose
     private String arrivalTerminal;
+    @SerializedName("arrivalGate")
+    @Expose
+    private String arrivalGate;
+    @SerializedName("baggage")
+    @Expose
+    private String baggage;
+
+    public String getArrivalGate() {
+        return arrivalGate;
+    }
+
+    public void setArrivalGate(String arrivalGate) {
+        this.arrivalGate = arrivalGate;
+    }
+
+    public String getBaggage() {
+        return baggage;
+    }
+
+    public void setBaggage(String baggage) {
+        this.baggage = baggage;
+    }
 
     /**
      * 
