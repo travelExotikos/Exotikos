@@ -84,7 +84,7 @@ public class FlightResultsActivity extends AppCompatActivity {
                 ArrayList<ScheduledFlight> flights= new ArrayList<>();
                 flights.add(selectedFlight);
 
-                TripStatus trip = TripStatus.createTrip(flights, response);
+                TripStatus trip = TripStatus.createTrip(flights, response.getAppendix());
                 result.putExtra("trip", Parcels.wrap(trip));
                 setResult(RESULT_OK, result);
                 finish();
