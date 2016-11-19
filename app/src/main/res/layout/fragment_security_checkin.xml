@@ -109,13 +109,6 @@
             android:layout_height="50dp"
             android:layout_gravity="right"
             android:id="@+id/btnNext" />
-
-        <Button
-            android:text="Watch Security Video Help"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnSecurityVideo" />
-
     </LinearLayout>
 
 </layout>

@@ -1,5 +1,6 @@
 package com.exotikosteam.exotikos.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.SmartFragmentStatePagerAdapter;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
@@ -18,7 +20,7 @@ import static com.exotikosteam.exotikos.R.id.vpPager;
  * Created by lramaswamy on 11/18/16.
  */
 
-public class SecurityProcessActivity extends AppCompatActivity {
+public class SecurityProcessActivity extends AppCompatActivity implements OnButtonsClicks {
     ViewPager viewPager;
 
     SecurityCheckinPagerAdapter pagerAdapter;
@@ -37,6 +39,18 @@ public class SecurityProcessActivity extends AppCompatActivity {
         tabsStrip.setViewPager(viewPager);
     }
 
+    @Override
+    public void handleButtonsClicks(String buttonName) {
+        if(buttonName.equals("LaunchSecurityCheckinVideoHelpPage")) {
+            showSecurityCheckinHelpVideoActivity();
+        }
+    }
+
+    private void showSecurityCheckinHelpVideoActivity() {
+        Intent i = new Intent(SecurityProcessActivity.this, SecurityVideoActivity.class);
+        startActivity(i);
+    }
+
     //return the order of the fragments in the view pager
     public class SecurityCheckinPagerAdapter extends SmartFragmentStatePagerAdapter {
         private String tabTitles[] = {"Checkin List", "Help" };
@@ -49,7 +63,7 @@ public class SecurityProcessActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if(position == 0)
-                return SecurityCheckinFragment.newInstance();
+                return SecurityCheckinFragment.newInstance(false);
             else if (position == 1)
                 return SecurityCheckingHelpFragment.newInstance();
             else

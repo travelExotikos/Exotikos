@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.BoardingGateFragment;
 import com.exotikosteam.exotikos.fragments.CardViewFragment;
@@ -30,7 +31,7 @@ import java.util.List;
 import rx.Observable;
 
 public class TravelStatusActivity extends ExotikosBaseActivity implements FragmentTravelScan.OnScanCompletedListener,
-        TravelPrepFragment.OnButtonsClicks {
+        OnButtonsClicks {
 
     public static final String TAG = TravelStatusActivity.class.getSimpleName();
 
@@ -133,17 +134,14 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         if(buttonName.equals("LaunchScan")) {
             showTravelScanFragment();
         }
-        if(buttonName.equals("LaunchSecurityCheckin")) {
-            showSecurityCheckinFragment();
-        }
-        if(buttonName.equals("LaunchSecurityCheckinHelpPage")) {
-            showSecurityCheckinHelpFragment();
-        }
+//        if(buttonName.equals("LaunchSecurityCheckin")) {
+//            showSecurityCheckinFragment();
+//        }
+//        if(buttonName.equals("LaunchSecurityCheckinHelpPage")) {
+//            showSecurityCheckinHelpFragment();
+//        }
         if(buttonName.equals("LaunchSecurityCheckinActivity")) {
             showSecurityCheckinActivity();
-        }
-        if(buttonName.equals("LaunchSecurityCheckinVideoHelpPage")) {
-            showSecurityCheckinHelpVideoActivity();
         }
     }
 
@@ -152,23 +150,11 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         startActivity(i);
     }
 
-
-    private void showSecurityCheckinHelpVideoActivity() {
-        Intent i = new Intent(TravelStatusActivity.this, SecurityVideoActivity.class);
-        startActivity(i);
-    }
-
     private void showSecurityCheckinHelpFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.flCard3, SecurityCheckingHelpFragment.newInstance());
         ft.commit();
     };
-
-    private void showBoardingPageFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flCard4, BoardingGateFragment.newInstance(this.trip));
-        ft.commit();
-    }
 
     private void getAirport(String departureAirportIATA) {
         airportsService = ((ExotikosApplication) getApplication()).getAirportsService();
@@ -209,10 +195,10 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         ft.replace(R.id.frgPlaceholder, FragmentTravelScan.newInstance(this.trip));
         ft.commit();
     }
-
-    private void showSecurityCheckinFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flCard3, SecurityCheckinFragment.newInstance(true));
-        ft.commit();
-    }
+//
+//    private void showSecurityCheckinFragment() {
+//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.replace(R.id.flCard3, SecurityCheckinFragment.newInstance(true));
+//        ft.commit();
+//    }
 }

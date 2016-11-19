@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.FragmentTravelPrepBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
@@ -40,10 +41,6 @@ public class TravelPrepFragment extends Fragment {
     TextView tvDepartureCity;
     TripStatus trip;
     TextView tvDestination;
-
-    public interface OnButtonsClicks {
-        void handleButtonsClicks(String buttonName);
-    }
 
 
     @Nullable

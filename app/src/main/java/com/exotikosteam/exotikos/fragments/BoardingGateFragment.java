@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.FragmentBoardingMainBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
@@ -28,7 +29,7 @@ public class BoardingGateFragment extends Fragment {
 
     FragmentBoardingMainBinding fragmentBoardingMainBinding;
     TripStatus trip;
-    TravelPrepFragment.OnButtonsClicks listener;
+    OnButtonsClicks listener;
 
     @Nullable
     @Override
@@ -42,8 +43,8 @@ public class BoardingGateFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(context instanceof TravelPrepFragment.OnButtonsClicks) {
-            listener = (TravelPrepFragment.OnButtonsClicks) context;
+        if(context instanceof OnButtonsClicks) {
+            listener = (OnButtonsClicks) context;
         }
     }
 
