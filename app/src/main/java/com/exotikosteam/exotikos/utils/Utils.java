@@ -126,7 +126,5 @@ public class Utils {
         Date currentTime = new Date();
         long timeToBoardMin = Utils.getDiffTime(currentTime, c.getTime());
         return Utils.convertminsToProperString(timeToBoardMin);
-
     }
-
 }

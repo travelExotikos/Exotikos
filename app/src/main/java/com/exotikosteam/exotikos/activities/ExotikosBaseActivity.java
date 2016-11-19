@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -21,6 +22,10 @@ import android.widget.Toast;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.utils.Constants;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.Locale;
 
 import static android.content.Intent.ACTION_CALL;
 
@@ -134,7 +139,7 @@ public class ExotikosBaseActivity extends AppCompatActivity implements ActivityC
         String uriString ="geo:0,0";
         Uri uri = Uri.parse(uriString);
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
-        intent.setPackage("com.google.android.apps.maps");
+        intent.setPackage(Constants.GOOGLE_MAP_PACKAGE);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
@@ -143,23 +148,25 @@ public class ExotikosBaseActivity extends AppCompatActivity implements ActivityC
     //=================== TANSLATE ==========
 
     private void handleTranslatorAction() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setPackage("com.google.android.apps.translate");
-
-        Uri uri = new Uri.Builder()
+        String defaultLanguage = Locale.getDefault().getLanguage();
+        Uri uri = uri = new Uri.Builder()
                 .scheme("http")
                 .authority("translate.google.com")
                 .path("/m/translate")
-                //TODO read current phoene settings for language
                 //.appendQueryParameter("q", "c'est l'meunier Mathurin qui caresse les filles au tic-tac du moulin")
-                //.appendQueryParameter("tl", "pl") // target language
-                //.appendQueryParameter("sl", "fr") // source language
+                .appendQueryParameter("tl", (Locale.getDefault().getLanguage() == "en" ? "pl" : "en")) // target language
+                .appendQueryParameter("sl", defaultLanguage) // source language
                 .build();
-        intent.setData(uri);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.setPackage(Constants.GOOGLE_TRANSLATE_PACKAGE);
+
+        if (intent.resolveActivity(getPackageManager()) == null) {
+            //Go to gogole play store and install google translate
+            uri = Uri.parse("market://details?id=" + Constants.GOOGLE_TRANSLATE_PACKAGE);
+            intent = new Intent(Intent.ACTION_VIEW, uri);
         }
+        startActivity(intent);
+
     }
 
     //================ CALL ================
@@ -199,6 +206,18 @@ public class ExotikosBaseActivity extends AppCompatActivity implements ActivityC
         }
         Log.e(TAG, "cannot read phone #");
         //return null;
+    }
+
+    private void getCurrentLocation() {
+        Location mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        // Note that this can be NULL if last location isn't already known.
+        if (mCurrentLocation != null) {
+            // Print current location if not null
+            Log.d("DEBUG", "current location: " + mCurrentLocation.toString());
+            LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
+        }
+        // Begin polling for new location updates.
+        startLocationUpdates();
     }
 
 }
