@@ -28,12 +28,8 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-<<<<<<< HEAD
-public class MainActivity extends ExotikosBaseActivity implements FragmentTravelScan.OnScanCompletedListener,
-                                                                OnButtonsClicks {
-=======
-public class MainActivity extends AppCompatActivity implements FragmentTravelScan.OnScanCompletedListener{
->>>>>>> 3a3e54ab3816e59377c4538414737946c3d53a22
+
+public class MainActivity extends ExotikosBaseActivity implements FragmentTravelScan.OnScanCompletedListener {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private TripStatus trip;
