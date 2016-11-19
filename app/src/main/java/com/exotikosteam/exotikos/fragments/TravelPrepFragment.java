@@ -20,6 +20,8 @@ import com.exotikosteam.exotikos.utils.Utils;
 
 import org.parceler.Parcels;
 
+import java.util.Date;
+
 /**
  * Created by lramaswamy on 11/12/16.
  */
@@ -58,10 +60,14 @@ public class TravelPrepFragment extends Fragment {
     private void populateData() {
         Flight flight = trip.getFlights().get(trip.getCurrentFlight());
         tvFlightNumber.setText(flight.getFlightNumber());
-        tvDepartureCity.setText(flight.getDepartureCity()); // @TODO empty : ada/yeyus
-        tvDepDate.setText(Utils.convertToDate(flight.getDepartureTime())); // @TODO need to parse this: Lakshmy
-        tvDestination.setText(flight.getArrivalCity()); // @TODO empty : ada/yeyus
+        tvDepartureCity.setText(flight.getDepartureCity());
+        tvDepDate.setText(Utils.convertToDate(flight.getDepartureTime()));
+        tvDestination.setText(flight.getArrivalCity());
         prepFragmentBinding.tvDepartureTime.setText(Utils.convertToTime(flight.getDepartureTime()));
+
+        Date departureTime = Utils.parseFlightstatsDate(flight.getDepartureTime());
+        tvCheckinDaysLeft.setText(Utils.getReadytoPrintCheckinTimeDelta(departureTime));
+        tvBoarding.setText(Utils.getReadytoPrintBoardingTimeDelta(departureTime));
     }
 
     private void setupBindings() {

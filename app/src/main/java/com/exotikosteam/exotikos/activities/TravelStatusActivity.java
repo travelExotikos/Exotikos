@@ -18,11 +18,13 @@ import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
 import com.exotikosteam.exotikos.models.airport.Airport;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
+import com.exotikosteam.exotikos.utils.Utils;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import rx.Observable;
@@ -55,24 +57,28 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         getAirport(flight.getDepartureAirportIATA());
 
 
-        cardViewFragmentList.add(0, CardViewFragment.newInstance("Travel Preparation", "Test", true));
+        cardViewFragmentList.add(0, CardViewFragment.newInstance("Travel Preparation", "", true));
         TravelPrepFragment prepFragment = TravelPrepFragment.newInstance(trip);
         cardViewFragmentList.get(0).setFragment(prepFragment);
 
-        cardViewFragmentList.add(1, CardViewFragment.newInstance("Checkin", "Test", true));
-        //Change this to Checking Fragment once ada is done
+        Date departureTime = Utils.parseFlightstatsDate(flight.getDepartureTime());
+
+        cardViewFragmentList.add(1, CardViewFragment.newInstance("Checkin", Utils.getCheckinTimeDelta(departureTime), true));
+        //Change this to Checking Fragment once ada is done @TODO Adriana
         SecurityCheckinFragment checkinFragment = SecurityCheckinFragment.newInstance(trip);
         cardViewFragmentList.get(1).setFragment(checkinFragment);
 
-        cardViewFragmentList.add(2, CardViewFragment.newInstance("Security Checkin", "Test", true));
+        cardViewFragmentList.add(2, CardViewFragment.newInstance("Security Checkin", Utils.getTimeDeltaFromCurrent(departureTime), true));
         SecurityCheckinFragment securityCheckinFragment = SecurityCheckinFragment.newInstance(trip);
         cardViewFragmentList.get(2).setFragment(securityCheckinFragment);
 
-        cardViewFragmentList.add(3, CardViewFragment.newInstance("Boarding", "Test", true));
+        cardViewFragmentList.add(3, CardViewFragment.newInstance("Boarding", Utils.getTimeDeltaFromCurrent(departureTime), true));
         BoardingGateFragment boardingGateFragment = BoardingGateFragment.newInstance(trip);
         cardViewFragmentList.get(3).setFragment(boardingGateFragment);
 
-        cardViewFragmentList.add(4, CardViewFragment.newInstance("Destination", "Test", true));
+        cardViewFragmentList.add(4, CardViewFragment.newInstance("Destination",
+                Utils.getTimeDeltaFromCurrent(
+                        Utils.parseFlightstatsDate(flight.getArrivalTime())), true));
         DestinationFragment destinationFragment = DestinationFragment.newInstance(trip);
         cardViewFragmentList.get(4).setFragment(destinationFragment);
 
@@ -102,7 +108,6 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
     @Override
     public void getTripInstance(TripStatus trip) {
         this.trip = trip;
-        //showTravelStatusFragment();
     }
 
     @Override
@@ -122,12 +127,6 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         if(buttonName.equals("LaunchSecurityCheckinVideoHelpPage")) {
             showSecurityCheckinHelpVideoActivity();
         }
-//        if(buttonName.equals("LaunchBoardingPage")) {
-//            showBoardingPageFragment();
-//        }
-//        if(buttonName.equals("launchDestinationPage")) {
-//            showDestinationPageFragment();
-//        }
     }
 
     private void showDestinationPageFragment() {

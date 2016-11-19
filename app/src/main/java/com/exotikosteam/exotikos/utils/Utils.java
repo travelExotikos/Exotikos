@@ -55,26 +55,78 @@ public class Utils {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
         try {
             Date d = format.parse(date);
-            return (DateFormat.format("EEE, MMM yyyy", d)).toString();
+            return (DateFormat.format("EEE, MMM dd, yyyy", d)).toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static long getDiffTime(Date date1, Date date2){
-        if (date2.getTime() - date1.getTime() < 0) {// if for example date1 = 22:00, date2 = 01:55.
+    private static long getDiffTime(Date date1, Date date2){
+        if (date2.getTime() - date1.getTime() < 0) {
             Calendar c = Calendar.getInstance();
             c.setTime(date2);
             c.add(Calendar.DATE, 1);
             date2 = c.getTime();
-        } //else for example date1 = 01:55, date2 = 03:55.
+        }
         long ms = date2.getTime() - date1.getTime();
 
-        //235 minutes ~ 4 hours for (22:00 -- 01:55).
-        //120 minutes ~ 2 hours for (01:55 -- 03:55).
         return TimeUnit.MINUTES.convert(ms, TimeUnit.MILLISECONDS);
     }
 
+    private static String convertminsToProperString(long timeToBoardMin) {
+        int days = 0;
+        int hours = 0;
+        if(timeToBoardMin > 24)
+            days = (int) timeToBoardMin/24/60;
+        hours = (int) timeToBoardMin/60%24;
+        int min = (int)timeToBoardMin%60;
+
+        StringBuffer sbf = new StringBuffer();
+        if(days > 0) {
+            sbf.append(Integer.toString(days));
+            sbf.append(" days ");
+        }
+        if(hours > 0) {
+            sbf.append(Integer.toString(hours));
+            sbf.append(" hours ");
+        }
+        sbf.append(Integer.toString(min));
+        sbf.append(" mins ");
+        return sbf.toString();
+    }
+
+    public static String getTimeDeltaFromCurrent(Date departureTime) {
+        Date currentTime = new Date();
+        long timeToBoardMin = Utils.getDiffTime(currentTime, departureTime);
+        return Utils.convertminsToProperString(timeToBoardMin);
+    }
+
+    public static String getReadytoPrintBoardingTimeDelta(Date departureTime) {
+        Date currentTime = new Date();
+        long timeToBoardMin = Utils.getDiffTime(currentTime, departureTime);
+        String boardTime = Constants.YOUHAVE + Utils.convertminsToProperString(timeToBoardMin) + Constants.TOBOARD;
+        return boardTime;
+    }
+
+    public static String getReadytoPrintCheckinTimeDelta(Date departureTime) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(departureTime);
+        c.add(Calendar.DATE, -1);
+        Date currentTime = new Date();
+        long timeToBoardMin = Utils.getDiffTime(currentTime, c.getTime());
+        String boardTime = Constants.YOUHAVE + Utils.convertminsToProperString(timeToBoardMin) + Constants.TOCHECKIN;
+        return boardTime;
+    }
+
+    public static String getCheckinTimeDelta(Date departureTime) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(departureTime);
+        c.add(Calendar.DATE, -1);
+        Date currentTime = new Date();
+        long timeToBoardMin = Utils.getDiffTime(currentTime, c.getTime());
+        return Utils.convertminsToProperString(timeToBoardMin);
+
+    }
 
 }

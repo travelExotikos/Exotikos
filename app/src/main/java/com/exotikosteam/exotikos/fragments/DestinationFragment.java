@@ -40,6 +40,7 @@ public class DestinationFragment extends Fragment {
         destinationFragment.tvArrivalTime.setText(Utils.convertToTime(flight.getArrivalTime()));
         destinationFragment.tvCarousel.setText(flight.getBaggage());
         destinationFragment.tvArrivalGate.setText(flight.getArrivalGate());
+        destinationFragment.tvLandingDate.setText(Utils.convertToDate(flight.getArrivalTime()));
     }
 
     public static DestinationFragment newInstance(TripStatus trip) {

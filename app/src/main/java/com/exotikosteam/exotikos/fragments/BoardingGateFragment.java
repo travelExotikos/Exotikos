@@ -49,18 +49,11 @@ public class BoardingGateFragment extends Fragment {
 
     public void populateFields() {
         Flight flight = trip.getFlights().get(trip.getCurrentFlight());
-        fragmentBoardingMainBinding.tvBoardingGate.setText(Constants.GATE + flight.getDepartureGate());
+        fragmentBoardingMainBinding.tvBoardingGate.setText(Constants.GATE + ((flight.getDepartureGate() != null) ? flight.getDepartureGate() : "N/A"));
         fragmentBoardingMainBinding.tvTerminal.setText(Constants.TERMINAL + flight.getDepartureTerminal());
         
-        //getDepartureTimeUTC is null!
         Date departureTime = Utils.parseFlightstatsDate(flight.getDepartureTime());
-        Date currentTime = new Date();
-        long timeToBoardMin = Utils.getDiffTime(currentTime, departureTime);
-        int hours = (int)timeToBoardMin/60;
-        int min = (int)timeToBoardMin%60;
-        String boardTime = Constants.YOUHAVE + Integer.toString(hours) + " hours " + Integer.toString(min) + " mins" +
-                Constants.TOBOARD;
-        fragmentBoardingMainBinding.tvTimetoBoard.setText(boardTime);
+        fragmentBoardingMainBinding.tvTimetoBoard.setText(Utils.getReadytoPrintBoardingTimeDelta(departureTime));
     }
 
     public static BoardingGateFragment newInstance(TripStatus trip) {
@@ -70,5 +63,7 @@ public class BoardingGateFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+
 
 }
