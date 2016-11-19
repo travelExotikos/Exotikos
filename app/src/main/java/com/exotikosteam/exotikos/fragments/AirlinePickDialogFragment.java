@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,15 @@ import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.AirlinesAdapter;
 import com.exotikosteam.exotikos.models.airline.Airline;
 import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
+import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.structure.database.transaction.FastStoreModelTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
@@ -32,6 +36,8 @@ import rx.subjects.PublishSubject;
  */
 
 public class AirlinePickDialogFragment extends DialogFragment {
+
+    public static final String TAG = AirlinePickDialogFragment.class.getSimpleName();
 
     @BindView(R.id.etName) EditText etName;
     @BindView(R.id.lvAirlines) ListView lvAirlines;
@@ -72,14 +78,31 @@ public class AirlinePickDialogFragment extends DialogFragment {
         airlines = new ArrayList<>();
         ExotikosApplication app = ((ExotikosApplication)getContext().getApplicationContext());
         airlinesService = app.getAirlinesService();
-        airlinesService.getActive(app.getFligthStatsAppID(), app.getFligthStatsAppKey())
-                .concatMapIterable(airlinesResponse -> airlinesResponse.getAirlines())
+        Observable<List<Airline>> cache = Observable.just(Airline.getAll());
+        cache
+                .flatMap(airlinesList -> {
+                    if (airlinesList.size() > 0) {
+                        return Observable.just(airlinesList);
+                    } else {
+                        return airlinesService.getActive(app.getFligthStatsAppID(), app.getFligthStatsAppKey())
+                                .map(airlinesResponse -> airlinesResponse.getAirlines());
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(airline -> {
-                    airlines.add(airline);
-                    adapter.notifyDataSetChanged();
-                });
+                .subscribe(
+                        as -> {
+                            airlines.addAll(as);
+                            adapter.notifyDataSetChanged();
+
+                            // Persist
+                            FastStoreModelTransaction
+                                    .insertBuilder(FlowManager.getModelAdapter(Airline.class))
+                                    .addAll(as)
+                                    .build();
+                        },
+                        throwable -> Log.e(TAG, "Error processing airlines", throwable)
+                );
 
         setupList();
         setupListeners();
