@@ -207,17 +207,4 @@ public class ExotikosBaseActivity extends AppCompatActivity implements ActivityC
         Log.e(TAG, "cannot read phone #");
         //return null;
     }
-
-    private void getCurrentLocation() {
-        Location mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-        // Note that this can be NULL if last location isn't already known.
-        if (mCurrentLocation != null) {
-            // Print current location if not null
-            Log.d("DEBUG", "current location: " + mCurrentLocation.toString());
-            LatLng latLng = new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
-        }
-        // Begin polling for new location updates.
-        startLocationUpdates();
-    }
-
 }
