@@ -34,10 +34,10 @@ import java.text.ParseException;
 
 public class FragmentTravelScan extends Fragment {
 
-    private OnScanCompletedListener listener;
-    private FragmentTravelScanBinding scanFragmentBinding;
+    private OnScanCompletedListener mListener;
+    private FragmentTravelScanBinding mScanFragmentBinding;
     private static String TAG = "ScanAction";
-    private TripStatus trip;
+    private TripStatus mTrip;
 
     public interface OnScanCompletedListener {
         public void getTripInstance(TripStatus trip);
@@ -47,8 +47,8 @@ public class FragmentTravelScan extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(context instanceof OnScanCompletedListener) {
-            listener = (OnScanCompletedListener) context;
+        if (context instanceof OnScanCompletedListener) {
+            mListener = (OnScanCompletedListener) context;
         } else {
             throw new ClassCastException(context.toString()
                     + " must implement FragmentTravelScan.OnScanCompletedListener");
@@ -58,16 +58,15 @@ public class FragmentTravelScan extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
-        scanFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_travel_scan, parent, false);
-        trip = Parcels.unwrap(getArguments().getParcelable(Constants.PARAM_TRIP));
-        return scanFragmentBinding.getRoot();
+        mScanFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_travel_scan, parent, false);
+        mTrip = Parcels.unwrap(getArguments().getParcelable(Constants.PARAM_TRIP));
+        return mScanFragmentBinding.getRoot();
     }
-
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        scanFragmentBinding.scanImageClick.setOnClickListener(v -> {
+        mScanFragmentBinding.scanImageClick.setOnClickListener(v -> {
             PDF417Utils.launchCameraView(getActivity());
         });
     }
@@ -81,7 +80,7 @@ public class FragmentTravelScan extends Fragment {
     }
 
     public void scanCompleted(TripStatus trip) {
-        listener.getTripInstance(trip);
+        mListener.getTripInstance(trip);
     }
 
     @Override
@@ -99,8 +98,6 @@ public class FragmentTravelScan extends Fragment {
             saveTrip(data);
         }
     }
-
-
 
     private void saveTrip(Intent data) {
         FlightStatusApiEndpoint flightStatusService = ((ExotikosApplication) getActivity().getApplication()).getFlightstatsRetrofit().create(FlightStatusApiEndpoint.class);
@@ -123,8 +120,8 @@ public class FragmentTravelScan extends Fragment {
                                         if (statusResponse == null || statusResponse.getFlightStatuses() == null || statusResponse.getFlightStatuses().size() < 1) {
                                             Log.e(TAG, "Cannot find flight. " + flightQuery);
                                         } else {
-                                            this.trip = TripStatus.saveOrUpdateTrip(this.trip, statusResponse.getFlightStatuses().get(0), scanData.getSeatNo(), statusResponse.getAppendix());
-                                            scanCompleted(this.trip);
+                                            mTrip = TripStatus.saveOrUpdateTrip(mTrip, statusResponse.getFlightStatuses().get(0), scanData.getSeatNo(), statusResponse.getAppendix());
+                                            scanCompleted(mTrip);
                                         }
                                     },
                                     throwable -> android.util.Log.e(TAG, "Error getting status", throwable),
@@ -138,7 +135,6 @@ public class FragmentTravelScan extends Fragment {
                 }
             }
         }
-
     }
 
     private String getQueryParamsInfo(BoardingPassScan scanData) {
