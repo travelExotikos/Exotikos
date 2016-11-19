@@ -3,7 +3,6 @@ package com.exotikosteam.exotikos.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
@@ -29,7 +28,8 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements FragmentTravelScan.OnScanCompletedListener{
+
+public class MainActivity extends ExotikosBaseActivity implements FragmentTravelScan.OnScanCompletedListener {
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private TripStatus trip;
@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
         trip = Parcels.unwrap(getIntent().getParcelableExtra(Constants.PARAM_TRIP));
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        prepareDrawableMenu();
 
         appId = ((ExotikosApplication)getApplication()).getFligthStatsAppID();
         appKey = ((ExotikosApplication)getApplication()).getFligthStatsAppKey();

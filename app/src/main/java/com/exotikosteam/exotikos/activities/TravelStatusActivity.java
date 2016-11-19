@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
@@ -28,7 +27,7 @@ import java.util.List;
 
 import rx.Observable;
 
-public class TravelStatusActivity extends AppCompatActivity implements FragmentTravelScan.OnScanCompletedListener,
+public class TravelStatusActivity extends ExotikosBaseActivity implements FragmentTravelScan.OnScanCompletedListener,
         TravelPrepFragment.OnButtonsClicks {
 
     public static final String TAG = TravelStatusActivity.class.getSimpleName();
@@ -44,6 +43,9 @@ public class TravelStatusActivity extends AppCompatActivity implements FragmentT
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_status);
+
+        prepareDrawableMenu();
+
         cardViewFragmentList = new ArrayList<>(5);
         trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
 
