@@ -41,5 +41,9 @@
     <string name="call_action">Call</string>
     <string name="translate_action">Translator</string>
     <string name="map_action">Map</string>
+    <string name="boardingGate">Boarding Information</string>
+    <string name="landing">Flight Landing Time</string>
+    <string name="carouselLbl">Carousel Number</string>
+    <string name="baggageCarousel">Baggage Carousel</string>
 </resources>
 

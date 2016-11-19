@@ -10,4 +10,7 @@ public class Constants {
     public static final Integer REQUEST_CODE_SCAN = 1;
     public static final Integer REQUEST_CODE_CONTACT = 2;
     public static final String PARAM_TRIP = "paramTrip";
+    public static final String TERMINAL = "Terminal ";
+    public static final String GATE = "Gate  ";
+
 }

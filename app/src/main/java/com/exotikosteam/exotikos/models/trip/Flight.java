@@ -3,7 +3,10 @@ package com.exotikosteam.exotikos.models.trip;
 import android.text.TextUtils;
 
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
+import com.exotikosteam.exotikos.models.airline.Airline;
+import com.exotikosteam.exotikos.models.airport.Airport;
 import com.exotikosteam.exotikos.models.flightstatus.AirportResources;
+import com.exotikosteam.exotikos.models.flightstatus.Appendix;
 import com.exotikosteam.exotikos.models.flightstatus.FlightStatus;
 import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.exotikosteam.exotikos.utils.Utils;
@@ -29,9 +32,6 @@ public class Flight extends BaseModel {
     @PrimaryKey(autoincrement = true)
     Integer id;
 
-    @Column
-    Integer order;
-
     @Column(name = "trip_id", excludeFromToModelMethod = false)
     Integer tripId;
 
@@ -49,6 +49,9 @@ public class Flight extends BaseModel {
 
     @Column(name = "seat_number")
     String seatNumber;
+
+    @Column(name = "baggage")
+    String baggage;
 
     @Column(name = "departure_gate")
     String departureGate;
@@ -68,6 +71,9 @@ public class Flight extends BaseModel {
     @Column(name = "departure_city")
     String departureCity;
 
+    @Column(name = "arrival_gate")
+    String arrivalGate;
+
     @Column(name = "arrival_time")
     String arrivalTime;
 
@@ -83,36 +89,30 @@ public class Flight extends BaseModel {
     @Column(name = "arrival_city")
     String arrivalCity;
 
-
     //Empty constructor for Parceler
     public Flight() {
     }
 
-    public Flight(ScheduledFlight sch) {
+    public Flight(ScheduledFlight sch, Appendix appendix) {
         super();
         this.setArrivalAirportIATA(sch.getArrivalAirportFsCode());
-        //TODO set city
-        this.setArrivalCity("TODO");
         this.setArrivalTerminal(sch.getArrivalTerminal());
         this.setArrivalTime(sch.getArrivalTime());
         this.setDepartureAirportIATA(sch.getDepartureAirportFsCode());
-        //TODO set city
-        this.setDepartureCity("TODO");
         this.setDepartureTerminal(sch.getDepartureTerminal());
         this.setDepartureTime(sch.getDepartureTime());
         this.setFlightCarrier(sch.getCarrierFsCode());
         this.setFlightNumber(sch.getFlightNumber());
+        if (appendix != null) {
+            setAppendinxData(appendix);
+        }
     }
 
-    public Flight(FlightStatus flightStatus, String seatNo) {
+    public Flight(FlightStatus flightStatus, String seatNo, Appendix appendix) {
         super();
         this.setArrivalAirportIATA(flightStatus.getArrivalAirportFsCode());
-        //TODO set city
-        this.setArrivalCity("TODO");
         this.setArrivalTime(flightStatus.getArrivalDate().getDateLocal());
         this.setDepartureAirportIATA(flightStatus.getDepartureAirportFsCode());
-        //TODO set city
-        this.setDepartureCity("TODO");
         this.setDepartureTime(flightStatus.getDepartureDate().getDateLocal());
 
         this.setArrivalTimeUTC(Utils.parseFlightstatsDate(flightStatus.getArrivalDate().getDateUtc()));
@@ -131,6 +131,31 @@ public class Flight extends BaseModel {
 
         if (!TextUtils.isEmpty(seatNo)) {
             this.setSeatNumber(seatNo);
+        }
+        if (appendix != null) {
+            setAppendinxData(appendix);
+        }
+    }
+
+    private void setAppendinxData(Appendix appendix) {
+        List<Airport> airports = appendix.getAirports();
+        List<Airline> airlines = appendix.getAirlines();
+        // Find airport name
+        for (Airport a: airports) {
+            if (a.getFs().equals(this.getArrivalAirportIATA())) {
+                this.setArrivalCity(a.getCity());
+            }
+            if (a.getFs().equals(this.getDepartureAirportIATA())) {
+                this.setDepartureCity(a.getCity());
+            }
+        }
+
+        // Find carrier name
+        for (Airline al: airlines) {
+            if (al.getFs().equals(this.getFlightCarrier())) {
+                this.setFlightCarrierName(al.getName());
+                break;
+            }
         }
     }
 
@@ -157,14 +182,6 @@ public class Flight extends BaseModel {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
     }
 
     public String getFlightNumber() {
@@ -307,6 +324,22 @@ public class Flight extends BaseModel {
         this.arrivalTimeUTC = arrivalTimeUTC;
     }
 
+    public String getBaggage() {
+        return baggage;
+    }
+
+    public void setBaggage(String baggage) {
+        this.baggage = baggage;
+    }
+
+    public String getArrivalGate() {
+        return arrivalGate;
+    }
+
+    public void setArrivalGate(String arrivalGate) {
+        this.arrivalGate = arrivalGate;
+    }
+
     //=================== DB operations ========================
 
     public static Flight get(Integer id) {
@@ -328,9 +361,12 @@ public class Flight extends BaseModel {
         to.setDepartureAirportIATA((!TextUtils.isEmpty(from.getDepartureAirportIATA()) ? from.getDepartureAirportIATA() : to.getDepartureAirportIATA()));
         to.setArrivalCity((!TextUtils.isEmpty(from.getArrivalCity()) ? from.getArrivalCity() : to.getArrivalCity()));
         to.setDepartureCity((!TextUtils.isEmpty(from.getDepartureCity()) ? from.getDepartureCity() : to.getDepartureCity()));
+        to.setArrivalGate((!TextUtils.isEmpty(from.getArrivalGate()) ? from.getArrivalGate() : to.getArrivalGate()));
         to.setDepartureGate((!TextUtils.isEmpty(from.getDepartureGate()) ? from.getDepartureGate() : to.getDepartureGate()));
         to.setFlightCarrier((!TextUtils.isEmpty(from.getFlightCarrier()) ? from.getFlightCarrier() : to.getFlightCarrier()));
+        to.setFlightCarrierName((!TextUtils.isEmpty(from.getFlightCarrierName()) ? from.getFlightCarrierName() : to.getFlightCarrierName()));
         to.setFlightId((from.getFlightId() != null ? from.getFlightId() : to.getFlightId()));
         to.setSeatNumber((!TextUtils.isEmpty(from.getSeatNumber()) ? from.getSeatNumber() : to.getSeatNumber()));
+        to.setBaggage((!TextUtils.isEmpty(from.getBaggage()) ? from.getBaggage() : to.getBaggage()));
     }
 }

@@ -1,7 +1,6 @@
 package com.exotikosteam.exotikos.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.activities.HelpActivity;
 import com.exotikosteam.exotikos.databinding.FragmentTravelPrepBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
@@ -39,10 +37,9 @@ public class TravelPrepFragment extends Fragment {
     TextView tvDepartureCity;
     TripStatus trip;
     TextView tvDestination;
-    String departureAirportIATA;
-    
+
     public interface OnButtonsClicks {
-        void handleButtonsClicks(String buttonName, String departureAirportIATA);
+        void handleButtonsClicks(String buttonName);
     }
 
 
@@ -63,7 +60,6 @@ public class TravelPrepFragment extends Fragment {
         tvDepartureCity.setText(flight.getDepartureCity()); // @TODO empty : ada/yeyus
         tvDepDate.setText(flight.getDepartureTime()); // @TODO need to parse this: Lakshmy
         tvDestination.setText(flight.getArrivalCity()); // @TODO empty : ada/yeyus
-        departureAirportIATA = flight.getDepartureAirportIATA();
     }
 
     private void setupBindings() {
@@ -86,38 +82,14 @@ public class TravelPrepFragment extends Fragment {
 
 
     private void setOnClickListener() {
-        prepFragmentBinding.btnScan.setOnClickListener(v -> {
-            handleLaunchScanPage();
-        });
-
         btnAirportPage.setOnClickListener(v -> {
-            handleLaunchAirportMapPage(departureAirportIATA);
+            handleLaunchAirportMapPage();
         });
 
-        prepFragmentBinding.btnHelp.setOnClickListener( v -> {
-            handleHelpAction();
-        });
-
-        prepFragmentBinding.btnSecurity.setOnClickListener(v -> {
-            launchSecurityCheckin();
-        });
     }
 
-
-    private void launchSecurityCheckin() {
-        listener.handleButtonsClicks("LaunchSecurityCheckin", null);
-    }
-
-    private void handleLaunchAirportMapPage(String departureAirportIATA) {
-        listener.handleButtonsClicks("LaunchAirportPage", departureAirportIATA);
-    }
-
-    private void handleLaunchScanPage() {
-        listener.handleButtonsClicks("LaunchScan", null);
-    }
-
-    private void handleHelpAction() {
-        startActivity(new Intent(getContext(), HelpActivity.class));
+    private void handleLaunchAirportMapPage() {
+        listener.handleButtonsClicks("LaunchAirportPage");
     }
 
     public static TravelPrepFragment newInstance(TripStatus trips) {

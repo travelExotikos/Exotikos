@@ -1,29 +1,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <RelativeLayout
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:text="@string/boarding"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
-            android:background="@color/colorAccent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/tvBoarding" />
-
-        <TextView
-            android:text="Boarding Gate"
-            android:layout_width="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvBoarding"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="65dp"
-            android:id="@+id/tvBoardingGateLbl" />
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/twitter_light_grey">
 
         <TextView
             tools:text="A54"
@@ -31,9 +12,9 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Display2"
             android:layout_height="wrap_content"
             android:textSize="@dimen/dmGateSize"
-            android:layout_below="@+id/tvBoardingGateLbl"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="@dimen/fragment_horizontal_margin"
             android:id="@+id/tvBoardingGate" />
 
         <TextView
@@ -53,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-            android:id="@+id/textView8"
+            android:id="@+id/tvTimetoBoard"
             android:layout_below="@+id/tvTerminal"
             android:layout_centerHorizontal="true" />
 

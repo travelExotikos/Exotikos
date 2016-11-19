@@ -1,9 +1,7 @@
 package com.exotikosteam.exotikos.models.trip;
 
 import com.exotikosteam.exotikos.models.ExotikosDatabase;
-import com.exotikosteam.exotikos.models.airline.Airline;
-import com.exotikosteam.exotikos.models.airport.Airport;
-import com.exotikosteam.exotikos.models.flightstatus.FlightScheduleResponse;
+import com.exotikosteam.exotikos.models.flightstatus.Appendix;
 import com.exotikosteam.exotikos.models.flightstatus.FlightStatus;
 import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.raizlabs.android.dbflow.annotation.Column;
@@ -82,7 +80,7 @@ public class TripStatus extends BaseModel {
             flights = SQLite.select()
                     .from(Flight.class)
                     .where(Flight_Table.trip_id.eq(id))
-                    .orderBy(Flight_Table.order, true)
+                    .orderBy(Flight_Table.departure_time_UTC, true)
                     .queryList();
         }
         return flights;
@@ -119,61 +117,52 @@ public class TripStatus extends BaseModel {
         tripStatus.save();
     }
 
-    public static TripStatus saveOrUpdateTrip(TripStatus trip, ScheduledFlight flight) {
+    public static TripStatus saveOrUpdateTrip(TripStatus trip, ScheduledFlight flight, Appendix appendix) {
         if (trip == null || trip.getId() == null) {
-            return createTrip(Arrays.asList(flight));
+            return createTrip(Arrays.asList(flight), appendix);
         }
-        return updateTrip(trip, new Flight(flight));
+        return updateTrip(trip, new Flight(flight, appendix));
     }
 
 
-    public static TripStatus saveOrUpdateTrip(TripStatus trip, FlightStatus flight, String seatNo) {
+    public static TripStatus saveOrUpdateTrip(TripStatus trip, FlightStatus flight, String seatNo, Appendix appendix) {
+        Flight f = new Flight(flight, seatNo, appendix);
         if (trip == null || trip.getId() == null) {
-            return createNewTrip(Arrays.asList(new Flight(flight, seatNo)));
+            return createNewTrip(Arrays.asList(f));
         }
-        return updateTrip(trip, new Flight(flight, seatNo));
+        return updateTrip(trip, f);
     }
 
-    public static TripStatus createTrip(List<ScheduledFlight> scheduleFlights) {
-        //only for API 24 List<Flight> flights = scheduleFlights.stream().map(f -> new Flight(f)).collect(Collectors.toList());
+    public static TripStatus createTrip(List<ScheduledFlight> scheduleFlights, Appendix appendix) {
         List<Flight> flights = new ArrayList<>();
         for (ScheduledFlight s: scheduleFlights) {
-            flights.add(new Flight(s));
+            flights.add(new Flight(s, appendix));
         }
         return createNewTrip(flights);
     }
 
-    public static TripStatus createTrip(List<ScheduledFlight> scheduleFlights, FlightScheduleResponse response) {
-        //only for API 24 List<Flight> flights = scheduleFlights.stream().map(f -> new Flight(f)).collect(Collectors.toList());
-        List<Airport> airports = response.getAppendix().getAirports();
-        List<Airline> airlines = response.getAppendix().getAirlines();
+    public static void deleteTrip(TripStatus trip) {
+        trip.delete();
+    }
 
-        List<Flight> flights = new ArrayList<>();
-        for (ScheduledFlight s: scheduleFlights) {
-            Flight f = new Flight(s);
-            // Find arrival airport payload
-            for (Airport a: airports) {
-                if (a.getFs().equals(s.getArrivalAirportFsCode())) {
-                    f.setArrivalCity(a.getCity());
-                }
-            }
-            // Find departure airport payload
-            for (Airport a: airports) {
-                if (a.getFs().equals(s.getDepartureAirportFsCode())) {
-                    f.setDepartureCity(a.getCity());
-                }
-            }
-
-            // Find carrier name
-            for (Airline al: airlines) {
-                if (al.getFs().equals(s.getCarrierFsCode())) {
-                    f.setFlightCarrierName(al.getName());
-                }
-            }
-
-            flights.add(f);
+    public static TripStatus deleteFlight(Integer flightId) {
+        Flight flight = Flight.get(flightId);
+        if (flight == null) {
+            return null;
         }
-        return createNewTrip(flights);
+        Integer tripId = flight.getTripId();
+        TripStatus trip = TripStatus.get(tripId);
+        Integer currentFlight = trip.getCurrentFlight();
+        Integer flightsCount = trip.getFlights().size();
+        if (flightsCount < 2) {
+            trip.delete();
+            return null;
+        } else if (currentFlight == flightsCount - 1) {
+            trip.setCurrentFlight(--currentFlight);
+            trip.save();
+        }
+        flight.delete();
+        return TripStatus.get(tripId);
     }
 
 
@@ -189,7 +178,6 @@ public class TripStatus extends BaseModel {
             }
         }
         if (isNewFlight) {
-            flight.setOrder(trip.getFlights().size());
             flight.setTripId(trip.getId());
             flight.save();
             trip.getFlights().add(flight);
@@ -206,7 +194,6 @@ public class TripStatus extends BaseModel {
         int i = 0;
         for (Flight f: flights) {
             f.setTripId(trip.getId());
-            f.setOrder(++i);
             f.save();
         }
         return TripStatus.get(trip.getId());

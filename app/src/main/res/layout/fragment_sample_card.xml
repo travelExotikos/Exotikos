@@ -49,7 +49,8 @@
         app:ael_orientation="vertical">
 
         <!-- The content of the expanded card should be here -->
-        <TextView
+        <FrameLayout
+            android:id="@+id/cards"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lorem_ipsum_long"/>

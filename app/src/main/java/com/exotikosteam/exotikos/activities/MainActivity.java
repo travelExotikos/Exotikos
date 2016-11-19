@@ -1,7 +1,6 @@
 package com.exotikosteam.exotikos.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -13,7 +12,6 @@ import com.exotikosteam.exotikos.fragments.FragmentTravelSummary;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
 import com.exotikosteam.exotikos.fragments.SecurityCheckingHelpFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
-import com.exotikosteam.exotikos.fragments.TravelPrepFragment.OnButtonsClicks;
 import com.exotikosteam.exotikos.models.airport.Airport;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.FlightStep;
@@ -30,8 +28,12 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
+<<<<<<< HEAD
 public class MainActivity extends ExotikosBaseActivity implements FragmentTravelScan.OnScanCompletedListener,
                                                                 OnButtonsClicks {
+=======
+public class MainActivity extends AppCompatActivity implements FragmentTravelScan.OnScanCompletedListener{
+>>>>>>> 3a3e54ab3816e59377c4538414737946c3d53a22
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private TripStatus trip;
@@ -146,19 +148,15 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
         }
 
         setupStarterFragment();
-
     }
 
-
-
     private void setupStarterFragment() {
-        //Depending on whether the user has scanned the boarding pass or not,
-        // we show the travel summary or the scanner fragment here
+
         //TODO the step statuses are for card view
         if (fStep == FlightStep.PREPARATION) {
-            showTravelPreparationFragment();
-        } if (fStep == FlightStep.CHECKIN_IN_DONE) {//replace with some logic to see if the use has created a trip before
-            showTravelStatusFragment();
+            showCardActivity();
+        } if (fStep == FlightStep.CHECKIN_IN_DONE) {
+            showSecurityCheckinFragment();
         } if (fStep == FlightStep.CHECK_IN) {
             showTravelScanFragment();
         }
@@ -195,32 +193,19 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
         showTravelStatusFragment();
     }
 
-    @Override
-    public void handleButtonsClicks(String buttonName, String departureAirportIATA) {
+    private void showCardActivity() {
+        Intent i = new Intent(MainActivity.this, TravelStatusActivity.class);
+        i.putExtra("trip", Parcels.wrap(this.trip));
+        startActivity(i);
+    }
 
-        if(buttonName.equals("LaunchAirportPage")) {
-            getAirport(departureAirportIATA);
-            showAiportLocationPage();
-        }
-        if(buttonName.equals("LaunchScan")) {
-            showTravelScanFragment();
-        }
-        if(buttonName.equals("LaunchSecurityCheckin")) {
-            showSecurityCheckinFragment();
-        }
-        if(buttonName.equals("LaunchSecurityCheckinHelpPage")) {
-            showSecurityCheckinHelpFragment();
-        }
-        if(buttonName.equals("LaunchSecurityCheckinVideoHelpPage")) {
-            showSecurityCheckinHelpVideoActivity();
-        }
+    private void showDestinationPageFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, SecurityCheckingHelpFragment.newInstance(this.trip));
+        ft.commit();
     }
 
     private void getAirport(String departureAirportIATA) {
-        //Once departure city code is completed, remove this temp code
-        if(departureAirportIATA.isEmpty() || departureAirportIATA == null) {
-            departureAirportIATA = "SFO";
-        }
         airportsService.getByIATACode(departureAirportIATA, appId, appKey)
                 .flatMapIterable(airportsResponse -> airportsResponse.getAirports())
                 .subscribe(
@@ -232,38 +217,6 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
 
     private void setDepartureAirport(Airport airport) {
         departureAirport = airport;
-    }
-
-    private void showSecurityCheckinHelpVideoActivity() {
-        Intent i = new Intent(MainActivity.this, SecurityVideoActivity.class);
-        startActivity(i);
-    }
-
-    private void showSecurityCheckinHelpFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, SecurityCheckingHelpFragment.newInstance(this.trip));
-        ft.commit();
-    }
-
-
-    private void showAiportLocationPage() {
-
-        double latitude = departureAirport.getLatitude();
-        double longitude = departureAirport.getLongitude();
-
-        String label = departureAirport.getName();
-        String uriBegin = "geo:" + latitude + "," + longitude + "(" + label + ")";
-        String query1 = departureAirport.getStreet1() + " " + departureAirport.getStreet2() +
-                        " " + departureAirport.getCity() + " " + departureAirport.getStateCode() + " "
-                        + departureAirport.getPostalCode() + " " + departureAirport.getCountryName();
-        String encodedQuery = Uri.encode(query1);
-        String uriString = uriBegin + "?q=" + encodedQuery + "&z=21";
-        Uri uri = Uri.parse(uriString);
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
-        intent.setPackage("com.google.android.apps.maps");
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
     }
 
     @Override
