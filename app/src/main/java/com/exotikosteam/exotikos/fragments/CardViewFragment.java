@@ -69,11 +69,10 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
 
         tvCardName.setText(cardName);
         tvTime.setText(relativeTime);
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.add(R.id.cards, f, cardName);
         ft.commit();
-
-        //rlCardContents.setVisibility(getArguments().getBoolean("collapsed") ? View.GONE : View.VISIBLE);
 
         setupListeners();
     }

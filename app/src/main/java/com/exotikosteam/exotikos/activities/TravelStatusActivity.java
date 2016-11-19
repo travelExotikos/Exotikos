@@ -1,5 +1,6 @@
 package com.exotikosteam.exotikos.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +9,9 @@ import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.BoardingGateFragment;
 import com.exotikosteam.exotikos.fragments.CardViewFragment;
 import com.exotikosteam.exotikos.fragments.DestinationFragment;
+import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
+import com.exotikosteam.exotikos.fragments.SecurityCheckingHelpFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 
@@ -19,16 +22,17 @@ import java.util.List;
 
 import rx.Observable;
 
-public class TravelStatusActivity extends AppCompatActivity {
+public class TravelStatusActivity extends AppCompatActivity implements FragmentTravelScan.OnScanCompletedListener,
+        TravelPrepFragment.OnButtonsClicks {
 
     private List<CardViewFragment> cardViewFragmentList;
-
+    TripStatus trip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_status);
         cardViewFragmentList = new ArrayList<>(5);
-        TripStatus trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
+        trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
 
         cardViewFragmentList.add(0, CardViewFragment.newInstance("Travel Preparation", "Test", true));
         TravelPrepFragment prepFragment = TravelPrepFragment.newInstance(trip);
@@ -53,17 +57,12 @@ public class TravelStatusActivity extends AppCompatActivity {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         //ft.add(R.id.llContainer, fragment1, "fragment_one");
-        ft.add(R.id.flCard1, cardViewFragmentList.get(0), "fragment_one");
-
-        ft.add(R.id.flCard1, cardViewFragmentList.get(1), "fragment_two");
-
-        ft.add(R.id.flCard1, cardViewFragmentList.get(2), "fragment_three");
-
-        ft.add(R.id.flCard1, cardViewFragmentList.get(3), "fragment_four");
+        ft.replace(R.id.flCard1, cardViewFragmentList.get(0));
+        ft.replace(R.id.flCard2, cardViewFragmentList.get(1));
+        ft.replace(R.id.flCard3, cardViewFragmentList.get(2));
+        ft.replace(R.id.flCard4, cardViewFragmentList.get(3));
+        ft.replace(R.id.flCard5, cardViewFragmentList.get(4));
         ft.commit();
-//
-//        ft.replace(R.id.flCard5, cardViewFragmentList.get(4));
-//        ft.commit();
 
         setupListeners();
     }
@@ -76,5 +75,92 @@ public class TravelStatusActivity extends AppCompatActivity {
                 cardViewFragmentList.get(3).getTitleClickSubject(),
                 cardViewFragmentList.get(4).getTitleClickSubject()
         ).subscribe(fragment -> ((CardViewFragment)fragment).toggle());
+
+    }
+
+    @Override
+    public void getTripInstance(TripStatus trip) {
+        this.trip = trip;
+        //showTravelStatusFragment();
+    }
+
+    @Override
+    public void handleButtonsClicks(String buttonName, String departureAirportIATA) {
+        if(buttonName.equals("LaunchAirportPage")) {
+            //getAirport(departureAirportIATA);
+            showAiportLocationPage();
+        }
+        if(buttonName.equals("LaunchScan")) {
+            showTravelScanFragment();
+        }
+        if(buttonName.equals("LaunchSecurityCheckin")) {
+            showSecurityCheckinFragment();
+        }
+        if(buttonName.equals("LaunchSecurityCheckinHelpPage")) {
+            showSecurityCheckinHelpFragment();
+        }
+        if(buttonName.equals("LaunchSecurityCheckinVideoHelpPage")) {
+            showSecurityCheckinHelpVideoActivity();
+        }
+        if(buttonName.equals("LaunchBoardingPage")) {
+            showBoardingPageFragment();
+        }
+        if(buttonName.equals("launchDestinationPage")) {
+            showDestinationPageFragment();
+        }
+    }
+
+    private void showDestinationPageFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, SecurityCheckingHelpFragment.newInstance(this.trip));
+        ft.commit();
+    }
+
+    private void showSecurityCheckinHelpVideoActivity() {
+        Intent i = new Intent(TravelStatusActivity.this, SecurityVideoActivity.class);
+        startActivity(i);
+    }
+
+    private void showSecurityCheckinHelpFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, SecurityCheckingHelpFragment.newInstance(this.trip));
+        ft.commit();
+    };
+
+    private void showBoardingPageFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, BoardingGateFragment.newInstance(this.trip));
+        ft.commit();
+    }
+
+    private void showAiportLocationPage() {
+//        double latitude = departureAirport.getLatitude();
+//        double longitude = departureAirport.getLongitude();
+//
+//        String label = departureAirport.getName();
+//        String uriBegin = "geo:" + latitude + "," + longitude + "(" + label + ")";
+//        String query1 = departureAirport.getStreet1() + " " + departureAirport.getStreet2() +
+//                " " + departureAirport.getCity() + " " + departureAirport.getStateCode() + " "
+//                + departureAirport.getPostalCode() + " " + departureAirport.getCountryName();
+//        String encodedQuery = Uri.encode(query1);
+//        String uriString = uriBegin + "?q=" + encodedQuery + "&z=21";
+//        Uri uri = Uri.parse(uriString);
+//        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+//        intent.setPackage("com.google.android.apps.maps");
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivity(intent);
+//        }
+    }
+
+    private void showTravelScanFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, FragmentTravelScan.newInstance(this.trip));
+        ft.commit();
+    }
+
+    private void showSecurityCheckinFragment() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frgPlaceholder, SecurityCheckinFragment.newInstance(this.trip));
+        ft.commit();
     }
 }

@@ -87,6 +87,7 @@ public class TravelPrepFragment extends Fragment {
         btnAirportPage.setOnClickListener(v -> {
             handleLaunchAirportMapPage(departureAirportIATA);
         });
+
     }
 
     private void handleLaunchAirportMapPage(String departureAirportIATA) {

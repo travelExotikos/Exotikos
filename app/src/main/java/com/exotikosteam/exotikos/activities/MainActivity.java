@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
         if (fStep == FlightStep.PREPARATION) {
             showCardActivity();
         } if (fStep == FlightStep.CHECKIN_IN_DONE) {
-            showTravelStatusFragment();
+            showSecurityCheckinFragment();
         } if (fStep == FlightStep.CHECK_IN) {
             showTravelScanFragment();
         }
