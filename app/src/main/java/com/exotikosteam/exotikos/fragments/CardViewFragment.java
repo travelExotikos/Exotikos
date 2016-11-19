@@ -3,9 +3,11 @@ package com.exotikosteam.exotikos.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.exotikosteam.exotikos.R;
@@ -15,32 +17,39 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.subjects.PublishSubject;
 
-public class SampleCardFragment extends Fragment implements ExpandableCard {
+public class CardViewFragment <T extends Fragment> extends Fragment implements ExpandableCard {
 
     private View rootView;
 
     private String cardName;
     private String relativeTime;
+    private T  f;
 
     // Bindings
     @BindView(R.id.tvCardName) TextView tvCardName;
     @BindView(R.id.tvTime) TextView tvTime;
     @BindView(R.id.rlCardContents)
     ExpandableRelativeLayout rlCardContents;
-
+    @BindView(R.id.cards)
+    FrameLayout card;
     // Event topics
-    private final PublishSubject<SampleCardFragment> titleClickSubject = PublishSubject.create();
+    private final PublishSubject<CardViewFragment> titleClickSubject = PublishSubject.create();
 
-    public static SampleCardFragment newInstance(String name, String time, boolean isCollapsed) {
+    public static CardViewFragment newInstance(String name, String time,
+                                               boolean isCollapsed) {
 
         Bundle args = new Bundle();
         args.putString("name", name);
         args.putString("time", time);
         args.putBoolean("collapsed", isCollapsed);
 
-        SampleCardFragment fragment = new SampleCardFragment();
+        CardViewFragment fragment = new CardViewFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public void setFragment(T fragment) {
+        f = fragment;
     }
 
     @Nullable
@@ -60,16 +69,19 @@ public class SampleCardFragment extends Fragment implements ExpandableCard {
 
         tvCardName.setText(cardName);
         tvTime.setText(relativeTime);
-//        rlCardContents.setVisibility(getArguments().getBoolean("collapsed") ? View.GONE : View.VISIBLE);
+
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        ft.add(R.id.cards, f, cardName);
+        ft.commit();
 
         setupListeners();
     }
 
     private void setupListeners() {
-        tvCardName.setOnClickListener(v -> titleClickSubject.onNext(this));
+        tvCardName.setOnClickListener(v -> titleClickSubject.onNext(CardViewFragment.this));
     }
 
-    public PublishSubject<SampleCardFragment> getTitleClickSubject() {
+    public PublishSubject<CardViewFragment> getTitleClickSubject() {
         return titleClickSubject;
     }
 
@@ -93,5 +105,7 @@ public class SampleCardFragment extends Fragment implements ExpandableCard {
             rlCardContents.toggle();
         }
     }
+
+
 
 }

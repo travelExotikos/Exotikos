@@ -97,4 +97,6 @@ dependencies {
         transitive = true
     }
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 }
