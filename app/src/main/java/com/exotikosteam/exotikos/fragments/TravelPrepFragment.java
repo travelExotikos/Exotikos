@@ -37,10 +37,9 @@ public class TravelPrepFragment extends Fragment {
     TextView tvDepartureCity;
     TripStatus trip;
     TextView tvDestination;
-    String departureAirportIATA;
-    
+
     public interface OnButtonsClicks {
-        void handleButtonsClicks(String buttonName, String departureAirportIATA);
+        void handleButtonsClicks(String buttonName);
     }
 
 
@@ -61,7 +60,6 @@ public class TravelPrepFragment extends Fragment {
         tvDepartureCity.setText(flight.getDepartureCity()); // @TODO empty : ada/yeyus
         tvDepDate.setText(flight.getDepartureTime()); // @TODO need to parse this: Lakshmy
         tvDestination.setText(flight.getArrivalCity()); // @TODO empty : ada/yeyus
-        departureAirportIATA = flight.getDepartureAirportIATA();
     }
 
     private void setupBindings() {
@@ -85,13 +83,13 @@ public class TravelPrepFragment extends Fragment {
 
     private void setOnClickListener() {
         btnAirportPage.setOnClickListener(v -> {
-            handleLaunchAirportMapPage(departureAirportIATA);
+            handleLaunchAirportMapPage();
         });
 
     }
 
-    private void handleLaunchAirportMapPage(String departureAirportIATA) {
-        listener.handleButtonsClicks("LaunchAirportPage", departureAirportIATA);
+    private void handleLaunchAirportMapPage() {
+        listener.handleButtonsClicks("LaunchAirportPage");
     }
 
     public static TravelPrepFragment newInstance(TripStatus trips) {

@@ -59,10 +59,10 @@ public class SecurityCheckinFragment extends Fragment {
     }
 
     private void handleLaunchSecurityVidoeHelpPage() {
-        listener.handleButtonsClicks("LaunchSecurityCheckinVideoHelpPage", null);
+        listener.handleButtonsClicks("LaunchSecurityCheckinVideoHelpPage");
     }
 
     private void handleLaunchSecurityHelpPage() {
-        listener.handleButtonsClicks("LaunchSecurityCheckinHelpPage", null);
+        listener.handleButtonsClicks("LaunchSecurityCheckinHelpPage");
     }
 }

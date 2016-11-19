@@ -1,7 +1,6 @@
 package com.exotikosteam.exotikos.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -9,13 +8,11 @@ import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.fragments.BoardingGateFragment;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.FragmentTravelSummary;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
 import com.exotikosteam.exotikos.fragments.SecurityCheckingHelpFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
-import com.exotikosteam.exotikos.fragments.TravelPrepFragment.OnButtonsClicks;
 import com.exotikosteam.exotikos.models.airport.Airport;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.FlightStep;
@@ -32,8 +29,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements FragmentTravelScan.OnScanCompletedListener,
-                                                                OnButtonsClicks {
+public class MainActivity extends AppCompatActivity implements FragmentTravelScan.OnScanCompletedListener{
 
     public static final String TAG = MainActivity.class.getSimpleName();
     private TripStatus trip;
@@ -146,10 +142,7 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
         }
 
         setupStarterFragment();
-
     }
-
-
 
     private void setupStarterFragment() {
 
@@ -194,37 +187,6 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
         showTravelStatusFragment();
     }
 
-    @Override
-    public void handleButtonsClicks(String buttonName, String departureAirportIATA) {
-
-        if(buttonName.equals("LaunchAirportPage")) {
-            getAirport(departureAirportIATA);
-            showAiportLocationPage();
-        }
-        if(buttonName.equals("LaunchScan")) {
-            showTravelScanFragment();
-        }
-        if(buttonName.equals("LaunchSecurityCheckin")) {
-            showSecurityCheckinFragment();
-        }
-        if(buttonName.equals("LaunchSecurityCheckinHelpPage")) {
-            showSecurityCheckinHelpFragment();
-        }
-        if(buttonName.equals("LaunchSecurityCheckinVideoHelpPage")) {
-            showSecurityCheckinHelpVideoActivity();
-        }
-        if(buttonName.equals("LaunchBoardingPage")) {
-            showBoardingPageFragment();
-        }
-        if(buttonName.equals("launchDestinationPage")) {
-            showDestinationPageFragment();
-        }
-        if(buttonName.equals("LaunchCardLayout")) {
-            showCardActivity();
-        }
-
-    }
-
     private void showCardActivity() {
         Intent i = new Intent(MainActivity.this, TravelStatusActivity.class);
         i.putExtra("trip", Parcels.wrap(this.trip));
@@ -249,42 +211,6 @@ public class MainActivity extends AppCompatActivity implements FragmentTravelSca
 
     private void setDepartureAirport(Airport airport) {
         departureAirport = airport;
-    }
-
-    private void showSecurityCheckinHelpVideoActivity() {
-        Intent i = new Intent(MainActivity.this, SecurityVideoActivity.class);
-        startActivity(i);
-    }
-
-    private void showSecurityCheckinHelpFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, SecurityCheckingHelpFragment.newInstance(this.trip));
-        ft.commit();
-    };
-
-    private void showBoardingPageFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, BoardingGateFragment.newInstance(this.trip));
-        ft.commit();
-    }
-
-    private void showAiportLocationPage() {
-        double latitude = departureAirport.getLatitude();
-        double longitude = departureAirport.getLongitude();
-
-        String label = departureAirport.getName();
-        String uriBegin = "geo:" + latitude + "," + longitude + "(" + label + ")";
-        String query1 = departureAirport.getStreet1() + " " + departureAirport.getStreet2() +
-                        " " + departureAirport.getCity() + " " + departureAirport.getStateCode() + " "
-                        + departureAirport.getPostalCode() + " " + departureAirport.getCountryName();
-        String encodedQuery = Uri.encode(query1);
-        String uriString = uriBegin + "?q=" + encodedQuery + "&z=21";
-        Uri uri = Uri.parse(uriString);
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
-        intent.setPackage("com.google.android.apps.maps");
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
     }
 
     @Override
