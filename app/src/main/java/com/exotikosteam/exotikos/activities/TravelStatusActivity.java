@@ -68,7 +68,6 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         createDestinationCard(flight);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        //ft.add(R.id.llContainer, fragment1, "fragment_one");
         ft.replace(R.id.flCard1, cardViewFragmentList.get(0));
         ft.replace(R.id.flCard2, cardViewFragmentList.get(1));
         ft.replace(R.id.flCard3, cardViewFragmentList.get(2));
