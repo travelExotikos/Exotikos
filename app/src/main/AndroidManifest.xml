@@ -52,6 +52,9 @@
         <activity
             android:name=".activities.SecurityVideoActivity"
             android:label="@string/security_video" />
+        <activity
+            android:name=".activities.SecurityProcessActivity"
+            android:label="@string/launchSecurityCheck" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
