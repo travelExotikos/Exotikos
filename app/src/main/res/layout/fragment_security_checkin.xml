@@ -104,24 +104,17 @@
             android:id="@+id/checkBox4" />
 
         <Button
-
             android:background="@drawable/arrow_right_bold_circle"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="right"
-            android:id="@+id/button2" />
+            android:id="@+id/btnNext" />
 
         <Button
             android:text="Watch Security Video Help"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnSecurityVideo" />
-
-        <Button
-            android:text="Security Help"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnSecurityHelp" />
 
     </LinearLayout>
 

@@ -8,10 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.models.trip.TripStatus;
-import com.exotikosteam.exotikos.utils.Constants;
-
-import org.parceler.Parcels;
 
 /**
  * Created by lramaswamy on 11/16/16.
@@ -27,10 +23,10 @@ public class SecurityCheckingHelpFragment extends Fragment {
         return view;
     }
 
-    public static SecurityCheckingHelpFragment newInstance(TripStatus trip) {
+    public static SecurityCheckingHelpFragment newInstance() {
         SecurityCheckingHelpFragment fragmentSecurityHelp = new SecurityCheckingHelpFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trip));
+        //bundle.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trip));
         fragmentSecurityHelp.setArguments(bundle);
         return fragmentSecurityHelp;
     }

@@ -10,9 +10,6 @@ import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.FragmentTravelSummary;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
-import com.exotikosteam.exotikos.fragments.SecurityCheckingHelpFragment;
-import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
-import com.exotikosteam.exotikos.models.airport.Airport;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.FlightStep;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
@@ -41,9 +38,6 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
     String appId;
     String appKey;
 
-    //Airport Information
-    Airport departureAirport;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,15 +50,6 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
 
         appId = ((ExotikosApplication)getApplication()).getFligthStatsAppID();
         appKey = ((ExotikosApplication)getApplication()).getFligthStatsAppKey();
-
-        // Get the list of all airlines
-//        airlinesService.getAll(appId, appKey)
-//                .flatMapIterable(airlinesResponse -> airlinesResponse.getAirlines())
-//                .subscribe(
-//                        airline -> Log.i(TAG, airline.getName()),
-//                        throwable -> Log.e(TAG, "Error getting airlines", throwable),
-//                        () -> Log.i(TAG, "Done with airlines")
-//                );
 
         airlinesService = ((ExotikosApplication) getApplication()).getAirlinesService();
         airportsService = ((ExotikosApplication) getApplication()).getAirportsService();
@@ -133,7 +118,6 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
                         () -> Log.i(TAG, "Done with schedule")
                 );
 
-        //@TODO Not sure what this is for? We are getting the trip selected from TripListActivity
         List<TripStatus> trips = TripStatus.getAll();
         for (TripStatus t: trips) {
             Log.i(TAG, String.format("tripId = %d,  #fligts = %d", t.getId(), t.getFlights().size()));
@@ -142,12 +126,11 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
         for (Flight f: flights) {
             Log.i(TAG, String.format("flightId = %d,  tripId = %d", f.getId(), f.getTripId()));
         }
-
-        setupStarterFragment();
+        //setupStarterFragment();
+        showCardActivity();
     }
 
     private void setupStarterFragment() {
-
         //TODO the step statuses are for card view
         if (fStep == FlightStep.PREPARATION) {
             showCardActivity();
@@ -156,12 +139,6 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
         } if (fStep == FlightStep.CHECK_IN) {
             showTravelScanFragment();
         }
-    }
-
-    private void showTravelPreparationFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, TravelPrepFragment.newInstance(trip));
-        ft.commit();
     }
 
     private void showTravelStatusFragment() {
@@ -179,7 +156,7 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
 
     private void showSecurityCheckinFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, SecurityCheckinFragment.newInstance(this.trip));
+        ft.replace(R.id.frgPlaceholder, SecurityCheckinFragment.newInstance(false));
         ft.commit();
     }
 
@@ -193,26 +170,6 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
         Intent i = new Intent(MainActivity.this, TravelStatusActivity.class);
         i.putExtra("trip", Parcels.wrap(this.trip));
         startActivity(i);
-    }
-
-    private void showDestinationPageFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, SecurityCheckingHelpFragment.newInstance(this.trip));
-        ft.commit();
-    }
-
-    private void getAirport(String departureAirportIATA) {
-        airportsService.getByIATACode(departureAirportIATA, appId, appKey)
-                .flatMapIterable(airportsResponse -> airportsResponse.getAirports())
-                .subscribe(
-                        airport -> setDepartureAirport(airport),
-                        throwable -> Log.e(TAG, "Error getting airline", throwable),
-                        () -> Log.i(TAG, "Done with airline by IATA")
-                );
-    }
-
-    private void setDepartureAirport(Airport airport) {
-        departureAirport = airport;
     }
 
     @Override

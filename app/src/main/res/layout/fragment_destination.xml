@@ -7,7 +7,7 @@
         android:background="@color/twitter_blue">
 
         <TextView
-            android:text="@string/landing"
+            android:text="@string/dateLanding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
@@ -23,7 +23,7 @@
             android:layout_alignBottom="@+id/tvLandingDateLbl"
             android:layout_alignLeft="@+id/tvArrivalTime"
             android:layout_alignStart="@+id/tvArrivalTime"
-            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            android:layout_marginTop="25dp"
             android:id="@+id/tvLandingDate" />
 
         <TextView
