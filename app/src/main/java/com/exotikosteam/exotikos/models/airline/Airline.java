@@ -1,44 +1,74 @@
 
 package com.exotikosteam.exotikos.models.airline;
 
+import com.exotikosteam.exotikos.models.ExotikosDatabase;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.ConflictAction;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.annotation.Unique;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import org.parceler.Parcel;
 
+import java.util.List;
+
 import javax.annotation.Generated;
 
-@Parcel
+@Parcel(analyze = Airline.class)
+@Table(database = ExotikosDatabase.class)
 @Generated("org.jsonschema2pojo")
-public class Airline {
+public class Airline extends BaseModel {
 
+    @Column
+    @PrimaryKey
+    @Unique(onUniqueConflict = ConflictAction.REPLACE)
     @SerializedName("fs")
     @Expose
-    private String fs;
+    protected String fs;
+
+    @Column
     @SerializedName("iata")
     @Expose
-    private String iata;
+    protected String iata;
+
+    @Column
     @SerializedName("icao")
     @Expose
-    private String icao;
+    protected String icao;
+
+    @Column
     @SerializedName("name")
     @Expose
-    private String name;
+    protected String name;
+
+    @Column
     @SerializedName("phoneNumber")
     @Expose
-    private String phoneNumber;
+    protected String phoneNumber;
+
+    @Column
     @SerializedName("active")
     @Expose
-    private Boolean active;
+    protected Boolean active;
+
+    @Column
     @SerializedName("dateFrom")
     @Expose
-    private String dateFrom;
+    protected String dateFrom;
+
+    @Column
     @SerializedName("dateTo")
     @Expose
-    private String dateTo;
+    protected String dateTo;
+
+    @Column
     @SerializedName("category")
     @Expose
-    private String category;
+    protected String category;
 
     /**
      * 
@@ -204,6 +234,10 @@ public class Airline {
 
     public String getIconUrl() {
         return String.format("http://www.gstatic.com/flights/airline_logos/70px/%s.png", iata);
+    }
+
+    public static List<Airline> getAll() {
+        return SQLite.select().from(Airline.class).queryList();
     }
 
 }
