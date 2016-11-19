@@ -11,10 +11,7 @@ import android.view.ViewGroup;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.FragmentSecurityCheckinBinding;
-import com.exotikosteam.exotikos.models.trip.TripStatus;
-import com.exotikosteam.exotikos.utils.Constants;
-
-import org.parceler.Parcels;
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 
 /**
  * Created by lramaswamy on 11/15/16.
@@ -23,12 +20,12 @@ import org.parceler.Parcels;
 public class SecurityCheckinFragment extends Fragment {
 
     FragmentSecurityCheckinBinding securityCheckinBinding;
-    TravelPrepFragment.OnButtonsClicks listener;
+    OnButtonsClicks listener;
 
-    public static SecurityCheckinFragment newInstance(TripStatus trip) {
+    public static SecurityCheckinFragment newInstance(boolean fromFragment) {
             SecurityCheckinFragment fragmentSecurity = new SecurityCheckinFragment();
             Bundle bundle = new Bundle();
-            bundle.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trip));
+            bundle.putBoolean("fromFragment", fromFragment);
             fragmentSecurity.setArguments(bundle);
             return fragmentSecurity;
     }
@@ -37,8 +34,8 @@ public class SecurityCheckinFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if(context instanceof TravelPrepFragment.OnButtonsClicks) {
-            listener = (TravelPrepFragment.OnButtonsClicks) context;
+        if(context instanceof OnButtonsClicks) {
+            listener = (OnButtonsClicks) context;
         }
     }
 
@@ -47,22 +44,25 @@ public class SecurityCheckinFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         securityCheckinBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_security_checkin, container, false);
 
-        securityCheckinBinding.btnSecurityHelp.setOnClickListener(v -> {
-            handleLaunchSecurityHelpPage();
-        });
+        //hide the next button if it is in the activity, instead of the fragment
+        boolean fromFragment = getArguments().getBoolean("fromFragment");
+        if(!fromFragment)
+            securityCheckinBinding.btnNext.setVisibility(View.GONE);
+        else
+            securityCheckinBinding.btnNext.setVisibility(View.VISIBLE);
 
-        securityCheckinBinding.btnSecurityVideo.setOnClickListener(v -> {
-            handleLaunchSecurityVidoeHelpPage();
+        securityCheckinBinding.btnNext.setOnClickListener(v -> {
+            handleLaunchSecurityActivity();
         });
 
         return securityCheckinBinding.getRoot();
     }
 
-    private void handleLaunchSecurityVidoeHelpPage() {
-        listener.handleButtonsClicks("LaunchSecurityCheckinVideoHelpPage");
+
+
+    private void handleLaunchSecurityActivity() {
+        listener.handleButtonsClicks("LaunchSecurityCheckinActivity");
     }
 
-    private void handleLaunchSecurityHelpPage() {
-        listener.handleButtonsClicks("LaunchSecurityCheckinHelpPage");
-    }
+
 }

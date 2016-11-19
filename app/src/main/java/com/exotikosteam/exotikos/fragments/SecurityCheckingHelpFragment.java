@@ -1,5 +1,7 @@
 package com.exotikosteam.exotikos.fragments;
 
+import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,10 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.models.trip.TripStatus;
-import com.exotikosteam.exotikos.utils.Constants;
-
-import org.parceler.Parcels;
+import com.exotikosteam.exotikos.databinding.FragmentSecurityHelpBinding;
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 
 /**
  * Created by lramaswamy on 11/16/16.
@@ -19,19 +19,37 @@ import org.parceler.Parcels;
 
 public class SecurityCheckingHelpFragment extends Fragment {
 
+    OnButtonsClicks listener;
+    FragmentSecurityHelpBinding fragmentSecurityHelpBinding;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof OnButtonsClicks) {
+            listener = (OnButtonsClicks) context;
+        }
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_security_help, container, false);
-        return view;
+        fragmentSecurityHelpBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_security_help, container, false);
+
+        fragmentSecurityHelpBinding.btnSecurityVideo.setOnClickListener(v -> {
+            handleLaunchSecurityVidoeHelpPage();
+        });
+        return fragmentSecurityHelpBinding.getRoot();
     }
 
-    public static SecurityCheckingHelpFragment newInstance(TripStatus trip) {
+    public static SecurityCheckingHelpFragment newInstance() {
         SecurityCheckingHelpFragment fragmentSecurityHelp = new SecurityCheckingHelpFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trip));
+        //bundle.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trip));
         fragmentSecurityHelp.setArguments(bundle);
         return fragmentSecurityHelp;
+    }
+
+    private void handleLaunchSecurityVidoeHelpPage() {
+        listener.handleButtonsClicks("LaunchSecurityCheckinVideoHelpPage");
     }
 }

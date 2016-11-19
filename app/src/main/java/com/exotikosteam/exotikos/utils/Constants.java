@@ -13,4 +13,8 @@ public class Constants {
     public static final String TERMINAL = "Terminal ";
     public static final String GATE = "Gate  ";
 
+    public static final String YOUHAVE = "You have ";
+    public static final String TOBOARD = " to Board";
+    public static final String TOCHECKIN = " to Checkin";
+
 }
