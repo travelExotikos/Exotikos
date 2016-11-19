@@ -13,6 +13,7 @@ import com.exotikosteam.exotikos.databinding.FragmentDestinationBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.utils.Constants;
+import com.exotikosteam.exotikos.utils.Utils;
 
 import org.parceler.Parcels;
 
@@ -36,7 +37,7 @@ public class DestinationFragment extends Fragment {
 
     private void populateData() {
         Flight flight = trip.getFlights().get(trip.getCurrentFlight());
-        destinationFragment.tvArrivalTime.setText(flight.getArrivalTime());
+        destinationFragment.tvArrivalTime.setText(Utils.convertToTime(flight.getArrivalTime()));
         destinationFragment.tvCarousel.setText(flight.getBaggage());
         destinationFragment.tvArrivalGate.setText(flight.getArrivalGate());
     }

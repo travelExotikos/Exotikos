@@ -14,8 +14,11 @@ import com.exotikosteam.exotikos.databinding.FragmentBoardingMainBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.utils.Constants;
+import com.exotikosteam.exotikos.utils.Utils;
 
 import org.parceler.Parcels;
+
+import java.util.Date;
 
 /**
  * Created by lramaswamy on 11/15/16.
@@ -48,6 +51,16 @@ public class BoardingGateFragment extends Fragment {
         Flight flight = trip.getFlights().get(trip.getCurrentFlight());
         fragmentBoardingMainBinding.tvBoardingGate.setText(Constants.GATE + flight.getDepartureGate());
         fragmentBoardingMainBinding.tvTerminal.setText(Constants.TERMINAL + flight.getDepartureTerminal());
+        
+        //getDepartureTimeUTC is null!
+        Date departureTime = Utils.parseFlightstatsDate(flight.getDepartureTime());
+        Date currentTime = new Date();
+        long timeToBoardMin = Utils.getDiffTime(currentTime, departureTime);
+        int hours = (int)timeToBoardMin/60;
+        int min = (int)timeToBoardMin%60;
+        String boardTime = Constants.YOUHAVE + Integer.toString(hours) + " hours " + Integer.toString(min) + " mins" +
+                Constants.TOBOARD;
+        fragmentBoardingMainBinding.tvTimetoBoard.setText(boardTime);
     }
 
     public static BoardingGateFragment newInstance(TripStatus trip) {

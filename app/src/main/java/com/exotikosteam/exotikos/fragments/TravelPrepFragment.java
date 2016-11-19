@@ -16,6 +16,7 @@ import com.exotikosteam.exotikos.databinding.FragmentTravelPrepBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.utils.Constants;
+import com.exotikosteam.exotikos.utils.Utils;
 
 import org.parceler.Parcels;
 
@@ -58,8 +59,9 @@ public class TravelPrepFragment extends Fragment {
         Flight flight = trip.getFlights().get(trip.getCurrentFlight());
         tvFlightNumber.setText(flight.getFlightNumber());
         tvDepartureCity.setText(flight.getDepartureCity()); // @TODO empty : ada/yeyus
-        tvDepDate.setText(flight.getDepartureTime()); // @TODO need to parse this: Lakshmy
+        tvDepDate.setText(Utils.convertToDate(flight.getDepartureTime())); // @TODO need to parse this: Lakshmy
         tvDestination.setText(flight.getArrivalCity()); // @TODO empty : ada/yeyus
+        prepFragmentBinding.tvDepartureTime.setText(Utils.convertToTime(flight.getDepartureTime()));
     }
 
     private void setupBindings() {

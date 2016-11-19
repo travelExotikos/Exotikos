@@ -178,7 +178,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
                 " " + departureAirport.getCity() + " " + departureAirport.getStateCode() + " "
                 + departureAirport.getPostalCode() + " " + departureAirport.getCountryName();
         String encodedQuery = Uri.encode(query1);
-        String uriString = uriBegin + "?q=" + encodedQuery + "&z=21";
+        String uriString = uriBegin + "?q=" + encodedQuery;
         Uri uri = Uri.parse(uriString);
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
         intent.setPackage("com.google.android.apps.maps");
