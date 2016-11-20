@@ -9,7 +9,6 @@ import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.FragmentTravelSummary;
-import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.FlightStep;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
@@ -130,34 +129,11 @@ public class MainActivity extends ExotikosBaseActivity implements FragmentTravel
         showCardActivity();
     }
 
-    private void setupStarterFragment() {
-        //TODO the step statuses are for card view
-        if (fStep == FlightStep.PREPARATION) {
-            showCardActivity();
-        } if (fStep == FlightStep.CHECKIN_IN_DONE) {
-            showSecurityCheckinFragment();
-        } if (fStep == FlightStep.CHECK_IN) {
-            showTravelScanFragment();
-        }
-    }
-
     private void showTravelStatusFragment() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frgPlaceholder, FragmentTravelSummary.newInstance(trip));
         ft.commit();
 
-    }
-
-    private void showTravelScanFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, FragmentTravelScan.newInstance(this.trip));
-        ft.commit();
-    }
-
-    private void showSecurityCheckinFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, SecurityCheckinFragment.newInstance(false));
-        ft.commit();
     }
 
     @Override

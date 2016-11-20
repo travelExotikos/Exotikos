@@ -70,6 +70,7 @@
             android:value="cc4a60543606224b369ed138786562f3" />
 
         <activity android:name=".activities.CheckInHintsActivity"></activity>
+        <activity android:name=".activities.InPlaneHintsActivity"></activity>
     </application>
 
 </manifest>

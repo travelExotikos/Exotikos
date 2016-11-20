@@ -35,10 +35,10 @@ public class CheckInFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static CheckInFragment newInstance(TripStatus trips) {
+    public static CheckInFragment newInstance(TripStatus trip) {
         CheckInFragment frag = new CheckInFragment();
         Bundle args = new Bundle();
-        args.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trips));
+        args.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trip));
         frag.setArguments(args);
         return frag;
     }

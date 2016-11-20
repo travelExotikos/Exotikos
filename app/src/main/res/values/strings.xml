@@ -47,19 +47,59 @@
     <string name="carouselLbl">Carousel Number</string>
     <string name="baggageCarousel">Baggage Carousel</string>
     <string name="dateLanding">Flight Landing Date</string>
-    <string name="check_in_station"><![CDATA[Go to <b> %s </b> check-in station.]]></string>
+    <string name="check_in_station" formatted="false">
+        <![CDATA[
+        Go to <b> %s </b> check-in station.
+        ]]></string>
     <string name="check_in_luggage_weight">Check the luggage’s weight. if it is too heavy you can repack some stuff to your handbag.</string>
     <string name="check_in_passport">Prepare passport and ticket.</string>
     <string name="check_in_repack">It is the last chance to move your cosmetics from handbag to luggage</string>
     <string name="check_in_scan">Scan your boarding card to provide information about the seat# </string>
-    <string name="check_in_station_question_english">Can you show me where is %s check in station?</string>
+    <string name="check_in_station_question_english" formatted="false">Can you show me where is %s check in station?</string>
     <string name="check_in_weight_question_english">Can you show me where I can weigh my luggage?</string>
-    <string name="check_in_hint1_description"><![CDATA[At the check-in station you leave your luggage. So now you have the last change to repack your stuff. <br/><b>Remember</b> <ul><li>The luggage should have weight under 45lb/23kg - otherwise you will have to pay extra</li><li>There are some limitation for handbag. It is better to repack to luggage cosmetics, alcohol</li></ul> Staff checks your ticket, selects a seat for you and provides boarding card. <br/><b>Good to know</b> <ul><li>You can ask for a seat next to window or aisle</li><li>Lower seat number means you will be able get out of a plan faster</li><li>You can find the seat # on the boarding card</li></ul>]]></string>
-    <string name="check_in_hint_description">What will happen</string>
-    <string name="check_in_hint_next_step">Next - Security Checkin</string>
+    <string name="check_in_hint1_description">
+        <![CDATA[
+        At the check-in station you leave your luggage. So now you have the last change to repack your stuff.
+        <br/><b>Remember</b>
+        <ul><li>The luggage should have weight under 45lb/23kg - otherwise you will have to pay extra</li>
+        <li>There are some limitation for handbag. It is better to repack to luggage cosmetics, alcohol</li></ul>
+        Staff checks your ticket, selects a seat for you and provides boarding card. <br/>
+        <b>Good to know</b>
+        <ul><li>You can ask for a seat next to window or aisle</li>
+        <li>Lower seat number means you will be able get out of a plan faster</li>
+        <li>You can find the seat # on the boarding card</li></ul>
+        ]]></string>
+    <string name="check_in_hint_tab_description">What will happen</string>
+    <string name="check_in_hint_tab_next_step">Next - Security Check In</string>
+    <string name="in_plane_welcome" formatted="false">
+        <![CDATA[
+        Congratulation you are in the plane.<br/>
+        Now it is the time for relax. You should be in %s in %s at %s local time<br/>
+        <p>
+        Long-haul flights can be rough on your body. Sitting for hours in the same position can leave your muscles sore and legs numb.<br/>
+        In next step you can find exercises which will help make your trip more compfortable.
+        </p>
+        ]]></string>
+    <string name="in_plane_hint_tab_exercises1">1</string>
+    <string name="in_plane_hint_tab_exercises2">2</string>
+    <string name="in_plane_hint_tab_exercises3">3</string>
+    <string name="in_plane_hint_tab_exercises4">4</string>
+    <string name="in_plane_hint_tab_exercises5">5</string>
+    <string name="in_plane_hint_tab_exercises6">6</string>
+    <string name="in_plane_hint_tab_exercises7">7</string>
+    <string name="in_plane_hint_exercise1_info">TODO - translate text from picture1</string>
+    <string name="in_plane_hint_exercise2_info">TODO - translate text from picture2</string>
+    <string name="in_plane_hint_exercise3_info">TODO - translate text from picture3</string>
+    <string name="in_plane_hint_exercise4_info">TODO - translate text from picture4</string>
+    <string name="in_plane_hint_exercise5_info">TODO - translate text from picture5</string>
+    <string name="in_plane_hint_exercise6_info">TODO - translate text from picture6</string>
+    <string name="in_plane_hint_exercise7_info">TODO - translate text from picture7</string>
     <string name="delete_trip">Delete trip?</string>
     <string name="yes_delete">Yes, Delete</string>
-    <string name="sec_check_in_hint_description">Checkin List</string>
-    <string name="sec_check_in_hint_help">Help</string>
-   </resources>
+    <string name="sec_check_in_hint_tab_description">Checkin List</string>
+    <string name="sec_check_in_hint_tab_help">Help</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
 

@@ -54,7 +54,7 @@ public class SecurityProcessActivity extends AppCompatActivity implements OnButt
 
     //return the order of the fragments in the view pager
     public class SecurityCheckinPagerAdapter extends SmartFragmentStatePagerAdapter {
-        private String tabTitles[] = {getString(R.string.sec_check_in_hint_description), getString(R.string.sec_check_in_hint_help)};
+        private String tabTitles[] = {getString(R.string.sec_check_in_hint_tab_description), getString(R.string.sec_check_in_hint_tab_help)};
 
         public SecurityCheckinPagerAdapter(FragmentManager fm) {
             super(fm);
