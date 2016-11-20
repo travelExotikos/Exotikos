@@ -7,13 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.FlightListAdapter;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
-import com.exotikosteam.exotikos.thirdparty.ItemClickSupport;
 import com.exotikosteam.exotikos.thirdparty.SimpleDividerItemDecoration;
 import com.exotikosteam.exotikos.utils.Constants;
 
@@ -59,14 +57,19 @@ public class TripListActivity extends AppCompatActivity {
             startActivityForResult(i, NewTripActivity.REQUEST_FLIGHT_SELECTION);
         });
 
-        ItemClickSupport.addTo(rvTrips).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                Intent i = new Intent(TripListActivity.this, MainActivity.class);
-                TripStatus trip = getTripForFlight(flights.get(position));
-                i.putExtra(Constants.PARAM_TRIP, Parcels.wrap(trip));
-                startActivity(i);
-            }
+        flightListAdapter.getItemClickSubject().retry().subscribe(flight -> {
+            Intent i = new Intent(TripListActivity.this, MainActivity.class);
+            TripStatus trip = getTripForFlight(flight);
+            i.putExtra(Constants.PARAM_TRIP, Parcels.wrap(trip));
+            startActivity(i);
+        });
+
+        flightListAdapter.getDeleteSubject().retry().subscribe(flight -> {
+            int index = flights.indexOf(flight);
+            flights.remove(flight);
+            flightListAdapter.notifyItemRemoved(index);
+            TripStatus trip = getTripForFlight(flight);
+            TripStatus.deleteTrip(trip);
         });
     }
 

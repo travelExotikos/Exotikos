@@ -54,6 +54,7 @@
     <string name="check_in_scan">Scan your boarding card to provide information about the seat# </string>
     <string name="check_in_station_question_english">Can you show me where is %s check in station?</string>
     <string name="check_in_weight_question_english">Can you show me where I can weigh my luggage?</string>
-
+    <string name="delete_trip">Delete trip?</string>
+    <string name="yes_delete">Yes, Delete</string>
 </resources>
 
