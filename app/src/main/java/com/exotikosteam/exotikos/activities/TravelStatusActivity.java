@@ -71,7 +71,6 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         createDestinationCard(flight);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        //ft.add(R.id.llContainer, fragment1, "fragment_one");
         ft.replace(R.id.flCard1, cardViewFragmentList.get(0));
         ft.replace(R.id.flCard2, cardViewFragmentList.get(1));
         ft.replace(R.id.flCard3, cardViewFragmentList.get(2));
@@ -84,7 +83,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
     }
 
     private void createDestinationCard(Flight flight) {
-        cardViewFragmentList.add(5, CardViewFragment.newInstance("Destination",
+        cardViewFragmentList.add(5, CardViewFragment.newInstance(Constants.DESTINATION,
                 Utils.getTimeDeltaFromCurrent(
                         Utils.parseFlightstatsDate(flight.getArrivalTime())), isStepActive(5)));
         DestinationFragment destinationFragment = DestinationFragment.newInstance(trip);
@@ -98,26 +97,26 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
     }
 
     private void createBoardingGateCard(Date departureTime) {
-        cardViewFragmentList.add(3, CardViewFragment.newInstance("Boarding", Utils.getTimeDeltaFromCurrent(departureTime), isStepActive(3)));
+        cardViewFragmentList.add(3, CardViewFragment.newInstance(Constants.BOARDING, Utils.getTimeDeltaFromCurrent(departureTime), isStepActive(3)));
         BoardingGateFragment boardingGateFragment = BoardingGateFragment.newInstance(trip);
         cardViewFragmentList.get(3).setFragment(boardingGateFragment);
     }
 
     private void createSecurityCheckinCard(Date departureTime) {
-        cardViewFragmentList.add(2, CardViewFragment.newInstance("Security Checkin", Utils.getTimeDeltaFromCurrent(departureTime), isStepActive(2)));
+        cardViewFragmentList.add(2, CardViewFragment.newInstance(Constants.SECURITY_CHECKING, Utils.getTimeDeltaFromCurrent(departureTime), isStepActive(2)));
         SecurityCheckinFragment securityCheckinFragment = SecurityCheckinFragment.newInstance(true);
         cardViewFragmentList.get(2).setFragment(securityCheckinFragment);
     }
 
     private void createCheckinCard(Date departureTime) {
-        cardViewFragmentList.add(1, CardViewFragment.newInstance("Checkin", Utils.getCheckinTimeDelta(departureTime), isStepActive(1)));
+        cardViewFragmentList.add(1, CardViewFragment.newInstance(Constants.CHECKIN, Utils.getCheckinTimeDelta(departureTime), isStepActive(1)));
         CheckInFragment checkinFragment = CheckInFragment.newInstance(trip);
         cardViewFragmentList.get(1).setFragment(checkinFragment);
     }
 
     private void createTravelPrepCard() {
-        cardViewFragmentList.add(0, CardViewFragment.newInstance("Travel Preparation", "", isStepActive(0)));
-        TravelPrepFragment prepFragment = TravelPrepFragment.newInstance(trip);
+        cardViewFragmentList.add(0, CardViewFragment.newInstance(Constants.TRAVEL_PREP, "", isStepActive(0)));
+        TravelPrepFragment prepFragment = TravelPrepFragment.newInstance(trip, true);
         cardViewFragmentList.get(0).setFragment(prepFragment);
     }
 
@@ -144,10 +143,10 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
 
     @Override
     public void handleButtonsClicks(String buttonName) {
-        if (("LaunchAirportPage").equals(buttonName)) {
+        if (Constants.GO_TO_AIRPORT_PAGE.equals(buttonName)) {
             showAiportLocationPage();
         }
-        if (("LaunchScan").equals(buttonName)) {
+        if (Constants.GO_TO_SCAN_PAGE.equals(buttonName)) {
             showTravelScanFragment();
         }
         if (Constants.GO_TO_CHECK_IN_HINTS.equals(buttonName)) {
@@ -156,11 +155,11 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         if (Constants.GO_TO_IN_PLANE_HINTS.equals(buttonName)) {
             showInPlaneHintsActivity();
         }
-//        if(buttonName.equals("LaunchSecurityCheckinHelpPage")) {
-//            showSecurityCheckinHelpFragment();
-//        }
-        if (("LaunchSecurityCheckinActivity").equals(buttonName)) {
+        if (Constants.GO_TO_SECURITY_CHECKING.equals(buttonName)) {
             showSecurityCheckinActivity();
+        }
+        if(Constants.GO_TO_PREP_PAGE.equals(buttonName)) {
+            showTravelPrepActivity();
         }
     }
 
@@ -176,6 +175,12 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
 
     private void showInPlaneHintsActivity() {
         Intent i = new Intent(this, InPlaneHintsActivity.class);
+        startActivity(i);
+    }
+
+    private void showTravelPrepActivity() {
+        Intent i = new Intent(this, TravelPrepProcessActivity.class);
+        i.putExtra("trip", Parcels.wrap(trip));
         startActivity(i);
     }
 
@@ -213,7 +218,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         String uriString = uriBegin + "?q=" + encodedQuery;
         Uri uri = Uri.parse(uriString);
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
-        intent.setPackage("com.google.android.apps.maps");
+        intent.setPackage(Constants.GOOGLE_MAP_PACKAGE);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
@@ -224,10 +229,4 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         ft.replace(R.id.frgPlaceholder, FragmentTravelScan.newInstance(this.trip));
         ft.commit();
     }
-//
-//    private void showSecurityCheckinFragment() {
-//        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.replace(R.id.flCard3, SecurityCheckinFragment.newInstance(true));
-//        ft.commit();
-//    }
 }

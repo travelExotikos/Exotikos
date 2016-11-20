@@ -24,4 +24,24 @@ public class Constants {
     public static final String GO_TO_SECURITY_VIDEO_HINT = "gotoSecurityVideoHint";
     public static final String GO_TO_IN_PLANE_HINTS = "gotoInPlaneHints";
 
+    public static final String GO_TO_AIRPORT_PAGE = "gotoAirportPage";
+    public static final String GO_TO_SCAN_PAGE = "LaunchScan";
+    public static final String GO_TO_SECURITY_CHECKING = "gotoSecurityCheckinActivity";
+    public static final String GO_TO_PREP_PAGE = "gotoTravelPrepActivity";
+    public static final String DESTINATION = "Destination";
+    public static final String BOARDING = "Boarding";
+    public static final String SECURITY_CHECKING = "Security Checkin";
+    public static final String CHECKIN = "Checkin";
+    public static final String CHECKIN_LIST = "Checkin List";
+    public static final String TRAVEL_PREP = "Travel Preparation";
+    public static final String TSA_WEBPAGE = "https://www.tsa.gov/travel/security-screening";
+    public static final String TSA_RESTRICTED = "https://www.tsa.gov/travel/security-screening/prohibited-items";
+
+    public static final String WEBPAGE_URL = "webpage_url";
+    public static final String TRIP_DETAILS = "Trip Details";
+    public static final String BAGGAGE_HELP = "Baggage Help";
+    public static final String TSA_WEBLBL = "TSA Webpage";
+    public static final String RESTRICTED = "Restricted Items";
+    public static final String RESTRICTED_PAGE = "Restricted Webpage";
+
 }

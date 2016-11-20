@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/restrictedItemsList"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:id="@+id/tvRestrictedItemsLbl" />
+
+    <CheckedTextView
+        android:text="@string/flammable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:id="@+id/checkedTextView1" />
+    <TextView
+        android:text="@string/flammableDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/flammableDetailslbl" />
+
+    <CheckedTextView
+        android:text="@string/firearms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:id="@+id/checkedTextView2" />
+
+    <TextView
+        android:text="@string/firearmsDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/firearmsDetailslbl" />
+
+    <CheckedTextView
+        android:text="@string/selfDefense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:id="@+id/checkedTextView3" />
+
+    <TextView
+        android:text="@string/selfDefenseDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/selfDefenselbl" />
+
+    <CheckedTextView
+        android:text="@string/sharpObj"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:id="@+id/checkedTextView4" />
+    <TextView
+        android:text="@string/sharpObjDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/sharpObjDetailslbl" />
+
+
+    <CheckedTextView
+        android:text="@string/sportingGoods"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:id="@+id/checkedTextView5" />
+    <TextView
+        android:text="@string/sportingGoodsDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/sportingGoodsDetailslbl" />
+
+    <CheckedTextView
+        android:text="@string/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:layout_marginTop="@dimen/fragment_horizontal_margin"
+        android:id="@+id/checkedTextView6" />
+    <TextView
+        android:text="@string/toolsDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+        android:id="@+id/toolsDetailslbl" />
+
+</LinearLayout>

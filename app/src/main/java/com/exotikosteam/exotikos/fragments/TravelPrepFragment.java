@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.FragmentTravelPrepBinding;
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.utils.Constants;
@@ -87,19 +87,34 @@ public class TravelPrepFragment extends Fragment {
 
 
     private void setOnClickListener() {
+        boolean fromFragment = getArguments().getBoolean("fromFragment");
+        if(!fromFragment)
+            prepFragmentBinding.btnNext.setVisibility(View.GONE);
+        else
+            prepFragmentBinding.btnNext.setVisibility(View.VISIBLE);
+
+        prepFragmentBinding.btnNext.setOnClickListener(v -> {
+            handleLaunchPrepActivity();
+        });
+
         btnAirportPage.setOnClickListener(v -> {
             handleLaunchAirportMapPage();
         });
 
     }
 
+    private void handleLaunchPrepActivity() {
+        listener.handleButtonsClicks(Constants.GO_TO_PREP_PAGE);
+    }
+
     private void handleLaunchAirportMapPage() {
         listener.handleButtonsClicks("LaunchAirportPage");
     }
 
-    public static TravelPrepFragment newInstance(TripStatus trips) {
+    public static TravelPrepFragment newInstance(TripStatus trips, boolean fromFragment) {
         TravelPrepFragment frag = new TravelPrepFragment();
         Bundle args = new Bundle();
+        args.putBoolean("fromFragment", fromFragment);
         args.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trips));
         frag.setArguments(args);
         return frag;
