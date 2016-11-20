@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.astuetz.PagerSlidingTabStrip;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.SmartFragmentStatePagerAdapter;
+import com.exotikosteam.exotikos.fragments.BaggageHelpFragment;
 import com.exotikosteam.exotikos.fragments.CheckInHintDescriptionFragment;
+import com.exotikosteam.exotikos.fragments.RestrictedItemsFragment;
 import com.exotikosteam.exotikos.fragments.SecurityCheckingHelpFragment;
 import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.utils.Constants;
@@ -46,7 +48,11 @@ public class CheckInHintsActivity extends AppCompatActivity implements OnButtons
     }
 
     public class CheckInHintsPagerAdapter extends SmartFragmentStatePagerAdapter {
-        private String tabTitles[] = {getString(R.string.check_in_hint_tab_description), getString(R.string.check_in_hint_tab_next_step)};
+        private String tabTitles[] = {
+                getString(R.string.check_in_hint_tab_description),
+                getString(R.string.check_in_hint_tab_next_step),
+                getString(R.string.sec_check_in_hint_tab_baggage),
+                getString(R.string.sec_check_in_hint_tab_restricted)};
 
         public CheckInHintsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -60,6 +66,10 @@ public class CheckInHintsActivity extends AppCompatActivity implements OnButtons
                     return CheckInHintDescriptionFragment.newInstance();
                 case 1:
                     return SecurityCheckingHelpFragment.newInstance();
+                case 2:
+                    return BaggageHelpFragment.newInstance();
+                case 3:
+                    return RestrictedItemsFragment.newInstance();
                 default:
                     return null;
             }

@@ -70,7 +70,7 @@
         <li>You can find the seat # on the boarding card</li></ul>
         ]]></string>
     <string name="check_in_hint_tab_description">What will happen</string>
-    <string name="check_in_hint_tab_next_step">Next - Security Check In</string>
+    <string name="check_in_hint_tab_next_step">Next Step</string>
     <string name="in_plane_welcome" formatted="false">
         <![CDATA[
         Congratulation you are in the plane.<br/>
@@ -100,6 +100,8 @@
     <string name="sec_check_in_hint_tab_help">Help</string>
     <string name="sec_check_in_hint_description">Checkin List</string>
     <string name="sec_check_in_hint_help">Help</string>
+    <string name="sec_check_in_hint_tab_baggage">Baggage Help</string>
+    <string name="sec_check_in_hint_tab_restricted">Restricted Items</string>
     <string name="liquidRules">Liquids Regulation</string>
     <string name="restrictedItemsList">The following categories have restrictions</string>
     <string name="firearmsDetails">No Firearms are allowed in Carryon Bags. Flares, Gun Lighters, and Gun Powder is prohibited in Checking bags.</string>
