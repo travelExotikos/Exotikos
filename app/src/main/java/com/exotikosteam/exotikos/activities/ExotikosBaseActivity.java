@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -21,6 +22,10 @@ import android.widget.Toast;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.utils.Constants;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.util.Locale;
 
 import static android.content.Intent.ACTION_CALL;
 
@@ -77,6 +82,19 @@ public class ExotikosBaseActivity extends AppCompatActivity implements ActivityC
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.REQUEST_CODE_CONTACT) {
+            if (Activity.RESULT_OK != resultCode) {
+                Log.e(TAG, "Cannot call");
+                return;
+            }
+            setPhoneFromConact(data);
+            call();
+        }
+    }
+
+    //================ DRAWABLE =================================
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -94,50 +112,14 @@ public class ExotikosBaseActivity extends AppCompatActivity implements ActivityC
                 handlePhoneAction();
                 break;
             case R.id.miMap:
-                //handleMapAction();
+                handleMapAction();
                 break;
             case R.id.miTranslator:
-                //handleTranslatorAction();
+                handleTranslatorAction();
                 break;
         }
         mDrawer.closeDrawers();
     }
-        // Create a new fragment and specify the fragment to show based on nav item clicked
-        /*
-        Fragment fragment = null;
-        Class fragmentClass;
-        switch(menuItem.getItemId()) {
-            case R.id.miCall:
-                fragmentClass = FirstFragment.class;
-                break;
-            case R.id.nav_second_fragment:
-                fragmentClass = SecondFragment.class;
-                break;
-            case R.id.nav_third_fragment:
-                fragmentClass = ThirdFragment.class;
-                break;
-            default:
-                fragmentClass = FirstFragment.class;
-        }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
-        // Highlight the selected item has been done by NavigationView
-        menuItem.setChecked(true);
-        // Set action bar title
-        setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-        mDrawer.closeDrawers();
-        */
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -150,8 +132,44 @@ public class ExotikosBaseActivity extends AppCompatActivity implements ActivityC
         }
     }
 
+    //============== MAP =============
 
-    //================ call friend
+    private void handleMapAction() {
+        //TODO read current GPS
+        String uriString ="geo:0,0";
+        Uri uri = Uri.parse(uriString);
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+        intent.setPackage(Constants.GOOGLE_MAP_PACKAGE);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
+
+    //=================== TANSLATE ==========
+
+    private void handleTranslatorAction() {
+        String defaultLanguage = Locale.getDefault().getLanguage();
+        Uri uri = uri = new Uri.Builder()
+                .scheme("http")
+                .authority("translate.google.com")
+                .path("/m/translate")
+                //.appendQueryParameter("q", "c'est l'meunier Mathurin qui caresse les filles au tic-tac du moulin")
+                .appendQueryParameter("tl", (Locale.getDefault().getLanguage() == "en" ? "pl" : "en")) // target language
+                .appendQueryParameter("sl", defaultLanguage) // source language
+                .build();
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.setPackage(Constants.GOOGLE_TRANSLATE_PACKAGE);
+
+        if (intent.resolveActivity(getPackageManager()) == null) {
+            //Go to gogole play store and install google translate
+            uri = Uri.parse("market://details?id=" + Constants.GOOGLE_TRANSLATE_PACKAGE);
+            intent = new Intent(Intent.ACTION_VIEW, uri);
+        }
+        startActivity(intent);
+
+    }
+
+    //================ CALL ================
 
     private void handlePhoneAction() {
         Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
@@ -169,22 +187,8 @@ public class ExotikosBaseActivity extends AppCompatActivity implements ActivityC
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
-        }
-        //Maybe now we have permission
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+        } else {
             startActivity(callIntent);
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constants.REQUEST_CODE_CONTACT) {
-            if (Activity.RESULT_OK != resultCode) {
-                Log.e(TAG, "Cannot call");
-                return;
-            }
-            setPhoneFromConact(data);
-            call();
         }
     }
 
@@ -197,12 +201,10 @@ public class ExotikosBaseActivity extends AppCompatActivity implements ActivityC
         if (cursor != null && cursor.moveToFirst()) {
             int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
             String number = "tel:" + cursor.getString(numberIndex);
-            Log.d(TAG, "number : " + number);
             mPhone = number;
             //return number;
         }
         Log.e(TAG, "cannot read phone #");
         //return null;
     }
-
 }

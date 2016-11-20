@@ -10,9 +10,12 @@ public class Constants {
     public static final Integer REQUEST_CODE_SCAN = 1;
     public static final Integer REQUEST_CODE_CONTACT = 2;
     public static final String PARAM_TRIP = "paramTrip";
+
+    public static final String GOOGLE_MAP_PACKAGE = "com.google.android.apps.maps";
+    public static final String GOOGLE_TRANSLATE_PACKAGE = "com.google.android.apps.translate";
+
     public static final String TERMINAL = "Terminal ";
     public static final String GATE = "Gate  ";
-
     public static final String YOUHAVE = "You have ";
     public static final String TOBOARD = " to Board";
     public static final String TOCHECKIN = " to Checkin";
