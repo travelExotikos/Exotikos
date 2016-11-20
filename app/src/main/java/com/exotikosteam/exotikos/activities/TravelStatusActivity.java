@@ -7,15 +7,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
-import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.BoardingGateFragment;
 import com.exotikosteam.exotikos.fragments.CardViewFragment;
+import com.exotikosteam.exotikos.fragments.CheckInFragment;
 import com.exotikosteam.exotikos.fragments.DestinationFragment;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
 import com.exotikosteam.exotikos.fragments.SecurityCheckingHelpFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.models.airport.Airport;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
@@ -99,8 +100,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
 
     private void createCheckinCard(Date departureTime) {
         cardViewFragmentList.add(1, CardViewFragment.newInstance("Checkin", Utils.getCheckinTimeDelta(departureTime), true));
-        //Change this to Checking Fragment once ada is done @TODO Adriana
-        SecurityCheckinFragment checkinFragment = SecurityCheckinFragment.newInstance(true);
+        CheckInFragment checkinFragment = CheckInFragment.newInstance(trip);
         cardViewFragmentList.get(1).setFragment(checkinFragment);
     }
 

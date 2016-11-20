@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Exotikos</string>
     <string name="lorem_ipsum_long">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="btn_ask_nfor_help">Ask\nfor help</string>
     <string name="UseWith">Scan</string>
     <string name="airline">Airline</string>
     <string name="select_airline">Select airline...</string>
@@ -46,5 +47,13 @@
     <string name="carouselLbl">Carousel Number</string>
     <string name="baggageCarousel">Baggage Carousel</string>
     <string name="dateLanding">Flight Landing Date</string>
+    <string name="check_in_station">Go to <b> %s </b> check-in station.</string>
+    <string name="check_in_luggage_weight">Check the luggage’s weight. if it is too heavy you can repack some stuff to your handbag.</string>
+    <string name="check_in_passport">Prepare passport and ticket.</string>
+    <string name="check_in_repack">It is the last chance to move your cosmetics from handbag to luggage</string>
+    <string name="check_in_scan">Scan your boarding card to provide information about the seat# </string>
+    <string name="check_in_station_question_english">Can you show me where is %s check in station?</string>
+    <string name="check_in_weight_question_english">Can you show me where I can weigh my luggage?</string>
+
 </resources>
 

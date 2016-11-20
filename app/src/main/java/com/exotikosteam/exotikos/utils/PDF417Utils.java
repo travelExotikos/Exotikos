@@ -120,7 +120,7 @@ public class PDF417Utils {
         parent.startActivityForResult(intent, Constants.REQUEST_CODE_SCAN);
     }
 
-    public static BoardingPassScan parseIntentData(Intent data) throws ParseException{
+    public static BoardingPassScan parseIntentData(Intent data) throws ParseException {
         BoardingPassScan scanData = null;
         RecognitionResults results = data.getParcelableExtra(Pdf417ScanActivity.EXTRAS_RECOGNITION_RESULTS);
         BaseRecognitionResult[] resultArray = results.getRecognitionResults();
@@ -131,7 +131,6 @@ public class PDF417Utils {
                 scanData = BoardingPassScan.fromScanResults(result);
             }
         }
-
         return scanData;
     }
 }
