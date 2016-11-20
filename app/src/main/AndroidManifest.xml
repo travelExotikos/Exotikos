@@ -69,6 +69,7 @@
             android:name="FLIGHTSTATS_APP_KEY"
             android:value="cc4a60543606224b369ed138786562f3" />
 
+        <activity android:name=".activities.CheckInHintsActivity"></activity>
     </application>
 
 </manifest>

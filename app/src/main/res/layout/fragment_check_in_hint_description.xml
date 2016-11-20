@@ -1,0 +1,17 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="efd ffsg fsf fsf vfvsfbvsfb fsb sbfbssfb sbsf ffs bsf bg fbsfb fb dbsbsffsdvs sf bfb bs vfsv"
+            android:layout_margin="10dp"/>
+    </RelativeLayout>
+</layout>

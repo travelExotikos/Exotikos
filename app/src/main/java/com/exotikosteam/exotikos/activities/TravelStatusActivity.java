@@ -20,6 +20,7 @@ import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.models.airport.Airport;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
+import com.exotikosteam.exotikos.utils.Constants;
 import com.exotikosteam.exotikos.utils.Utils;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 
@@ -128,25 +129,30 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
 
     @Override
     public void handleButtonsClicks(String buttonName) {
-        if(buttonName.equals("LaunchAirportPage")) {
+        if (("LaunchAirportPage").equals(buttonName)) {
             showAiportLocationPage();
         }
-        if(buttonName.equals("LaunchScan")) {
+        if (("LaunchScan").equals(buttonName)) {
             showTravelScanFragment();
         }
-//        if(buttonName.equals("LaunchSecurityCheckin")) {
-//            showSecurityCheckinFragment();
-//        }
+        if (Constants.GO_TO_CHECK_IN_HINTS.equals(buttonName)) {
+            showCheckInHintsActivity();
+        }
 //        if(buttonName.equals("LaunchSecurityCheckinHelpPage")) {
 //            showSecurityCheckinHelpFragment();
 //        }
-        if(buttonName.equals("LaunchSecurityCheckinActivity")) {
+        if (("LaunchSecurityCheckinActivity").equals(buttonName)) {
             showSecurityCheckinActivity();
         }
     }
 
     private void showSecurityCheckinActivity() {
         Intent i = new Intent(this, SecurityProcessActivity.class);
+        startActivity(i);
+    }
+
+    private void showCheckInHintsActivity() {
+        Intent i = new Intent(this, CheckInHintsActivity.class);
         startActivity(i);
     }
 

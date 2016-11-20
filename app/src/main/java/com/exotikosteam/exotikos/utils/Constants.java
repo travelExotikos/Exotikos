@@ -20,4 +20,7 @@ public class Constants {
     public static final String TOBOARD = " to Board";
     public static final String TOCHECKIN = " to Checkin";
 
+    public static final String GO_TO_CHECK_IN_HINTS = "gotoCheckInHints";
+    public static final String GO_TO_SECURITY_VIDEO_HINT = "gotoSecurityVideoHint";
+
 }

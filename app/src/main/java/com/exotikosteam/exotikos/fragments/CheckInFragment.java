@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,11 +64,14 @@ public class CheckInFragment extends Fragment {
         mBinding.btnCheckInScan.setOnClickListener( v -> {
             PDF417Utils.launchCameraView(getActivity());
         });
+        mBinding.btnNext.setOnClickListener(v -> {
+            handleLauncCheckInHintsActivity();
+        });
     }
 
     private void populateData() {
         String text = getResources().getString(R.string.check_in_station);
-        mBinding.tvFindCheckIn.setText(String.format(text, mFlight.getFlightCarrierName()));
+        mBinding.tvFindCheckIn.setText(Html.fromHtml(String.format(text, mFlight.getFlightCarrierName()), Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV));
     }
 
     @Override
@@ -82,7 +86,7 @@ public class CheckInFragment extends Fragment {
             mListener = (OnButtonsClicks) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnButtonsClicks");
         }
     }
 
@@ -119,6 +123,10 @@ public class CheckInFragment extends Fragment {
     private void parsingError() {
         Snackbar.make(mBinding.getRoot(), R.string.scan_parsing_error, Snackbar.LENGTH_LONG)
                 .show();
+    }
+
+    private void handleLauncCheckInHintsActivity() {
+        mListener.handleButtonsClicks(Constants.GO_TO_CHECK_IN_HINTS);
     }
 
 }

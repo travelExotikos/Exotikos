@@ -8,67 +8,61 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.SmartFragmentStatePagerAdapter;
-import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
+import com.exotikosteam.exotikos.fragments.CheckInHintDescriptionFragment;
 import com.exotikosteam.exotikos.fragments.SecurityCheckingHelpFragment;
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.utils.Constants;
 
 import static com.exotikosteam.exotikos.R.id.vpPager;
 
-/**
- * Created by lramaswamy on 11/18/16.
- */
+public class CheckInHintsActivity extends AppCompatActivity implements OnButtonsClicks {
 
-public class SecurityProcessActivity extends AppCompatActivity implements OnButtonsClicks {
-    ViewPager viewPager;
+    ViewPager mViewPager;
+    CheckInHintsActivity.CheckInHintsPagerAdapter mPagerAdapter;
 
-    SecurityCheckinPagerAdapter pagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_security_process);
+        setContentView(R.layout.activity_check_in_hints);
 
-        pagerAdapter = new SecurityCheckinPagerAdapter(getSupportFragmentManager());
-        viewPager = (ViewPager) findViewById(vpPager);
-        viewPager.setAdapter(pagerAdapter);
+        mPagerAdapter = new CheckInHintsActivity.CheckInHintsPagerAdapter(getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(vpPager);
+        mViewPager.setAdapter(mPagerAdapter);
 
         // Give the PagerSlidingTabStrip the ViewPager
         PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         // Attach the view pager to the tab strip
-        tabsStrip.setViewPager(viewPager);
+        tabsStrip.setViewPager(mViewPager);
     }
 
     @Override
     public void handleButtonsClicks(String buttonName) {
         if(Constants.GO_TO_SECURITY_VIDEO_HINT.equals(buttonName)) {
-            showSecurityCheckinHelpVideoActivity();
+            Intent i = new Intent(CheckInHintsActivity.this, SecurityVideoActivity.class);
+            startActivity(i);
         }
     }
 
-    private void showSecurityCheckinHelpVideoActivity() {
-        Intent i = new Intent(SecurityProcessActivity.this, SecurityVideoActivity.class);
-        startActivity(i);
-    }
+    public class CheckInHintsPagerAdapter extends SmartFragmentStatePagerAdapter {
+        private String tabTitles[] = {getString(R.string.check_in_hint_description), getString(R.string.check_in_hint_next_step)};
 
-    //return the order of the fragments in the view pager
-    public class SecurityCheckinPagerAdapter extends SmartFragmentStatePagerAdapter {
-        private String tabTitles[] = {getString(R.string.sec_check_in_hint_description), getString(R.string.sec_check_in_hint_help)};
-
-        public SecurityCheckinPagerAdapter(FragmentManager fm) {
+        public CheckInHintsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         //controls the order and creation of the fragments
         @Override
         public Fragment getItem(int position) {
-            if(position == 0)
-                return SecurityCheckinFragment.newInstance(false);
-            else if (position == 1)
-                return SecurityCheckingHelpFragment.newInstance();
-            else
-                return null;
+            switch (position) {
+                case 0:
+                    return CheckInHintDescriptionFragment.newInstance();
+                case 1:
+                    return SecurityCheckingHelpFragment.newInstance();
+                default:
+                    return null;
+            }
         }
 
         //returns the Title of the tab
