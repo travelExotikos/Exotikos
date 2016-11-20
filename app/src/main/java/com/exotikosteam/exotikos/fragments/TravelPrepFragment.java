@@ -87,19 +87,34 @@ public class TravelPrepFragment extends Fragment {
 
 
     private void setOnClickListener() {
+        boolean fromFragment = getArguments().getBoolean("fromFragment");
+        if(!fromFragment)
+            prepFragmentBinding.btnNext.setVisibility(View.GONE);
+        else
+            prepFragmentBinding.btnNext.setVisibility(View.VISIBLE);
+
+        prepFragmentBinding.btnNext.setOnClickListener(v -> {
+            handleLaunchPrepActivity();
+        });
+
         btnAirportPage.setOnClickListener(v -> {
             handleLaunchAirportMapPage();
         });
 
     }
 
+    private void handleLaunchPrepActivity() {
+        listener.handleButtonsClicks("LaunchTravelPrepActivity");
+    }
+
     private void handleLaunchAirportMapPage() {
         listener.handleButtonsClicks("LaunchAirportPage");
     }
 
-    public static TravelPrepFragment newInstance(TripStatus trips) {
+    public static TravelPrepFragment newInstance(TripStatus trips, boolean fromFragment) {
         TravelPrepFragment frag = new TravelPrepFragment();
         Bundle args = new Bundle();
+        args.putBoolean("fromFragment", fromFragment);
         args.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trips));
         frag.setArguments(args);
         return frag;

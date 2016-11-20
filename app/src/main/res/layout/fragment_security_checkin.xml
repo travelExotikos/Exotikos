@@ -1,19 +1,12 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1"
-        android:background="@color/greenlight">
-
-        <TextView
-            android:text="@string/checkin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
-            android:id="@+id/tvSecurityCheckin" />
+        android:background="@color/twitter_mild_grey">
 
         <CheckedTextView
             android:text="@string/idString"

@@ -104,8 +104,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tvDestinationLbl"
-            android:layout_alignLeft="@+id/tvFlightNumber"
-            android:layout_alignStart="@+id/tvFlightNumber"
+            android:layout_alignRight="@+id/tvDepartureTime"
+            android:layout_alignEnd="@+id/tvDepartureTime"
             android:id="@+id/tvDestination"
             android:layout_alignTop="@+id/tvDestinationLbl" />
 
@@ -117,7 +117,9 @@
             android:id="@+id/tvCheckinDaysLeft"
             android:layout_below="@+id/btnAirportPage"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="@dimen/fragment_horizontal_margin"/>
 
         <TextView
             tools:text="Boarding in 32 Days"
@@ -128,7 +130,8 @@
             android:layout_below="@+id/tvCheckinDaysLeft"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="@dimen/fragment_horizontal_margin"/>
+            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            android:layout_marginLeft="@dimen/fragment_horizontal_margin"/>
 
         <Button
             android:background="@drawable/google_maps"
@@ -137,7 +140,19 @@
             android:id="@+id/btnAirportPage"
             android:gravity="end"
             android:layout_below="@+id/tvDestination"
-            android:layout_alignLeft="@+id/tvDestination"
-            android:layout_alignStart="@+id/tvDestination" />
+            android:layout_alignLeft="@+id/tvDepartureTime"
+            android:layout_alignStart="@+id/tvDepartureTime"
+            android:layout_marginTop="@dimen/fragment_horizontal_margin"/>
+
+        <Button
+            android:background="@drawable/arrow_right_bold_circle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/btnNext"
+            android:layout_below="@+id/tvDestination"
+            android:layout_toRightOf="@+id/btnAirportPage"
+            android:layout_toEndOf="@+id/btnAirportPage"
+            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            />
     </RelativeLayout>
 </layout>
