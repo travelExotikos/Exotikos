@@ -69,7 +69,7 @@ public class TripListActivity extends AppCompatActivity {
             flights.remove(flight);
             flightListAdapter.notifyItemRemoved(index);
             TripStatus trip = getTripForFlight(flight);
-            trip.delete();
+            TripStatus.deleteTrip(trip);
         });
     }
 
