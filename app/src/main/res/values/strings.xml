@@ -46,5 +46,7 @@
     <string name="carouselLbl">Carousel Number</string>
     <string name="baggageCarousel">Baggage Carousel</string>
     <string name="dateLanding">Flight Landing Date</string>
+    <string name="delete_trip">Delete trip?</string>
+    <string name="yes_delete">Yes, Delete</string>
 </resources>
 
