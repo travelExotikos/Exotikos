@@ -61,5 +61,6 @@
     <string name="yes_delete">Yes, Delete</string>
     <string name="sec_check_in_hint_description">Checkin List</string>
     <string name="sec_check_in_hint_help">Help</string>
-   </resources>
+    <string name="liquidRules">Liquids Rule</string>
+</resources>
 

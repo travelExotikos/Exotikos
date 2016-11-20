@@ -68,7 +68,6 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         createDestinationCard(flight);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        //ft.add(R.id.llContainer, fragment1, "fragment_one");
         ft.replace(R.id.flCard1, cardViewFragmentList.get(0));
         ft.replace(R.id.flCard2, cardViewFragmentList.get(1));
         ft.replace(R.id.flCard3, cardViewFragmentList.get(2));
@@ -107,7 +106,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
 
     private void createTravelPrepCard() {
         cardViewFragmentList.add(0, CardViewFragment.newInstance("Travel Preparation", "", true));
-        TravelPrepFragment prepFragment = TravelPrepFragment.newInstance(trip);
+        TravelPrepFragment prepFragment = TravelPrepFragment.newInstance(trip, true);
         cardViewFragmentList.get(0).setFragment(prepFragment);
     }
 
@@ -144,6 +143,10 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         if (("LaunchSecurityCheckinActivity").equals(buttonName)) {
             showSecurityCheckinActivity();
         }
+
+        if(buttonName.equals("LaunchTravelPrepActivity")) {
+            showTravelPrepActivity();
+        }
     }
 
     private void showSecurityCheckinActivity() {
@@ -153,6 +156,12 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
 
     private void showCheckInHintsActivity() {
         Intent i = new Intent(this, CheckInHintsActivity.class);
+        startActivity(i);
+    }
+
+    private void showTravelPrepActivity() {
+        Intent i = new Intent(this, TravelPrepProcessActivity.class);
+        i.putExtra("trip", Parcels.wrap(trip));
         startActivity(i);
     }
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+
+    <TextView
+        android:text="@string/liquidRules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+        android:id="@+id/textView3" />
+    <TextView
+        android:text="For more information click"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        app:srcCompat="@drawable/baggage_help"
+        android:id="@+id/baggageHelp" />
+
+
+
+
+</LinearLayout>
