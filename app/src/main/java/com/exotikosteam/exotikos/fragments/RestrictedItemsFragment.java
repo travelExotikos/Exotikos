@@ -10,21 +10,20 @@ import android.view.ViewGroup;
 import com.exotikosteam.exotikos.R;
 
 /**
- * Created by lramaswamy on 11/19/16.
+ * Created by lramaswamy on 11/20/16.
  */
 
-public class BaggageHelpFragment extends Fragment {
-
+public class RestrictedItemsFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_baggage_help, container, false);
+        return inflater.inflate(R.layout.fragment_restricted_items, container, false);
     }
 
-    public static BaggageHelpFragment newInstance() {
-        BaggageHelpFragment baggageHelpFragment = new BaggageHelpFragment();
+    public static RestrictedItemsFragment newInstance() {
+        RestrictedItemsFragment restrictedItemsFragment = new RestrictedItemsFragment();
         Bundle bundle = new Bundle();
-        baggageHelpFragment.setArguments(bundle);
-        return baggageHelpFragment;
+        restrictedItemsFragment.setArguments(bundle);
+        return restrictedItemsFragment;
     }
 }

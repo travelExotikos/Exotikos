@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.FragmentSecurityCheckinBinding;
 import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
+import com.exotikosteam.exotikos.utils.Constants;
 
 /**
  * Created by lramaswamy on 11/15/16.
@@ -61,7 +62,7 @@ public class SecurityCheckinFragment extends Fragment {
 
 
     private void handleLaunchSecurityActivity() {
-        listener.handleButtonsClicks("LaunchSecurityCheckinActivity");
+        listener.handleButtonsClicks(Constants.GO_TO_SECURITY_CHECKING);
     }
 
 

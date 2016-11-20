@@ -61,6 +61,19 @@
     <string name="yes_delete">Yes, Delete</string>
     <string name="sec_check_in_hint_description">Checkin List</string>
     <string name="sec_check_in_hint_help">Help</string>
-    <string name="liquidRules">Liquids Rule</string>
+    <string name="liquidRules">Liquids Regulation</string>
+    <string name="restrictedItemsList">The following categories have restrictions</string>
+    <string name="firearmsDetails">No Firearms are allowed in Carryon Bags. Flares, Gun Lighters, and Gun Powder is prohibited in Checking bags.</string>
+    <string name="firearms">Firearms</string>
+    <string name="selfDefense">Self Defense</string>
+    <string name="sharpObj">Sharp Objects</string>
+    <string name="sportingGoods">Sporting Goods</string>
+    <string name="tools">Tools</string>
+    <string name="selfDefenseDetails">No Self Defense items are allowed in Carryon Bags. Items can be taken in Checkin in luggage.</string>
+    <string name="flammable">Explosives/Flammable</string>
+    <string name="flammableDetails">Electronic Cigarettes and Vaping Devices, Lighters without fuel, Up to 3.4 oz./100.55 ml of Non-Flammable Liquid, Gel, or Aerosol, Safety Matches, Up to two in life vests and two spares of Small Compressed Gas Cartridges are allowed in Carryon bags.</string>
+    <string name="sharpObjDetails">Only Disposable Razors are allowed in Carryon. Other sharp objects such as scissors, knives, etc are allowed in Checkin Luggage.</string>
+    <string name="sportingGoodsDetails">Skates, including ice skates and rollerblades are allowed in Carryon. Other sporting goods such as baseball bats, etc can be taken in Checkin Luggage.</string>
+    <string name="toolsDetails">Screwdrivers/Wrenches/Pliers Less than seven inches in length are allowed in Carryon. Others such as hammer, drills, drill bits, etc can be taken in Checkin Luggage.</string>
 </resources>
 
