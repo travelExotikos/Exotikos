@@ -41,7 +41,7 @@ public class Utils {
     }
 
     public static String convertToTime(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
+        SimpleDateFormat format = new SimpleDateFormat(FLIGHTSTATS_DATE_FORMAT);
         try {
             Date d = format.parse(date);
             return (DateFormat.format("hh:mma", d)).toString();
@@ -52,7 +52,7 @@ public class Utils {
     }
 
     public static String convertToDate(String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
+        SimpleDateFormat format = new SimpleDateFormat(FLIGHTSTATS_DATE_FORMAT);
         try {
             Date d = format.parse(date);
             return (DateFormat.format("EEE, MMM dd, yyyy", d)).toString();
@@ -97,6 +97,9 @@ public class Utils {
     }
 
     public static String getTimeDeltaFromCurrent(Date departureTime) {
+        if (departureTime == null) {
+            return "";
+        }
         Date currentTime = new Date();
         long timeToBoardMin = Utils.getDiffTime(currentTime, departureTime);
         return Utils.convertminsToProperString(timeToBoardMin);
@@ -120,6 +123,9 @@ public class Utils {
     }
 
     public static String getCheckinTimeDelta(Date departureTime) {
+        if (departureTime == null) {
+            return "";
+        }
         Calendar c = Calendar.getInstance();
         c.setTime(departureTime);
         c.add(Calendar.DATE, -1);

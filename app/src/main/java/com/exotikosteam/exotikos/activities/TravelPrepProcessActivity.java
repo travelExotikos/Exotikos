@@ -61,7 +61,7 @@ public class TravelPrepProcessActivity extends AppCompatActivity implements OnBu
     //return the order of the fragments in the view pager
     public class TravelPrepPagerAdapter extends SmartFragmentStatePagerAdapter {
         private String tabTitles[] = {Constants.TRIP_DETAILS, Constants.CHECKIN_LIST,
-                Constants.RESTRICTED, Constants.BAGGAGE_HELP, Constants.TSA_WEBLBL, Constants.RESTRICTED_PAGE };
+                getString(R.string.sec_check_in_hint_tab_restricted), getString(R.string.sec_check_in_hint_tab_baggage), Constants.TSA_WEBLBL, Constants.RESTRICTED_PAGE };
 
         public TravelPrepPagerAdapter(FragmentManager fm) {
             super(fm);

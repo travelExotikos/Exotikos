@@ -37,6 +37,7 @@ public class TripStatus extends BaseModel {
     @Column
     Integer flightStepOrdinal;
 
+    @Column(name = "flight_step")
     FlightStep flightStep;
 
     @Column

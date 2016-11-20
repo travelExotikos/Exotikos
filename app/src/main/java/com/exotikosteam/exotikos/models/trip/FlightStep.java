@@ -7,10 +7,9 @@ package com.exotikosteam.exotikos.models.trip;
 public enum FlightStep {
     PREPARATION,
     CHECK_IN,
-    CHECKIN_IN_DONE,
     SECURITY_CHECK_IN,
     BOARDING,
-    PLANE,
+    IN_PLANE,
     DONE;
 
 

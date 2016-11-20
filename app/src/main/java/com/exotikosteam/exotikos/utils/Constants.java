@@ -22,6 +22,7 @@ public class Constants {
 
     public static final String GO_TO_CHECK_IN_HINTS = "gotoCheckInHints";
     public static final String GO_TO_SECURITY_VIDEO_HINT = "gotoSecurityVideoHint";
+    public static final String GO_TO_IN_PLANE_HINTS = "gotoInPlaneHints";
 
     public static final String GO_TO_AIRPORT_PAGE = "gotoAirportPage";
     public static final String GO_TO_SCAN_PAGE = "LaunchScan";
