@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.FragmentSecurityHelpBinding;
 import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
+import com.exotikosteam.exotikos.utils.Constants;
 
 /**
  * Created by lramaswamy on 11/16/16.
@@ -50,6 +51,6 @@ public class SecurityCheckingHelpFragment extends Fragment {
     }
 
     private void handleLaunchSecurityVidoeHelpPage() {
-        listener.handleButtonsClicks("LaunchSecurityCheckinVideoHelpPage");
+        listener.handleButtonsClicks(Constants.GO_TO_SECURITY_VIDEO_HINT);
     }
 }

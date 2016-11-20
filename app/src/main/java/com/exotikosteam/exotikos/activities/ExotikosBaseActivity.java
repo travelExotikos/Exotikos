@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -22,8 +21,6 @@ import android.widget.Toast;
 
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.utils.Constants;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Locale;
 

@@ -7,18 +7,20 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import com.exotikosteam.exotikos.ExotikosApplication;
-import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.BoardingGateFragment;
 import com.exotikosteam.exotikos.fragments.CardViewFragment;
+import com.exotikosteam.exotikos.fragments.CheckInFragment;
 import com.exotikosteam.exotikos.fragments.DestinationFragment;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
 import com.exotikosteam.exotikos.fragments.SecurityCheckingHelpFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.models.airport.Airport;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
+import com.exotikosteam.exotikos.utils.Constants;
 import com.exotikosteam.exotikos.utils.Utils;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 
@@ -99,8 +101,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
 
     private void createCheckinCard(Date departureTime) {
         cardViewFragmentList.add(1, CardViewFragment.newInstance("Checkin", Utils.getCheckinTimeDelta(departureTime), true));
-        //Change this to Checking Fragment once ada is done @TODO Adriana
-        SecurityCheckinFragment checkinFragment = SecurityCheckinFragment.newInstance(true);
+        CheckInFragment checkinFragment = CheckInFragment.newInstance(trip);
         cardViewFragmentList.get(1).setFragment(checkinFragment);
     }
 
@@ -128,25 +129,30 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
 
     @Override
     public void handleButtonsClicks(String buttonName) {
-        if(buttonName.equals("LaunchAirportPage")) {
+        if (("LaunchAirportPage").equals(buttonName)) {
             showAiportLocationPage();
         }
-        if(buttonName.equals("LaunchScan")) {
+        if (("LaunchScan").equals(buttonName)) {
             showTravelScanFragment();
         }
-//        if(buttonName.equals("LaunchSecurityCheckin")) {
-//            showSecurityCheckinFragment();
-//        }
+        if (Constants.GO_TO_CHECK_IN_HINTS.equals(buttonName)) {
+            showCheckInHintsActivity();
+        }
 //        if(buttonName.equals("LaunchSecurityCheckinHelpPage")) {
 //            showSecurityCheckinHelpFragment();
 //        }
-        if(buttonName.equals("LaunchSecurityCheckinActivity")) {
+        if (("LaunchSecurityCheckinActivity").equals(buttonName)) {
             showSecurityCheckinActivity();
         }
     }
 
     private void showSecurityCheckinActivity() {
         Intent i = new Intent(this, SecurityProcessActivity.class);
+        startActivity(i);
+    }
+
+    private void showCheckInHintsActivity() {
+        Intent i = new Intent(this, CheckInHintsActivity.class);
         startActivity(i);
     }
 
