@@ -11,11 +11,13 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.SmartFragmentStatePagerAdapter;
 import com.exotikosteam.exotikos.fragments.BaggageHelpFragment;
+import com.exotikosteam.exotikos.fragments.RestrictedItemsFragment;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
-import com.exotikosteam.exotikos.fragments.TSAWebpageFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
+import com.exotikosteam.exotikos.fragments.WebpageFragment;
 import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
+import com.exotikosteam.exotikos.utils.Constants;
 
 import org.parceler.Parcels;
 
@@ -58,7 +60,8 @@ public class TravelPrepProcessActivity extends AppCompatActivity implements OnBu
 
     //return the order of the fragments in the view pager
     public class TravelPrepPagerAdapter extends SmartFragmentStatePagerAdapter {
-        private String tabTitles[] = {"Trip Details", "Checkin List", "Baggage Help", "TSA Webpage" };
+        private String tabTitles[] = {Constants.TRIP_DETAILS, Constants.CHECKIN_LIST,
+                Constants.RESTRICTED, Constants.BAGGAGE_HELP, Constants.TSA_WEBLBL, Constants.RESTRICTED_PAGE };
 
         public TravelPrepPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -72,9 +75,13 @@ public class TravelPrepProcessActivity extends AppCompatActivity implements OnBu
             else if (position == 1)
                 return SecurityCheckinFragment.newInstance(false);
             else if (position == 2)
-                return BaggageHelpFragment.newInstance();
+                return RestrictedItemsFragment.newInstance();
             else if (position == 3)
-                return TSAWebpageFragment.newInstance();
+                return BaggageHelpFragment.newInstance();
+            else if (position == 4)
+                return WebpageFragment.newInstance(Constants.TSA_WEBPAGE);
+            else if (position == 5)
+                return WebpageFragment.newInstance(Constants.TSA_RESTRICTED);
             else
                 return null;
         }

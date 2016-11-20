@@ -104,7 +104,7 @@ public class TravelPrepFragment extends Fragment {
     }
 
     private void handleLaunchPrepActivity() {
-        listener.handleButtonsClicks("LaunchTravelPrepActivity");
+        listener.handleButtonsClicks(Constants.GO_TO_PREP_PAGE);
     }
 
     private void handleLaunchAirportMapPage() {

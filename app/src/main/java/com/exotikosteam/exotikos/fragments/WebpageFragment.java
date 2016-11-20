@@ -14,15 +14,16 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.exotikosteam.exotikos.R;
-import com.exotikosteam.exotikos.databinding.FragmentTsaWebpageBinding;
+import com.exotikosteam.exotikos.databinding.FragmentWebpageBinding;
+import com.exotikosteam.exotikos.utils.Constants;
 
 /**
  * Created by lramaswamy on 11/19/16.
  */
 
-public class TSAWebpageFragment extends Fragment {
+public class WebpageFragment extends Fragment {
 
-    FragmentTsaWebpageBinding fragmentTsaWebpageBinding;
+    FragmentWebpageBinding fragmentWebpageBinding;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,16 +35,16 @@ public class TSAWebpageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        fragmentTsaWebpageBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_tsa_webpage, container, false);
-
-        fragmentTsaWebpageBinding.webview.getSettings().setLoadsImagesAutomatically(true);
-        fragmentTsaWebpageBinding.webview.getSettings().setJavaScriptEnabled(true);
-        fragmentTsaWebpageBinding.webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        fragmentWebpageBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_webpage, container, false);
+        String webpageURL = getArguments().getString(Constants.WEBPAGE_URL);
+        fragmentWebpageBinding.webview.getSettings().setLoadsImagesAutomatically(true);
+        fragmentWebpageBinding.webview.getSettings().setJavaScriptEnabled(true);
+        fragmentWebpageBinding.webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         // Configure the client to use when opening URLs
-        fragmentTsaWebpageBinding.webview.setWebViewClient(new TsaWebpageBrowser());
+        fragmentWebpageBinding.webview.setWebViewClient(new TsaWebpageBrowser());
         // Load the initial URL
-        fragmentTsaWebpageBinding.webview.loadUrl("https://www.tsa.gov/travel/security-screening");
-        return fragmentTsaWebpageBinding.getRoot();
+        fragmentWebpageBinding.webview.loadUrl(webpageURL);
+        return fragmentWebpageBinding.getRoot();
     }
 
     // Manages the behavior when URLs are loaded
@@ -63,11 +64,11 @@ public class TSAWebpageFragment extends Fragment {
         }
     }
 
-    public static TSAWebpageFragment newInstance() {
-        TSAWebpageFragment tsaWebpageFragment = new TSAWebpageFragment();
+    public static WebpageFragment newInstance(String webpageURL) {
+        WebpageFragment webpageFragment = new WebpageFragment();
         Bundle bundle = new Bundle();
-        //bundle.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trip));
-        tsaWebpageFragment.setArguments(bundle);
-        return tsaWebpageFragment;
+        bundle.putString(Constants.WEBPAGE_URL, webpageURL);
+        webpageFragment.setArguments(bundle);
+        return webpageFragment;
     }
 }

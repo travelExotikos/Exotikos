@@ -45,7 +45,6 @@ public class SecurityCheckingHelpFragment extends Fragment {
     public static SecurityCheckingHelpFragment newInstance() {
         SecurityCheckingHelpFragment fragmentSecurityHelp = new SecurityCheckingHelpFragment();
         Bundle bundle = new Bundle();
-        //bundle.putParcelable(Constants.PARAM_TRIP, Parcels.wrap(trip));
         fragmentSecurityHelp.setArguments(bundle);
         return fragmentSecurityHelp;
     }
