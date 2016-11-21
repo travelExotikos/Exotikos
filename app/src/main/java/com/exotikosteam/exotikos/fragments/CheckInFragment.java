@@ -71,7 +71,7 @@ public class CheckInFragment extends Fragment {
 
     private void populateData() {
         String text = getResources().getString(R.string.check_in_station);
-        mBinding.tvFindCheckIn.setText(Html.fromHtml(String.format(text, mFlight.getFlightCarrierName()), Html.FROM_HTML_SEPARATOR_LINE_BREAK_DIV));
+        mBinding.tvFindCheckIn.setText(Html.fromHtml(String.format(text, mFlight.getFlightCarrierName())));
     }
 
     @Override

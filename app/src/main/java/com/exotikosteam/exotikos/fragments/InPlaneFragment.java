@@ -83,7 +83,7 @@ public class InPlaneFragment extends Fragment {
         mBinding.tvInPlane.setText(Html.fromHtml(String.format(text,
                 mFlight.getArrivalCity(),
                 Utils.getTimeDeltaFromCurrent(mFlight.getArrivalTimeUTC()),
-                Utils.convertToTime(mFlight.getArrivalTime())), Html.FROM_HTML_MODE_LEGACY));
+                Utils.convertToTime(mFlight.getArrivalTime()))));
     }
 
     private void handleLauncInPlaneHintsActivity() {

@@ -64,7 +64,6 @@ public class FlightListAdapter extends RecyclerSwipeAdapter<FlightListAdapter.Vi
         holder.binding.delete.setOnClickListener(v -> {
             mItemManger.removeShownLayouts(holder.binding.swipe);
             deleteSubject.onNext(flight);
-            deleteSubject.onCompleted();
             mItemManger.closeAllItems();
         });
 
