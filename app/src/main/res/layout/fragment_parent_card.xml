@@ -48,8 +48,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         app:ael_expanded="false"
-        app:ael_duration="10"
-        app:ael_interpolator="bounce"
+        app:ael_duration="300"
+        app:ael_interpolator="accelerate"
         app:ael_orientation="vertical">
 
         <!-- The content of the expanded card should be here -->
