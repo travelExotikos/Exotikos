@@ -8,34 +8,33 @@ Time spent: **4x** hours spent in total for wireframes
 
 The following **required** functionality is completed:
 
-* [ ] Login through Facebook [Owner: Jesus]
-* [ ] Way to input information 
-  * [ ] Bar code scanner [Owner: Ada]
-    * [ ] APIs to use the bar code scanner - library https://pdf417.mobi/ [Owner: Ada]
-    * [ ] What information is obtained from the QR code  [Owner: Ada]
-    * [ ] Use https://shaun.net/whats-contained-in-a-boarding-pass-barcode/ to obtain QR code scanning
-       * [ ] Name
-       * [ ] booking  reference???,
-       * [ ] from-to-airline need dictionary/service to read this. ATLMEMDL=from Atlanta to Memphis, Delta
-       * [ ] Flight #
-       * [ ] Departure day 006 = 06JAN Julian format
-       * [ ] Cabin Y-economy, F-first, J-business
-       * [ ] Seat # 
-  * [ ] Manually provide the information [Owner: Lakshmy] **Optional**
-* [ ] Get the native clock and provide push notification for when the travel is imminent and in progress
-  * [ ] Travel start [Owner: Jesus]
-    * [ ] Upcoming flights list view [Owner: Jesus]
-    * [ ] Flight detail activity
-       * [ ] Fragment - You will flight in X days
-       * [ ] Fragment - Your flight will depart in XX hours, head to {AirportName}
-       * [ ] [Actions] Give me directions
-       * [ ] [Checks section] Before you leave
-       * [ ] Luggage
-       * [ ] Visas
-       * [ ] Medication
-  * [ ] In Progress [Owner: Lakshmy]
-    * [ ] In flight [Owner: Lakshmy]
-      * [ ] Fragment - details on the next leg of the journey
+* [x] Way to input information 
+  * [x] Bar code scanner [Owner: Ada]
+    * [x] APIs to use the bar code scanner - library https://pdf417.mobi/ [Owner: Ada]
+    * [x] What information is obtained from the QR code  [Owner: Ada]
+    * [x] Use https://shaun.net/whats-contained-in-a-boarding-pass-barcode/ to obtain QR code scanning
+       * [x] Name
+       * [x] booking  reference???,
+       * [x] from-to-airline need dictionary/service to read this. ATLMEMDL=from Atlanta to Memphis, Delta
+       * [x] Flight #
+       * [x] Departure day 006 = 06JAN Julian format
+       * [x] Cabin Y-economy, F-first, J-business
+       * [x] Seat # 
+  * [x] Manually provide the information [Owner: Lakshmy] **Optional**
+* [x] Get the native clock and provide push notification for when the travel is imminent and in progress
+  * [x] Travel start [Owner: Jesus]
+    * [x] Upcoming flights list view [Owner: Jesus]
+    * [x] Flight detail activity
+       * [x] Fragment - You will flight in X days
+       * [x] Fragment - Your flight will depart in XX hours, head to {AirportName}
+       * [x] [Actions] Give me directions
+       * [x] [Checks section] Before you leave
+       * [x] Luggage
+       * [ ] Visas ** Stretch **
+       * [ ] Medication ** Stretch **
+  * [x] In Progress [Owner: Lakshmy]
+    * [x] In flight [Owner: Lakshmy]
+      * [x] Fragment - details on the next leg of the journey
        * [ ] In flightCountry
        * [ ] Time zone
        * [ ] Language
@@ -51,13 +50,13 @@ The following **required** functionality is completed:
        * [ ] Time gap between landing to next gate
        * [ ] provide weather information, 
        * [ ] provide baggage information
-  * [ ] Provide users will additional help needed along the way[Owner: Ada]
-    * [ ] Include translation as needed [Owner: Ada]
+  * [x] Provide users will additional help needed along the way[Owner: Ada]
+    * [x] Include translation as needed [Owner: Ada]
    
 
 The following **optional** features are implemented:
   * [ ] Barometric pressure changes - provide exercises to pop ears [stretch]
-  * [ ] Manually allow users to input travel information [Owner: Lakshmy] 
+  * [x] Manually allow users to input travel information [Owner: Lakshmy] 
 
 The following **bonus** features are implemented:
 
