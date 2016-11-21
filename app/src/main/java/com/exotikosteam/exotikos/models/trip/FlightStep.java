@@ -11,6 +11,4 @@ public enum FlightStep {
     BOARDING,
     IN_PLANE,
     DONE;
-
-
 }

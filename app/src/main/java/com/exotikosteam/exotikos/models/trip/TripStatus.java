@@ -99,6 +99,10 @@ public class TripStatus extends BaseModel {
         return currentFlight;
     }
 
+    public Flight getCurrentFlightInstance() {
+        return flights.get(currentFlight);
+    }
+
     public void setCurrentFlight(Integer currentFlight) {
         this.currentFlight = currentFlight;
     }

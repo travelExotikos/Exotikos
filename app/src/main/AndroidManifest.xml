@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.exotikosteam.exotikos">
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -42,6 +44,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.TravelPrepProcessActivity"
             android:label="Checkin List"/>
@@ -57,6 +60,20 @@
         <activity
             android:name=".activities.SecurityProcessActivity"
             android:label="@string/launchSecurityCheck" />
+
+        <!-- Services -->
+        <service android:name=".services.TripTrackerService" />
+
+        <!-- Receivers -->
+        <receiver android:name="com.commonsware.cwac.wakeful.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="com.commonsware.cwac.wakeful"
+                android:resource="@xml/wakeful"/>
+        </receiver>
 
         <meta-data
             android:name="io.fabric.ApiKey"

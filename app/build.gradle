@@ -21,6 +21,7 @@ repositories {
     maven { url 'https://maven.fabric.io/public' }
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'http://maven.microblink.com' }
+    maven { url 'https://s3.amazonaws.com/repo.commonsware.com' }
 }
 
 android {
@@ -100,4 +101,6 @@ dependencies {
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    compile 'com.commonsware.cwac:wakeful:1.0.+'
+    compile 'net.danlew:android.joda:2.9.5'
 }
