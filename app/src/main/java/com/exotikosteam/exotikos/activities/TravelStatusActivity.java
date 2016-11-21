@@ -54,7 +54,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         prepareDrawableMenu();
 
         cardViewFragmentList = new ArrayList<>(5);
-        trip = Parcels.unwrap(getIntent().getParcelableExtra("trip"));
+        trip = Parcels.unwrap(getIntent().getParcelableExtra(Constants.PARAM_TRIP));
 
         appId = ((ExotikosApplication)getApplication()).getFligthStatsAppID();
         appKey = ((ExotikosApplication)getApplication()).getFligthStatsAppKey();
@@ -152,9 +152,6 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         if (Constants.GO_TO_AIRPORT_PAGE.equals(buttonName)) {
             showAiportLocationPage();
         }
-        if (Constants.GO_TO_SCAN_PAGE.equals(buttonName)) {
-            showTravelScanFragment();
-        }
         if (Constants.GO_TO_CHECK_IN_HINTS.equals(buttonName)) {
             showCheckInHintsActivity();
         }
@@ -228,11 +225,5 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
-    }
-
-    private void showTravelScanFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.frgPlaceholder, FragmentTravelScan.newInstance(this.trip));
-        ft.commit();
     }
 }

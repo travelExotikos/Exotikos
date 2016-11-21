@@ -80,13 +80,13 @@
         In next step you can find exercises which will help make your trip more compfortable.
         </p>
         ]]></string>
-    <string name="in_plane_hint_tab_exercises1">1</string>
-    <string name="in_plane_hint_tab_exercises2">2</string>
-    <string name="in_plane_hint_tab_exercises3">3</string>
-    <string name="in_plane_hint_tab_exercises4">4</string>
-    <string name="in_plane_hint_tab_exercises5">5</string>
-    <string name="in_plane_hint_tab_exercises6">6</string>
-    <string name="in_plane_hint_tab_exercises7">7</string>
+    <string name="in_plane_hint_tab_exercises1">Foots</string>
+    <string name="in_plane_hint_tab_exercises2">Foots</string>
+    <string name="in_plane_hint_tab_exercises3">Knees</string>
+    <string name="in_plane_hint_tab_exercises4">Shoulders</string>
+    <string name="in_plane_hint_tab_exercises5">Neck</string>
+    <string name="in_plane_hint_tab_exercises6">Beck</string>
+    <string name="in_plane_hint_tab_exercises7">Walk</string>
     <string name="in_plane_hint_exercise1_info">TODO - translate text from picture1</string>
     <string name="in_plane_hint_exercise2_info">TODO - translate text from picture2</string>
     <string name="in_plane_hint_exercise3_info">TODO - translate text from picture3</string>

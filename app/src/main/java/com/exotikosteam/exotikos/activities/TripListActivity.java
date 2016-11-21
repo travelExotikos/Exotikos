@@ -58,7 +58,7 @@ public class TripListActivity extends AppCompatActivity {
         });
 
         flightListAdapter.getItemClickSubject().retry().subscribe(flight -> {
-            Intent i = new Intent(TripListActivity.this, MainActivity.class);
+            Intent i = new Intent(TripListActivity.this, TravelStatusActivity.class);
             TripStatus trip = getTripForFlight(flight);
             i.putExtra(Constants.PARAM_TRIP, Parcels.wrap(trip));
             startActivity(i);
