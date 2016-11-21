@@ -43,13 +43,17 @@ The following **required** functionality is completed:
        * [ ] Leg exercises
        * [ ] Back exercises
        * [ ] In airport [Owner: Lakshmy]
-  * [ ] Destination [Owner: Lakshmy]
-    * [ ] In airport
-       * [ ] Provide weather information 
-       * [ ] Provide next gate information
-       * [ ] Time gap between landing to next gate
-       * [ ] provide weather information, 
-       * [ ] provide baggage information
+  * [X] Security Checkin [Owner: Lakshmy]
+    * [X] In airport
+       * [X] Provide video on checkin
+       * [X] Provide information on prohibited items
+       * [X] Provide information on what needs to be done for security
+       * [X] Provide webpage on both TSA security and prohibited items
+  * [X] Destination [Owner: Lakshmy]
+    * [X] In airport
+       * [X] Provide next gate information
+       * [X] Time gap between landing to next gate
+       * [X] provide baggage information
   * [x] Provide users will additional help needed along the way[Owner: Ada]
     * [x] Include translation as needed [Owner: Ada]
    
@@ -58,9 +62,6 @@ The following **optional** features are implemented:
   * [ ] Barometric pressure changes - provide exercises to pop ears [stretch]
   * [x] Manually allow users to input travel information [Owner: Lakshmy] 
 
-The following **bonus** features are implemented:
-
-* [ ] Yelp with top restaurants in the airport 
 
 The following **additional** features are implemented:
 
