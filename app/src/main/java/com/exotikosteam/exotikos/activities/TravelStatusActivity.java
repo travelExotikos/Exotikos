@@ -132,8 +132,14 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
                 cardViewFragmentList.get(3).getTitleClickSubject(),
                 cardViewFragmentList.get(4).getTitleClickSubject(),
                 cardViewFragmentList.get(5).getTitleClickSubject()
-        ).subscribe(fragment -> ((CardViewFragment)fragment).toggle());
-
+        ).subscribe(fragment -> {
+            for (CardViewFragment f: cardViewFragmentList) {
+                if (!fragment.equals(f)) {
+                    f.collapse();
+                }
+            }
+            ((CardViewFragment) fragment).toggle();
+        });
     }
 
     @Override

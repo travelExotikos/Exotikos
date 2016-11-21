@@ -8,19 +8,6 @@
     android:orientation="vertical"
     android:animateLayoutChanges="true">
 
-    <TextView
-        android:id="@+id/tvCardName"
-        tools:text="Card Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/card_header_padding"
-        android:layout_marginStart="@dimen/card_header_padding"
-        android:layout_marginLeft="@dimen/card_header_padding"
-        android:layout_marginBottom="@dimen/card_header_padding"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/tvTime"
@@ -30,9 +17,25 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_marginEnd="@dimen/card_header_padding"
         android:layout_marginRight="@dimen/card_header_padding"
-        android:layout_alignBottom="@+id/tvCardName"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/tvCardName"
+        tools:text="Card Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@id/tvTime"
+        android:layout_toStartOf="@id/tvTime"
+        android:layout_alignBaseline="@+id/tvTime"
+        android:layout_marginTop="@dimen/card_header_padding"
+        android:layout_marginStart="@dimen/card_header_padding"
+        android:layout_marginLeft="@dimen/card_header_padding"
+        android:layout_marginBottom="@dimen/card_header_padding"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <com.github.aakira.expandablelayout.ExpandableRelativeLayout
         android:id="@+id/rlCardContents"
@@ -45,7 +48,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         app:ael_expanded="false"
-        app:ael_duration="500"
+        app:ael_duration="10"
         app:ael_interpolator="bounce"
         app:ael_orientation="vertical">
 
