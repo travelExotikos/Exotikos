@@ -127,5 +127,9 @@
     <string name="departure_time_notification" formatted="false">Your flight departure was %s %s</string>
     <string name="date_difference_ahead">moved ahead</string>
     <string name="date_difference_delay">delayed</string>
+    <string name="flight_checkin_notification">You can now Check In</string>
+    <string name="leave_for_airport_notification">You should head to %s airport</string>
+    <string name="head_to_security_notification">You should go through security to avoid delays</string>
+    <string name="head_to_gate_notification">Head to Gate %s</string>
 </resources>
 

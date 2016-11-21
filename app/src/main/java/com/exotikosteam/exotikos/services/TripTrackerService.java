@@ -12,11 +12,13 @@ import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.activities.TravelStatusActivity;
+import com.exotikosteam.exotikos.models.events.EventInputContext;
 import com.exotikosteam.exotikos.models.flightstatus.DateLocalAndUTC;
 import com.exotikosteam.exotikos.models.flightstatus.FlightStatus;
 import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
+import com.exotikosteam.exotikos.utils.EventProcessor;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
 
@@ -63,9 +65,11 @@ public class TripTrackerService extends WakefulIntentService {
         flightSchedule = app.getFlightScheduleService();
 
         Log.i(TAG, "Service is up and running");
+
         // Do some clever work
         for (TripStatus trip: TripStatus.getAll()) {
             updateTripStatus(trip);
+            processFlightEvents(trip);
         }
         Log.i(TAG, "Service is done. Going to sleep");
     }
@@ -204,12 +208,23 @@ public class TripTrackerService extends WakefulIntentService {
                                 flight.setArrivalTerminal(scheduledFlight.getArrivalTerminal());
                                 flight.setArrivalTime(scheduledFlight.getArrivalTime());
                                 flight.setDepartureTime(scheduledFlight.getDepartureTime());
+                                // TODO how to get UTC?
                             }
 
                             flight.save();
                         });
             }
         }
+    }
+
+    private void processFlightEvents(TripStatus trip) {
+        DateTime now = new DateTime(DateTimeZone.UTC);
+        EventProcessor ep = EventProcessor.newDefaultInstance(this);
+        for (Flight f : trip.getFlights()) {
+            ep.process(new EventInputContext(trip, f, now, null));
+        }
+        trip.setUpdatedAt(now.toDate());
+        trip.save();
     }
 
     private boolean flightIsClose(Flight flight) {

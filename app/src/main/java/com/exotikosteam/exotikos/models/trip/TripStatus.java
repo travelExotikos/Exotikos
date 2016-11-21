@@ -16,6 +16,7 @@ import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,6 +43,9 @@ public class TripStatus extends BaseModel {
 
     @Column
     Integer currentFlight;
+
+    @Column(name= "updated_at")
+    Date updatedAt;
 
     List<Flight> flights = new ArrayList<>();
 
@@ -107,6 +111,22 @@ public class TripStatus extends BaseModel {
         this.currentFlight = currentFlight;
     }
 
+    public Integer getFlightStepOrdinal() {
+        return flightStepOrdinal;
+    }
+
+    public void setFlightStepOrdinal(Integer flightStepOrdinal) {
+        this.flightStepOrdinal = flightStepOrdinal;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public static TripStatus get(Integer id) {
         return SQLite.select().from(TripStatus.class).where(TripStatus_Table.id.eq(id)).querySingle();
     }
@@ -119,6 +139,7 @@ public class TripStatus extends BaseModel {
         for (Flight f: tripStatus.getFlights()) {
             f.save();
         }
+        tripStatus.setUpdatedAt(new Date());
         tripStatus.save();
     }
 
@@ -187,6 +208,7 @@ public class TripStatus extends BaseModel {
             flight.save();
             trip.getFlights().add(flight);
         }
+        trip.setUpdatedAt(new Date());
         trip.save();
         return trip;
     }
@@ -195,6 +217,7 @@ public class TripStatus extends BaseModel {
         TripStatus trip = new TripStatus();
         trip.setFlightStep(FlightStep.PREPARATION);
         trip.setCurrentFlight(0);
+        trip.setUpdatedAt(new Date());
         trip.save();
         int i = 0;
         for (Flight f: flights) {
