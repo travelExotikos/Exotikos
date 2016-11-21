@@ -74,6 +74,12 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
         ft.add(R.id.cards, f, cardName);
         ft.commit();
 
+        if (getArguments().getBoolean("collapsed")) {
+            collapse();
+        } else {
+            expand();
+        }
+
         setupListeners();
     }
 
