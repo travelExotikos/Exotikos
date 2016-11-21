@@ -20,7 +20,7 @@ The following **required** functionality is completed:
        * [x] Departure day 006 = 06JAN Julian format
        * [x] Cabin Y-economy, F-first, J-business
        * [x] Seat # 
-  * [x] Manually provide the information [Owner: Lakshmy] **Optional**
+  * [X] Manually provide the information [Owner: Lakshmy] **Optional**
 * [x] Get the native clock and provide push notification for when the travel is imminent and in progress
   * [x] Travel start [Owner: Jesus]
     * [x] Upcoming flights list view [Owner: Jesus]
