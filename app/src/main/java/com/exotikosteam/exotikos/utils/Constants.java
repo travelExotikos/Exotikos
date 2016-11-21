@@ -1,5 +1,7 @@
 package com.exotikosteam.exotikos.utils;
 
+import org.joda.time.Period;
+
 /**
  * Created by ada on 11/12/16.
  */
@@ -19,7 +21,7 @@ public class Constants {
     public static final String YOUHAVE = "You have ";
     public static final String TOBOARD = " to Board";
     public static final String TOCHECKIN = " to Checkin";
-
+    
     public static final String GO_TO_CHECK_IN_HINTS = "gotoCheckInHints";
     public static final String GO_TO_SECURITY_VIDEO_HINT = "gotoSecurityVideoHint";
     public static final String GO_TO_IN_PLANE_HINTS = "gotoInPlaneHints";
@@ -42,5 +44,11 @@ public class Constants {
     public static final String TSA_WEBLBL = "TSA Webpage";
     public static final String RESTRICTED = "Restricted Items";
     public static final String RESTRICTED_PAGE = "Restricted Webpage";
+
+    public static final long SERVICE_INTERVAL = 5 * 60000L;
+    public static final Period NOTIFY_CHECKIN_AVAILABLE = Period.hours(24);
+    public static final Period NOTIFY_LEAVE_FOR_AIRPORT = Period.hours(5);
+    public static final Period NOTIFY_HEAD_TO_SECURITY = new Period(2, 30, 0, 0); // 2h 30min
+    public static final Period NOTIFY_HEAD_TO_DEPARTURE_GATE = Period.hours(1);
 
 }

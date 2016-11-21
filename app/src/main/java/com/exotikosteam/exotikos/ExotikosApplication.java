@@ -6,7 +6,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.crashlytics.android.Crashlytics;
+import com.exotikosteam.exotikos.services.TripTrackerAlarmListener;
 import com.exotikosteam.exotikos.thirdparty.LenientGsonConverterFactory;
 import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
@@ -19,6 +21,8 @@ import com.google.gson.GsonBuilder;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowLog;
 import com.raizlabs.android.dbflow.config.FlowManager;
+
+import net.danlew.android.joda.JodaTimeAndroid;
 
 import io.fabric.sdk.android.Fabric;
 import okhttp3.OkHttpClient;
@@ -89,6 +93,11 @@ public class ExotikosApplication extends Application {
 
         flightScheduleService = getFlightstatsRetrofit()
                 .create(SchedulesApiEndpoint.class);
+
+        JodaTimeAndroid.init(this);
+
+
+        WakefulIntentService.scheduleAlarms(new TripTrackerAlarmListener(), this, false);
     }
 
     public String getFligthStatsAppID() {

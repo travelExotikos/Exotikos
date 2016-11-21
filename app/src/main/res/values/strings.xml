@@ -116,5 +116,20 @@
     <string name="sharpObjDetails">Only Disposable Razors are allowed in Carryon. Other sharp objects such as scissors, knives, etc are allowed in Checkin Luggage.</string>
     <string name="sportingGoodsDetails">Skates, including ice skates and rollerblades are allowed in Carryon. Other sporting goods such as baseball bats, etc can be taken in Checkin Luggage.</string>
     <string name="toolsDetails">Screwdrivers/Wrenches/Pliers Less than seven inches in length are allowed in Carryon. Others such as hammer, drills, drill bits, etc can be taken in Checkin Luggage.</string>
+
+    <!-- Notifications -->
+    <string name="baggage_claim_notification">Your baggage will be in claim %s</string>
+    <string name="arrival_gate_notification" formatted="false">Your flight will arrive to Gate %s</string>
+    <string name="departure_gate_notification" formatted="false">Your flight will depart from Gate %s</string>
+    <string name="departure_terminal_notification" formatted="false">Your flight will depart from Terminal %s</string>
+    <string name="arrival_terminal_notification" formatted="false">Your flight will arrive to Terminal %s</string>
+    <string name="arrival_time_notification" formatted="false">Your flight arrival was %s %s</string>
+    <string name="departure_time_notification" formatted="false">Your flight departure was %s %s</string>
+    <string name="date_difference_ahead">moved ahead</string>
+    <string name="date_difference_delay">delayed</string>
+    <string name="flight_checkin_notification">You can now Check In</string>
+    <string name="leave_for_airport_notification">You should head to %s airport</string>
+    <string name="head_to_security_notification">You should go through security to avoid delays</string>
+    <string name="head_to_gate_notification">Head to Gate %s</string>
 </resources>
 
