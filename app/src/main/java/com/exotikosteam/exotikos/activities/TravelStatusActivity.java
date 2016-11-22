@@ -64,10 +64,19 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         Date departureTime = Utils.parseFlightstatsDate(flight.getDepartureTime());
 
         createTravelPrepCard();
+        /* TODO this code has been commented for demo
         createCheckinCard(flight.getDepartureTimeUTC());
         createSecurityCheckinCard(flight.getDepartureTimeUTC());
         createBoardingGateCard(flight.getDepartureTimeUTC());
         createInPlaneCard(flight.getArrivalTimeUTC());
+        */
+
+        //TODO remove this code after resolved problem with UTC time
+        createCheckinCard(Utils.parseFlightstatsDate(flight.getDepartureTime()));
+        createSecurityCheckinCard(Utils.parseFlightstatsDate(flight.getDepartureTime()));
+        createBoardingGateCard(Utils.parseFlightstatsDate(flight.getDepartureTime()));
+        createInPlaneCard(Utils.parseFlightstatsDate(flight.getArrivalTime()));
+
         createDestinationCard(flight);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

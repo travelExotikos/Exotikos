@@ -85,14 +85,14 @@ public class Utils {
         StringBuffer sbf = new StringBuffer();
         if(days > 0) {
             sbf.append(Integer.toString(days));
-            sbf.append(" days ");
+            sbf.append("d ");
         }
         if(hours > 0) {
             sbf.append(Integer.toString(hours));
-            sbf.append(" hours ");
+            sbf.append("h ");
         }
         sbf.append(Integer.toString(min));
-        sbf.append(" mins ");
+        sbf.append("min ");
         return sbf.toString();
     }
 
