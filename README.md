@@ -39,10 +39,10 @@ The following **required** functionality is completed:
        * [ ] Time zone
        * [ ] Language
        * [ ] Details of the next airport (shops, etc) [Stretch]
-     * [ ] Fragment - inflight exercises
-       * [ ] Leg exercises
-       * [ ] Back exercises
-       * [ ] In airport [Owner: Lakshmy]
+     * [x] Fragment - inflight exercises
+       * [x] Leg exercises
+       * [x] Back exercises
+       * [x] In airport [Owner: Ada]
   * [X] Security Checkin [Owner: Lakshmy]
     * [X] In airport
        * [X] Provide video on checkin
