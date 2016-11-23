@@ -18,6 +18,7 @@ public interface ImageSearchApiEndpoint {
             @Query("o") String output,
             @Query("native") int isNative,
             @Query("b") int b,
+            @Query("n") int count,
             @Query("p") String query
     );
 
