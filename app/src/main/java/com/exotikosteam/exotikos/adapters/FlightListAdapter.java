@@ -6,14 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
+import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.ItemFlightBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
 
 import java.util.List;
 
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
 public class FlightListAdapter extends RecyclerSwipeAdapter<FlightListAdapter.ViewHolder> {
@@ -26,10 +30,12 @@ public class FlightListAdapter extends RecyclerSwipeAdapter<FlightListAdapter.Vi
 
     private final PublishSubject<Flight> itemClickSubject = PublishSubject.create();
     private final PublishSubject<Flight> deleteSubject = PublishSubject.create();
+    private ExotikosApplication app;
 
     public FlightListAdapter(Context mContext, List<Flight> mFlights) {
         this.mFlights = mFlights;
         this.mContext = mContext;
+        this.app = (ExotikosApplication)mContext.getApplicationContext();
     }
 
     public PublishSubject<Flight> getItemClickSubject() {
@@ -69,6 +75,18 @@ public class FlightListAdapter extends RecyclerSwipeAdapter<FlightListAdapter.Vi
 
         holder.binding.setFlight(flight);
         holder.binding.executePendingBindings();
+
+        app.getYahooSearchService()
+                .getByQuery("js", 1, 0, 1, flight.getArrivalCity() + " city")
+                .flatMapIterable(imageSearch -> imageSearch.getResults())
+                .map(result -> result.getIurl())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(url -> {
+                    Glide.with(mContext)
+                            .load(url)
+                            .into(holder.binding.ivBackground);
+                });
     }
 
     @Override

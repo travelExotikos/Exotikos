@@ -53,4 +53,6 @@
     <color name="tweet_transparent_bg">#80000000</color>
     <color name="twitter_active_retweet">#ff5fba7d</color>
     <color name="twitter_active_fav">#ffe81c4f</color>
+    <color name="flight_item_background_guard">#b0ffffff</color>
+    <color name="flight_item_font">#ff000000</color>
 </resources>
