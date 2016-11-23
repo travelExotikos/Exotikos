@@ -49,125 +49,152 @@
         </LinearLayout>
 
         <!-- Main view -->
-        <RelativeLayout
-            android:id="@+id/rlContainer"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/airline_item_padding"
-            android:background="@android:color/background_light"
-            android:clickable="true">
+            android:background="@android:color/background_light">
 
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:id="@+id/ivAirlineImage"
-                tools:src="@drawable/ic_add_24dp"
-                app:imageUrl='@{flight.airlineIconUrl}'
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:descendantFocusability="blocksDescendants"
-                android:focusable="false"
-                android:layout_marginRight="@dimen/airline_item_padding" />
-
-            <TextView
-                tools:text="Airline Name"
-                android:text='@{flight.flightCarrierName}'
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/ivAirlineImage"
-                android:layout_toEndOf="@+id/ivAirlineImage"
-                android:id="@+id/tvAirlineName" />
-
-            <TextView
-                tools:text="XY123"
-                android:text='@{flight.flightCarrier + flight.flightNumber}'
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/tvAirlineName"
-                android:layout_toEndOf="@+id/tvAirlineName"
-                android:layout_marginLeft="5dp"
-                android:id="@+id/tvFlightNumber" />
-
-            <TextView
-                tools:text="FROM"
-                android:text='@{flight.departureCity}'
-                android:textStyle="italic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/tvAirlineName"
-                android:layout_toRightOf="@+id/ivAirlineImage"
-                android:layout_toEndOf="@+id/ivAirlineImage"
-                android:id="@+id/tvFromAirport" />
-
-            <TextView
-                tools:text="XXX"
-                android:text='@{flight.departureAirportIATA}'
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvFromAirport"
-                android:layout_toRightOf="@+id/ivAirlineImage"
-                android:layout_toEndOf="@+id/ivAirlineImage"
-                android:id="@+id/tvFromCode" />
-
-            <TextView
-                tools:text="0:00AM"
-                app:asShortTime='@{flight.departureTime}'
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvFromCode"
-                android:layout_toRightOf="@+id/ivAirlineImage"
-                android:layout_toEndOf="@+id/ivAirlineImage"
-                android:id="@+id/tvFromTime" />
-
-            <View
+                android:id="@+id/ivBackground"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@+id/tvFromAirport"
-                android:layout_toLeftOf="@+id/tvToAirport"
-                android:layout_alignBaseline="@id/tvFromAirport"
-                android:background="@color/colorAccent"/>
+                android:layout_height="match_parent"
+                tools:background="@android:color/black"
+                android:scaleType="centerCrop"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rlContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/flight_item_image_margin"
+                    android:padding="@dimen/airline_item_padding"
+                    android:background="@color/flight_item_background_guard"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/ivAirlineImage"
+                        tools:src="@drawable/ic_add_24dp"
+                        app:imageUrl='@{flight.airlineIconUrl}'
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:descendantFocusability="blocksDescendants"
+                        android:focusable="false"
+                        android:layout_marginRight="@dimen/airline_item_padding" />
+
+                    <TextView
+                        tools:text="Airline Name"
+                        android:text='@{flight.flightCarrierName}'
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/ivAirlineImage"
+                        android:layout_toEndOf="@+id/ivAirlineImage"
+                        android:id="@+id/tvAirlineName"
+                        android:textColor="@color/flight_item_font"/>
+
+                    <TextView
+                        tools:text="XY123"
+                        android:text='@{flight.flightCarrier + flight.flightNumber}'
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/tvAirlineName"
+                        android:layout_toEndOf="@+id/tvAirlineName"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/tvFlightNumber"
+                        android:textColor="@color/flight_item_font"/>
+
+                    <TextView
+                        tools:text="FROM"
+                        android:text='@{flight.departureCity}'
+                        android:textStyle="italic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/tvAirlineName"
+                        android:layout_toRightOf="@+id/ivAirlineImage"
+                        android:layout_toEndOf="@+id/ivAirlineImage"
+                        android:id="@+id/tvFromAirport"
+                        android:textColor="@color/flight_item_font"/>
+
+                    <TextView
+                        tools:text="XXX"
+                        android:text='@{flight.departureAirportIATA}'
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvFromAirport"
+                        android:layout_toRightOf="@+id/ivAirlineImage"
+                        android:layout_toEndOf="@+id/ivAirlineImage"
+                        android:id="@+id/tvFromCode"
+                        android:textColor="@color/flight_item_font"/>
+
+                    <TextView
+                        tools:text="0:00AM"
+                        app:asShortTime='@{flight.departureTime}'
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvFromCode"
+                        android:layout_toRightOf="@+id/ivAirlineImage"
+                        android:layout_toEndOf="@+id/ivAirlineImage"
+                        android:id="@+id/tvFromTime"
+                        android:textColor="@color/flight_item_font"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@+id/tvFromAirport"
+                        android:layout_toLeftOf="@+id/tvToAirport"
+                        android:layout_alignBaseline="@id/tvFromAirport"
+                        android:background="@color/colorAccent"/>
 
 
-            <TextView
-                tools:text="TO"
-                android:text='@{flight.arrivalCity}'
-                android:textStyle="italic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tvFromAirport"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/tvToAirport" />
+                    <TextView
+                        tools:text="TO"
+                        android:text='@{flight.arrivalCity}'
+                        android:textStyle="italic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tvFromAirport"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/tvToAirport"
+                        android:textColor="@color/flight_item_font"/>
 
-            <TextView
-                tools:text="XXX"
-                android:text='@{flight.arrivalAirportIATA}'
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvToAirport"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/tvToCode" />
+                    <TextView
+                        tools:text="XXX"
+                        android:text='@{flight.arrivalAirportIATA}'
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvToAirport"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/tvToCode"
+                        android:textColor="@color/flight_item_font"/>
 
-            <TextView
-                tools:text="0:00AM"
-                app:asShortTime='@{flight.arrivalTime}'
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvToCode"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:id="@+id/tvToTime" />
+                    <TextView
+                        tools:text="0:00AM"
+                        app:asShortTime='@{flight.arrivalTime}'
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvToCode"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/tvToTime"
+                        android:textColor="@color/flight_item_font"/>
 
-        </RelativeLayout>
+                </RelativeLayout>
+            </FrameLayout>
+        </FrameLayout>
     </com.daimajia.swipe.SwipeLayout>
 </layout>
