@@ -14,6 +14,7 @@ import com.exotikosteam.exotikos.webservices.flightstats.AirlinesApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.AirportsApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.FlightStatusApiEndpoint;
 import com.exotikosteam.exotikos.webservices.flightstats.SchedulesApiEndpoint;
+import com.exotikosteam.exotikos.webservices.yahoosearch.ImageSearchApiEndpoint;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
@@ -35,14 +36,17 @@ public class ExotikosApplication extends Application {
     public static final String TAG = ExotikosApplication.class.getSimpleName();
 
     public static final String FLIGHTSTATS_API_BASE = "https://api.flightstats.com/";
+    public static final String YAHOO_SEARCH_API_BASE = "https://m.search.yahoo.com/";
 
     private String fligthStatsAppID;
     private String fligthStatsAppKey;
     private Retrofit flightstatsRetrofit;
+    private Retrofit yahooSearchRetrofit;
     private AirlinesApiEndpoint airlinesService;
     private AirportsApiEndpoint airportsService;
     private FlightStatusApiEndpoint flightStatusService;
     private SchedulesApiEndpoint flightScheduleService;
+    private ImageSearchApiEndpoint yahooSearchService;
 
     @Override
     public void onCreate() {
@@ -81,6 +85,12 @@ public class ExotikosApplication extends Application {
                 .addConverterFactory(LenientGsonConverterFactory.create(gson))
                 .addCallAdapterFactory(rxAdapter)
                 .build();
+        
+        yahooSearchRetrofit = new Retrofit.Builder()
+                .baseUrl(YAHOO_SEARCH_API_BASE)
+                .addConverterFactory(LenientGsonConverterFactory.create(gson))
+                .addCallAdapterFactory(rxAdapter)
+                .build();
 
         airlinesService = getFlightstatsRetrofit()
                 .create(AirlinesApiEndpoint.class);
@@ -93,6 +103,9 @@ public class ExotikosApplication extends Application {
 
         flightScheduleService = getFlightstatsRetrofit()
                 .create(SchedulesApiEndpoint.class);
+
+        yahooSearchService = getYahooSearchRetrofit()
+                .create(ImageSearchApiEndpoint.class);
 
         JodaTimeAndroid.init(this);
 
@@ -112,6 +125,10 @@ public class ExotikosApplication extends Application {
         return flightstatsRetrofit;
     }
 
+    public Retrofit getYahooSearchRetrofit() {
+        return yahooSearchRetrofit;
+    }
+
     public AirlinesApiEndpoint getAirlinesService() {
         return airlinesService;
     }
@@ -126,5 +143,9 @@ public class ExotikosApplication extends Application {
 
     public SchedulesApiEndpoint getFlightScheduleService() {
         return flightScheduleService;
+    }
+
+    public ImageSearchApiEndpoint getYahooSearchService() {
+        return yahooSearchService;
     }
 }
