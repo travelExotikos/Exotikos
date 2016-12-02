@@ -124,6 +124,11 @@ public class TripTrackerService extends WakefulIntentService {
                                 status = f;
                             }
 
+                            if (status == null) {
+                                Log.e(TAG, "Error loading FlightStatus data for " + flight.getFlightCarrier() + flight.getFlightNumber());
+                                return;
+                            }
+
                             if (status.getAirportResources() != null) {
                                 flight.setBaggage(updateStringParam(
                                         trip,
