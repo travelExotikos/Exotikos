@@ -7,41 +7,62 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
-        <item name="colorAccent">@color/twitter_blue</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="colorAccent">@color/twitter_blue</item>
+        <item name="colorAccent">@color/accent</item>
         <item name="actionBarStyle">@style/ExotikosActionBar</item>
         <item name="android:actionBarStyle">@style/ExotikosActionBar</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@color/twitter_lighter_grey</item>
+        <item name="android:windowBackground">@color/secondary_light</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_light</item>
+        <item name="android:textAppearanceLarge">@style/Base.TextAppearance.AppCompat.Title</item>
     </style>
 
     <style name="AppThemeActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="colorAccent">@color/twitter_blue</item>
+        <item name="colorAccent">@color/accent</item>
         <item name="actionBarStyle">@style/ExotikosActionBar</item>
         <item name="android:actionBarStyle">@style/ExotikosActionBar</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@color/twitter_lighter_grey</item>
+        <item name="android:windowBackground">@color/secondary_light</item>
     </style>
 
     <style name="ExotikosActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/twitter_blue</item>
-        <item name="background">@color/twitter_blue</item>
+        <item name="android:background">@color/primary_dark</item>
+        <item name="background">@color/primary_dark</item>
+    </style>
+
+    <style name="ExotikosCardHeaderBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/divider</item>
+        <item name="background">@color/divider</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
     </style>
 
     <style name="ExotikosToolbar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="android:textColorPrimary">@color/twitter_lighter_grey</item>
-        <item name="android:textColorSecondary">@color/twitter_light_grey</item>
-        <item name="actionMenuTextColor">@color/twitter_lighter_grey</item>
-        <item name="android:background">@color/twitter_blue</item>
-        <item name="background">@color/twitter_blue</item>
-        <item name="colorControlNormal">@color/twitter_light_grey</item>
+        <item name="android:textColorPrimary">@color/primary_text</item>
+        <item name="android:textColorSecondary">@color/secondary_text</item>
+        <item name="actionMenuTextColor">@color/primary_text</item>
+        <item name="android:background">@color/primary_dark</item>
+        <item name="background">@color/secondary_light</item>
+        <item name="colorControlNormal">@color/primary</item>
     </style>
+
+
+
+    <color name="primary">#00BCD4 </color>
+    <color name="primary_dark">#0097A7 </color>
+    <color name="primary_light">#B2EBF2 </color>
+    <color name="secondary_light">#fff5f8fa</color>
+    <color name="accent">#009688 </color>
+    <color name="primary_text">#212121 </color>
+    <color name="secondary_text">#757575 </color>
+    <color name="icons">#FFFFFF </color>
+    <color name="divider">#BDBDBD </color>
 
     <color name="twitter_blue">#55acee</color>
     <color name="twitter_lighter_grey">#fff5f8fa</color>

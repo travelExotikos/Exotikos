@@ -4,12 +4,12 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/twitter_light_grey">
+        >
 
         <TextView
             tools:text="A54"
             android:layout_width="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display2"
+
             android:layout_height="wrap_content"
             android:textSize="@dimen/dmGateSize"
             android:layout_alignParentTop="true"
@@ -20,7 +20,7 @@
         <TextView
             tools:text="Terminal 3"
             android:layout_width="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+
             android:textSize="@dimen/dmTerminalSize"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvBoardingGate"
@@ -32,7 +32,8 @@
             android:text="You have 1hr 45min to board"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="15dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             android:id="@+id/tvTimetoBoard"
             android:layout_below="@+id/tvTerminal"

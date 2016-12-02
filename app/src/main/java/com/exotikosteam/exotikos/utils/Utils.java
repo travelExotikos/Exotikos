@@ -1,8 +1,14 @@
 package com.exotikosteam.exotikos.utils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
+
+import com.exotikosteam.exotikos.models.airport.Airport;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -132,5 +138,24 @@ public class Utils {
         Date currentTime = new Date();
         long timeToBoardMin = Utils.getDiffTime(currentTime, c.getTime());
         return Utils.convertminsToProperString(timeToBoardMin);
+    }
+
+    public static void showAiportLocationPage(Airport departureAirport, Activity activity, Context context) {
+        double latitude = departureAirport.getLatitude();
+        double longitude = departureAirport.getLongitude();
+
+        String label = departureAirport.getName();
+        String uriBegin = "geo:" + latitude + "," + longitude + "(" + label + ")";
+        String query1 = departureAirport.getStreet1() + " " + departureAirport.getStreet2() +
+                " " + departureAirport.getCity() + " " + departureAirport.getStateCode() + " "
+                + departureAirport.getPostalCode() + " " + departureAirport.getCountryName();
+        String encodedQuery = Uri.encode(query1);
+        String uriString = uriBegin + "?q=" + encodedQuery;
+        Uri uri = Uri.parse(uriString);
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+        intent.setPackage(Constants.GOOGLE_MAP_PACKAGE);
+        if (intent.resolveActivity(activity.getPackageManager()) != null) {
+            context.startActivity(intent);
+        }
     }
 }

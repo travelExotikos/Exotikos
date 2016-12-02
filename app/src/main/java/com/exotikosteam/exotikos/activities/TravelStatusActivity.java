@@ -1,7 +1,6 @@
 package com.exotikosteam.exotikos.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -44,7 +43,6 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
     String appId;
     String appKey;
     Airport departureAirport;
-    AirportsApiEndpoint airportsService;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,7 +157,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
     @Override
     public void handleButtonsClicks(String buttonName) {
         if (Constants.GO_TO_AIRPORT_PAGE.equals(buttonName)) {
-            showAiportLocationPage();
+            Utils.showAiportLocationPage(departureAirport, this, getApplicationContext());
         }
         if (Constants.GO_TO_CHECK_IN_HINTS.equals(buttonName)) {
             showCheckInHintsActivity();
@@ -203,7 +201,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
     };
 
     private void getAirport(String departureAirportIATA) {
-        airportsService = ((ExotikosApplication) getApplication()).getAirportsService();
+        AirportsApiEndpoint airportsService = ((ExotikosApplication) getApplication()).getAirportsService();
         airportsService.getByIATACode(departureAirportIATA, appId, appKey)
                 .flatMapIterable(airportsResponse -> airportsResponse.getAirports())
                 .subscribe(
@@ -217,22 +215,5 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         departureAirport = airport;
     }
 
-    private void showAiportLocationPage() {
-        double latitude = departureAirport.getLatitude();
-        double longitude = departureAirport.getLongitude();
 
-        String label = departureAirport.getName();
-        String uriBegin = "geo:" + latitude + "," + longitude + "(" + label + ")";
-        String query1 = departureAirport.getStreet1() + " " + departureAirport.getStreet2() +
-                " " + departureAirport.getCity() + " " + departureAirport.getStateCode() + " "
-                + departureAirport.getPostalCode() + " " + departureAirport.getCountryName();
-        String encodedQuery = Uri.encode(query1);
-        String uriString = uriBegin + "?q=" + encodedQuery;
-        Uri uri = Uri.parse(uriString);
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
-        intent.setPackage(Constants.GOOGLE_MAP_PACKAGE);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
-    }
 }
