@@ -108,7 +108,7 @@ public class TravelPrepFragment extends Fragment {
     }
 
     private void handleLaunchAirportMapPage() {
-        listener.handleButtonsClicks("LaunchAirportPage");
+        listener.handleButtonsClicks(Constants.GO_TO_AIRPORT_PAGE);
     }
 
     public static TravelPrepFragment newInstance(TripStatus trips, boolean fromFragment) {
