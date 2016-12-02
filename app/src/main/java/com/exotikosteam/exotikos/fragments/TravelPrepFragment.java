@@ -88,10 +88,17 @@ public class TravelPrepFragment extends Fragment {
 
     private void setOnClickListener() {
         boolean fromFragment = getArguments().getBoolean("fromFragment");
-        if(!fromFragment)
+        if(!fromFragment) {
             prepFragmentBinding.btnNext.setVisibility(View.GONE);
-        else
+            prepFragmentBinding.tvCheckinDaysLeft.setVisibility(View.GONE);
+            prepFragmentBinding.tvBoarding.setVisibility(View.GONE);
+        }
+        else {
             prepFragmentBinding.btnNext.setVisibility(View.VISIBLE);
+            prepFragmentBinding.tvCheckinDaysLeft.setVisibility(View.VISIBLE);
+            prepFragmentBinding.tvBoarding.setVisibility(View.VISIBLE);
+
+        }
 
         prepFragmentBinding.btnNext.setOnClickListener(v -> {
             handleLaunchPrepActivity();
