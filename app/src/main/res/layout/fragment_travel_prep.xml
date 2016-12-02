@@ -11,9 +11,9 @@
             android:text="@string/flightNumberlbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
+            android:layout_marginStart="@dimen/fragment_travel_prep_padding"
+            android:layout_marginTop="@dimen/fragment_travel_prep_padding"
             android:id="@+id/tvFlightNumberLbl"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -23,7 +23,7 @@
             android:text="Date of Travel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="27dp"
+            android:layout_marginTop="25dp"
             android:id="@+id/tvDateOfTravelLbl"
             android:layout_below="@+id/tvFlightNumberLbl"
             android:layout_alignLeft="@+id/tvFlightNumberLbl"
@@ -47,8 +47,8 @@
             android:layout_alignTop="@+id/tvFlightNumberLbl"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="56dp"
-            android:layout_marginEnd="56dp"
+            android:layout_marginRight="@dimen/fragment_travel_prep_padding"
+            android:layout_marginEnd="@dimen/fragment_travel_prep_padding"
             android:id="@+id/tvFlightNumber" />
 
         <TextView
@@ -77,18 +77,8 @@
             android:layout_below="@+id/tvFromLbl"
             android:layout_alignLeft="@+id/tvFromLbl"
             android:layout_alignStart="@+id/tvFromLbl"
-            android:layout_marginTop="22dp"
+            android:layout_marginTop="25dp"
             android:id="@+id/tvDestinationLbl" />
-
-        <TextView
-            tools:text="San Francisco"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvDepartureCity"
-            android:layout_below="@+id/tvDepartureTime"
-            android:layout_alignRight="@+id/tvDepartureTime"
-            android:layout_alignEnd="@+id/tvDepartureTime"
-            android:layout_marginTop="24dp" />
 
         <TextView
             android:text="Origin"
@@ -131,7 +121,7 @@
             android:layout_below="@+id/tvCheckinDaysLeft"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="@dimen/fragment_horizontal_margin"
+            android:layout_marginBottom="@dimen/fragment_travel_prep_margin_bottom"
             android:paddingLeft="@dimen/fragment_horizontal_margin"
             android:background="@color/primary"/>
 
@@ -142,9 +132,10 @@
             android:id="@+id/btnAirportPage"
             android:gravity="end"
             android:layout_below="@+id/tvDestination"
-            android:layout_alignLeft="@+id/tvDepartureTime"
-            android:layout_alignStart="@+id/tvDepartureTime"
-            android:layout_marginTop="@dimen/fragment_horizontal_margin"/>
+            android:paddingLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
+
+            android:layout_marginTop="@dimen/fragment_travel_prep_padding"/>
 
         <Button
             android:background="@drawable/arrow_right_bold_circle"
@@ -152,9 +143,20 @@
             android:layout_height="50dp"
             android:id="@+id/btnNext"
             android:layout_below="@+id/tvDestination"
-            android:layout_toRightOf="@+id/btnAirportPage"
-            android:layout_toEndOf="@+id/btnAirportPage"
-            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            android:layout_alignLeft="@+id/tvDepartureTime"
+            android:layout_alignStart="@+id/tvDepartureTime"
+            android:layout_marginTop="@dimen/fragment_travel_prep_padding"
+
             />
+
+        <TextView
+            tools:text="San Francisco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvDepartureCity"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/tvDepartureTime"
+            android:layout_alignRight="@+id/tvDestination"
+            android:layout_alignEnd="@+id/tvDestination" />
     </RelativeLayout>
 </layout>
