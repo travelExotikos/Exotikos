@@ -3,7 +3,6 @@ package com.exotikosteam.exotikos.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,6 +12,7 @@ import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.FlightResultsAdapter;
 import com.exotikosteam.exotikos.models.flightstatus.FlightScheduleResponse;
 import com.exotikosteam.exotikos.models.flightstatus.ScheduledFlight;
+import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 
 import org.parceler.Parcels;
@@ -86,6 +86,20 @@ public class FlightResultsActivity extends AppCompatActivity {
                 flights.add(selectedFlight);
 
                 TripStatus trip = TripStatus.createTrip(flights, response.getAppendix());
+
+                for (Flight flight: trip.getFlights()) {
+                    ((ExotikosApplication) getApplicationContext()).getYahooSearchService()
+                            .getByQuery("js", 1, 0, 1, flight.getArrivalCity() + " city")
+                            .flatMapIterable(imageSearch -> imageSearch.getResults())
+                            .map(resultF -> resultF.getIurl())
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(url -> {
+                                flight.setArrivalCityImageUrl(url);
+                                flight.update();
+                            });
+                }
+
                 result.putExtra("trip", Parcels.wrap(trip));
                 setResult(RESULT_OK, result);
                 finish();

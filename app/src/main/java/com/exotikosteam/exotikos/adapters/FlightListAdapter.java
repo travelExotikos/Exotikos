@@ -2,6 +2,7 @@ package com.exotikosteam.exotikos.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,17 +77,23 @@ public class FlightListAdapter extends RecyclerSwipeAdapter<FlightListAdapter.Vi
         holder.binding.setFlight(flight);
         holder.binding.executePendingBindings();
 
-        app.getYahooSearchService()
-                .getByQuery("js", 1, 0, 1, flight.getArrivalCity() + " city")
-                .flatMapIterable(imageSearch -> imageSearch.getResults())
-                .map(result -> result.getIurl())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(url -> {
-                    Glide.with(mContext)
-                            .load(url)
-                            .into(holder.binding.ivBackground);
-                });
+        if (TextUtils.isEmpty(flight.getArrivalCityImageUrl())) {
+            app.getYahooSearchService()
+                    .getByQuery("js", 1, 0, 1, flight.getArrivalCity() + " city")
+                    .flatMapIterable(imageSearch -> imageSearch.getResults())
+                    .map(result -> result.getIurl())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(url -> {
+                        Glide.with(mContext)
+                                .load(url)
+                                .into(holder.binding.ivBackground);
+                    });
+        } else {
+            Glide.with(mContext)
+                    .load(flight.getArrivalCityImageUrl())
+                    .into(holder.binding.ivBackground);
+        }
     }
 
     @Override

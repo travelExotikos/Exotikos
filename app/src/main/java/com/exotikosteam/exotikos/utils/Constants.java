@@ -29,12 +29,7 @@ public class Constants {
     public static final String GO_TO_AIRPORT_PAGE = "gotoAirportPage";
     public static final String GO_TO_SECURITY_CHECKING = "gotoSecurityCheckinActivity";
     public static final String GO_TO_PREP_PAGE = "gotoTravelPrepActivity";
-    public static final String DESTINATION = "Destination";
-    public static final String BOARDING = "Boarding";
-    public static final String SECURITY_CHECKING = "Security Checkin";
-    public static final String CHECKIN = "Checkin";
     public static final String CHECKIN_LIST = "Checkin List";
-    public static final String TRAVEL_PREP = "Travel Preparation";
     public static final String TSA_WEBPAGE = "https://www.tsa.gov/travel/security-screening";
     public static final String TSA_RESTRICTED = "https://www.tsa.gov/travel/security-screening/prohibited-items";
 
