@@ -94,6 +94,13 @@
             android:layout_marginTop="@dimen/fragment_horizontal_margin"
             android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
             android:id="@+id/checkBox4" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/primary_light"
+            android:layout_marginTop="@dimen/fragment_travel_prep_margin_bottom"
+            android:layout_marginBottom="@dimen/fragment_travel_prep_margin_bottom"
+            android:id="@+id/spacer"/>
 
         <Button
             android:background="@drawable/arrow_right_bold_circle"
@@ -102,6 +109,7 @@
             android:layout_gravity="right"
             android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
             android:layout_marginBottom="@dimen/fragment_travel_prep_padding"
+            android:layout_below="@+id/spacer"
             android:id="@+id/btnNext" />
     </LinearLayout>
 

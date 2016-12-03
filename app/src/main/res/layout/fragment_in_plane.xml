@@ -5,16 +5,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.exotikosteam.exotikos.fragments.InPlaneFragment"
-        android:background="@drawable/card_image_plane"
-        android:backgroundTintMode="src_in">
+        >
 
         <TextView
             android:id="@+id/tvInPlane"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:textColor="@android:color/black"
+
             tools:text="bla bla bla"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/primary_light"
+            android:layout_below="@+id/tvInPlane"
+            android:layout_marginTop="@dimen/fragment_travel_prep_margin_bottom"
+            android:layout_marginBottom="@dimen/fragment_travel_prep_margin_bottom"
+            android:id="@+id/spacer"/>
 
         <Button
             android:id="@+id/btnNext"
@@ -22,7 +31,7 @@
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/spacer"
             android:background="@drawable/arrow_right_bold_circle" />
 
     </RelativeLayout>

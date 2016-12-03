@@ -21,8 +21,6 @@ import com.exotikosteam.exotikos.utils.Utils;
 
 import org.parceler.Parcels;
 
-import java.util.Date;
-
 /**
  * Created by lramaswamy on 11/12/16.
  */
@@ -35,8 +33,7 @@ public class TravelPrepFragment extends Fragment {
     FragmentTravelPrepBinding prepFragmentBinding;
     Button btnAirportPage;
     TextView tvFlightNumber;
-    TextView tvBoarding;
-    TextView tvCheckinDaysLeft;
+
     TextView tvDepDate;
     TextView tvDepartureCity;
     TripStatus trip;
@@ -61,17 +58,11 @@ public class TravelPrepFragment extends Fragment {
         tvDepDate.setText(Utils.convertToDate(flight.getDepartureTime()));
         tvDestination.setText(flight.getArrivalCity());
         prepFragmentBinding.tvDepartureTime.setText(Utils.convertToTime(flight.getDepartureTime()));
-
-        Date departureTime = Utils.parseFlightstatsDate(flight.getDepartureTime());
-        tvCheckinDaysLeft.setText(Utils.getReadytoPrintCheckinTimeDelta(departureTime));
-        tvBoarding.setText(Utils.getReadytoPrintBoardingTimeDelta(departureTime));
     }
 
     private void setupBindings() {
         btnAirportPage = prepFragmentBinding.btnAirportPage;
         tvFlightNumber = prepFragmentBinding.tvFlightNumber;
-        tvBoarding = prepFragmentBinding.tvBoarding;
-        tvCheckinDaysLeft = prepFragmentBinding.tvCheckinDaysLeft;
         tvDepDate = prepFragmentBinding.tvDepDate;
         tvDepartureCity = prepFragmentBinding.tvDepartureCity;
         tvDestination = prepFragmentBinding.tvDestination;
@@ -90,14 +81,9 @@ public class TravelPrepFragment extends Fragment {
         boolean fromFragment = getArguments().getBoolean("fromFragment");
         if(!fromFragment) {
             prepFragmentBinding.btnNext.setVisibility(View.GONE);
-            prepFragmentBinding.tvCheckinDaysLeft.setVisibility(View.GONE);
-            prepFragmentBinding.tvBoarding.setVisibility(View.GONE);
         }
         else {
             prepFragmentBinding.btnNext.setVisibility(View.VISIBLE);
-            prepFragmentBinding.tvCheckinDaysLeft.setVisibility(View.VISIBLE);
-            prepFragmentBinding.tvBoarding.setVisibility(View.VISIBLE);
-
         }
 
         prepFragmentBinding.btnNext.setOnClickListener(v -> {
