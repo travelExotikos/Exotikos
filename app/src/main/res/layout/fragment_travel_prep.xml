@@ -108,6 +108,8 @@
             android:layout_marginTop="@dimen/fragment_travel_prep_margin_bottom"
             android:layout_below="@+id/tvDestination"
             android:layout_marginBottom="@dimen/fragment_travel_prep_margin_bottom"
+            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginRight="@dimen/fragment_horizontal_margin"
             />
 
         <Button
@@ -129,7 +131,9 @@
             android:layout_below="@+id/spacer"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-             />
+            android:layout_marginBottom="@dimen/fragment_travel_prep_padding"
+
+            />
 
         <TextView
             tools:text="San Francisco"

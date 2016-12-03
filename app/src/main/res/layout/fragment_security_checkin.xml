@@ -5,7 +5,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1">
+        android:weightSum="1"
+        >
 
         <CheckedTextView
             android:text="@string/idString"
@@ -100,7 +101,9 @@
             android:background="@color/primary_light"
             android:layout_marginTop="@dimen/fragment_travel_prep_margin_bottom"
             android:layout_marginBottom="@dimen/fragment_travel_prep_margin_bottom"
-            android:id="@+id/spacer"/>
+            android:id="@+id/spacer"
+            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginRight="@dimen/fragment_horizontal_margin"/>
 
         <Button
             android:background="@drawable/arrow_right_bold_circle"
