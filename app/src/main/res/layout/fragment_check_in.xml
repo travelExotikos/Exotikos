@@ -3,66 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
+        android:id="@+id/rvCardContent"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
-        <Button
-            android:id="@+id/btnFindWeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:text="@string/btn_ask_nfor_help" />
-
         <TextView
-            android:id="@+id/tvFindWeight"
+            android:id="@+id/tvCheckinInfo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btnFindWeight"
-            android:layout_toStartOf="@+id/btnFindWeight"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:lines="3"
-            android:text="@string/check_in_luggage_weight"/>
-
-        <TextView
-            android:id="@+id/tvRepack"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@id/tvFindWeight"
-            android:text="@string/check_in_repack"/>
-
-        <Button
-            android:id="@+id/btnFindCheckIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/tvRepack"
-            android:text="@string/btn_ask_nfor_help" />
-
-        <TextView
-            android:id="@+id/tvFindCheckIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btnFindCheckIn"
-            android:layout_below="@id/tvRepack"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:lines="3"
-            tools:text="ble ble fda fdgg sgfgf  gdsg  rgfg g sfg  gss dfgfgdg fssfsf gfgss fsfssf"/>
-
-        <TextView
-            android:id="@+id/tvPassport"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/tvFindCheckIn"
-            android:text="@string/check_in_passport"/>
+            tools:text="fdgfd gfhgh g g hgjyrhj dgf ff h ghj fhj hkj gh fh gfhdgjhjfhg hgf hgd jhfgj fgjhjdghgdjfgh hjg dgjfjfhjgj h"/>
 
         <View
             android:layout_width="match_parent"
@@ -70,7 +23,7 @@
             android:background="@color/primary_light"
             android:id="@+id/spacer"
             android:layout_marginTop="@dimen/fragment_travel_prep_margin_bottom"
-            android:layout_below="@+id/tvPassport"
+            android:layout_below="@+id/tvCheckinInfo"
             android:layout_marginBottom="@dimen/fragment_travel_prep_margin_bottom"
             />
 
@@ -81,7 +34,7 @@
             android:id="@+id/btnCheckInScan"
             android:textColor="@color/primary_dark"
             android:background="@android:color/transparent"
-            android:gravity="left"
+            android:gravity="center"
             android:layout_below="@+id/spacer"
             android:layout_toLeftOf="@+id/btnNext"
             android:layout_toStartOf="@+id/btnNext" />

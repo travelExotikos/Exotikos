@@ -47,6 +47,7 @@
     <string name="carouselLbl">Carousel Number</string>
     <string name="baggageCarousel">Baggage Carousel</string>
     <string name="dateLanding">Flight Landing Date</string>
+    <string name="check_in_info" formatted="false">It is time for check-in.\nYou have to find check-in station for %s. Staff will ask you for your passport and provide you the boarding card with you seat number. You will need the boarding card on a boarding step</string>
     <string name="check_in_station" formatted="false">
         <![CDATA[
         Go to <b> %s </b> check-in station.
