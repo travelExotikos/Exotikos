@@ -47,10 +47,15 @@ public class SecurityCheckinFragment extends Fragment {
 
         //hide the next button if it is in the activity, instead of the fragment
         boolean fromFragment = getArguments().getBoolean("fromFragment");
-        if(!fromFragment)
+        if(!fromFragment) {
             securityCheckinBinding.btnNext.setVisibility(View.GONE);
-        else
+            securityCheckinBinding.spacer.setVisibility(View.GONE);
+        }
+        else {
             securityCheckinBinding.btnNext.setVisibility(View.VISIBLE);
+            securityCheckinBinding.spacer.setVisibility(View.VISIBLE);
+
+        }
 
         securityCheckinBinding.btnNext.setOnClickListener(v -> {
             handleLaunchSecurityActivity();

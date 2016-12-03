@@ -64,24 +64,35 @@
             android:layout_below="@id/tvFindCheckIn"
             android:text="@string/check_in_passport"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/primary_light"
+            android:id="@+id/spacer"
+            android:layout_marginTop="@dimen/fragment_travel_prep_margin_bottom"
+            android:layout_below="@+id/tvPassport"
+            android:layout_marginBottom="@dimen/fragment_travel_prep_margin_bottom"
+            />
+
+        <Button
+            android:text="@string/check_in_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:id="@+id/btnCheckInScan"
+            android:textColor="@color/primary_dark"
+            android:background="@android:color/transparent"
+            android:gravity="left"
+            android:layout_below="@+id/spacer"
+            android:layout_toLeftOf="@+id/btnNext"
+            android:layout_toStartOf="@+id/btnNext" />
+
         <Button
             android:id="@+id/btnNext"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/tvPassport"
+            android:layout_below="@id/spacer"
             android:background="@drawable/arrow_right_bold_circle" />
-
-        <Button
-            android:id="@+id/btnCheckInScan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/btnNext"
-            android:text="@string/check_in_scan"
-            android:layout_marginBottom="10dp"/>
-
     </RelativeLayout>
 </layout>
