@@ -13,8 +13,8 @@
             android:checkMarkTint="@color/colorAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/fragment_horizontal_margin"
-            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginTop="@dimen/fragment_travel_margin_top"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
             android:layout_marginRight="@dimen/fragment_horizontal_margin"
             android:id="@+id/cbID" />
 
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_horizontal_margin"
-            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
             android:id="@+id/cbCabinBags" />
 
         <CheckedTextView
@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_horizontal_margin"
-            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
             android:id="@+id/cbStroller" />
 
         <CheckedTextView
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_horizontal_margin"
-            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
             android:id="@+id/cbHandbag" />
 
         <CheckedTextView
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_horizontal_margin"
-            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
             android:id="@+id/cbLiquidRules1" />
 
         <CheckedTextView
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_horizontal_margin"
-            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
             android:id="@+id/cbLiquidRules2" />
 
         <CheckedTextView
@@ -81,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_horizontal_margin"
-            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
             android:id="@+id/cbLiquidRules3" />
 
         <CheckedTextView
@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fragment_horizontal_margin"
-            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
             android:id="@+id/checkBox4" />
 
         <Button
@@ -100,7 +100,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="right"
-            android:layout_marginBottom="@dimen/fragment_horizontal_margin"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
+            android:layout_marginBottom="@dimen/fragment_travel_prep_padding"
             android:id="@+id/btnNext" />
     </LinearLayout>
 

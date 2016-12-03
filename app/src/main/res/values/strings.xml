@@ -139,5 +139,7 @@
     <string name="card_title_checkin">Check-in</string>
     <string name="card_title_preparation">Preparation</string>
     <string name="card_title_plane">Flight</string>
+
+    <string name="select_date">Select departing date ...</string>
 </resources>
 

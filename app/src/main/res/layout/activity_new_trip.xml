@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:background="@drawable/new_trip"
+    android:fitsSystemWindows="true">
 
     <RelativeLayout
         android:id="@+id/activity_new_trip"
@@ -12,15 +14,18 @@
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingTop="40dp"
         tools:context="com.exotikosteam.exotikos.activities.NewTripActivity">
 
         <Button
             android:text="@string/new_trip_scan"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:drawableStart="@drawable/qrcode_scan"
+            android:drawableLeft="@drawable/qrcode_scan"
+            style="@style/BigButton"
             android:id="@+id/btnScan" />
 
         <TextView
@@ -28,73 +33,56 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvScanBoardingPass"
+            style="@style/TextViewSeparator"
+            android:background="@drawable/separator_textview_bg"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/btnScan"/>
 
-        <TextView
-            android:text="@string/airline"
+        <Button
+            android:text="@string/select_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvScanBoardingPass"
-            android:id="@+id/tvAirline" />
+            android:layout_below="@+id/tvScanBoardingPass"
+            style="@style/BigButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/btnSelectDate"/>
 
         <Button
             android:text="@string/select_airline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvAirline"
+            android:layout_below="@+id/btnSelectDate"
+            style="@style/BigButton"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/btnSelectAirline"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <TextView
-            android:text="@string/flight_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnSelectAirline"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/tvFlightNumber" />
+            android:layout_alignParentEnd="true"
+            android:id="@+id/btnSelectAirline"/>
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:layout_below="@+id/tvFlightNumber"
+            android:layout_below="@+id/btnSelectAirline"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/etFlightNumber"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/big_edittext_bg"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:hint="@string/new_trip_enter_flight_number" />
-
-        <TextView
-            android:text="@string/new_trip_departure_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etFlightNumber"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/tvDepartureDate" />
-
-        <DatePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvDepartureDate"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/dpDepartureDate"
-            android:calendarViewShown="false" />
 
         <Button
             android:text="@string/new_trip_select_flight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dpDepartureDate"
+            android:layout_below="@id/etFlightNumber"
             android:layout_centerHorizontal="true"
             android:id="@+id/btnSelectFlights" />
 

@@ -1,5 +1,6 @@
 package com.exotikosteam.exotikos.fragments;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,19 +8,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.exotikosteam.exotikos.R;
+import com.exotikosteam.exotikos.databinding.FragmentParentCardBinding;
 import com.exotikosteam.exotikos.models.trip.Flight;
-import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import org.parceler.Parcels;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import rx.subjects.PublishSubject;
 
 public class CardViewFragment <T extends Fragment> extends Fragment implements ExpandableCard {
@@ -30,22 +26,15 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     private static final String COLLAPSED_BUNDLE = "collapsed";
     private static final String FLIGHT_BUNDLE = "flightB";
 
-    private View rootView;
+
+    private View mRootView;
     private String mCardName;
     private String mRelativeTime;
     private int mImageId;
     private Flight mFlight;
     private T  f;
+    private FragmentParentCardBinding mBinding;
 
-    // Bindings
-    @BindView(R.id.tvCardName) TextView tvCardName;
-    @BindView(R.id.tvTime) TextView tvTime;
-    @BindView(R.id.rlCardContents)
-    ExpandableRelativeLayout rlCardContents;
-    @BindView(R.id.cards)
-    FrameLayout card;
-    @BindView(R.id.ivBackground)
-    ImageView ivBackground;
     // Event topics
     private final PublishSubject<CardViewFragment> titleClickSubject = PublishSubject.create();
 
@@ -54,7 +43,6 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
                                                String time,
                                                Flight flight,
                                                boolean isCollapsed) {
-
         Bundle args = new Bundle();
         args.putInt(TITLE_BUNDLE, titleId);
         args.putString(TIME_BUNDLE, time);
@@ -74,9 +62,9 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_parent_card, container, false);
-        ButterKnife.bind(this, rootView);
-        return rootView;
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_parent_card, container, false);
+        mRootView = mBinding.getRoot();
+        return mRootView;
     }
 
     @Override
@@ -88,18 +76,18 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
         mImageId = getArguments().getInt(IMAGE_BUNDLE);
         mFlight = Parcels.unwrap(getArguments().getParcelable(FLIGHT_BUNDLE));
 
-        tvCardName.setText(mCardName);
-        tvTime.setText(mRelativeTime);
+        mBinding.tvCardName.setText(mCardName);
+        mBinding.tvTime.setText(mRelativeTime);
         if (mImageId < 0) {
-           // ivBackground.setImageResource(R.drawable.card_image_gradient_shape);
             Glide.with(getContext())
                     .load(mFlight.getArrivalCityImageUrl())
-                    .into(ivBackground);
-            ivBackground.setImageAlpha(180);
-            ivBackground.setBackgroundResource(R.drawable.card_image_gradient_shape);
+                    .into(mBinding.ivBackground);
+            mBinding.ivBackground.setImageAlpha(180);
+            mBinding.ivBackground.setBackgroundResource(R.drawable.card_image_gradient_shape);
         } else {
-            ivBackground.setBackgroundResource(mImageId);
-            ivBackground.setImageResource(R.drawable.card_image_gradient_shape_light);
+            mBinding.ivBackground.setImageResource(mImageId);
+            mBinding.ivBackground.setImageAlpha(180);
+            mBinding.ivBackground.setBackgroundResource(R.drawable.card_image_gradient_shape);
         }
 
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
@@ -116,7 +104,7 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     }
 
     private void setupListeners() {
-        ivBackground .setOnClickListener(v -> titleClickSubject.onNext(CardViewFragment.this));
+        mBinding.ivBackground .setOnClickListener(v -> titleClickSubject.onNext(CardViewFragment.this));
     }
 
     public PublishSubject<CardViewFragment> getTitleClickSubject() {
@@ -126,24 +114,32 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     @Override
     public void expand() {
         if (!isDetached()) {
-            rlCardContents.expand();
+            mBinding.rlCardContents.expand();
+            animateHintButton();
         }
     }
 
     @Override
     public void collapse() {
         if (!isDetached()) {
-            rlCardContents.collapse();
+            mBinding.rlCardContents.collapse();
         }
     }
 
     @Override
     public void toggle() {
         if (!isDetached()) {
-            rlCardContents.toggle();
+            mBinding.rlCardContents.toggle();
+            animateHintButton();
         }
     }
 
-
+    private void animateHintButton() {
+        /*
+        ObjectAnimator anim = ObjectAnimator.ofFloat(mBinding.btNext, "alpha", 0, 1);
+        anim.setDuration(2000);
+        anim.start();
+        */
+    }
 
 }

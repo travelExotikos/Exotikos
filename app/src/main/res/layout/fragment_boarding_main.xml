@@ -3,41 +3,28 @@
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <TextView
             tools:text="A54"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dmGateSize"
+            android:textAppearance="@style/ExotikosLargeText"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/fragment_horizontal_margin"
+            android:layout_marginTop="@dimen/fragment_travel_margin_top"
             android:id="@+id/tvBoardingGate" />
 
         <TextView
             tools:text="Terminal 3"
             android:layout_width="wrap_content"
-
-            android:textSize="@dimen/dmTerminalSize"
+            android:textAppearance="@style/ExotikosMediumText"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvBoardingGate"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/fragment_travel_margin_top"
+            android:layout_marginBottom="@dimen/fragment_travel_prep_padding"
             android:id="@+id/tvTerminal" />
-
-        <TextView
-            android:text="You have 1hr 45min to board"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:layout_marginBottom="15dp"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-            android:id="@+id/tvTimetoBoard"
-            android:layout_below="@+id/tvTerminal"
-            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 </layout>

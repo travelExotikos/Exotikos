@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <TextView
             android:text="@string/flightNumberlbl"
             android:layout_width="wrap_content"
@@ -23,7 +22,7 @@
             android:text="Date of Travel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/fragment_travel_margin_top"
             android:id="@+id/tvDateOfTravelLbl"
             android:layout_below="@+id/tvFlightNumberLbl"
             android:layout_alignLeft="@+id/tvFlightNumberLbl"
@@ -34,7 +33,7 @@
             android:text="@string/timeofFlight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/fragment_travel_margin_top"
             android:id="@+id/tvDeptTimeTxt"
             android:layout_below="@+id/tvDateOfTravelLbl"
             android:layout_alignLeft="@+id/tvDateOfTravelLbl"
@@ -77,7 +76,7 @@
             android:layout_below="@+id/tvFromLbl"
             android:layout_alignLeft="@+id/tvFromLbl"
             android:layout_alignStart="@+id/tvFromLbl"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/fragment_travel_margin_top"
             android:id="@+id/tvDestinationLbl" />
 
         <TextView
@@ -103,12 +102,12 @@
             tools:text="Checkin before 31Days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             android:id="@+id/tvCheckinDaysLeft"
             android:layout_below="@+id/btnAirportPage"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="25dp"
+            android:textAppearance="@style/ExotikosLargeText"
+            android:layout_marginTop="@dimen/fragment_travel_margin_top"
             android:paddingLeft="@dimen/fragment_horizontal_margin"
             android:background="@color/primary"/>
 
@@ -116,9 +115,9 @@
             tools:text="Boarding in 32 Days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
             android:id="@+id/tvBoarding"
             android:layout_below="@+id/tvCheckinDaysLeft"
+            android:textAppearance="@style/ExotikosLargeText"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="@dimen/fragment_travel_prep_margin_bottom"
@@ -134,7 +133,6 @@
             android:layout_below="@+id/tvDestination"
             android:paddingLeft="@dimen/fragment_horizontal_margin"
             android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
-
             android:layout_marginTop="@dimen/fragment_travel_prep_padding"/>
 
         <Button
@@ -145,16 +143,14 @@
             android:layout_below="@+id/tvDestination"
             android:layout_alignLeft="@+id/tvDepartureTime"
             android:layout_alignStart="@+id/tvDepartureTime"
-            android:layout_marginTop="@dimen/fragment_travel_prep_padding"
-
-            />
+            android:layout_marginTop="@dimen/fragment_travel_prep_padding" />
 
         <TextView
             tools:text="San Francisco"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvDepartureCity"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/fragment_travel_margin_top"
             android:layout_below="@+id/tvDepartureTime"
             android:layout_alignRight="@+id/tvDestination"
             android:layout_alignEnd="@+id/tvDestination" />
