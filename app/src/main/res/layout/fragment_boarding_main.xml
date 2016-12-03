@@ -11,8 +11,9 @@
             android:layout_height="wrap_content"
             android:textAppearance="@style/ExotikosLargeText"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/fragment_travel_margin_top"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
+            android:layout_marginRight="@dimen/fragment_horizontal_margin"
             android:id="@+id/tvBoardingGate" />
 
         <TextView
@@ -21,8 +22,9 @@
             android:textAppearance="@style/ExotikosMediumText"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvBoardingGate"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/fragment_travel_margin_top"
+            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
+            android:layout_marginRight="@dimen/fragment_horizontal_margin"
             android:layout_marginBottom="@dimen/fragment_travel_prep_padding"
             android:id="@+id/tvTerminal" />
 
