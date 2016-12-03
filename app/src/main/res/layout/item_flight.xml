@@ -157,7 +157,6 @@
                         android:layout_alignBaseline="@id/tvFromAirport"
                         android:background="@color/colorAccent"/>
 
-
                     <TextView
                         tools:text="TO"
                         android:text='@{flight.arrivalCity}'

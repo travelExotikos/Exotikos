@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
-
     <TextView
         android:text="@string/liquidRules"
         android:layout_width="match_parent"
@@ -19,8 +18,5 @@
         android:layout_height="550dp"
         app:srcCompat="@drawable/baggage_help"
         android:id="@+id/baggageHelp" />
-
-
-
 
 </LinearLayout>

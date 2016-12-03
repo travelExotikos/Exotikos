@@ -3,8 +3,7 @@
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <TextView
             android:text="@string/dateLanding"
@@ -90,9 +89,6 @@
             android:layout_alignLeft="@+id/tvCarousel"
             android:layout_alignStart="@+id/tvCarousel"
             android:id="@+id/tvArrivalGate" />
-
-
-
 
     </RelativeLayout>
 </layout>
