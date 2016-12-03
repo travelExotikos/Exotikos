@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    android:background="@drawable/new_trip">
 
     <RelativeLayout
         android:id="@+id/activity_new_trip"
@@ -17,10 +18,14 @@
 
         <Button
             android:text="@string/new_trip_scan"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/new_trip_top_guard"
+            android:drawableStart="@drawable/qrcode_scan"
+            android:drawableLeft="@drawable/qrcode_scan"
+            style="@style/BigButton"
             android:id="@+id/btnScan" />
 
         <TextView
@@ -43,11 +48,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvAirline"
+            style="@style/BigButton"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/btnSelectAirline"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:id="@+id/btnSelectAirline"/>
 
         <TextView
             android:text="@string/flight_number"
