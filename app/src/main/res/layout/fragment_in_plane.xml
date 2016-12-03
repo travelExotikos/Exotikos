@@ -23,6 +23,8 @@
             android:layout_below="@+id/tvInPlane"
             android:layout_marginTop="@dimen/fragment_travel_prep_margin_bottom"
             android:layout_marginBottom="@dimen/fragment_travel_prep_margin_bottom"
+            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
+            android:layout_marginRight="@dimen/fragment_horizontal_margin"
             android:id="@+id/spacer"/>
 
         <Button
@@ -32,7 +34,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/spacer"
-            android:background="@drawable/arrow_right_bold_circle" />
+            android:background="@drawable/arrow_right_bold_circle"
+            android:layout_marginBottom="@dimen/fragment_travel_prep_padding"
+            />
 
     </RelativeLayout>
 </layout>
