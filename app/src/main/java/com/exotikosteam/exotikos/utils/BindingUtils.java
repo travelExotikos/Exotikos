@@ -1,11 +1,13 @@
 package com.exotikosteam.exotikos.utils;
 
 import android.databinding.BindingAdapter;
+import android.graphics.Color;
 import android.text.format.DateFormat;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +23,17 @@ public class BindingUtils {
         Glide.with(view.getContext())
                 .load(imageUrl)
                 .into(view);
+    }
+
+    @BindingAdapter({"bind:roundedImageUrl"})
+    public static void loadRoundedImage(RoundedImageView view, String imageUrl) {
+        Glide.with(view.getContext())
+                .load(imageUrl)
+                .dontAnimate()
+                .into(view);
+        view.mutateBackground(true);
+        view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        view.setScaleType(ImageView.ScaleType.FIT_XY);
     }
 
     @BindingAdapter({"bind:asShortTime"})
