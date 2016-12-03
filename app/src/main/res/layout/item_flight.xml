@@ -80,7 +80,7 @@
                         android:id="@+id/ivAirlineImage"
                         tools:src="@drawable/ic_add_24dp"
                         app:imageUrl='@{flight.airlineIconUrl}'
-                        android:layout_alignParentTop="true"
+                        android:layout_below="@+id/tvFlightDate"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
                         android:descendantFocusability="blocksDescendants"
@@ -88,11 +88,24 @@
                         android:layout_marginRight="@dimen/airline_item_padding" />
 
                     <TextView
+                        tools:text="January 10th, 2016"
+                        app:asLongDate='@{flight.departureTime}'
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="8dp"
+                        android:id="@+id/tvFlightDate"
+                        android:textColor="@color/flight_item_font"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                    <TextView
                         tools:text="Airline Name"
                         android:text='@{flight.flightCarrierName}'
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
+                        android:layout_below="@id/tvFlightDate"
                         android:layout_toRightOf="@+id/ivAirlineImage"
                         android:layout_toEndOf="@+id/ivAirlineImage"
                         android:id="@+id/tvAirlineName"
@@ -104,7 +117,7 @@
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
+                        android:layout_below="@id/tvFlightDate"
                         android:layout_toRightOf="@+id/tvAirlineName"
                         android:layout_toEndOf="@+id/tvAirlineName"
                         android:layout_marginLeft="5dp"

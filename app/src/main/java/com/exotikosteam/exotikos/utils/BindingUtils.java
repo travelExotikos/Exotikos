@@ -2,7 +2,6 @@ package com.exotikosteam.exotikos.utils;
 
 import android.databinding.BindingAdapter;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +29,18 @@ public class BindingUtils {
         try {
             Date d = format.parse(date);
             view.setText(DateFormat.format("hh:mma", d));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @BindingAdapter({"bind:asLongDate"})
+    public static void convertToLongDate(TextView view, String date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
+        java.text.DateFormat outputFormat = DateFormat.getLongDateFormat(view.getContext());
+        try {
+            Date d = format.parse(date);
+            view.setText(outputFormat.format(d));
         } catch (Exception e) {
             e.printStackTrace();
         }
