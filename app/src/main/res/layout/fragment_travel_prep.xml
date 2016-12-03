@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <TextView
             android:text="@string/flightNumberlbl"
             android:layout_width="wrap_content"
@@ -134,7 +133,6 @@
             android:layout_below="@+id/tvDestination"
             android:paddingLeft="@dimen/fragment_horizontal_margin"
             android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
-
             android:layout_marginTop="@dimen/fragment_travel_prep_padding"/>
 
         <Button
@@ -145,9 +143,7 @@
             android:layout_below="@+id/tvDestination"
             android:layout_alignLeft="@+id/tvDepartureTime"
             android:layout_alignStart="@+id/tvDepartureTime"
-            android:layout_marginTop="@dimen/fragment_travel_prep_padding"
-
-            />
+            android:layout_marginTop="@dimen/fragment_travel_prep_padding" />
 
         <TextView
             tools:text="San Francisco"

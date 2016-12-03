@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -13,12 +14,12 @@
         android:id="@+id/ivBackground"
         android:layout_height="100dp"
         android:layout_width="match_parent"
-        tools:background="@android:color/black"
+        tools:background="@android:color/holo_green_dark"
         android:scaleType="centerCrop"/>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/flight_item_background_guard">
+    android:layout_alignBottom="@id/ivBackground">
 
     <TextView
         android:id="@+id/tvTime"
@@ -29,7 +30,9 @@
         android:layout_marginEnd="@dimen/card_header_padding"
         android:layout_marginRight="@dimen/card_header_padding"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/tvCardName"
@@ -42,12 +45,10 @@
         android:layout_toLeftOf="@id/tvTime"
         android:layout_toStartOf="@id/tvTime"
         android:layout_alignBaseline="@+id/tvTime"
-        android:layout_marginTop="@dimen/card_header_padding"
         android:layout_marginStart="@dimen/card_header_padding"
         android:layout_marginLeft="@dimen/card_header_padding"
-        android:layout_marginBottom="@dimen/card_header_padding"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/flight_item_font" />
+        android:textColor="@color/white" />
 
 </RelativeLayout>
 
@@ -77,3 +78,4 @@
 
     </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 </RelativeLayout>
+</layout>
