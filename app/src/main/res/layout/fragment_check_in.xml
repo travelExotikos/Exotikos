@@ -34,7 +34,7 @@
             android:id="@+id/btnCheckInScan"
             android:textColor="@color/primary_dark"
             android:background="@android:color/transparent"
-            android:gravity="left"
+            android:gravity="center"
             android:layout_below="@+id/spacer"
             android:layout_toLeftOf="@+id/btnNext"
             android:layout_toStartOf="@+id/btnNext" />

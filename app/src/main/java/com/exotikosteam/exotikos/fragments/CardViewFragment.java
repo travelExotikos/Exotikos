@@ -22,6 +22,8 @@ import org.parceler.Parcels;
 
 import rx.subjects.PublishSubject;
 
+import static com.exotikosteam.exotikos.R.id.btnNext;
+
 public class CardViewFragment <T extends Fragment> extends Fragment implements ExpandableCard {
 
     private static final String TITLE_BUNDLE = "titleId";
@@ -36,8 +38,11 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     private String mRelativeTime;
     private int mImageId;
     private Flight mFlight;
+    private AnimatorSet mAnimSet;
+    private Button mBtnNext;
     private T  f;
     private FragmentParentCardBinding mBinding;
+    private float btnNextX = 0;
     // Event topics
     private final PublishSubject<CardViewFragment> titleClickSubject = PublishSubject.create();
 
@@ -85,14 +90,12 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
             Glide.with(getContext())
                     .load(mFlight.getArrivalCityImageUrl())
                     .into(mBinding.ivBackground);
-            mBinding.ivBackground.setImageAlpha(180);
-            mBinding.ivBackground.setBackgroundResource(R.drawable.card_image_gradient_shape);
         } else {
             mBinding.ivBackground.setImageResource(mImageId);
-            mBinding.ivBackground.setImageAlpha(180);
-            mBinding.ivBackground.setBackgroundResource(R.drawable.card_image_gradient_shape);
         }
 
+        mBinding.ivBackground.setImageAlpha(180);
+        mBinding.ivBackground.setBackgroundResource(R.drawable.card_image_gradient_shape);
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         ft.add(R.id.cards, f, mCardName);
         ft.commit();
@@ -138,25 +141,39 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     }
 
     private void animateHintButton() {
-        if (f != null && f.getView() != null) {
-            Button btnNext = (Button) f.getView().findViewById(R.id.btnNext);
-            if (btnNext != null) {
-                ObjectAnimator anim = ObjectAnimator.ofFloat(btnNext, "alpha", 0, 1);
-                anim.setDuration(2000);
-               // anim.start();
-
-                float positionX = btnNext.getX() - 40;
-                ObjectAnimator moveAnim = ObjectAnimator.ofFloat(btnNext, "X", positionX, positionX + 40, positionX);
-                moveAnim.setDuration(3000);
-                moveAnim.setInterpolator(new BounceInterpolator());
-
-                AnimatorSet set = new AnimatorSet();
-                set.playTogether(anim, moveAnim);
-
-                set.start();
-            }
+        setBtnNextAnimiation();
+        if (mAnimSet != null && !mAnimSet.isRunning()) {
+            mAnimSet.start();
         }
 
+    }
+
+    private void setStartAnimSet() {
+            ObjectAnimator animHide = ObjectAnimator.ofFloat(mBtnNext, "alpha", 0);
+            ObjectAnimator animMoveToLeft = ObjectAnimator.ofFloat(mBtnNext, "X", btnNextX - 80);
+            animMoveToLeft.setDuration(250);
+            ObjectAnimator anim = ObjectAnimator.ofFloat(mBtnNext, "alpha", 0, 1);
+            anim.setDuration(1000);
+            ObjectAnimator moveAnim = ObjectAnimator.ofFloat(mBtnNext, "X", btnNextX - 80, btnNextX);
+            moveAnim.setDuration(2000);
+            moveAnim.setInterpolator(new BounceInterpolator());
+            AnimatorSet bounceAnimSet = new AnimatorSet();
+            bounceAnimSet.playTogether(anim, moveAnim);
+
+            mAnimSet = new AnimatorSet();
+            mAnimSet.playSequentially(animHide, animMoveToLeft, bounceAnimSet);
+    }
+
+    private void setBtnNextAnimiation() {
+        if (mBtnNext == null && f != null && f.getView() != null) {
+            mBtnNext = (Button) f.getView().findViewById(btnNext);
+            if (mBtnNext != null) {
+                if (btnNextX == 0) {
+                    btnNextX = mBtnNext.getX();
+                }
+                setStartAnimSet();
+            }
+        }
     }
 
 }
