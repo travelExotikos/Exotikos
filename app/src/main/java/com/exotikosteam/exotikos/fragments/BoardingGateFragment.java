@@ -54,7 +54,6 @@ public class BoardingGateFragment extends Fragment {
         fragmentBoardingMainBinding.tvTerminal.setText(Constants.TERMINAL + flight.getDepartureTerminal());
         
         Date departureTime = Utils.parseFlightstatsDate(flight.getDepartureTime());
-        fragmentBoardingMainBinding.tvTimetoBoard.setText(Utils.getReadytoPrintBoardingTimeDelta(departureTime));
     }
 
     public static BoardingGateFragment newInstance(TripStatus trip) {
