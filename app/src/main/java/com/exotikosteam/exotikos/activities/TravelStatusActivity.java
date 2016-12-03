@@ -53,6 +53,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
 
         cardViewFragmentList = new ArrayList<>(5);
         trip = Parcels.unwrap(getIntent().getParcelableExtra(Constants.PARAM_TRIP));
+        trip = TripStatus.get(trip.getId());
 
         appId = ((ExotikosApplication)getApplication()).getFligthStatsAppID();
         appKey = ((ExotikosApplication)getApplication()).getFligthStatsAppKey();
@@ -90,39 +91,62 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
     }
 
     private void createDestinationCard(Flight flight) {
-        cardViewFragmentList.add(5, CardViewFragment.newInstance(Constants.DESTINATION,
-                Utils.getTimeDeltaFromCurrent(
-                        Utils.parseFlightstatsDate(flight.getArrivalTime())), isStepActive(5)));
+        cardViewFragmentList.add(5, CardViewFragment.newInstance(
+                R.string.card_title_destination,
+                -1,
+                Utils.getTimeDeltaFromCurrent(Utils.parseFlightstatsDate(flight.getArrivalTime())),
+                flight,
+                isStepActive(5)));
         DestinationFragment destinationFragment = DestinationFragment.newInstance(trip);
         cardViewFragmentList.get(5).setFragment(destinationFragment);
     }
 
     private void createInPlaneCard(Date arrivalTime) {
-        cardViewFragmentList.add(4, CardViewFragment.newInstance("In Plane", Utils.getTimeDeltaFromCurrent(arrivalTime), isStepActive(4)));
+        cardViewFragmentList.add(4, CardViewFragment.newInstance(R.string.card_title_plane,
+                R.drawable.card_image_plane,
+                Utils.getTimeDeltaFromCurrent(arrivalTime),
+                flight,
+                isStepActive(4)));
         InPlaneFragment fragment = InPlaneFragment.newInstance(trip);
         cardViewFragmentList.get(4).setFragment(fragment);
     }
 
     private void createBoardingGateCard(Date departureTime) {
-        cardViewFragmentList.add(3, CardViewFragment.newInstance(Constants.BOARDING, Utils.getTimeDeltaFromCurrent(departureTime), isStepActive(3)));
+        cardViewFragmentList.add(3, CardViewFragment.newInstance(R.string.card_title_boarding,
+                R.drawable.card_image_boarding,
+                Utils.getTimeDeltaFromCurrent(departureTime),
+                flight,
+                isStepActive(3)));
         BoardingGateFragment boardingGateFragment = BoardingGateFragment.newInstance(trip);
         cardViewFragmentList.get(3).setFragment(boardingGateFragment);
     }
 
     private void createSecurityCheckinCard(Date departureTime) {
-        cardViewFragmentList.add(2, CardViewFragment.newInstance(Constants.SECURITY_CHECKING, Utils.getTimeDeltaFromCurrent(departureTime), isStepActive(2)));
+        cardViewFragmentList.add(2, CardViewFragment.newInstance(R.string.card_title_sec_checkin,
+                R.drawable.card_image_sec_checkin,
+                Utils.getTimeDeltaFromCurrent(departureTime),
+                flight,
+                isStepActive(2)));
         SecurityCheckinFragment securityCheckinFragment = SecurityCheckinFragment.newInstance(true);
         cardViewFragmentList.get(2).setFragment(securityCheckinFragment);
     }
 
     private void createCheckinCard(Date departureTime) {
-        cardViewFragmentList.add(1, CardViewFragment.newInstance(Constants.CHECKIN, Utils.getCheckinTimeDelta(departureTime), isStepActive(1)));
+        cardViewFragmentList.add(1, CardViewFragment.newInstance(R.string.card_title_checkin,
+                R.drawable.card_image_checkin,
+                Utils.getCheckinTimeDelta(departureTime),
+                flight,
+                isStepActive(1)));
         CheckInFragment checkinFragment = CheckInFragment.newInstance(trip);
         cardViewFragmentList.get(1).setFragment(checkinFragment);
     }
 
     private void createTravelPrepCard() {
-        cardViewFragmentList.add(0, CardViewFragment.newInstance(Constants.TRAVEL_PREP, "", isStepActive(0)));
+        cardViewFragmentList.add(0, CardViewFragment.newInstance(R.string.card_title_preparation,
+                R.drawable.card_image_preparation,
+                "",
+                flight,
+                isStepActive(0)));
         TravelPrepFragment prepFragment = TravelPrepFragment.newInstance(trip, true);
         cardViewFragmentList.get(0).setFragment(prepFragment);
     }

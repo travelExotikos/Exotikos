@@ -131,5 +131,13 @@
     <string name="leave_for_airport_notification">You should head to %s airport</string>
     <string name="head_to_security_notification">You should go through security to avoid delays</string>
     <string name="head_to_gate_notification">Head to Gate %s</string>
+
+    <!-- Tabs titles -->
+    <string name="card_title_destination">Destination</string>
+    <string name="card_title_boarding">Boarding</string>
+    <string name="card_title_sec_checkin">Security Check-in</string>
+    <string name="card_title_checkin">Check-in</string>
+    <string name="card_title_preparation">Travel Preparation</string>
+    <string name="card_title_plane">In Plane</string>
 </resources>
 

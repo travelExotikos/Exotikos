@@ -4,13 +4,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.exotikosteam.exotikos.fragments.InPlaneFragment">
+        tools:context="com.exotikosteam.exotikos.fragments.InPlaneFragment"
+        android:background="@drawable/card_image_plane"
+        android:backgroundTintMode="src_in">
 
         <TextView
             android:id="@+id/tvInPlane"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:textColor="@android:color/black"
+            tools:text="bla bla bla"/>
 
         <Button
             android:id="@+id/btnNext"

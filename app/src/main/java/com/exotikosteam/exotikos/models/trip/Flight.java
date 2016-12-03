@@ -89,6 +89,9 @@ public class Flight extends BaseModel {
     @Column(name = "arrival_city")
     String arrivalCity;
 
+    @Column(name = "arrival_city_image_url")
+    String arrivalCityImageUrl;
+
     //Empty constructor for Parceler
     public Flight() {
     }
@@ -144,9 +147,12 @@ public class Flight extends BaseModel {
         for (Airport a: airports) {
             if (a.getFs().equals(this.getArrivalAirportIATA())) {
                 this.setArrivalCity(a.getCity());
+                //Date localDate = Utils.getUTCDate(this.getArrivalTime(), a.getTimeZoneRegionName());
+
             }
             if (a.getFs().equals(this.getDepartureAirportIATA())) {
                 this.setDepartureCity(a.getCity());
+                //Date localDate = Utils.getUTCDate(this.getDepartureTime(), a.getTimeZoneRegionName());
             }
         }
 
@@ -157,22 +163,6 @@ public class Flight extends BaseModel {
                 break;
             }
         }
-    }
-
-    //TODO remove - use only for example data
-    public static Flight newInstance(String arrivalDate, String departureDate, String flightNumber, String departureTime,
-                                     String departureTerminal, String arrivalTime, String arrivalTerminal, String seatNumber) {
-        Flight flight = new Flight();
-        //flight.setArrivalDate(arrivalDate);
-        //flight.setDepartureDate(departureDate);
-        flight.setFlightNumber(flightNumber);
-        flight.setDepartureTime(departureTime);
-        flight.setDepartureTerminal(departureTerminal);
-        flight.setArrivalTime(arrivalTime);
-        flight.setArrivalTerminal(arrivalTerminal);
-        flight.setSeatNumber(seatNumber);
-
-        return flight;
     }
 
 
@@ -338,6 +328,14 @@ public class Flight extends BaseModel {
 
     public void setArrivalGate(String arrivalGate) {
         this.arrivalGate = arrivalGate;
+    }
+
+    public String getArrivalCityImageUrl() {
+        return arrivalCityImageUrl;
+    }
+
+    public void setArrivalCityImageUrl(String arrivalCityImageUrl) {
+        this.arrivalCityImageUrl = arrivalCityImageUrl;
     }
 
     //=================== DB operations ========================

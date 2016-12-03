@@ -8,10 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.exotikosteam.exotikos.R;
+import com.exotikosteam.exotikos.models.trip.Flight;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,10 +24,17 @@ import rx.subjects.PublishSubject;
 
 public class CardViewFragment <T extends Fragment> extends Fragment implements ExpandableCard {
 
-    private View rootView;
+    private static final String TITLE_BUNDLE = "titleId";
+    private static final String TIME_BUNDLE = "time";
+    private static final String IMAGE_BUNDLE = "imageId";
+    private static final String COLLAPSED_BUNDLE = "collapsed";
+    private static final String FLIGHT_BUNDLE = "flightB";
 
-    private String cardName;
-    private String relativeTime;
+    private View rootView;
+    private String mCardName;
+    private String mRelativeTime;
+    private int mImageId;
+    private Flight mFlight;
     private T  f;
 
     // Bindings
@@ -32,16 +44,23 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     ExpandableRelativeLayout rlCardContents;
     @BindView(R.id.cards)
     FrameLayout card;
+    @BindView(R.id.ivBackground)
+    ImageView ivBackground;
     // Event topics
     private final PublishSubject<CardViewFragment> titleClickSubject = PublishSubject.create();
 
-    public static CardViewFragment newInstance(String name, String time,
+    public static CardViewFragment newInstance(int  titleId,
+                                               int imageId,
+                                               String time,
+                                               Flight flight,
                                                boolean isCollapsed) {
 
         Bundle args = new Bundle();
-        args.putString("name", name);
-        args.putString("time", time);
-        args.putBoolean("collapsed", isCollapsed);
+        args.putInt(TITLE_BUNDLE, titleId);
+        args.putString(TIME_BUNDLE, time);
+        args.putBoolean(COLLAPSED_BUNDLE, isCollapsed);
+        args.putInt(IMAGE_BUNDLE, imageId);
+        args.putParcelable(FLIGHT_BUNDLE, Parcels.wrap(flight));
 
         CardViewFragment fragment = new CardViewFragment();
         fragment.setArguments(args);
@@ -64,17 +83,26 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        cardName = getArguments().getString("name");
-        relativeTime = getArguments().getString("time");
+        mCardName = getActivity().getString(getArguments().getInt(TITLE_BUNDLE));
+        mRelativeTime = getArguments().getString(TIME_BUNDLE);
+        mImageId = getArguments().getInt(IMAGE_BUNDLE);
+        mFlight = Parcels.unwrap(getArguments().getParcelable(FLIGHT_BUNDLE));
 
-        tvCardName.setText(cardName);
-        tvTime.setText(relativeTime);
+        tvCardName.setText(mCardName);
+        tvTime.setText(mRelativeTime);
+        if (mImageId < 0) {
+            Glide.with(getContext())
+                    .load(mFlight.getArrivalCityImageUrl())
+                    .into(ivBackground);
+        } else {
+            ivBackground.setImageResource(mImageId);
+        }
 
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        ft.add(R.id.cards, f, cardName);
+        ft.add(R.id.cards, f, mCardName);
         ft.commit();
 
-        if (getArguments().getBoolean("collapsed")) {
+        if (getArguments().getBoolean(COLLAPSED_BUNDLE)) {
             collapse();
         } else {
             expand();
@@ -84,7 +112,7 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     }
 
     private void setupListeners() {
-        tvCardName.setOnClickListener(v -> titleClickSubject.onNext(CardViewFragment.this));
+        ivBackground .setOnClickListener(v -> titleClickSubject.onNext(CardViewFragment.this));
     }
 
     public PublishSubject<CardViewFragment> getTitleClickSubject() {
