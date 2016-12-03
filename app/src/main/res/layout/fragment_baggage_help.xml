@@ -3,13 +3,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+    >
 
     <TextView
         android:text="@string/liquidRules"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
+        android:textAppearance="@style/ExotikosLargeText"
+        android:layout_marginTop="@dimen/fragment_travel_prep_padding"
         android:textColor="@color/primary_text"
         android:id="@+id/textView3" />
 

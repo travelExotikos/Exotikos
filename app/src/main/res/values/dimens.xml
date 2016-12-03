@@ -13,5 +13,6 @@
 
     <dimen name="fragment_travel_prep_margin_bottom">6dp</dimen>
     <dimen name="fragment_travel_prep_padding">16dp</dimen>
+    <dimen name="fragment_travel_margin_top">25dp</dimen>
     <dimen name="new_trip_top_guard">50dp</dimen>
 </resources>
