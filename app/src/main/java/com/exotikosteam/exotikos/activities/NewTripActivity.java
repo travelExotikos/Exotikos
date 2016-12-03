@@ -88,7 +88,7 @@ public class NewTripActivity extends AppCompatActivity {
             DateFormat dateFormat = android.text.format.DateFormat.getLongDateFormat(getApplicationContext());
             DatePickerDialog dpd = new DatePickerDialog(NewTripActivity.this,
                     (view1, year, month, dayOfMonth) -> {
-                        c.set(year, month - 1, dayOfMonth, 0, 0);
+                        c.set(year, month, dayOfMonth, 0, 0);
                         btnSelectDate.setText(dateFormat.format(c.getTime()));
                         selectedYear = year;
                         selectedMonth = month;

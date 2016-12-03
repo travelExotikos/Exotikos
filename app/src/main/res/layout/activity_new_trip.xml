@@ -33,6 +33,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvScanBoardingPass"
+            style="@style/TextViewSeparator"
+            android:background="@drawable/separator_textview_bg"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/btnScan"/>
 
@@ -60,24 +62,18 @@
             android:layout_alignParentEnd="true"
             android:id="@+id/btnSelectAirline"/>
 
-        <TextView
-            android:text="@string/flight_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnSelectAirline"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/tvFlightNumber" />
-
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:layout_below="@+id/tvFlightNumber"
+            android:layout_below="@+id/btnSelectAirline"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/etFlightNumber"
+            android:textAlignment="center"
+            android:layout_margin="5dp"
+            android:background="@drawable/big_edittext_bg"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:hint="@string/new_trip_enter_flight_number" />

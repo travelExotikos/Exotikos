@@ -22,6 +22,7 @@
         <item name="android:textColorSecondary">@color/secondary_light</item>
         <item name="android:textAppearanceLarge">@style/ExotikosLargeText</item>
         <item name="android:textAppearanceMedium">@style/ExotikosMediumText</item>
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
     </style>
 
     <style name="AppThemeActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -92,6 +93,13 @@
         <item name="android:clickable">true</item>
         <item name="android:layout_margin">5dp</item>
         <item name="colorAccent">@color/primary_text</item>
+    </style>
+
+    <style name="TextViewSeparator" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:layout_margin">25dp</item>
     </style>
 
     <color name="primary">#00BCD4 </color>
