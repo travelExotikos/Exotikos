@@ -1,5 +1,6 @@
 package com.exotikosteam.exotikos.fragments;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 
 import com.bumptech.glide.Glide;
@@ -141,7 +143,17 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
             if (btnNext != null) {
                 ObjectAnimator anim = ObjectAnimator.ofFloat(btnNext, "alpha", 0, 1);
                 anim.setDuration(2000);
-                anim.start();
+               // anim.start();
+
+                float positionX = btnNext.getX() - 30;
+                ObjectAnimator moveAnim = ObjectAnimator.ofFloat(btnNext, "X", positionX, positionX + 30, positionX);
+                moveAnim.setDuration(3000);
+                moveAnim.setInterpolator(new BounceInterpolator());
+
+                AnimatorSet set = new AnimatorSet();
+                set.playTogether(anim, moveAnim);
+
+                set.start();
             }
         }
 

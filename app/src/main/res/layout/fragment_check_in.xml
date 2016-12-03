@@ -3,11 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
+        android:id="@+id/rvCardContent"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">
 
+        <TextView
+            android:id="@+id/tvCheckinInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            tools:text="fdgfd gfhgh g g hgjyrhj dgf ff h ghj fhj hkj gh fh gfhdgjhjfhg hgf hgd jhfgj fgjhjdghgdjfgh hjg dgjfjfhjgj h"/>
+
+        <!--
         <Button
             android:id="@+id/btnFindWeight"
             android:layout_width="wrap_content"
@@ -16,26 +26,6 @@
             android:layout_alignParentEnd="true"
             android:text="@string/btn_ask_nfor_help" />
 
-        <TextView
-            android:id="@+id/tvFindWeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btnFindWeight"
-            android:layout_toStartOf="@+id/btnFindWeight"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:lines="3"
-            android:text="@string/check_in_luggage_weight"/>
-
-        <TextView
-            android:id="@+id/tvRepack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/tvFindWeight"
-            android:text="@string/check_in_repack"/>
-
         <Button
             android:id="@+id/btnFindCheckIn"
             android:layout_width="wrap_content"
@@ -43,35 +33,23 @@
             android:layout_alignParentRight="true"
             android:layout_below="@id/tvRepack"
             android:text="@string/btn_ask_nfor_help" />
-
-        <TextView
-            android:id="@+id/tvFindCheckIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btnFindCheckIn"
-            android:layout_below="@id/tvRepack"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:lines="3"
-            tools:text="ble ble fda fdgg sgfgf  gdsg  rgfg g sfg  gss dfgfgdg fssfsf gfgss fsfssf"/>
-
-        <TextView
-            android:id="@+id/tvPassport"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/tvFindCheckIn"
-            android:text="@string/check_in_passport"/>
-
+-->
         <Button
             android:id="@+id/btnNext"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/tvPassport"
+            android:layout_below="@id/tvCheckinInfo"
             android:background="@drawable/arrow_right_bold_circle" />
+<!--
+        <View
+            android:id="@+id/sText"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/btnNext"
+            android:background="@android:color/primary_text_dark"/>
+-->
 
         <Button
             android:id="@+id/btnCheckInScan"
@@ -79,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
             android:layout_below="@id/btnNext"
             android:text="@string/check_in_scan"
             android:layout_marginBottom="10dp"/>

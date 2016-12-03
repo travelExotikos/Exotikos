@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,7 @@ import org.parceler.Parcels;
 public class CheckInFragment extends Fragment {
 
     private OnButtonsClicks mListener;
-    private FragmentCheckInBinding mBinding;
+    public FragmentCheckInBinding mBinding;
     private TripStatus mTrip;
     private Flight mFlight;
 
@@ -54,6 +53,7 @@ public class CheckInFragment extends Fragment {
     }
 
     private void setOnClickListener() {
+        /*
         mBinding.btnFindCheckIn.setOnClickListener(v -> {
             String text = getResources().getString(R.string.check_in_station_question_english);
             showInfoDialog(String.format(text, mFlight.getFlightCarrierName()));
@@ -61,6 +61,7 @@ public class CheckInFragment extends Fragment {
         mBinding.btnFindWeight.setOnClickListener( v -> {
             showInfoDialog(getResources().getString(R.string.check_in_weight_question_english));
         });
+        */
         mBinding.btnCheckInScan.setOnClickListener( v -> {
             PDF417Utils.launchCameraView(getActivity());
         });
@@ -70,8 +71,8 @@ public class CheckInFragment extends Fragment {
     }
 
     private void populateData() {
-        String text = getResources().getString(R.string.check_in_station);
-        mBinding.tvFindCheckIn.setText(Html.fromHtml(String.format(text, mFlight.getFlightCarrierName())));
+        String text = getResources().getString(R.string.check_in_info);
+        mBinding.tvCheckinInfo.setText(String.format(text, mFlight.getFlightCarrierName()));
     }
 
     @Override

@@ -1,81 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:animateLayoutChanges="true"
-    style="@style/ExotikosCardHeaderBar">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/ivBackground"
-        android:layout_height="100dp"
-        android:layout_width="match_parent"
-        tools:background="@android:color/holo_green_dark"
-        android:scaleType="centerCrop"/>
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_alignBottom="@id/ivBackground">
-
-    <TextView
-        android:id="@+id/tvTime"
-        tools:text="in XXh XXm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginEnd="@dimen/card_header_padding"
-        android:layout_marginRight="@dimen/card_header_padding"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/tvCardName"
-        tools:text="Card Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@id/tvTime"
-        android:layout_toStartOf="@id/tvTime"
-        android:layout_alignBaseline="@+id/tvTime"
-        android:layout_marginStart="@dimen/card_header_padding"
-        android:layout_marginLeft="@dimen/card_header_padding"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/white" />
-
-</RelativeLayout>
-
-    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-        android:id="@+id/rlCardContents"
+    <RelativeLayout
+        style="@style/ExotikosCardHeaderBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ivBackground"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
 
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        app:ael_expanded="false"
-        app:ael_duration="300"
-        app:ael_interpolator="accelerate"
-        app:ael_orientation="vertical"
-        android:background="@color/secondary_light">
+        <ImageView
+            android:id="@+id/ivBackground"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            tools:background="@android:color/holo_green_dark" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/ivBackground">
 
-        <!-- The content of the expanded card should be here -->
-        <FrameLayout
-            android:id="@+id/cards"
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/card_header_padding"
+                android:layout_marginRight="@dimen/card_header_padding"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/white"
+                tools:text="in XXh XXm" />
+
+            <TextView
+                android:id="@+id/tvCardName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tvTime"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="@dimen/card_header_padding"
+                android:layout_marginStart="@dimen/card_header_padding"
+                android:layout_toLeftOf="@id/tvTime"
+                android:layout_toStartOf="@id/tvTime"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
+                tools:text="Card Name" />
+        </RelativeLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/rlCardContents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lorem_ipsum_long"/>
+            android:layout_alignParentEnd="true"
 
-    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-</RelativeLayout>
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ivBackground"
+            android:background="@color/secondary_light"
+            app:ael_duration="300"
+            app:ael_expanded="false"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <!-- The content of the expanded card should be here -->
+            <FrameLayout
+                android:id="@+id/cards"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem_ipsum_long" />
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+    </RelativeLayout>
 </layout>
