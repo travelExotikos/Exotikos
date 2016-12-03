@@ -1,6 +1,8 @@
 package com.exotikosteam.exotikos.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +12,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.fragments.AirlinePickDialogFragment;
 import com.exotikosteam.exotikos.models.BoardingPassScan;
@@ -50,8 +55,6 @@ public class NewTripActivity extends AppCompatActivity {
 
         // only dates starting tomorrow
         dpDepartureDate.setMinDate(System.currentTimeMillis() - 1000);
-
-        // TODO ticket scan
     }
 
     private void setupListeners() {
@@ -62,6 +65,16 @@ public class NewTripActivity extends AppCompatActivity {
                     .subscribe(airline -> {
                         mSelectedAirline = airline;
                         btnSelectAirline.setText(airline.getName());
+                        Glide.with(NewTripActivity.this)
+                                .load(airline.getIconUrl())
+                                .asBitmap()
+                                .into(new SimpleTarget<Bitmap>() {
+                                    @Override
+                                    public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                                        btnSelectAirline.setCompoundDrawablesWithIntrinsicBounds(
+                                                new BitmapDrawable(getResources(), bitmap), null, null, null);
+                                    }
+                                });
                         pickAirlineDialogFragment.dismiss();
                     });
             pickAirlineDialogFragment.show(fm, "fragment_dialog_pick_airline");
