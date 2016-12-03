@@ -145,8 +145,8 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
                 anim.setDuration(2000);
                // anim.start();
 
-                float positionX = btnNext.getX() - 30;
-                ObjectAnimator moveAnim = ObjectAnimator.ofFloat(btnNext, "X", positionX, positionX + 30, positionX);
+                float positionX = btnNext.getX() - 40;
+                ObjectAnimator moveAnim = ObjectAnimator.ofFloat(btnNext, "X", positionX, positionX + 40, positionX);
                 moveAnim.setDuration(3000);
                 moveAnim.setInterpolator(new BounceInterpolator());
 
