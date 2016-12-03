@@ -98,8 +98,11 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
             ivBackground.setImageAlpha(180);
             ivBackground.setBackgroundResource(R.drawable.card_image_gradient_shape);
         } else {
-            ivBackground.setBackgroundResource(mImageId);
-            ivBackground.setImageResource(R.drawable.card_image_gradient_shape_light);
+           // ivBackground.setBackgroundResource(mImageId);
+           // ivBackground.setImageResource(R.drawable.card_image_gradient_shape_light);
+            ivBackground.setImageResource(mImageId);
+            ivBackground.setImageAlpha(180);
+            ivBackground.setBackgroundResource(R.drawable.card_image_gradient_shape);
         }
 
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
