@@ -1,5 +1,6 @@
 package com.exotikosteam.exotikos.fragments;
 
+import android.animation.ObjectAnimator;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.bumptech.glide.Glide;
 import com.exotikosteam.exotikos.R;
@@ -34,7 +36,6 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     private Flight mFlight;
     private T  f;
     private FragmentParentCardBinding mBinding;
-
     // Event topics
     private final PublishSubject<CardViewFragment> titleClickSubject = PublishSubject.create();
 
@@ -135,11 +136,15 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     }
 
     private void animateHintButton() {
-        /*
-        ObjectAnimator anim = ObjectAnimator.ofFloat(mBinding.btNext, "alpha", 0, 1);
-        anim.setDuration(2000);
-        anim.start();
-        */
+        if (f != null && f.getView() != null) {
+            Button btnNext = (Button) f.getView().findViewById(R.id.btnNext);
+            if (btnNext != null) {
+                ObjectAnimator anim = ObjectAnimator.ofFloat(btnNext, "alpha", 0, 1);
+                anim.setDuration(2000);
+                anim.start();
+            }
+        }
+
     }
 
 }
