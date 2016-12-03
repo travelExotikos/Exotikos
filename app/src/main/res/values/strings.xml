@@ -135,9 +135,9 @@
     <!-- Tabs titles -->
     <string name="card_title_destination">Destination</string>
     <string name="card_title_boarding">Boarding</string>
-    <string name="card_title_sec_checkin">Security Check-in</string>
+    <string name="card_title_sec_checkin">Security</string>
     <string name="card_title_checkin">Check-in</string>
-    <string name="card_title_preparation">Travel Preparation</string>
-    <string name="card_title_plane">In Plane</string>
+    <string name="card_title_preparation">Preparation</string>
+    <string name="card_title_plane">Flight</string>
 </resources>
 

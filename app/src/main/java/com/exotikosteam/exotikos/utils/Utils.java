@@ -129,13 +129,13 @@ public class Utils {
     }
 
     public static String getCheckinTimeDelta(Date departureTime) {
-        if (departureTime == null) {
+        Date currentTime = new Date();
+        if (departureTime == null || departureTime.compareTo(currentTime) < 0) {
             return "";
         }
         Calendar c = Calendar.getInstance();
         c.setTime(departureTime);
         c.add(Calendar.DATE, -1);
-        Date currentTime = new Date();
         long timeToBoardMin = Utils.getDiffTime(currentTime, c.getTime());
         return Utils.convertminsToProperString(timeToBoardMin);
     }

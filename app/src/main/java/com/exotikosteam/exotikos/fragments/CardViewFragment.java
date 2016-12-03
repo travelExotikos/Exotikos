@@ -91,11 +91,15 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
         tvCardName.setText(mCardName);
         tvTime.setText(mRelativeTime);
         if (mImageId < 0) {
+           // ivBackground.setImageResource(R.drawable.card_image_gradient_shape);
             Glide.with(getContext())
                     .load(mFlight.getArrivalCityImageUrl())
                     .into(ivBackground);
+            ivBackground.setImageAlpha(180);
+            ivBackground.setBackgroundResource(R.drawable.card_image_gradient_shape);
         } else {
-            ivBackground.setImageResource(mImageId);
+            ivBackground.setBackgroundResource(mImageId);
+            ivBackground.setImageResource(R.drawable.card_image_gradient_shape_light);
         }
 
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
