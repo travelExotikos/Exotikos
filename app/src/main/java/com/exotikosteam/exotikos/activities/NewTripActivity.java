@@ -1,5 +1,6 @@
 package com.exotikosteam.exotikos.activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.bumptech.glide.Glide;
@@ -25,7 +25,9 @@ import com.exotikosteam.exotikos.utils.PDF417Utils;
 
 import org.parceler.Parcels;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,13 +38,17 @@ public class NewTripActivity extends AppCompatActivity {
 
     private Airline mSelectedAirline;
 
+    @BindView(R.id.btnSelectDate) Button btnSelectDate;
     @BindView(R.id.btnSelectAirline) Button btnSelectAirline;
     @BindView(R.id.btnSelectFlights) Button btnSelectFlights;
     @BindView(R.id.etFlightNumber) EditText etFlightNumber;
-    @BindView(R.id.dpDepartureDate) DatePicker dpDepartureDate;
     @BindView(R.id.btnScan) Button btnScan;
 
     private View rootView;
+
+    private int selectedYear = -1;
+    private int selectedMonth = -1;
+    private int selectedDay = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +58,6 @@ public class NewTripActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupListeners();
-
-        // only dates starting tomorrow
-        dpDepartureDate.setMinDate(System.currentTimeMillis() - 1000);
     }
 
     private void setupListeners() {
@@ -80,13 +83,31 @@ public class NewTripActivity extends AppCompatActivity {
             pickAirlineDialogFragment.show(fm, "fragment_dialog_pick_airline");
         });
 
+        btnSelectDate.setOnClickListener(view -> {
+            Calendar c = Calendar.getInstance();
+            DateFormat dateFormat = android.text.format.DateFormat.getLongDateFormat(getApplicationContext());
+            DatePickerDialog dpd = new DatePickerDialog(NewTripActivity.this,
+                    (view1, year, month, dayOfMonth) -> {
+                        c.set(year, month - 1, dayOfMonth, 0, 0);
+                        btnSelectDate.setText(dateFormat.format(c.getTime()));
+                        selectedYear = year;
+                        selectedMonth = month;
+                        selectedDay = dayOfMonth;
+                    },
+                    selectedYear != -1 ? selectedDay : c.get(Calendar.YEAR),
+                    selectedMonth != -1 ? selectedMonth : c.get(Calendar.MONTH),
+                    selectedDay != -1 ? selectedDay : c.get(Calendar.DAY_OF_MONTH));
+            dpd.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+            dpd.show();
+        });
+
         btnSelectFlights.setOnClickListener(view -> {
             showResultsForFlightData(
                     mSelectedAirline.getIata(),
                     etFlightNumber.getText().toString(),
-                    dpDepartureDate.getYear(),
-                    dpDepartureDate.getMonth() + 1,
-                    dpDepartureDate.getDayOfMonth()
+                    selectedYear,
+                    selectedMonth + 1,
+                    selectedDay
             );
         });
 

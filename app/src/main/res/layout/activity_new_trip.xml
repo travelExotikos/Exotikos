@@ -36,18 +36,23 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/btnScan"/>
 
-        <TextView
-            android:text="@string/airline"
+        <Button
+            android:text="@string/select_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvScanBoardingPass"
-            android:id="@+id/tvAirline" />
+            android:layout_below="@+id/tvScanBoardingPass"
+            style="@style/BigButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/btnSelectDate"/>
 
         <Button
             android:text="@string/select_airline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvAirline"
+            android:layout_below="@+id/btnSelectDate"
             style="@style/BigButton"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -77,30 +82,11 @@
             android:layout_alignParentEnd="true"
             android:hint="@string/new_trip_enter_flight_number" />
 
-        <TextView
-            android:text="@string/new_trip_departure_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etFlightNumber"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/tvDepartureDate" />
-
-        <DatePicker
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvDepartureDate"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/dpDepartureDate"
-            android:calendarViewShown="false" />
-
         <Button
             android:text="@string/new_trip_select_flight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dpDepartureDate"
+            android:layout_below="@id/etFlightNumber"
             android:layout_centerHorizontal="true"
             android:id="@+id/btnSelectFlights" />
 

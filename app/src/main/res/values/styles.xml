@@ -58,7 +58,7 @@
         <item name="android:textAppearanceLarge">@style/ExotikosLargeText</item>
         <item name="android:textAppearanceMedium">@style/ExotikosMediumText</item>
     </style>
-    
+
     <style name="ExotikosLargeText" parent="@android:style/TextAppearance.Large">
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">normal</item>
