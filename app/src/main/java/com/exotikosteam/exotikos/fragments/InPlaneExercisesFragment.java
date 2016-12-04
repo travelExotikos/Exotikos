@@ -13,9 +13,9 @@ import com.exotikosteam.exotikos.databinding.FragmentInPlaneExercisesBinding;
 import java.util.Locale;
 
 public class InPlaneExercisesFragment extends Fragment {
+    private final static String STEP_ARG_KEY = "step";
 
-    FragmentInPlaneExercisesBinding mBinding;
-    Integer mStep;
+    private FragmentInPlaneExercisesBinding mBinding;
 
     public InPlaneExercisesFragment() {
         // Required empty public constructor
@@ -23,7 +23,9 @@ public class InPlaneExercisesFragment extends Fragment {
 
     public static InPlaneExercisesFragment newInstance(int step) {
         InPlaneExercisesFragment fragment = new InPlaneExercisesFragment();
-        fragment.mStep = step;
+        Bundle args = new Bundle();
+        args.putInt(STEP_ARG_KEY, step);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -45,8 +47,8 @@ public class InPlaneExercisesFragment extends Fragment {
                 {R.string.in_plane_hint_exercise6_info, R.drawable.exercise6},
                 {R.string.in_plane_hint_exercise7_info, R.drawable.exercise7}};
 
-        int text = data[mStep][0];
-        int image = data[mStep][1];
+        int text = data[getStep()][0];
+        int image = data[getStep()][1];
         if (text >= 0 && !"en".equals(Locale.getDefault().getLanguage())) {
             mBinding.tvExerciseInfo.setText(text);
         } else {
@@ -59,4 +61,7 @@ public class InPlaneExercisesFragment extends Fragment {
         }
     }
 
+    private int getStep() {
+        return getArguments().getInt(STEP_ARG_KEY);
+    }
 }
