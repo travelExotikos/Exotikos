@@ -3,6 +3,7 @@ package com.exotikosteam.exotikos.utils;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.models.BoardingPassScan;
 import com.microblink.activity.Pdf417ScanActivity;
 import com.microblink.recognizers.BaseRecognitionResult;
@@ -23,7 +24,7 @@ public class PDF417Utils {
 
         // If you want sound to be played after the scanning process ends,
         // put here the resource ID of your sound file. (optional)
-        //intent.putExtra(Pdf417ScanActivity.EXTRAS_BEEP_RESOURCE, );
+        intent.putExtra(Pdf417ScanActivity.EXTRAS_BEEP_RESOURCE, R.raw.bip);
 
         // In order for scanning to work, you must enter a valid licence key. Without licence key,
         // scanning will not work. Licence key is bound the the package name of your app, so when
