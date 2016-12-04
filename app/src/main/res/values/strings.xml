@@ -47,7 +47,10 @@
     <string name="carouselLbl">Carousel Number</string>
     <string name="baggageCarousel">Baggage Carousel</string>
     <string name="dateLanding">Flight Landing Date</string>
-    <string name="check_in_info" formatted="false">This is time for check-in. You have to go to check-in station for %s. Staff will ask you for your passport and provide you the boarding card with a seat number. You will use it during boarding process</string>
+    <string name="check_in_info" formatted="false">
+        <![CDATA[
+        This is time for check-in. You have to go to check-in station for <b> %s</b>. Staff will ask you for your passport and provide you the boarding card with a seat number. You will use it during boarding process.
+        ]]></string>
     <string name="check_in_station" formatted="false">
         <![CDATA[
         Go to <b> %s </b> check-in station.
