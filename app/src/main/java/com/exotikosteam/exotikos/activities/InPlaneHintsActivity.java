@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.astuetz.PagerSlidingTabStrip;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.adapters.SmartFragmentStatePagerAdapter;
@@ -27,6 +28,7 @@ public class InPlaneHintsActivity extends AppCompatActivity implements OnButtons
         mPagerAdapter = new InPlaneHintsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(vpPager);
         mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.setPageTransformer(true, new ZoomInTransformer());
 
         // Give the PagerSlidingTabStrip the ViewPager
         PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
