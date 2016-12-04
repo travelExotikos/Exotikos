@@ -65,17 +65,17 @@ public class Utils {
     }
 
     private  static int prepareYear(Calendar now, int scanJulian) {
-        // the data from boarding card be scanned only at jDate or couple days earlier but for testing/demo we need more
+        // the data from boarding card can be scanned only at jDate or couple days earlier but for testing/demo we need more
         int acceptableDiff = 300;
-        int nowJulian = now.get(Calendar.HOUR_OF_DAY);
+        int nowJulian = now.get(Calendar.DAY_OF_YEAR);
         int nowYear = now.get(Calendar.YEAR);
-        if (Math.abs(scanJulian - nowYear) < 300) {
+        if (Math.abs(scanJulian - nowJulian) < 300) {
             return nowYear;
         }
         if (nowYear < 150) {
-            return nowJulian - 1;
+            return nowYear - 1;
         }
-        return nowJulian + 1;
+        return nowYear + 1;
     }
 
     public static Date parseLongFormatDate(String stringDate) {
