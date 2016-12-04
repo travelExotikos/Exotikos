@@ -75,7 +75,9 @@
         ]]></string>
     <string name="check_in_hint_tab_description">What will happen</string>
     <string name="check_in_hint_tab_next_step">Next Step</string>
-    <string name="in_plane_welcome" formatted="false">Congratulation you are on the plane. Now it is time to relax. You should be in %s in %s at %s local time.</string>
+    <string name="in_plane_welcome" formatted="false"><![CDATA[
+    Congratulation you are on the plane. Now it is time to relax. You should be in <b>%s</b> in <b>%s</b> at <b>%s</b> local time.
+    ]]></string>
     <string name="in_plane_hint_tab_exercises0">Long-haul flights can be rough on your body. Sitting for hours in the same position can leave your muscles sore and legs numb.<br/>
         In next step you can find exercises which will help make your trip more compfortable.</string>
     <string name="in_plane_hint_tab_exercises1">Foots</string>
