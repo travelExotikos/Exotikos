@@ -93,5 +93,5 @@
         app:menu="@menu/drawer_view"
         app:itemTextColor="@color/secondary_text"
         app:itemBackground="@color/secondary_light"
-        android:background="@color/secondary_light">
+        android:background="@color/secondary_light"/>
 </android.support.v4.widget.DrawerLayout>
