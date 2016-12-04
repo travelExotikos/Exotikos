@@ -5,6 +5,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,10 +80,10 @@ public class InPlaneFragment extends Fragment {
 
     private void populateData() {
         String text = getResources().getString(R.string.in_plane_welcome);
-        mBinding.tvInPlane.setText(String.format(text,
+        mBinding.tvInPlane.setText(Html.fromHtml(String.format(text,
                 mFlight.getArrivalCity(),
                 Utils.getTimeToDate(mFlight.getArrivalTimeUTC()),
-                Utils.convertToTime(mFlight.getArrivalTime())));
+                Utils.convertToTime(mFlight.getArrivalTime()))));
     }
 
     private void handleLauncInPlaneHintsActivity() {

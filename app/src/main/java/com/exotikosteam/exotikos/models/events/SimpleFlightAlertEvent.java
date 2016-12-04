@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.exotikosteam.exotikos.activities.TravelStatusActivity;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.Period;
 import org.parceler.Parcels;
 
@@ -26,7 +27,7 @@ public class SimpleFlightAlertEvent extends FlightEventProcessor {
 
     @Override
     public boolean shouldFire(EventInputContext context) {
-        DateTime departureUtc = new DateTime(context.getFlight().getDepartureTimeUTC());
+        DateTime departureUtc = new DateTime(context.getFlight().getDepartureTimeUTC(), DateTimeZone.UTC);
 
         return departureUtc.minus(triggerTime).isAfter(context.getDeviceTime()) &&
                 departureUtc.minus(triggerTime).isAfter(new DateTime(context.getTrip().getUpdatedAt()));
