@@ -139,5 +139,6 @@
     <string name="card_title_plane">Flight</string>
 
     <string name="select_date">Select departing date ...</string>
+    <string name="help_header">SOS</string>
 </resources>
 
