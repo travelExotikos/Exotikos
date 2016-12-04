@@ -1,7 +1,6 @@
 package com.exotikosteam.exotikos.fragments;
 
 import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +9,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 
 import com.bumptech.glide.Glide;
@@ -21,8 +19,6 @@ import com.exotikosteam.exotikos.models.trip.Flight;
 import org.parceler.Parcels;
 
 import rx.subjects.PublishSubject;
-
-import static com.exotikosteam.exotikos.R.id.btnNext;
 
 public class CardViewFragment <T extends Fragment> extends Fragment implements ExpandableCard {
 
@@ -42,7 +38,6 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     private Button mBtnNext;
     private T  f;
     private FragmentParentCardBinding mBinding;
-    private float btnNextX = 0;
     // Event topics
     private final PublishSubject<CardViewFragment> titleClickSubject = PublishSubject.create();
 
@@ -121,7 +116,6 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     public void expand() {
         if (!isDetached()) {
             mBinding.rlCardContents.expand();
-            animateHintButton();
         }
     }
 
@@ -136,44 +130,25 @@ public class CardViewFragment <T extends Fragment> extends Fragment implements E
     public void toggle() {
         if (!isDetached()) {
             mBinding.rlCardContents.toggle();
-            animateHintButton();
         }
     }
 
-    private void animateHintButton() {
-        setBtnNextAnimiation();
-        if (mAnimSet != null && !mAnimSet.isRunning()) {
-            mAnimSet.start();
-        }
+    /* it is my first android animation do not want to delete it:)
+    private void setStartAnimSet(float btnNextX) {
+        ObjectAnimator animHide = ObjectAnimator.ofFloat(mBtnNext, "alpha", 0);
+        ObjectAnimator animMoveToLeft = ObjectAnimator.ofFloat(mBtnNext, "X", btnNextX - 80);
+        animMoveToLeft.setDuration(250);
+        ObjectAnimator anim = ObjectAnimator.ofFloat(mBtnNext, "alpha", 0, 1);
+        anim.setDuration(1000);
+        ObjectAnimator moveAnim = ObjectAnimator.ofFloat(mBtnNext, "X", btnNextX - 80, btnNextX);
+        moveAnim.setDuration(2000);
+        moveAnim.setInterpolator(new BounceInterpolator());
+        AnimatorSet bounceAnimSet = new AnimatorSet();
+        bounceAnimSet.playTogether(anim, moveAnim);
 
+        mAnimSet = new AnimatorSet();
+        mAnimSet.playSequentially(animHide, animMoveToLeft, bounceAnimSet);
     }
-
-    private void setStartAnimSet() {
-            ObjectAnimator animHide = ObjectAnimator.ofFloat(mBtnNext, "alpha", 0);
-            ObjectAnimator animMoveToLeft = ObjectAnimator.ofFloat(mBtnNext, "X", btnNextX - 80);
-            animMoveToLeft.setDuration(250);
-            ObjectAnimator anim = ObjectAnimator.ofFloat(mBtnNext, "alpha", 0, 1);
-            anim.setDuration(1000);
-            ObjectAnimator moveAnim = ObjectAnimator.ofFloat(mBtnNext, "X", btnNextX - 80, btnNextX);
-            moveAnim.setDuration(2000);
-            moveAnim.setInterpolator(new BounceInterpolator());
-            AnimatorSet bounceAnimSet = new AnimatorSet();
-            bounceAnimSet.playTogether(anim, moveAnim);
-
-            mAnimSet = new AnimatorSet();
-            mAnimSet.playSequentially(animHide, animMoveToLeft, bounceAnimSet);
-    }
-
-    private void setBtnNextAnimiation() {
-        if (mBtnNext == null && f != null && f.getView() != null) {
-            mBtnNext = (Button) f.getView().findViewById(btnNext);
-            if (mBtnNext != null) {
-                if (btnNextX == 0) {
-                    btnNextX = mBtnNext.getX();
-                }
-                setStartAnimSet();
-            }
-        }
-    }
+    */
 
 }
