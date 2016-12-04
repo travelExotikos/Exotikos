@@ -81,7 +81,7 @@ public class InPlaneFragment extends Fragment {
         String text = getResources().getString(R.string.in_plane_welcome);
         mBinding.tvInPlane.setText(String.format(text,
                 mFlight.getArrivalCity(),
-                Utils.getTimeDeltaFromCurrent(mFlight.getArrivalTimeUTC()),
+                Utils.getTimeToDate(mFlight.getArrivalTimeUTC()),
                 Utils.convertToTime(mFlight.getArrivalTime())));
     }
 

@@ -45,7 +45,6 @@ public class TripListActivity extends AppCompatActivity {
 
         setupRecyclerView();
         setupListeners();
-
         setSupportActionBar(toolbar);
         fetchTrips();
     }

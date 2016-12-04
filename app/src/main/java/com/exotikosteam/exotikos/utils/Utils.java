@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
@@ -26,14 +27,58 @@ public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
     private static final String FLIGHTSTATS_DATE_FORMAT =  "yyyy-MM-dd'T'hh:mm:ss.S";
 
+    private static final long CHECKIN_TIME_MIN = (long) 2.5 * 60;
+    private static final long SEC_CHECKIN_TIME_MIN = (long) 1.5 * 60;
+    private static final long BOARDING_TIME_MIN = 30;
+
+
+    public static Date getUTCDate(String longDate, String timeZone) {
+        Log.d(Utils.class.getSimpleName(), longDate + ' ' + timeZone);
+        SimpleDateFormat sdfTimeZone = new SimpleDateFormat(FLIGHTSTATS_DATE_FORMAT);
+        sdfTimeZone.setTimeZone(TimeZone.getTimeZone(timeZone));
+        Date utcDate = null;
+        try {
+            utcDate = sdfTimeZone.parse(longDate);
+        } catch (ParseException e) {
+            Log.e(Utils.class.getSimpleName(), String.format("Cannot convert date with timezone %s, %s", longDate, timeZone));
+        }
+        return utcDate;
+    }
+
+    public static long getDiffWithCurrentInMin(Date utcDate) {
+        Calendar nowUTC = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        Calendar utcCal = new GregorianCalendar();
+        utcCal.setTimeZone(TimeZone.getTimeZone("UTC"));
+        utcCal.setTime(utcDate);
+        long minDiff = TimeUnit.MINUTES.convert(utcCal.getTimeInMillis() - nowUTC.getTimeInMillis(), TimeUnit.MILLISECONDS);
+        Log.d(Utils.class.getSimpleName(), String.format("utcCal: %d, utcNow: %d", utcCal.getTimeInMillis(), nowUTC.getTimeInMillis()));
+        return minDiff;
+    }
+
     public static Calendar parseJulian3digitsDate(String jDate) throws ParseException {
-        //TODO do not have a better idea
+        if (TextUtils.isEmpty(jDate) || !TextUtils.isDigitsOnly(jDate)) {
+            return null;
+        }
         Calendar cal = Calendar.getInstance();
-        cal.setTime(new SimpleDateFormat("yyyyddd").parse(cal.get(Calendar.YEAR) + jDate));
+        cal.setTime(new SimpleDateFormat("yyyyddd").parse(prepareYear(cal, Integer.parseInt(jDate)) + jDate));
         return cal;
     }
 
-    public static Date parseFlightstatsDate(String stringDate) {
+    private  static int prepareYear(Calendar now, int scanJulian) {
+        // the data from boarding card be scanned only at jDate or couple days earlier but for testing/demo we need more
+        int acceptableDiff = 300;
+        int nowJulian = now.get(Calendar.HOUR_OF_DAY);
+        int nowYear = now.get(Calendar.YEAR);
+        if (Math.abs(scanJulian - nowYear) < 300) {
+            return nowYear;
+        }
+        if (nowYear < 150) {
+            return nowJulian - 1;
+        }
+        return nowJulian + 1;
+    }
+
+    public static Date parseLongFormatDate(String stringDate) {
         if (!TextUtils.isEmpty(stringDate)) {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat(FLIGHTSTATS_DATE_FORMAT);
@@ -68,25 +113,13 @@ public class Utils {
         return null;
     }
 
-    private static long getDiffTime(Date date1, Date date2){
-        if (date2.getTime() - date1.getTime() < 0) {
-            Calendar c = Calendar.getInstance();
-            c.setTime(date2);
-            c.add(Calendar.DATE, 1);
-            date2 = c.getTime();
+    private static String convertMinsToProperString(long timeInMin) {
+        if (timeInMin < 0) {
+            return "";
         }
-        long ms = date2.getTime() - date1.getTime();
-
-        return TimeUnit.MINUTES.convert(ms, TimeUnit.MILLISECONDS);
-    }
-
-    private static String convertminsToProperString(long timeToBoardMin) {
-        int days = 0;
-        int hours = 0;
-        if(timeToBoardMin > 24)
-            days = (int) timeToBoardMin/24/60;
-        hours = (int) timeToBoardMin/60%24;
-        int min = (int)timeToBoardMin%60;
+        int days = (int) timeInMin / (24 * 60);
+        int hours = (int) (timeInMin / 60) % 24;
+        int min = (int) timeInMin % 60;
 
         StringBuffer sbf = new StringBuffer();
         if(days > 0) {
@@ -102,43 +135,38 @@ public class Utils {
         return sbf.toString();
     }
 
-    public static String getTimeDeltaFromCurrent(Date departureTime) {
+    public static String getTimeToDate(Date date) {
+        if (date == null) {
+            return "";
+        }
+        long timeInMin = Utils.getDiffWithCurrentInMin(date);
+        return Utils.convertMinsToProperString(timeInMin);
+    }
+
+    public static String getTimeToCheckin(Date departureTime) {
         if (departureTime == null) {
             return "";
         }
-        Date currentTime = new Date();
-        long timeToBoardMin = Utils.getDiffTime(currentTime, departureTime);
-        return Utils.convertminsToProperString(timeToBoardMin);
+        long timeInMin = Utils.getDiffWithCurrentInMin(departureTime);
+        return Utils.convertMinsToProperString(timeInMin - CHECKIN_TIME_MIN);
     }
 
-    public static String getReadytoPrintBoardingTimeDelta(Date departureTime) {
-        Date currentTime = new Date();
-        long timeToBoardMin = Utils.getDiffTime(currentTime, departureTime);
-        String boardTime = Constants.YOUHAVE + Utils.convertminsToProperString(timeToBoardMin) + Constants.TOBOARD;
-        return boardTime;
-    }
-
-    public static String getReadytoPrintCheckinTimeDelta(Date departureTime) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(departureTime);
-        c.add(Calendar.DATE, -1);
-        Date currentTime = new Date();
-        long timeToBoardMin = Utils.getDiffTime(currentTime, c.getTime());
-        String boardTime = Constants.YOUHAVE + Utils.convertminsToProperString(timeToBoardMin) + Constants.TOCHECKIN;
-        return boardTime;
-    }
-
-    public static String getCheckinTimeDelta(Date departureTime) {
-        Date currentTime = new Date();
-        if (departureTime == null || departureTime.compareTo(currentTime) < 0) {
+    public static String getTimeToSecCheckin(Date departureTime) {
+        if (departureTime == null) {
             return "";
         }
-        Calendar c = Calendar.getInstance();
-        c.setTime(departureTime);
-        c.add(Calendar.DATE, -1);
-        long timeToBoardMin = Utils.getDiffTime(currentTime, c.getTime());
-        return Utils.convertminsToProperString(timeToBoardMin);
+        long timeInMin = Utils.getDiffWithCurrentInMin(departureTime);
+        return Utils.convertMinsToProperString(timeInMin - SEC_CHECKIN_TIME_MIN);
     }
+
+    public static String getTimeToBoarding(Date departureTime) {
+        if (departureTime == null) {
+            return "";
+        }
+        long timeInMin = Utils.getDiffWithCurrentInMin(departureTime);
+        return Utils.convertMinsToProperString(timeInMin - BOARDING_TIME_MIN);
+    }
+
 
     public static void showAiportLocationPage(Airport departureAirport, Activity activity, Context context) {
         double latitude = departureAirport.getLatitude();
