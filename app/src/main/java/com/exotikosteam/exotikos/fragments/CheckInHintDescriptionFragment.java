@@ -35,7 +35,7 @@ public class CheckInHintDescriptionFragment extends Fragment {
     }
 
     private void populateData() {
-        mBinding.tvDescription.setText(Html.fromHtml(getString(R.string.check_in_hint1_description), Html.FROM_HTML_MODE_COMPACT));
+        mBinding.tvDescription.setText(Html.fromHtml(getString(R.string.check_in_hint1_description)));
     }
 
 }

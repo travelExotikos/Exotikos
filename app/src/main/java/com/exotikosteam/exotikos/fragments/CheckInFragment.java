@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,7 @@ public class CheckInFragment extends Fragment {
 
     private void populateData() {
         String text = getResources().getString(R.string.check_in_info);
-        mBinding.tvCheckinInfo.setText(String.format(text, mFlight.getFlightCarrierName()));
+        mBinding.tvCheckinInfo.setText(Html.fromHtml(String.format(text, mFlight.getFlightCarrierName())));
     }
 
     @Override

@@ -1,15 +1,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/miCall"
-        android:icon="@drawable/common_google_signin_btn_icon_dark"
+        android:icon="@drawable/ic_local_phone_black_18dp"
         android:title="@string/call_action" />
     <item
         android:id="@+id/miTranslator"
-        android:icon="@drawable/common_google_signin_btn_icon_dark"
+        android:icon="@drawable/ic_action_name"
         android:title="@string/translate_action" />
     <item
         android:id="@+id/miMap"
-        android:icon="@drawable/common_google_signin_btn_icon_dark"
+        android:icon="@drawable/ic_map_black_18dp"
         android:title="@string/map_action" />
     <!-- TODO if more items in menu - group them in help
         <group android:checkableBehavior="single">

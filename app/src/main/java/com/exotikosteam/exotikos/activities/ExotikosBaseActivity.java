@@ -49,6 +49,7 @@ public class ExotikosBaseActivity extends AppCompatActivity implements ActivityC
         mDrawerToggle = setupDrawerToggle();
         mDrawer.addDrawerListener(mDrawerToggle);
         mnvDrawer = (NavigationView) findViewById(R.id.nvView);
+        mnvDrawer.setItemIconTintList(null);
         // Setup drawer view
         setupDrawerContent(mnvDrawer);
     }
