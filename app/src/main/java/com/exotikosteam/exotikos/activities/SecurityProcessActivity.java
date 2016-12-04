@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.astuetz.PagerSlidingTabStrip;
 import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.R;
@@ -33,7 +34,7 @@ public class SecurityProcessActivity extends AppCompatActivity implements OnButt
         pagerAdapter = new SecurityCheckinPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(vpPager);
         viewPager.setAdapter(pagerAdapter);
-
+        viewPager.setPageTransformer(true, new ZoomInTransformer());
         // Give the PagerSlidingTabStrip the ViewPager
         PagerSlidingTabStrip tabsStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         // Attach the view pager to the tab strip

@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.ToxicBakery.viewpager.transforms.ZoomInTransformer;
 import com.astuetz.PagerSlidingTabStrip;
 import com.exotikosteam.exotikos.ExotikosApplication;
 import com.exotikosteam.exotikos.R;
@@ -51,6 +52,7 @@ public class TravelPrepProcessActivity extends AppCompatActivity implements OnBu
         pagerAdapter = new TravelPrepPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(vpPager);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setPageTransformer(true, new ZoomInTransformer());
         Flight flight = trip.getFlights().get(trip.getCurrentFlight());
         getAirport(flight.getDepartureAirportIATA());
 
