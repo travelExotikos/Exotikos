@@ -9,17 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.R;
 import com.exotikosteam.exotikos.databinding.FragmentBoardingMainBinding;
+import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.models.trip.Flight;
 import com.exotikosteam.exotikos.models.trip.TripStatus;
 import com.exotikosteam.exotikos.utils.Constants;
-import com.exotikosteam.exotikos.utils.Utils;
 
 import org.parceler.Parcels;
-
-import java.util.Date;
 
 /**
  * Created by lramaswamy on 11/15/16.
@@ -52,8 +49,6 @@ public class BoardingGateFragment extends Fragment {
         Flight flight = trip.getFlights().get(trip.getCurrentFlight());
         fragmentBoardingMainBinding.tvBoardingGate.setText(Constants.GATE + ((flight.getDepartureGate() != null) ? flight.getDepartureGate() : "N/A"));
         fragmentBoardingMainBinding.tvTerminal.setText(Constants.TERMINAL + flight.getDepartureTerminal());
-        
-        Date departureTime = Utils.parseFlightstatsDate(flight.getDepartureTime());
     }
 
     public static BoardingGateFragment newInstance(TripStatus trip) {

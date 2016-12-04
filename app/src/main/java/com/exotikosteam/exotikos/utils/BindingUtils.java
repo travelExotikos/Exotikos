@@ -38,13 +38,7 @@ public class BindingUtils {
 
     @BindingAdapter({"bind:asShortTime"})
     public static void convertToShortTime(TextView view, String date) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S");
-        try {
-            Date d = format.parse(date);
-            view.setText(DateFormat.format("hh:mma", d));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        view.setText(Utils.convertToTime(date));
     }
 
     @BindingAdapter({"bind:asLongDate"})

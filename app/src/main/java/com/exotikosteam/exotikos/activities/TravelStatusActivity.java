@@ -60,22 +60,13 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         flight = trip.getFlights().get(trip.getCurrentFlight());
         getAirport(flight.getDepartureAirportIATA());
 
-        Date departureTime = Utils.parseFlightstatsDate(flight.getDepartureTime());
+        Date departureTime = Utils.parseLongFormatDate(flight.getDepartureTime());
 
         createTravelPrepCard();
-        /* TODO this code has been commented for demo
         createCheckinCard(flight.getDepartureTimeUTC());
         createSecurityCheckinCard(flight.getDepartureTimeUTC());
         createBoardingGateCard(flight.getDepartureTimeUTC());
-        createInPlaneCard(flight.getArrivalTimeUTC());
-        */
-
-        //TODO remove this code after resolved problem with UTC time
-        createCheckinCard(Utils.parseFlightstatsDate(flight.getDepartureTime()));
-        createSecurityCheckinCard(Utils.parseFlightstatsDate(flight.getDepartureTime()));
-        createBoardingGateCard(Utils.parseFlightstatsDate(flight.getDepartureTime()));
-        createInPlaneCard(Utils.parseFlightstatsDate(flight.getArrivalTime()));
-
+        createInPlaneCard();
         createDestinationCard(flight);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -94,17 +85,17 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         cardViewFragmentList.add(5, CardViewFragment.newInstance(
                 R.string.card_title_destination,
                 -1,
-                Utils.getTimeDeltaFromCurrent(Utils.parseFlightstatsDate(flight.getArrivalTime())),
+                Utils.getTimeToDate(flight.getArrivalTimeUTC()),
                 flight,
                 isStepActive(5)));
         DestinationFragment destinationFragment = DestinationFragment.newInstance(trip);
         cardViewFragmentList.get(5).setFragment(destinationFragment);
     }
 
-    private void createInPlaneCard(Date arrivalTime) {
+    private void createInPlaneCard() {
         cardViewFragmentList.add(4, CardViewFragment.newInstance(R.string.card_title_plane,
                 R.drawable.card_image_plane,
-                Utils.getTimeDeltaFromCurrent(arrivalTime),
+                Utils.getTimeToDate(flight.getDepartureTimeUTC()),
                 flight,
                 isStepActive(4)));
         InPlaneFragment fragment = InPlaneFragment.newInstance(trip);
@@ -114,7 +105,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
     private void createBoardingGateCard(Date departureTime) {
         cardViewFragmentList.add(3, CardViewFragment.newInstance(R.string.card_title_boarding,
                 R.drawable.card_image_boarding,
-                Utils.getTimeDeltaFromCurrent(departureTime),
+                Utils.getTimeToBoarding(departureTime),
                 flight,
                 isStepActive(3)));
         BoardingGateFragment boardingGateFragment = BoardingGateFragment.newInstance(trip);
@@ -124,7 +115,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
     private void createSecurityCheckinCard(Date departureTime) {
         cardViewFragmentList.add(2, CardViewFragment.newInstance(R.string.card_title_sec_checkin,
                 R.drawable.card_image_sec_checkin,
-                Utils.getTimeDeltaFromCurrent(departureTime),
+                Utils.getTimeToSecCheckin(departureTime),
                 flight,
                 isStepActive(2)));
         SecurityCheckinFragment securityCheckinFragment = SecurityCheckinFragment.newInstance(true);
@@ -134,7 +125,7 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
     private void createCheckinCard(Date departureTime) {
         cardViewFragmentList.add(1, CardViewFragment.newInstance(R.string.card_title_checkin,
                 R.drawable.card_image_checkin,
-                Utils.getCheckinTimeDelta(departureTime),
+                Utils.getTimeToCheckin(departureTime),
                 flight,
                 isStepActive(1)));
         CheckInFragment checkinFragment = CheckInFragment.newInstance(trip);

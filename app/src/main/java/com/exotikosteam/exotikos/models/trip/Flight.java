@@ -118,8 +118,8 @@ public class Flight extends BaseModel {
         this.setDepartureAirportIATA(flightStatus.getDepartureAirportFsCode());
         this.setDepartureTime(flightStatus.getDepartureDate().getDateLocal());
 
-        this.setArrivalTimeUTC(Utils.parseFlightstatsDate(flightStatus.getArrivalDate().getDateUtc()));
-        this.setDepartureTimeUTC(Utils.parseFlightstatsDate(flightStatus.getArrivalDate().getDateUtc()));
+        this.setArrivalTimeUTC(Utils.parseLongFormatDate(flightStatus.getArrivalDate().getDateUtc()));
+        this.setDepartureTimeUTC(Utils.parseLongFormatDate(flightStatus.getArrivalDate().getDateUtc()));
 
         this.setFlightId(flightStatus.getFlightId());
         this.setFlightCarrier(flightStatus.getCarrierFsCode());
@@ -147,12 +147,14 @@ public class Flight extends BaseModel {
         for (Airport a: airports) {
             if (a.getFs().equals(this.getArrivalAirportIATA())) {
                 this.setArrivalCity(a.getCity());
-                //Date localDate = Utils.getUTCDate(this.getArrivalTime(), a.getTimeZoneRegionName());
+                Date localDate = Utils.getUTCDate(this.getArrivalTime(), a.getTimeZoneRegionName());
+                this.setArrivalTimeUTC(localDate);
 
             }
             if (a.getFs().equals(this.getDepartureAirportIATA())) {
                 this.setDepartureCity(a.getCity());
-                //Date localDate = Utils.getUTCDate(this.getDepartureTime(), a.getTimeZoneRegionName());
+                Date localDate = Utils.getUTCDate(this.getDepartureTime(), a.getTimeZoneRegionName());
+                this.setDepartureTimeUTC(localDate);
             }
         }
 
@@ -164,7 +166,6 @@ public class Flight extends BaseModel {
             }
         }
     }
-
 
     public Integer getId() {
         return id;

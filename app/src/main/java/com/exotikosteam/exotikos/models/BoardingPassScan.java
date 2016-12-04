@@ -23,7 +23,6 @@ public class BoardingPassScan {
     protected String flightNo;
     protected Integer departureDay;
     protected Integer departuteMonth;
-    //TODO year There is no info about year in the scan
     protected Integer departureYear;
     protected String cabin;
     protected String seatNo;
@@ -91,7 +90,6 @@ public class BoardingPassScan {
         Calendar cal = Utils.parseJulian3digitsDate(barcodeDataArray[4].substring(0,3));
         bp.departureDay = cal.get(Calendar.DAY_OF_MONTH);
         bp.departuteMonth = cal.get(Calendar.MONTH) + 1;
-        // TODO check year if julian date is before today year+1 if not year
         bp.departureYear = cal.get(Calendar.YEAR);
         bp.cabin = barcodeDataArray[4].substring(3,4);
         bp.seatNo = barcodeDataArray[4].substring(4,barcodeDataArray[4].length());
