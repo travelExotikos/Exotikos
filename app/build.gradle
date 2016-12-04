@@ -105,4 +105,5 @@ dependencies {
     compile 'net.danlew:android.joda:2.9.5'
     compile 'com.makeramen:roundedimageview:2.2.1'
     compile 'com.android.support:cardview-v7:23.2.1'
+    compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
 }
