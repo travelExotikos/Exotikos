@@ -140,4 +140,23 @@
     <color name="twitter_active_fav">#ffe81c4f</color>
     <color name="flight_item_background_guard">#b0ffffff</color>
     <color name="flight_item_font">#ff000000</color>
+
+    <style name="cardViewSeparator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/primary_dark</item>
+        <item name="android:layout_marginTop">@dimen/fragment_travel_prep_margin_bottom</item>
+        <item name="android:layout_marginBottom">@dimen/fragment_travel_prep_margin_bottom</item>
+    </style>
+
+    <style name="cardViewButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/primary_dark</item>
+        <item name="android:layout_marginLeft">@dimen/fragment_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/fragment_horizontal_margin</item>
+    </style>
+
 </resources>

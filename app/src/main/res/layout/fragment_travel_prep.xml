@@ -5,7 +5,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rl">
+        android:id="@+id/rl"
+        android:layout_margin="10dp">
 
         <TextView
             android:text="@string/flightNumberlbl"
@@ -100,40 +101,6 @@
             android:id="@+id/tvDestination"
             android:layout_alignTop="@+id/tvDestinationLbl" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/primary_light"
-            android:id="@+id/spacer"
-            android:layout_marginTop="@dimen/fragment_travel_prep_margin_bottom"
-            android:layout_below="@+id/tvDestination"
-            android:layout_marginBottom="@dimen/fragment_travel_prep_margin_bottom"
-            android:layout_marginLeft="@dimen/fragment_horizontal_margin"
-            android:layout_marginRight="@dimen/fragment_horizontal_margin"
-            />
-
-        <Button
-            android:text="Directions to Airport"
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:id="@+id/btnAirportPage"
-            android:textColor="@color/primary_dark"
-            android:background="@android:color/transparent"
-            android:paddingLeft="@dimen/fragment_travel_prep_padding"
-            android:gravity="center|left"
-            android:layout_below="@+id/spacer" />
-
-        <Button
-            android:background="@drawable/arrow_right_bold_circle"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/btnNext"
-            android:layout_below="@+id/spacer"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="@dimen/fragment_travel_prep_padding"
-
-            />
 
         <TextView
             tools:text="San Francisco"
@@ -144,5 +111,27 @@
             android:layout_below="@+id/tvDepartureTime"
             android:layout_alignRight="@+id/tvDestination"
             android:layout_alignEnd="@+id/tvDestination" />
+
+        <View
+            android:id="@+id/spacer"
+            android:layout_below="@+id/tvDestination"
+            style="@style/cardViewSeparator"/>
+
+        <Button
+            android:text="Directions to Airport"
+            android:id="@+id/btnAirportPage"
+            android:layout_below="@+id/spacer"
+            style="@style/cardViewButton"/>
+
+        <View
+            android:id="@+id/spacer2"
+            android:layout_below="@+id/btnAirportPage"
+            style="@style/cardViewSeparator"/>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_below="@+id/spacer2"
+            android:text="Read More"
+            style="@style/cardViewButton"/>
     </RelativeLayout>
 </layout>

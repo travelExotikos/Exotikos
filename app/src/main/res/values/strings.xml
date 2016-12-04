@@ -47,7 +47,7 @@
     <string name="carouselLbl">Carousel Number</string>
     <string name="baggageCarousel">Baggage Carousel</string>
     <string name="dateLanding">Flight Landing Date</string>
-    <string name="check_in_info" formatted="false">It is time for check-in.\nYou have to find check-in station for %s. Staff will ask you for your passport and provide you the boarding card with you seat number. You will need the boarding card on a boarding step</string>
+    <string name="check_in_info" formatted="false">This is time for check-in. You have to go to check-in station for %s. Staff will ask you for your passport and provide you the boarding card with a seat number. You will use it during boarding process</string>
     <string name="check_in_station" formatted="false">
         <![CDATA[
         Go to <b> %s </b> check-in station.
@@ -72,15 +72,9 @@
         ]]></string>
     <string name="check_in_hint_tab_description">What will happen</string>
     <string name="check_in_hint_tab_next_step">Next Step</string>
-    <string name="in_plane_welcome" formatted="false">
-        <![CDATA[
-        Congratulation you are in the plane.<br/>
-        Now it is the time for relax. You should be in %s in %s at %s local time<br/>
-        <p>
-        Long-haul flights can be rough on your body. Sitting for hours in the same position can leave your muscles sore and legs numb.<br/>
-        In next step you can find exercises which will help make your trip more compfortable.
-        </p>
-        ]]></string>
+    <string name="in_plane_welcome" formatted="false">Congratulation you are in the plane. Now it is the time for relax.\n\n You should be in %s in %s at %s local time.</string>
+    <string name="in_plane_hint_tab_exercises0">Long-haul flights can be rough on your body. Sitting for hours in the same position can leave your muscles sore and legs numb.<br/>
+        In next step you can find exercises which will help make your trip more compfortable.</string>
     <string name="in_plane_hint_tab_exercises1">Foots</string>
     <string name="in_plane_hint_tab_exercises2">Foots</string>
     <string name="in_plane_hint_tab_exercises3">Knees</string>
