@@ -27,19 +27,29 @@
             android:id="@+id/tvBoardingGate" />
 
         <TextView
-            tools:text="Terminal 3"
+            android:text="Terminal 3"
             android:layout_width="match_parent"
             android:textAppearance="@style/ExotikosMediumText"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvBoardingGate"
             android:layout_marginTop="@dimen/fragment_travel_margin_top"
             android:gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/fragment_travel_prep_padding"
             android:id="@+id/tvTerminal" />
+
+        <TextView
+            tools:text="Seat #"
+            android:layout_width="match_parent"
+            android:textAppearance="@style/ExotikosMediumText"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTerminal"
+            android:layout_marginTop="@dimen/fragment_travel_margin_top"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/fragment_travel_prep_padding"
+            android:id="@+id/tvSeat" />
 
         <View
             android:id="@+id/spacer"
-            android:layout_below="@+id/tvTerminal"
+            android:layout_below="@+id/tvSeat"
             style="@style/cardViewSeparator"/>
 
         <Button
