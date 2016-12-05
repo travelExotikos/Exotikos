@@ -142,5 +142,13 @@
 
     <string name="select_date">Select departing date ...</string>
     <string name="help_header">SOS</string>
+    <string name="boardingInfo">Please check the boarding terminal gate information below and proceed to the terminal and gate for boarding.</string>
+    <string name="boardingLine">Boarding Line</string>
+    <string name="boardingGateHd">Boarding Gate</string>
+    <string name="boardingLineExplanation">When you hear the announcement, line up for boarding the plane. Follow the instructions and board either based on your seat or boarding group.</string>
+    <string name="liquidsExplanation">Do not pack more than 3.4 ounces of liquids. All the liquids should git in a quart size bag.</string>
+    <string name="boardingGateExplanation">Find your terminal and then your gate. Once you find it, wait patiently until the attendants announce for boarding.</string>
+    <string name="gate">Gate Info</string>
+    <string name="boardingInfoHd">Boarding Line</string>
 </resources>
 

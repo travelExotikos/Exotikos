@@ -60,6 +60,9 @@
         <activity
             android:name=".activities.SecurityProcessActivity"
             android:label="@string/launchSecurityCheck" />
+        <activity
+            android:name=".activities.BoardingActivity"
+            android:label="@string/boarding" />
 
         <!-- Services -->
         <service android:name=".services.TripTrackerService" />
