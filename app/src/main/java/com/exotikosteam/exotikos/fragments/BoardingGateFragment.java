@@ -49,6 +49,7 @@ public class BoardingGateFragment extends Fragment {
         Flight flight = trip.getFlights().get(trip.getCurrentFlight());
         fragmentBoardingMainBinding.tvBoardingGate.setText(Constants.GATE + ((flight.getDepartureGate() != null) ? flight.getDepartureGate() : "N/A"));
         fragmentBoardingMainBinding.tvTerminal.setText(Constants.TERMINAL + flight.getDepartureTerminal());
+        fragmentBoardingMainBinding.tvSeat.setText(Constants.SEAT + flight.getSeatNumber());
         fragmentBoardingMainBinding.btnNext.setOnClickListener(v -> {
             handleLaunchBoardingActivity();
         });

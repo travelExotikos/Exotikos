@@ -18,7 +18,7 @@ public class Constants {
 
     public static final String TERMINAL = " Boarding Terminal ";
     public static final String GATE = " Boarding Gate  ";
-    public static final String YOUHAVE = "You have ";
+    public static final String SEAT = "Seat # ";
     public static final String TOBOARD = " to Board";
     public static final String TOCHECKIN = " to Checkin";
     
