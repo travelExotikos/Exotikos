@@ -46,4 +46,5 @@ public class Constants {
     public static final Period NOTIFY_HEAD_TO_SECURITY = new Period(2, 30, 0, 0); // 2h 30min
     public static final Period NOTIFY_HEAD_TO_DEPARTURE_GATE = Period.hours(1);
 
+    public static final String GO_TO_BOARDING_PAGE = "gotoBoardingPage";
 }

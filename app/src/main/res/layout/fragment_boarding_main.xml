@@ -6,27 +6,46 @@
         android:layout_height="wrap_content">
 
         <TextView
-            tools:text="A54"
+            android:id="@+id/tvBoardingInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="10dp"
+            android:gravity="fill"
+            android:text="@string/boardingInfo"/>
+
+
+        <TextView
+            tools:text="A54"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textAppearance="@style/ExotikosLargeText"
-            android:layout_alignParentTop="true"
             android:layout_marginTop="@dimen/fragment_travel_margin_top"
-            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
-            android:layout_marginRight="@dimen/fragment_horizontal_margin"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/tvBoardingInfo"
             android:id="@+id/tvBoardingGate" />
 
         <TextView
             tools:text="Terminal 3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:textAppearance="@style/ExotikosMediumText"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvBoardingGate"
             android:layout_marginTop="@dimen/fragment_travel_margin_top"
-            android:layout_marginLeft="@dimen/fragment_travel_prep_padding"
-            android:layout_marginRight="@dimen/fragment_horizontal_margin"
+            android:gravity="center_horizontal"
             android:layout_marginBottom="@dimen/fragment_travel_prep_padding"
             android:id="@+id/tvTerminal" />
 
+        <View
+            android:id="@+id/spacer"
+            android:layout_below="@+id/tvTerminal"
+            style="@style/cardViewSeparator"/>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_below="@id/spacer"
+            android:text="Read More"
+            style="@style/cardViewButton"/>
     </RelativeLayout>
 </layout>

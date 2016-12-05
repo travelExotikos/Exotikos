@@ -11,12 +11,20 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/ExotikosLargeText"
         android:layout_marginTop="@dimen/fragment_travel_prep_padding"
-        android:textColor="@color/primary_text"
-        android:id="@+id/textView3" />
+        android:layout_margin="@dimen/fragment_horizontal_margin"
+        android:id="@+id/tvLiquids" />
+
+    <TextView
+        android:text="@string/liquidsExplanation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fragment_horizontal_margin"
+        android:id="@+id/tvInline" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="550dp"
+        android:layout_margin="@dimen/fragment_horizontal_margin"
         app:srcCompat="@drawable/baggage_help"
         android:id="@+id/baggageHelp" />
 

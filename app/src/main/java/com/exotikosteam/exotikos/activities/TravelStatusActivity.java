@@ -14,7 +14,6 @@ import com.exotikosteam.exotikos.fragments.DestinationFragment;
 import com.exotikosteam.exotikos.fragments.FragmentTravelScan;
 import com.exotikosteam.exotikos.fragments.InPlaneFragment;
 import com.exotikosteam.exotikos.fragments.SecurityCheckinFragment;
-import com.exotikosteam.exotikos.fragments.SecurityCheckingHelpFragment;
 import com.exotikosteam.exotikos.fragments.TravelPrepFragment;
 import com.exotikosteam.exotikos.interfaces.OnButtonsClicks;
 import com.exotikosteam.exotikos.models.airport.Airport;
@@ -186,6 +185,14 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         if(Constants.GO_TO_PREP_PAGE.equals(buttonName)) {
             showTravelPrepActivity();
         }
+        if(Constants.GO_TO_BOARDING_PAGE.equals(buttonName)) {
+            showBoardingPageActivity();
+        }
+    }
+
+    private void showBoardingPageActivity() {
+        Intent i = new Intent(this, BoardingActivity.class);
+        startActivity(i);
     }
 
     private void showSecurityCheckinActivity() {
@@ -208,12 +215,6 @@ public class TravelStatusActivity extends ExotikosBaseActivity implements Fragme
         i.putExtra("trip", Parcels.wrap(trip));
         startActivity(i);
     }
-
-    private void showSecurityCheckinHelpFragment() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.flCard3, SecurityCheckingHelpFragment.newInstance());
-        ft.commit();
-    };
 
     private void getAirport(String departureAirportIATA) {
         AirportsApiEndpoint airportsService = ((ExotikosApplication) getApplication()).getAirportsService();
